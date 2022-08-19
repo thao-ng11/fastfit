@@ -4,7 +4,7 @@ services:
     command: /bin/bash run.sh
     working_dir: /app
     volumes:
-      - ./ghi/app:/app
+      - ./frontend/fast-fit-frontend:/app
     ports:
       - "3000:3000"
     environment:
