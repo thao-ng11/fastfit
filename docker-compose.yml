@@ -1,0 +1,35 @@
+services:
+  react:
+    image: node:lts-bullseye
+    command: /bin/bash run.sh
+    working_dir: /app
+    volumes:
+      - ./ghi/app:/app
+    ports:
+      - "3000:3000"
+    environment:
+      HOST_OS: ${OS}
+      NODE_ENV: development
+      HOST: "0.0.0.0"
+  database:
+    image: postgres:14.2-bullseye
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db:/docker-entrypoint-initdb.d
+    environment:
+      - POSTGRES_MULTIPLE_DATABASES=users #need to add all microservices and their database names here
+      - POSTGRES_PASSWORD=test-databases
+    ports:
+      - 15432:5432
+  accounts:
+    build:
+      context:
+      dockerfile:
+    ports:
+      -"8010:8000"
+    volumes:
+      - #"location of the files":/app
+    environment:
+      SECRET_KEY: db0a49ab25db171089e1a3950f31f3288df643c7c33ede3f38d6bf7788569e24
+      DATABASE_URL: #add database url
+    # finish accounts 
