@@ -1,0 +1,1 @@
+# use user model inheritance to build the user profile including api calls to other microservices for data. 
