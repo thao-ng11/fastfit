@@ -1,5 +1,5 @@
 # Fix this import and query name, if you need to
-from db import AccountsQueries
+from user_db import AccountsQueries, DuplicateAccount
 from fastapi import (
     Depends,
     HTTPException,
