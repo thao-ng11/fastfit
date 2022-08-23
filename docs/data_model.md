@@ -1,4 +1,4 @@
- # Data models
+# Data models
 
 ## User
 
@@ -12,7 +12,6 @@
 
 The `User` entity contains the data about a user account.
 
-
 ### RECIPES MODELS
 
 ## Meal
@@ -20,11 +19,10 @@ The `User` entity contains the data about a user account.
 | Name       | Type     | Unique | Optional |
 | ---------- | -------- | ------ | -------- |
 | id         | int      | yes    | no       |
-| uservo     | reference to   | yes    | no       |
+| uservo     | reference to user  | yes    | no       |
 | recipe_api_id| string   | no     | no       |
 | date     | date | no    | no       |
 | type | str      | no     | no       |
-
 
 ### WORKOUTS MODELS
 
@@ -65,7 +63,7 @@ The `User` entity contains the data about a user account.
 
 ### JOURNAL MODELS
 
-# Feeling_Emoji
+## Feeling_Emoji
 
 | Name            | Type     | Unique | Optional |
 | --------------- | -------- | ------ | -------- |
@@ -73,7 +71,7 @@ The `User` entity contains the data about a user account.
 | feeling | str | no     | no       |
 | image | date | no     | no       |
 
-# User_Mood
+## User_Mood
 
 | Name            | Type     | Unique | Optional |
 | --------------- | -------- | ------ | -------- |
@@ -81,7 +79,7 @@ The `User` entity contains the data about a user account.
 | uservo | reference to user | no     | no       |
 | date | date | no     | no       |
 
-# Journal_streak
+## Journal_streak
 
 | Name            | Type     | Unique | Optional |
 | --------------- | -------- | ------ | -------- |
@@ -89,7 +87,7 @@ The `User` entity contains the data about a user account.
 | streak_days | int | no     | no       |
 | date | int | no     | no       |
 
-# Journal
+## Journal
 
 | Name            | Type     | Unique | Optional |
 | --------------- | -------- | ------ | -------- |
