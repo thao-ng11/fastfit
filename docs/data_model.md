@@ -21,7 +21,6 @@
 
 The `User` entity contains the data about a user account.
 
-
 # RECIPES MODELS
 
 ## Meal
@@ -84,23 +83,21 @@ The `User` entity contains the data about a user account.
 | note      | str      | no     | no       |
 | feeling   | int      | no     | no       |
 
-
 # HEALTH MODELS
 
 ## Health_data
-| Name         | Type                    | Unique | Optional |
-| ------------ | ----------------------- | ------ | -------- |
-| profilevo    | ref_profile | no     | no       |
-| current_weight | int          | no    | no       |
-| current_bmi | float               | no     | no       |
-| date/time    | date/time               | no     | no       |
 
+| Name           | Type        | Unique | Optional |
+| -------------- | ----------- | ------ | -------- |
+| profilevo      | ref_profile | no     | no       |
+| current_weight | int         | no     | no       |
+| current_bmi    | float       | no     | no       |
+| date/time      | date/time   | no     | no       |
 
 ## Goals
-| Name         | Type                    | Unique | Optional |
-| ------------ | ----------------------- | ------ | -------- |
-| profilevo    | ref_profile | no     | no       |
-| goal_weight | int          | no    | no       |
-| goal_bmi | float          | no    | no       |
 
-
+| Name        | Type        | Unique | Optional |
+| ----------- | ----------- | ------ | -------- |
+| profilevo   | ref_profile | no     | no       |
+| goal_weight | int         | no     | no       |
+| goal_bmi    | float       | no     | no       |
