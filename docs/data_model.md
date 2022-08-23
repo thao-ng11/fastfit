@@ -10,6 +10,16 @@
 | firstname | string       | no     | no       |
 | lastname  | string       | no     | no       |
 
+## Profile
+
+| Name | Type | Unique | Optional |
+| user_info | reference to user | yes | no |
+| avatar | png | no | no |
+| weight | int | no | no |
+| height | int | no | no |
+| zip | int | no | no |
+
+
 The `User` entity contains the data about a user account.
 
 
