@@ -98,3 +98,7 @@ The `User` entity contains the data about a user account.
 | grateful     | str   | no     | no       |
 | daily_aff    | str   | no     | no       |
 | note          | str     | no     | no       |
+
+### Health Models
+
+## UserVO
