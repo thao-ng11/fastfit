@@ -107,6 +107,19 @@ The `User` entity contains the data about a user account.
 
 # Journal
 
+<<<<<<< HEAD
+| Name            | Type     | Unique | Optional |
+| --------------- | -------- | ------ | -------- |
+| uservo | ref_user | no     | no       |
+| date | date | no     | no       |
+| grateful     | str   | no     | no       |
+| daily_aff    | str   | no     | no       |
+| note          | str     | no     | no       |
+
+### Health Models
+
+## UserVO
+=======
 | Name      | Type     | Unique | Optional |
 | --------- | -------- | ------ | -------- |
 | uservo    | ref_user | no     | no       |
@@ -115,3 +128,4 @@ The `User` entity contains the data about a user account.
 | daily_aff | str      | no     | no       |
 | note      | str      | no     | no       |
 | feeling   | int      | no     | no       |
+>>>>>>> main
