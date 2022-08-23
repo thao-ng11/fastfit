@@ -16,7 +16,7 @@ from pydantic import BaseModel
 from typing import Optional
 import os
 
-SIGNING_KEY = os.environ["SIGNING_KEY"]
+SECRET_KEY = os.environ["SECRET_KEY"]
 ALGORITHM = "HS256"
 COOKIE_NAME = "fastapi_access_token"
 
@@ -71,9 +71,9 @@ def authenticate_user(repo: AccountsQueries, username: str, password: str):
 
 
 def create_access_token(data: dict):
-    to_encode = data.copy()
-    encoded_jwt = jwt.encode(to_encode, SIGNING_KEY, algorithm=ALGORITHM)
-    return encoded_jwt
+   to_encode = data.copy()
+   encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+   return encoded_jwt
 
 
 async def get_current_user(
@@ -92,7 +92,7 @@ async def get_current_user(
     if not token and cookie_token:
         token = cookie_token
     try:
-        payload = jwt.decode(token, SIGNING_KEY, algorithms=[ALGORITHM])
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         username = payload.get("sub")
         if username is None:
             raise credentials_exception
@@ -173,7 +173,7 @@ async def signup(
     },
 )
 
-async def read_users_active(current_user: User = Depends(get_current_active_user)):
+async def read_users_active(current_user: User = Depends(get_current_user)):
     return current_user
 
 @router.post("/token/validate")

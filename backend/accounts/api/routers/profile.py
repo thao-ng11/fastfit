@@ -6,7 +6,7 @@ from pydantic import BaseModel
 from fastapi.security import OAuth2PasswordBearer
 import os
 from jose import jwt
-from db import pool
+from user_db import pool
 from .users import User
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token", auto_error=False)
@@ -81,7 +81,7 @@ def profile_post(
 @router.get(
     "api/profile/",
     response_model = ProfileOut,
-    response = {
+    responses = {
         200: {"model": ProfileOut},
         400: {"model": ErrorMessage},
     },
