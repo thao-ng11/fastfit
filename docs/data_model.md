@@ -12,12 +12,21 @@
 
 ## Profile
 
+<<<<<<< HEAD
 | Name      | Type              | Unique | Optional |
 | --------- | ----------------- | ------ | -------- |
 | user_info | reference to user | yes    | no       |
 | avatar    | png               | no     | no       |
 | height    | int               | no     | no       |
 | zip       | int               | no     | no       |
+=======
+| Name | Type | Unique | Optional |
+| --- | --- | --- | --- |
+| user_info | reference to user | yes | no |
+| avatar | png | no | no |
+| height | int | no | no |
+| zip    | int | no | no |
+>>>>>>> efb0356031e67a44eea323d40239e91f6bf5de69
 
 The `User` entity contains the data about a user account.
 
@@ -71,6 +80,30 @@ The `User` entity contains the data about a user account.
 | weight       | int                     | no     | yes      |
 
 ### JOURNAL MODELS
+
+# Feeling_Emoji
+
+| Name            | Type     | Unique | Optional |
+| --------------- | -------- | ------ | -------- |
+| id | int | no     | no       |
+| feeling | str | no     | no       |
+| image | date | no     | no       |
+
+# User_Mood
+
+| Name            | Type     | Unique | Optional |
+| --------------- | -------- | ------ | -------- |
+| feeling | str | no     | no       |
+| uservo | reference to user | no     | no       |
+| date | date | no     | no       |
+
+# Journal_streak
+
+| Name            | Type     | Unique | Optional |
+| --------------- | -------- | ------ | -------- |
+| uservo | reference to user | no     | no       |
+| streak_days | int | no     | no       |
+| date | int | no     | no       |
 
 # Journal
 
