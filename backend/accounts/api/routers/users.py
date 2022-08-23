@@ -46,6 +46,13 @@ class User(BaseModel):
     password: str
     username: str
 
+class UserSignUp(BaseModel):
+    username: str
+    password: str
+    email: str | None = None
+    firstname: str | None = None
+    lastname: str | None = None
+
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -138,6 +145,7 @@ async def get_token(request: Request):
 
 ###########################################################################
 #begin user functions
+
 @router.post("/api/users")
 async def signup(
     user: UserSignUp, response: Response, repo: AccountsQueries = Depends()
