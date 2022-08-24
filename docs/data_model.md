@@ -33,6 +33,13 @@ The `User` entity contains the data about a user account.
 | date          | date         | no     | no       |
 | type          | str          | no     | no       |
 
+## Meal_type
+
+| Name          | Type         | Unique | Optional |
+| ------------- | ------------ | ------ | -------- |
+| id            | int          | yes    | no       |
+| name        | str | yes    | no       |
+
 # WORKOUTS MODELS
 
 ## Workout_categories
@@ -55,7 +62,7 @@ The `User` entity contains the data about a user account.
 | category     | reference to categories | no     | no       |
 | date/time    | date/time               | no     | no       |
 | muscle_group | str                     | no     | no       |
-| length       | int                     | no     | no       |
+| duration       | int                     | no     | no       |
 | distance     | float                   | no     | yes      |
 
 ## Strength_workout
