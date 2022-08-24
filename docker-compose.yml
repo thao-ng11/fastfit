@@ -35,8 +35,8 @@ services:
           # for the data stored by PostgreSQL
       - postgres-data:/var/lib/postgresql/data
     environment:
-      POSTGRES_MULTIPLE DATABASES: accounts
-      POSTGRES_PASSWORD: fastfit
+      - POSTGRES_MULTIPLE_DATABASES=accounts,recipes,workouts,journals,health
+      - POSTGRES_PASSWORD=fastfit
     ports:
       - 15432:5432
 
