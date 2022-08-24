@@ -11,7 +11,7 @@ CREATE TABLE users (
 
 CREATE TABLE user_profile (
     id SERIAL PRIMARY KEY,
-    username REFERENCES users(username),
+    username INT REFERENCES users(id),
     height INT NOT NULL,
     zip INT NOT NULL
 );
@@ -25,7 +25,7 @@ CREATE TABLE uservo (
 
 CREATE TABLE meal (
     id SERIAL PRIMARY KEY,
-    uservo REFERENCES uservo(usernamevo)
+    uservo INT REFERENCES uservo(id),
     recipe_api_id VARCHAR(500) NOT NULL,
     date DATE NOT NULL,
     type VARCHAR(100) NOT NULL
@@ -55,9 +55,9 @@ CREATE TABLE muscle_group (
 
 CREATE TABLE cardio_workout (
     id SERIAL PRIMARY KEY,
-    uservo REFERENCES uservo(usernamevo) ON DELETE CASCADE,
-    category REFERENCES workout_categories(category),
-    muscle_group REFERENCES muscle_group(muscle),
+    uservo INT REFERENCES uservo(id) ON DELETE CASCADE,
+    category INT REFERENCES workout_categories(id),
+    muscle_group INT REFERENCES muscle_group(id),
     workout_date TIMESTAMPTZ NOT NULL,
     duration INT NOT NULL,
     distance FLOAT
@@ -65,9 +65,9 @@ CREATE TABLE cardio_workout (
 
 CREATE TABLE strength_workout (
     id SERIAL PRIMARY KEY,
-    uservo REFERENCES uservo(usernamevo) ON DELETE CASCADE,
-    category REFERENCES workout_categories(category),
-    muscle_group REFERENCES muscle_group(muscle),
+    uservo INT REFERENCES uservo(id) ON DELETE CASCADE,
+    category INT REFERENCES workout_categories(id),
+    muscle_group INT REFERENCES muscle_group(id),
     workout_date TIMESTAMPTZ NOT NULL,
     sets INT NOT NULL,
     repetitions INT NOT NULL,
@@ -83,7 +83,7 @@ CREATE TABLE uservo (
 
 CREATE TABLE journal (
     id SERIAL PRIMARY KEY,
-    uservo REFERENCES uservo(usernamevo) ON DELETE CASCADE,
+    uservo INT REFERENCES uservo(id) ON DELETE CASCADE,
     entry_date timestamp DEFAULT current_timestamp,
     grateful TEXT NOT NULL,
     daily_aff TEXT NOT NULL,
@@ -100,14 +100,15 @@ CREATE TABLE uservo (
 );
 
 CREATE TABLE health_data (
-    uservo_id REFERENCES uservo(id),
+    uservo_id INT REFERENCES uservo(id),
     current_weight INT NOT NULL,
     current_bmi FLOAT NOT NULL,
-    entry_date timestamp DEFAULT current_timestamp,
+    entry_date timestamp DEFAULT current_timestamp
 );
 
 CREATE TABLE goals (
-    uservo_id REFERENCES uservo(id),
+    uservo_id INT REFERENCES uservo(id),
     goal_weight INT,
-    goal_bmi FLOAT,
+    goal_bmi FLOAT
 );
+
