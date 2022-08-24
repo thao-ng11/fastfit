@@ -130,4 +130,17 @@ services:
       PGUSER: fastfit
       PGPASSWORD: fastfit
 
+  recipes-poller:
+    build:
+      context: ./backend/recipes/poll
+      dockerfile: ./Dockerfile.dev
+    volumes:
+      - ./backend/recipes/poll:/app
+    depends_on:
+      - postgres
+      - accounts
+    environment:
+      DATABASE_URL: postgresql://fastfit:fastfit@postgres:5432/recipes
+      ACCOUNTS_API: http://accounts:8000
+
 
