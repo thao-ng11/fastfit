@@ -9,7 +9,7 @@ CREATE TABLE users (
     lastname VARCHAR(200)
 );
 
-CREATE TABLE profile (
+CREATE TABLE user_profile (
     id SERIAL PRIMARY KEY,
     username REFERENCES users(username),
     height INT NOT NULL,
