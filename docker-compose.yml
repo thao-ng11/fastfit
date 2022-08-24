@@ -28,25 +28,17 @@ services:
       PGADMIN_DISABLE_POSTFIX: 1
 
   postgres:
-    build:
-      context: ./relational-data
-      dockerfile: ./Dockerfile.dev
+    image: postgres:14.2-bullseye
     volumes:
-            #for your initialization scripts
+          # for your initialization scripts
       - ./data/postgres/init:/docker-entrypoint-initdb.d
-          # For the data stored by PostgreSQL
+          # for the data stored by PostgreSQL
       - postgres-data:/var/lib/postgresql/data
     environment:
-        #for the superuser of postgres instance- must be same as above
-        # Password for the postgres superuser
-        # See 01-create-databases.sql for the name/password
-        #   for the user of the application database
-      POSTGRES_USER: fastfit
+      POSTGRES_MULTIPLE DATABASES: accounts
       POSTGRES_PASSWORD: fastfit
-      POSTGRES_DB: fastfit
     ports:
       - 15432:5432
-
 
   accounts:
     build:
@@ -56,6 +48,8 @@ services:
       - "8010:8000"
     volumes:
       - ./backend/accounts/api:/app
+    depends_on:
+      - postgres
     environment:
       SECRET_KEY: db0a49ab25db171089e1a3950f31f3288df643c7c33ede3f38d6bf7788569e24
       PGHOST: postgres
@@ -64,3 +58,4 @@ services:
       PGUSER: fastfit
       PGPASSWORD: fastfit
     # finish accounts 
+

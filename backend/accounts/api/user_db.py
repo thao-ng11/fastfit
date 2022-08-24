@@ -14,7 +14,7 @@ class AccountsQueries:
     def get_user(self, username: str):
         with pool.connection() as conn:
             with conn.cursor() as cur:
-                cur.excecute(
+                cur.execute(
                     """
                     SELECT u.id
                     , u.username

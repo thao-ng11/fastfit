@@ -1,0 +1,4 @@
+CREATE USER fastfit WITH LOGIN PASSWORD 'fastfit' SUPERUSER;
+
+CREATE DATABASE accounts WITH OWNER fastfit;
+

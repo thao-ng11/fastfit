@@ -48,7 +48,7 @@ class User(BaseModel):
 
 class UserSignUp(BaseModel):
     username: str
-    password: str
+    hashed_password: str
     email: str | None = None
     firstname: str | None = None
     lastname: str | None = None
@@ -65,7 +65,7 @@ def authenticate_user(repo: AccountsQueries, username: str, password: str):
     user = repo.get_user(username)
     if not user:
         return False
-    if not verify_password(password, user["hashed_password"]):
+    if not verify_password(password, user["password"]):
         return False
     return user
 
@@ -102,6 +102,14 @@ async def get_current_user(
     if user is None:
         raise credentials_exception
     return user
+
+async def get_current_active_user(
+    current_user: User = Depends(get_current_user),
+):
+    # if current_user.disabled:
+    #     raise HTTPException(status_code=400, detail="Inactive user")
+    return current_user
+
 
 
 @router.post("/token")
@@ -157,7 +165,7 @@ async def signup(
             user.firstname,
             user.lastname,
             user.email,
-            user.hashed_password,
+            hashed_password,
         )
         return user
     except DuplicateAccount:
@@ -173,7 +181,7 @@ async def signup(
     },
 )
 
-async def read_users_active(current_user: User = Depends(get_current_user)):
+async def read_users_active(current_user: User = Depends(get_current_active_user)):
     return current_user
 
 @router.post("/token/validate")
