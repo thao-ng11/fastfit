@@ -1,23 +1,11 @@
-\connect recipes
+\connect accounts
 
-INSERT INTO uservo (usernamevo)
+INSERT INTO users (
+  username,
+  password,
+  email,
+  firstname,
+  lastname
+)
 VALUES
-('testuser1');
-
-\connect workouts
-
-INSERT INTO uservo (usernamevo)
-VALUES
-('testuser1');
-
-\connect journals
-
-INSERT INTO uservo (usernamevo)
-VALUES
-('testuser1');
-
-\connect health
-
-INSERT INTO uservo (usernamevo, heightvo)
-VALUES
-('testuser1', 68);
+('testuser1', 'fastfit', 'fastfit@example.com', 'fast', 'fit');
