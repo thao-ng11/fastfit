@@ -1,5 +1,7 @@
 # Progress Report
 
+### 8/24
+
 ### 8/23
 
 The team worked together to design all the db tables in the data_model.md file. We expanded on each of our microservices to confirm the data we need to store in the db and are ready to design the db sql files tomorrow.
