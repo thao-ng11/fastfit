@@ -12,7 +12,7 @@ VALUES
 
 \connect recipes
 
-INSERT INTO usersvo (
+INSERT INTO uservo (
   usernamevo
 )
 VALUES
@@ -20,7 +20,7 @@ VALUES
 
 \connect workouts
 
-INSERT INTO usersvo (
+INSERT INTO uservo (
   usernamevo
 )
 VALUES
@@ -28,7 +28,7 @@ VALUES
 
 \connect journals
 
-INSERT INTO usersvo (
+INSERT INTO uservo (
   usernamevo
 )
 VALUES
@@ -36,7 +36,7 @@ VALUES
 
 \connect health
 
-INSERT INTO usersvo (
+INSERT INTO uservo (
   usernamevo,
   heightvo
 )
