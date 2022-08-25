@@ -175,7 +175,7 @@ async def signup(
         response.status_code = status.HTTP_409_CONFLICT
         return { "detail": "this account already exists"}
 
-@router.get("users/active",
+@router.get("/users/active",
     response_model = User,
     responses = {
         200: { "model": User },

@@ -9,6 +9,10 @@ ACCOUNTS_API = os.environ["ACCOUNTS_API"]
 conninfo = os.environ["DATABASE_URL"]
 pool = ConnectionPool(conninfo=conninfo)
 
+def get_users():
+    # response = 
+    pass
+
 def poll():
     while True:
         print("Recipes poller polling for user data")
