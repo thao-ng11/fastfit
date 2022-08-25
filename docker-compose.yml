@@ -174,7 +174,7 @@ services:
       context: ./backend/health/poll
       dockerfile: ./Dockerfile.dev
     volumes:
-      - ./backend/journals/poll:/app
+      - ./backend/health/poll:/app
     depends_on:
       - postgres
       - accounts
