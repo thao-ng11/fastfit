@@ -30,13 +30,13 @@ services:
   postgres:
     image: postgres:14.2-bullseye
     volumes:
-          # for your initialization scripts
+      # for your initialization scripts
       - ./data/postgres/init:/docker-entrypoint-initdb.d
-          # for the data stored by PostgreSQL
+        # for the data stored by PostgreSQL
       - postgres-data:/var/lib/postgresql/data
     environment:
-      POSTGRES_MULTIPLE DATABASES: accounts
-      POSTGRES_PASSWORD: fastfit
+      - POSTGRES_MULTIPLE_DATABASES=accounts,recipes,workouts,journals,health
+      - POSTGRES_PASSWORD=fastfit
     ports:
       - 15432:5432
 
@@ -57,5 +57,101 @@ services:
       PGDATABASE: accounts
       PGUSER: fastfit
       PGPASSWORD: fastfit
-    # finish accounts 
 
+  workouts:
+    build:
+      context: ./backend/workouts/api
+      dockerfile: ./Dockerfile.dev
+    ports:
+      - "8020:8000"
+    volumes:
+      - ./backend/workouts/api:/app
+    depends_on:
+      - postgres
+    environment:
+      SECRET_KEY: db0a49ab25db171089e1a3950f31f3288df643c7c33ede3f38d6bf7788569e24
+      PGHOST: postgres
+      DATABASE_URL: postgresql://fastfit:fastfit@postgres:5432/workouts
+      PGDATABASE: workouts
+      PGUSER: fastfit
+      PGPASSWORD: fastfit
+
+  recipes:
+    build:
+      context: ./backend/recipes/api
+      dockerfile: ./Dockerfile.dev
+    ports:
+      - "8030:8000"
+    volumes:
+      - ./backend/recipes/api:/app
+    depends_on:
+      - postgres
+    environment:
+      SECRET_KEY: db0a49ab25db171089e1a3950f31f3288df643c7c33ede3f38d6bf7788569e24
+      PGHOST: postgres
+      DATABASE_URL: postgresql://fastfit:fastfit@postgres:5432/recipes
+      PGDATABASE: recipes
+      PGUSER: fastfit
+      PGPASSWORD: fastfit
+
+  journals:
+    build:
+      context: ./backend/journals/api
+      dockerfile: ./Dockerfile.dev
+    ports:
+      - "8040:8000"
+    volumes:
+      - ./backend/journals/api:/app
+    depends_on:
+      - postgres
+    environment:
+      SECRET_KEY: db0a49ab25db171089e1a3950f31f3288df643c7c33ede3f38d6bf7788569e24
+      PGHOST: postgres
+      DATABASE_URL: postgresql://fastfit:fastfit@postgres:5432/journals
+      PGDATABASE: journals
+      PGUSER: fastfit
+      PGPASSWORD: fastfit
+
+  health:
+    build:
+      context: ./backend/health/api
+      dockerfile: ./Dockerfile.dev
+    ports:
+      - "8050:8000"
+    volumes:
+      - ./backend/health/api:/app
+    depends_on:
+      - postgres
+    environment:
+      SECRET_KEY: db0a49ab25db171089e1a3950f31f3288df643c7c33ede3f38d6bf7788569e24
+      PGHOST: postgres
+      DATABASE_URL: postgresql://fastfit:fastfit@postgres:5432/health
+      PGDATABASE: health
+      PGUSER: fastfit
+      PGPASSWORD: fastfit
+
+  recipes-poller:
+    build:
+      context: ./backend/recipes/poll
+      dockerfile: ./Dockerfile.dev
+    volumes:
+      - ./backend/recipes/poll:/app
+    depends_on:
+      - postgres
+      - accounts
+    environment:
+      DATABASE_URL: postgresql://fastfit:fastfit@postgres:5432/recipes
+      ACCOUNTS_API: http://accounts:8000
+
+  journals-poller:
+    build:
+      context: ./backend/journals/poll
+      dockerfile: ./Dockerfile.dev
+    volumes:
+      - ./backend/journals/poll:/app
+    depends_on:
+      - postgres
+      - accounts
+    environment:
+      DATABASE_URL: postgresql://fastfit:fastfit@postgres:5432/journals
+      ACCOUNTS_API: http://accounts:8000
