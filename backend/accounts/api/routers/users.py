@@ -48,7 +48,7 @@ class User(BaseModel):
 
 class UserSignUp(BaseModel):
     username: str
-    hashed_password: str
+    password: str
     email: str | None = None
     firstname: str | None = None
     lastname: str | None = None
