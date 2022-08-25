@@ -4,10 +4,7 @@ from typing import List
 from fastapi import APIRouter, Response, status, Depends, HTTPException
 import os
 from psycopg_pool import ConnectionPool
-
-
-conninfo = os.environ["DATABASE_URL"]
-pool = ConnectionPool(conninfo=conninfo)
+from journal_db import JournalQueries, pool
 
 class Journal(BaseModel):
     id: int
@@ -20,6 +17,7 @@ class Journal(BaseModel):
     
 
 class JournalIn(BaseModel):
+    uservo: int
     feeling: int
     grateful: str
     daily_aff: str
@@ -44,3 +42,15 @@ class ErrorMessage(BaseModel):
 
 class Message(BaseModel):
     message: str
+
+@router.post(
+    "/api/journal", 
+    response_model=JournalOut,
+    responses={
+        500: {"model": ErrorMessage},
+    },
+)
+def new_journal(
+    journal: JournalIn,
+    query=Depends(JournalQueries),
+)
