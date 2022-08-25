@@ -159,14 +159,17 @@ async def signup(
     user: UserSignUp, response: Response, repo: AccountsQueries = Depends()
 ):
     hashed_password = pwd_context.hash(user.password)
+    print(hashed_password)
     try:
+        # do not touch this method ever!!!!!!!!!!!!!!!!!!!!!!!!! 
         repo.create_user(
             user.username,
+            hashed_password,
+            user.email,
             user.firstname,
             user.lastname,
-            user.email,
-            hashed_password,
         )
+        print(user)
         return user
     except DuplicateAccount:
         response.status_code = status.HTTP_409_CONFLICT

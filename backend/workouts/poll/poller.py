@@ -11,7 +11,7 @@ pool = ConnectionPool(conninfo=conninfo)
 
 def poll():
     while True:
-        print("Journal poller polling for user data")
+        print("Workouts poller polling for user data")
         try:
             # Write your polling logic, here
             pass

@@ -56,10 +56,10 @@ class AccountsQueries:
                         """,
                         [
                             username,
-                            hashed_password,
-                            email,
                             firstname,
                             lastname,
+                            hashed_password,
+                            email,
                         ],
                     )
                 except UniqueViolation:
