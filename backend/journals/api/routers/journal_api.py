@@ -10,26 +10,26 @@ class Journal(BaseModel):
     id: int
     uservo: int
     entry_date: datetime
-    feeling: int
     grateful: str
     daily_aff: str
     note: str
+    feeling: int
     
 
 class JournalIn(BaseModel):
     uservo: int
-    feeling: int
     grateful: str
     daily_aff: str
     note: str
+    feeling: int
 
 
 class JournalOut(BaseModel):
     entry_date: datetime
-    feeling: int
     grateful: str
     daily_aff: str
     note: str
+    feeling: int
     
 
 class JournalList(BaseModel):
@@ -50,7 +50,28 @@ class Message(BaseModel):
         500: {"model": ErrorMessage},
     },
 )
-def new_journal(
+def journal_post(
     journal: JournalIn,
     query=Depends(JournalQueries),
+):
+    row = query.insert_journal(
+        journal.grateful, journal.daily_aff, journal.note, journal.feeling,
+    )
+    if row is None:
+        Response.status_code = status.HTTP_409_CONFLICT
+        return {"message": "Could not create duplicate meal type post"}
+    return row
+
+
+@router.get(
+    "/api/journals",
+    response_model=JournalList,
+    responses={
+        404: {"model": ErrorMessage},
+    }
 )
+def journal_list(
+    query=Depends(JournalQueries),
+):
+    rows = query.get_journals_list()
+    return rows

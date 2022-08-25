@@ -155,7 +155,7 @@ services:
     environment:
       DATABASE_URL: postgresql://fastfit:fastfit@postgres:5432/journals
       ACCOUNTS_API: http://accounts:8000
-  
+
   workouts-poller:
     build:
       context: ./backend/workouts/poll
