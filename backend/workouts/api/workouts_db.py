@@ -1,4 +1,5 @@
 import os
+from tkinter.tix import COLUMN
 from psycopg_pool import ConnectionPool
 
 conninfo = os.environ["DATABASE_URL"]
@@ -45,22 +46,42 @@ class MuscleGroupQueries:
                     record[column.name] = row[i]
                 return record
 
-# class WorkoutCategoryQueries:
-#     def get_workout_category_query(self):
-#         with pool.connection() as conn:
-#             with conn.cursor() as cur:
-#                 cur.execute(
-#                     """
-#                     SELECT *
-#                     FROM workout_categories;
-#                     """
-#                 )
+class WorkoutCategoryQueries:
+    def get_workout_category_query(self):
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    SELECT *
+                    FROM workout_categories;
+                    """
+                )
 
-#                 new_dict = []
-#                 for row in cur.fetchall():
-#                     dictionary = {
-#                         "id": row[0],
-#                         "category": row[1]
-#                     }
-#                     new_dict.append(dictionary)
-#                 return new_dict
+                new_list = []
+                for row in cur.fetchall():
+                    dictionary = {
+                        "id": row[0],
+                        "category": row[1]
+                    }
+                    new_list.append(dictionary)
+                return new_list
+
+    def insert_workout_category(self, category):
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                try:
+                    cur.execute(
+                        """
+                        INSERT INTO workout_categories (category)
+                        VALUES (%s)
+                        RETURNING id, category
+                        """,
+                        [category],
+                    )
+                except psycopg.errors.UniqueViolation:
+                    return None
+                row = cur.fetchone()
+                record = {}
+                for i, column in enumerate(cur.description):
+                    record[column.name] = row[i]
+                return record

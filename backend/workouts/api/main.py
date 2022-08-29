@@ -26,3 +26,4 @@ app.add_middleware(
 
 app.include_router(workouts_api.router)
 
+

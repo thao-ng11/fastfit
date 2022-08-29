@@ -1,3 +1,4 @@
+from http.client import responses
 from fastapi import APIRouter, Response, status, Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
 from psycopg.errors import ForeignKeyViolation
@@ -22,7 +23,7 @@ from workout_models import (
 )
 from workouts_db import (
     MuscleGroupQueries,
-    # WorkoutCategoryQueries,
+    WorkoutCategoryQueries,
     pool,
 )
 
@@ -59,3 +60,35 @@ def muscle_group_list(
 ):
     rows = query.get_muscle_group_query()
     return  rows
+
+@router.post(
+    "/api/workout_category",
+    response_model=WorkoutCategoryOut,
+    responses={
+        500: {"model": ErrorMessage},
+    },
+)
+def workout_category_post(
+    workout_category: WorkoutCategoryIn,
+    query=Depends(WorkoutCategoryQueries),
+):
+    row = query.insert_workout_category(
+        workout_category.category,
+    )
+    if row is None:
+        Response.status_code = status.HTTP_409_CONFLICT
+        return {"message":"Could not create duplicate workout category post"}
+    return row
+
+@router.get(
+    "/api/workout_category",
+    response_model=WorkoutCategoryList,
+    responses={
+        404:{"model": ErrorMessage},
+    }
+)
+def workout_category_list(
+    query=Depends(WorkoutCategoryQueries)
+):
+    rows = query.get_workout_category_query()
+    return rows
