@@ -18,6 +18,8 @@ from workout_models import (
     StrengthWorkoutList,
     StrengthWorkoutsIn,
     StrengthWorkoutsOut,
+    CardioWorkoutDeleteOperation,
+    StrengthWorkoutDeleteOperation,
     ErrorMessage,
     Message,
 )
@@ -131,6 +133,20 @@ def cardio_workout_list(
     rows = query.get_cardio_workout_query()
     return rows
 
+@router.delete(
+    "/api/cardio_workout/{cardio_workout_id}",
+    response_model=CardioWorkoutDeleteOperation,
+)
+def delete_cardio_workout(
+    cardio_workout_id: int,
+    query=Depends(CardioWorkoutQueries)
+):
+    try:
+        query.delete_cardio_workout(cardio_workout_id)
+        return {"result": True}
+    except:
+        return {"result": False}
+
 @router.post(
     "/api/strength_workout",
     response_model=StrengthWorkoutsOut,
@@ -168,3 +184,17 @@ def strength_workout_list(
 ):
     rows = query.get_strength_workout_query()
     return rows
+
+@router.delete(
+    "/api/strength_workout/{strength_workout_id}",
+    response_model=StrengthWorkoutDeleteOperation,
+)
+def delete_strength_workout(
+    strength_workout_id: int,
+    query=Depends(StrengthWorkoutQueries)
+):
+    try:
+        query.delete_strength_workout(strength_workout_id)
+        return {"result": True}
+    except:
+        return {"result": False}
