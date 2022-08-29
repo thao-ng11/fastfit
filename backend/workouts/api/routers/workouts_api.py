@@ -108,7 +108,6 @@ def cardio_workout_post(
     row = query.insert_cardio_workout(
         cardio_workout.uservo, 
         cardio_workout.category, 
-        cardio_workout.muscle_group, 
         cardio_workout.workout_date,
         cardio_workout.duration, 
         cardio_workout.distance,

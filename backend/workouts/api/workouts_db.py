@@ -103,24 +103,23 @@ class CardioWorkoutQueries:
                         "id": row[0],
                         "uservo": row[1],
                         "category": row[2],
-                        "muscle_group" :row[3],
-                        "workout_date": row[4],
-                        "duration": row[5],
-                        "distance": row[6],
+                        "workout_date": row[3],
+                        "duration": row[4],
+                        "distance": row[5],
                     }
                     new_list.append(dictionary)
                 return new_list
-    def insert_cardio_workout(self, uservo, category, muscle_group, workout_date, duration, distance):
+    def insert_cardio_workout(self, uservo, category, workout_date, duration, distance):
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 try:
                     cur.execute(
                         """
-                        INSERT INTO cardio_workout (uservo, category, muscle_group, workout_date, duration, distance)
-                        VALUES (%s,%s,%s,%s,%s,%s)
-                        RETURNING id, uservo, category, muscle_group, workout_date, duration, distance
+                        INSERT INTO cardio_workout (uservo, category, workout_date, duration, distance)
+                        VALUES (%s,%s,%s,%s,%s)
+                        RETURNING id, uservo, category, workout_date, duration, distance
                         """,
-                        [uservo, category, muscle_group, workout_date, duration, distance],
+                        [uservo, category, workout_date, duration, distance],
                     )
                 except psycopg.errors.UniqueViolation:
                     return None

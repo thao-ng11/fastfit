@@ -21,7 +21,6 @@ class CardioWorkoutsOut(BaseModel):
     id : int
     uservo : int
     category : int
-    muscle_group : int
     workout_date : date
     duration : int
     distance : float
@@ -29,7 +28,6 @@ class CardioWorkoutsOut(BaseModel):
 class CardioWorkoutsIn(BaseModel):
     uservo : int
     category : int
-    muscle_group : int
     workout_date : date
     duration : int
     distance : float 

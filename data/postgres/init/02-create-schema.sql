@@ -57,7 +57,6 @@ CREATE TABLE cardio_workout (
     id SERIAL PRIMARY KEY,
     uservo INT REFERENCES uservo(id) ON DELETE CASCADE,
     category INT REFERENCES workout_categories(id),
-    muscle_group INT REFERENCES muscle_group(id),
     workout_date TIMESTAMPTZ NOT NULL,
     duration INT NOT NULL,
     distance FLOAT
