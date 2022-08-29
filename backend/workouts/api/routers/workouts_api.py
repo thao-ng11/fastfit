@@ -25,6 +25,7 @@ from workouts_db import (
     MuscleGroupQueries,
     WorkoutCategoryQueries,
     CardioWorkoutQueries,
+    StrengthWorkoutQueries,
     pool,
 )
 
@@ -128,4 +129,42 @@ def cardio_workout_list(
     query=Depends(CardioWorkoutQueries)
 ):
     rows = query.get_cardio_workout_query()
+    return rows
+
+@router.post(
+    "/api/strength_workout",
+    response_model=StrengthWorkoutsOut,
+    responses={
+        500: {"model": ErrorMessage},
+    },
+)
+def strength_workout_post(
+    strength_workout: StrengthWorkoutsIn,
+    query=Depends(StrengthWorkoutQueries,)
+):
+    row = query.insert_strength_workout(
+        strength_workout.uservo, 
+        strength_workout.category, 
+        strength_workout.muscle_group,
+        strength_workout.workout_date,
+        strength_workout.sets,
+        strength_workout.repetitions,
+        strength_workout.weight,
+    )
+    if row is None:
+        Response.status_code = status.HTTP_409_CONFLICT
+        return {"message":"Could not create duplicate strength workout post"}
+    return row
+
+@router.get(
+    "/api/strength_workout",
+    response_model=StrengthWorkoutList,
+    responses={
+        404:{"model": ErrorMessage},
+    }
+)
+def strength_workout_list(
+    query=Depends(StrengthWorkoutQueries)
+):
+    rows = query.get_strength_workout_query()
     return rows

@@ -128,3 +128,48 @@ class CardioWorkoutQueries:
                 for i, column in enumerate(cur.description):
                     record[column.name] = row[i]
                 return record
+
+class StrengthWorkoutQueries:
+    def get_strength_workout_query(self):
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    SELECT *
+                    FROM strength_workout;
+                    """
+                )
+
+                new_list = []
+                for row in cur.fetchall():
+                    dictionary = {
+                        "id": row[0],
+                        "uservo": row[1],
+                        "category": row[2],
+                        "muscle_group":row[3],
+                        "workout_date": row[4],
+                        "sets" : row[5],
+                        "repetitions": row[6],
+                        "weight": row[7],
+                    }
+                    new_list.append(dictionary)
+                return new_list
+    def insert_strength_workout(self, uservo, category, muscle_group, workout_date, sets, repetitions, weight):
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                try:
+                    cur.execute(
+                        """
+                        INSERT INTO strength_workout (uservo, category, muscle_group, workout_date, sets, repetitions, weight)
+                        VALUES (%s,%s,%s,%s,%s,%s,%s)
+                        RETURNING id, uservo, category, muscle_group, workout_date, sets, repetitions, weight
+                        """,
+                        [uservo, category, muscle_group, workout_date, sets, repetitions, weight ],
+                    )
+                except psycopg.errors.UniqueViolation:
+                    return None
+                row = cur.fetchone()
+                record = {}
+                for i, column in enumerate(cur.description):
+                    record[column.name] = row[i]
+                return record

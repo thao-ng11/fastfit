@@ -39,7 +39,7 @@ class StrengthWorkoutsOut(BaseModel):
     muscle_group : int
     workout_date : date 
     sets : int
-    repitions : int
+    repetitions : int
     weight : int
 
 class StrengthWorkoutsIn(BaseModel):
@@ -48,7 +48,7 @@ class StrengthWorkoutsIn(BaseModel):
     muscle_group : int
     workout_date : date
     sets : int
-    repitions : int
+    repetitions : int
     weight : int
 
 class MuscleGroupList(BaseModel):
