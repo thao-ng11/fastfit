@@ -24,17 +24,17 @@ CREATE TABLE uservo (
     usernamevo VARCHAR(100) NOT NULL UNIQUE
 );
 
+CREATE TABLE meal_type (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE
+);
+
 CREATE TABLE meal (
     id SERIAL PRIMARY KEY,
     uservo INT REFERENCES uservo(id),
     recipe_api_id VARCHAR(500) NOT NULL,
     date DATE NOT NULL,
-    type VARCHAR(100) NOT NULL
-);
-
-CREATE TABLE meal_type (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL UNIQUE
+    type INT REFERENCES meal_type(id) NOT NULL
 );
 
 \connect workouts
@@ -58,7 +58,6 @@ CREATE TABLE cardio_workout (
     id SERIAL PRIMARY KEY,
     uservo INT REFERENCES uservo(id) ON DELETE CASCADE,
     category INT REFERENCES workout_categories(id),
-    muscle_group INT REFERENCES muscle_group(id),
     workout_date TIMESTAMPTZ NOT NULL,
     duration INT NOT NULL,
     distance FLOAT

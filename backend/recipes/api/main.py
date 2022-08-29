@@ -1,11 +1,8 @@
-# need cors middleware settings for authentication
-# set routers
-# app = FastAPI()
-# origins
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import os
 
+from routers import recipes_api
 
 app = FastAPI()
 
@@ -23,4 +20,4 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
+app.include_router(recipes_api.router)

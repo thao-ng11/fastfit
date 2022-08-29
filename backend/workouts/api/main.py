@@ -9,6 +9,7 @@ import os
 
 app = FastAPI()
 
+from routers import workouts_api
 
 origins = [
     "http://localhost:3000",
@@ -22,5 +23,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(workouts_api.router)
 
 
