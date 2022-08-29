@@ -14,7 +14,7 @@ from workout_models import (
     WorkoutCategoryList,
     CardioWorkoutsIn,
     CardioWorkoutsOut,
-    CardioWrokoutList,
+    CardioWorkoutList,
     StrengthWorkoutList,
     StrengthWorkoutsIn,
     StrengthWorkoutsOut,
@@ -24,6 +24,7 @@ from workout_models import (
 from workouts_db import (
     MuscleGroupQueries,
     WorkoutCategoryQueries,
+    CardioWorkoutQueries,
     pool,
 )
 
@@ -91,4 +92,41 @@ def workout_category_list(
     query=Depends(WorkoutCategoryQueries)
 ):
     rows = query.get_workout_category_query()
+    return rows
+
+@router.post(
+    "/api/cardio_workout",
+    response_model=CardioWorkoutsOut,
+    responses={
+        500: {"model": ErrorMessage},
+    },
+)
+def cardio_workout_post(
+    cardio_workout: CardioWorkoutsIn,
+    query=Depends(CardioWorkoutQueries,)
+):
+    row = query.insert_cardio_workout(
+        cardio_workout.uservo, 
+        cardio_workout.category, 
+        cardio_workout.muscle_group, 
+        cardio_workout.workout_date,
+        cardio_workout.duration, 
+        cardio_workout.distance,
+    )
+    if row is None:
+        Response.status_code = status.HTTP_409_CONFLICT
+        return {"message":"Could not create duplicate workout category post"}
+    return row
+
+@router.get(
+    "/api/cardio_workout",
+    response_model=CardioWorkoutList,
+    responses={
+        404:{"model": ErrorMessage},
+    }
+)
+def cardio_workout_list(
+    query=Depends(CardioWorkoutQueries)
+):
+    rows = query.get_cardio_workout_query()
     return rows
