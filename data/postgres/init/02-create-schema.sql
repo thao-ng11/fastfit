@@ -11,7 +11,8 @@ CREATE TABLE users (
 
 CREATE TABLE user_profile (
     id SERIAL PRIMARY KEY,
-    username INT REFERENCES users(id),
+    -- username is actually the user id 
+    userid INT REFERENCES users(id), 
     height INT NOT NULL,
     zip INT NOT NULL
 );
