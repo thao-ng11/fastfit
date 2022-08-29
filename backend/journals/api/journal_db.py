@@ -1,5 +1,5 @@
 import os
-from psycopg_pool import ConnectionPool, UniqueViolation
+from psycopg_pool import ConnectionPool
 
 
 conninfo = os.environ["DATABASE_URL"]
@@ -7,13 +7,17 @@ pool = ConnectionPool(conninfo=conninfo)
 
 
 class JournalQueries:
-    def get_journals_list(self):
+    def get_all_journals(self):
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
                     """
-                    SELECT j.id, j.entry_date, j.grateful, j.daily_aff,
-                        j.note,j.feeling
+                    SELECT j.id
+                    , j.entry_date
+                    , j.grateful
+                    , j.daily_aff
+                    , j.note
+                    , j.feeling
                     FROM journal j
                     GROUP BY j.entry_date
                     """
@@ -54,7 +58,7 @@ class JournalQueries:
                 return record
 
 
-    # def get_journal(self, journal_id):
+    # def get_one_journal(self, journal_id):
     #     with pool.connection() as conn:
     #         with conn.cursor() as cur:
     #             cur.execute(

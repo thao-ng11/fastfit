@@ -84,7 +84,7 @@ CREATE TABLE uservo (
 CREATE TABLE journal (
     id SERIAL PRIMARY KEY,
     uservo INT REFERENCES uservo(id) ON DELETE CASCADE,
-    entry_date timestamp DEFAULT current_timestamp,
+    entry_date TIMESTAMPTZ, NOT NULL
     grateful TEXT NOT NULL,
     daily_aff TEXT NOT NULL,
     note TEXT NOT NULL,

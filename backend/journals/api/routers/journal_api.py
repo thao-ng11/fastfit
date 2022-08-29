@@ -6,6 +6,8 @@ import os
 from psycopg_pool import ConnectionPool
 from journal_db import JournalQueries, pool
 
+router= APIRouter()
+
 class Journal(BaseModel):
     id: int
     uservo: int
@@ -17,7 +19,6 @@ class Journal(BaseModel):
     
 
 class JournalIn(BaseModel):
-    uservo: int
     grateful: str
     daily_aff: str
     note: str
@@ -25,7 +26,7 @@ class JournalIn(BaseModel):
 
 
 class JournalOut(BaseModel):
-    entry_date: datetime
+    entry_date: date
     grateful: str
     daily_aff: str
     note: str
@@ -33,7 +34,7 @@ class JournalOut(BaseModel):
     
 
 class JournalList(BaseModel):
-    __root__: List[Journal]
+    __root__: List[JournalOut]
 
 
 class ErrorMessage(BaseModel):
@@ -59,12 +60,12 @@ def journal_post(
     )
     if row is None:
         Response.status_code = status.HTTP_409_CONFLICT
-        return {"message": "Could not create duplicate meal type post"}
+        return {"message": "Could not create duplicate journal post"}
     return row
 
 
 @router.get(
-    "/api/journals",
+    "/api/journal",
     response_model=JournalList,
     responses={
         404: {"model": ErrorMessage},
@@ -73,5 +74,25 @@ def journal_post(
 def journal_list(
     query=Depends(JournalQueries),
 ):
-    rows = query.get_journals_list()
+    rows = query.get_all_journals()
     return rows
+
+
+@router.get(
+    "api/journal/{journal_id}",
+    response_model = JournalOut | Message,
+    response = {
+        200: {"model": JournalOut},
+        404: {"model": ErrorMessage},
+    },
+)
+def get_journal(
+    mentorship_id: int,
+    response: Response,
+    query=Depends(JournalQueries),
+):
+    row = query.get_one_journal(journal_id)
+    if row is None:
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return {"message": "Mentorship not found"}
+    return row
