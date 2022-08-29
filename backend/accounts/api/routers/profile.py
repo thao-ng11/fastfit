@@ -39,7 +39,7 @@ class ErrorMessage(BaseModel):
 
 from profile_db import ProfileQueries
 
-@router.post("api/profile/new", response_model = ProfileOut, responses={500: {"model": ErrorMessage},},)
+@router.post("/api/profile/new", response_model = ProfileOut, responses={500: {"model": ErrorMessage},},)
 
 def profile_post(
     profile: ProfileIn, 
@@ -48,19 +48,30 @@ def profile_post(
 ):
     if bearer_token is None:
         raise credentials_exception
+    print(bearer_token)
+    
     payload = jwt.decode(bearer_token, SECRET_KEY, algorithms=[ALGORITHM])
-    username = payload.get("sub"),
-    user = payload.get("user")
+    print(payload)
+    password = payload.get("sub"),
+    print(password)
+    userid = payload.get("userid")
+    print(userid)
+    username= payload.get("username")
+    print(username)
+    firstname =payload.get("firstname") 
+    print(firstname)
+    lastname= payload.get("lastname")
+    print(lastname)
     with pool.connection() as conn:
         with conn.cursor() as cur:
             try:
                 cur.execute(
                     """
-                    INSERT INTO profile (height, zip, userid)
+                    INSERT INTO user_profile (height, zip, username)
                     VALUES (%s, %s, %s)
-                    RETURNING id, height, zip, userid
+                    RETURNING id, height, zip, username
                     """,
-                    [profile.height, profile.zip, user["id"]],
+                    [profile.height, profile.zip, userid],
                 )
             except UniqueViolation:
                 response.status_code = status.HTTP_409_CONFLICT
@@ -69,9 +80,10 @@ def profile_post(
                 }
             row = cur.fetchone()
             record = {
-                "firstname": user["firstname"],
-                "lastname": user["lastname"],
+                "firstname": firstname,
+                "lastname": lastname,
                 "username": username,
+                "userid": userid,
             }
 
             for i, column in enumerate(cur.description):
@@ -79,7 +91,7 @@ def profile_post(
             return record
 
 @router.get(
-    "api/profile/",
+    "/api/profile/",
     response_model = ProfileOut,
     responses = {
         200: {"model": ProfileOut},
@@ -94,8 +106,8 @@ def profile_list(
     if bearer_token is None:
         raise credentials_exception
     payload = jwt.decode(bearer_token, SECRET_KEY, algorithms=[ALGORITHM])
-    user = payload.get("user")
-    id = user["id"]
+    user = payload.get("username")
+    id = payload.get("userid")
     row = query.get_profile(id)
     if row is None:
         response.status_code = status.HTTP_404_NOT_FOUND
