@@ -13,3 +13,7 @@ Today was a pretty rough day. Ryan was testing the AUTH stuff and working throug
 8/24
 
 We finished up the DB and created the tables for each of our microservices. We started making our functions for our FastAPI backend to be able to query through the database we just created. We also messed with Trello, applying better industry practice with standups. Tomorrow I am hoping to finish up the entire backend, test it all on the FastAPI website which would leave me plenty of time to get started on the frontend next week.
+
+8/25
+
+Finished up the pollers this am, and created the docker containers for each poller. 12 total so far! I am finally getting better at git. 
