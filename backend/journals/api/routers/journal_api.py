@@ -19,6 +19,7 @@ class Journal(BaseModel):
     
 
 class JournalIn(BaseModel):
+    entry_date: datetime
     grateful: str
     daily_aff: str
     note: str
@@ -26,7 +27,7 @@ class JournalIn(BaseModel):
 
 
 class JournalOut(BaseModel):
-    entry_date: date
+    entry_date: datetime
     grateful: str
     daily_aff: str
     note: str
@@ -55,7 +56,7 @@ def journal_post(
     journal: JournalIn,
     query=Depends(JournalQueries),
 ):
-    row = query.insert_journal(
+    row = query.insert_journal(journal.entry_date,
         journal.grateful, journal.daily_aff, journal.note, journal.feeling,
     )
     if row is None:
@@ -78,21 +79,21 @@ def journal_list(
     return rows
 
 
-@router.get(
-    "api/journal/{journal_id}",
-    response_model = JournalOut | Message,
-    response = {
-        200: {"model": JournalOut},
-        404: {"model": ErrorMessage},
-    },
-)
-def get_journal(
-    mentorship_id: int,
-    response: Response,
-    query=Depends(JournalQueries),
-):
-    row = query.get_one_journal(journal_id)
-    if row is None:
-        response.status_code = status.HTTP_404_NOT_FOUND
-        return {"message": "Mentorship not found"}
-    return row
+# @router.get(
+#     "api/journal/{journal_id}",
+#     response_model = JournalOut | Message,
+#     response = {
+#         200: {"model": JournalOut},
+#         404: {"model": ErrorMessage},
+#     },
+# )
+# def get_journal(
+#     mentorship_id: int,
+#     response: Response,
+#     query=Depends(JournalQueries),
+# ):
+#     row = query.get_one_journal(journal_id)
+#     if row is None:
+#         response.status_code = status.HTTP_404_NOT_FOUND
+#         return {"message": "Mentorship not found"}
+#     return row

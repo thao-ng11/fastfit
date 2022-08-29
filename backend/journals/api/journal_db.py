@@ -1,6 +1,7 @@
 import os
+import psycopg
 from psycopg_pool import ConnectionPool
-
+from psycopg.errors import UniqueViolation
 
 conninfo = os.environ["DATABASE_URL"]
 pool = ConnectionPool(conninfo=conninfo)
@@ -19,7 +20,8 @@ class JournalQueries:
                     , j.note
                     , j.feeling
                     FROM journal j
-                    GROUP BY j.entry_date
+                    GROUP BY j.id
+                    ORDER BY j.entry_date
                     """
                 )
 
@@ -35,21 +37,21 @@ class JournalQueries:
                     }
                     jlist.append(jdict)
 
-                return jdict
+                return jlist
 
-    def insert_journal(self, grateful, daily_aff, note, feeling):
+    def insert_journal(self, entry_date, grateful, daily_aff, note, feeling):
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 try:
                     cur.execute(
                         """
-                        INSERT INTO journal (grateful, daily_aff, note, feeling)
-                        VALUES (%s, %s, %s, %s)
-                        RETURNING id, grateful, daily_aff, note, feeling
+                        INSERT INTO journal (entry_date, grateful, daily_aff, note, feeling)
+                        VALUES (CURRENT_TIMESTAMP, %s, %s, %s, %s)
+                        RETURNING id, entry_date, grateful, daily_aff, note, feeling
                         """,
                         [grateful, daily_aff, note, feeling],
                     )
-                except psycopg.errors.UniqueViolation:
+                except UniqueViolation:
                     return None
                 row = cur.fetchone()
                 record = {}
