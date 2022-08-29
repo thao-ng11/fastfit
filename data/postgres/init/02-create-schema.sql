@@ -11,7 +11,8 @@ CREATE TABLE users (
 
 CREATE TABLE user_profile (
     id SERIAL PRIMARY KEY,
-    username INT REFERENCES users(id),
+    -- username is actually the user id 
+    userid INT REFERENCES users(id), 
     height INT NOT NULL,
     zip INT NOT NULL
 );
@@ -57,7 +58,6 @@ CREATE TABLE cardio_workout (
     id SERIAL PRIMARY KEY,
     uservo INT REFERENCES uservo(id) ON DELETE CASCADE,
     category INT REFERENCES workout_categories(id),
-    muscle_group INT REFERENCES muscle_group(id),
     workout_date TIMESTAMPTZ NOT NULL,
     duration INT NOT NULL,
     distance FLOAT

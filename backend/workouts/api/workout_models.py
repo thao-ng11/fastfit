@@ -20,16 +20,14 @@ class WorkoutCategoryIn(BaseModel):
 class CardioWorkoutsOut(BaseModel):
     id : int
     uservo : int
-    category : str
-    muscle_group : str
+    category : int
     workout_date : date
     duration : int
     distance : float
 
 class CardioWorkoutsIn(BaseModel):
     uservo : int
-    category : str
-    muscle_group : str
+    category : int
     workout_date : date
     duration : int
     distance : float 
@@ -37,20 +35,20 @@ class CardioWorkoutsIn(BaseModel):
 class StrengthWorkoutsOut(BaseModel):
     id : int
     uservo : int
-    category : str
-    muscle_group : str
+    category : int
+    muscle_group : int
     workout_date : date 
     sets : int
-    repitions : int
+    repetitions : int
     weight : int
 
 class StrengthWorkoutsIn(BaseModel):
     uservo : int
-    category : str
-    muscle_group : str
+    category : int
+    muscle_group : int
     workout_date : date
     sets : int
-    repitions : int
+    repetitions : int
     weight : int
 
 class MuscleGroupList(BaseModel):
@@ -59,7 +57,7 @@ class MuscleGroupList(BaseModel):
 class WorkoutCategoryList(BaseModel):
     __root__ : List[WorkoutCategoryOut]
 
-class CardioWrokoutList(BaseModel):
+class CardioWorkoutList(BaseModel):
     __root__ : List[CardioWorkoutsOut]
 
 class StrengthWorkoutList(BaseModel):

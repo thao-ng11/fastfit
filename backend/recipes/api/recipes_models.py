@@ -16,7 +16,7 @@ class MealIn(BaseModel):
     uservo: int
     recipe_api_id: str
     date: date
-    type: str
+    type: int
 
 
 class MealOut(BaseModel):
@@ -24,7 +24,7 @@ class MealOut(BaseModel):
     uservo: int
     recipe_api_id: str
     date: date
-    type: str
+    type: int
 
 
 class MealTypeList(BaseModel):
@@ -33,6 +33,10 @@ class MealTypeList(BaseModel):
 
 class MealList(BaseModel):
     __root__: List[MealOut]
+
+
+class MealTypeDeleteOperation(BaseModel):
+    result: bool
 
 
 class ErrorMessage(BaseModel):
