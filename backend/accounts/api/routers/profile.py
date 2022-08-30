@@ -73,6 +73,7 @@ def profile_post(
                     """,
                     [profile.height, profile.zip, userid],
                 )
+            
             except UniqueViolation:
                 response.status_code = status.HTTP_409_CONFLICT
                 return {
