@@ -1,6 +1,7 @@
 import os
 from psycopg_pool import ConnectionPool
 from psycopg.errors import UniqueViolation
+import psycopg
 
 conninfo = os.environ["DATABASE_URL"]
 pool = ConnectionPool(conninfo=conninfo)
@@ -142,3 +143,33 @@ class MealQueries:
                 for i, column in enumerate(cur.description):
                     record[column.name] = row[i]
                 return record
+
+    def delete_meal(self, id):
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    DELETE FROM meal
+                    WHERE id = %s
+                    """,
+                    [id],
+                )
+    
+    def update_meal(self, date, type, id):
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                """
+                UPDATE meal
+                SET date = %s, type = %s
+                WHERE id = %s
+                RETURNING id, uservo, recipe_api_id, date, type
+                """,
+                [date, type, id],
+                )
+            conn.commit()
+            row = cur.fetchone()
+            record = {}
+            for i, column in enumerate(cur.description):
+                record[column.name] = row[i]
+            return record

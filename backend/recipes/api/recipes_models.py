@@ -27,6 +27,11 @@ class MealOut(BaseModel):
     type: int
 
 
+class MealPut(BaseModel):
+    date: date
+    type: int
+
+
 class MealTypeList(BaseModel):
     __root__: List[MealTypeOut]
 
@@ -35,7 +40,7 @@ class MealList(BaseModel):
     __root__: List[MealOut]
 
 
-class MealTypeDeleteOperation(BaseModel):
+class DeleteOperation(BaseModel):
     result: bool
 
 
