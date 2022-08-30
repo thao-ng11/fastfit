@@ -9,10 +9,11 @@ from recipes_models import (
     MealTypeIn,
     MealTypeOut,
     MealTypeList,
-    MealTypeDeleteOperation,
     MealIn,
     MealOut,
+    MealPut,
     MealList,
+    DeleteOperation,
     ErrorMessage,
     Message,
 )
@@ -83,7 +84,7 @@ def meal_type_list(
 
 @router.delete(
     "/api/meal_types/{meal_type_id}",
-    response_model=MealTypeDeleteOperation,
+    response_model=DeleteOperation,
 )
 def delete_meal_type(
     meal_type_id: int,
@@ -144,5 +145,39 @@ def meal_post(
         meal.recipe_api_id,
         meal.date,
         meal.type
+    )
+    return row
+
+@router.delete(
+    "/api/meals/{meal_id}",
+    response_model=DeleteOperation,
+)
+def delete_meal(
+    meal_id: int,
+    query=Depends(MealQueries)
+):
+    try:
+        query.delete_meal(meal_id)
+        return {"result": True}
+    except:
+        return {"result": False}
+
+
+@router.put(
+    "/api/meals/{meal_id}",
+    response_model=MealOut,
+    responses={
+        404: {"model": ErrorMessage},
+    }
+)
+def update_meal(
+    meal_id: int,
+    meal: MealPut,
+    query=Depends(MealQueries),
+):
+    row = query.update_meal(
+        meal.date,
+        meal.type,
+        meal_id
     )
     return row

@@ -51,6 +51,12 @@ class StrengthWorkoutsIn(BaseModel):
     repetitions : int
     weight : int
 
+class CardioWorkoutDeleteOperation(BaseModel):
+    result: bool
+
+class StrengthWorkoutDeleteOperation(BaseModel):
+    result: bool
+
 class MuscleGroupList(BaseModel):
     __root__ : List[MuscleGroupOut]
 
@@ -68,3 +74,4 @@ class ErrorMessage(BaseModel):
 
 class Message(BaseModel):
     message: str
+

@@ -129,6 +129,17 @@ class CardioWorkoutQueries:
                     record[column.name] = row[i]
                 return record
 
+    def delete_cardio_workout(self,id):
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    DELETE FROM cardio_workout
+                    WHERE id = %s
+                    """,
+                    [id],
+                )
+
 class StrengthWorkoutQueries:
     def get_strength_workout_query(self):
         with pool.connection() as conn:
@@ -154,6 +165,7 @@ class StrengthWorkoutQueries:
                     }
                     new_list.append(dictionary)
                 return new_list
+
     def insert_strength_workout(self, uservo, category, muscle_group, workout_date, sets, repetitions, weight):
         with pool.connection() as conn:
             with conn.cursor() as cur:
@@ -173,3 +185,14 @@ class StrengthWorkoutQueries:
                 for i, column in enumerate(cur.description):
                     record[column.name] = row[i]
                 return record
+
+    def delete_strength_workout(self,id):
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    DELETE FROM strength_workout
+                    WHERE id = %s
+                    """,
+                    [id],
+                )
