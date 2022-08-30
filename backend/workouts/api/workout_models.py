@@ -76,9 +76,15 @@ class Message(BaseModel):
     message: str
 
 class StrengthWorkoutPut(BaseModel):
-    category : str
-    muscle_group : str
+    category : int
+    muscle_group : int
     workout_date : date
     sets : int
     repetitions : int
     weight : int
+
+class CardioWorkoutPut(BaseModel):
+    category : int
+    workout_date : date
+    duration: int
+    distance: int

@@ -23,6 +23,7 @@ from workout_models import (
     ErrorMessage,
     Message,
     StrengthWorkoutPut,
+    CardioWorkoutPut,
 )
 from workouts_db import (
     MuscleGroupQueries,
@@ -148,6 +149,27 @@ def delete_cardio_workout(
     except:
         return {"result": False}
 
+@router.put(
+    "/api/cardio_workout/{cardio_workout_id}",
+    response_model=CardioWorkoutsOut,
+    responses={
+        404: {"model": ErrorMessage},
+    }
+)
+def update_cardio_workout(
+    cardio_workout_id: int,
+    cardio_workout: CardioWorkoutPut,
+    query=Depends(CardioWorkoutQueries),
+):
+    row = query.update_cardio_workout(
+        cardio_workout.category,
+        cardio_workout.workout_date,
+        cardio_workout.duration,
+        cardio_workout.distance,
+        cardio_workout_id
+    )
+    return row
+
 @router.post(
     "/api/strength_workout",
     response_model=StrengthWorkoutsOut,
@@ -219,6 +241,6 @@ def update_strength_workout(
         strength_workout.sets,
         strength_workout.repetitions,
         strength_workout.weight,
-        strength_workout_id,
+        strength_workout_id
     )
     return row

@@ -139,6 +139,24 @@ class CardioWorkoutQueries:
                     """,
                     [id],
                 )
+    def update_cardio_workout(self, category, workout_date, duration, distance, id,):
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    UPDATE cardio_workout
+                    SET category = %s, workout_date = %s, duration = %s, distance = %s
+                    WHERE id = %s
+                    RETURNING id, username, category, workout_date, duration, distance
+                    """,
+                    [category,workout_date, duration, distance, id],
+                )
+            conn.commit()
+            row = cur.fetchone()
+            record = {}
+            for i, column in enumerate(cur.description):
+                record[column.name] = row[i]
+            return record
 
 class StrengthWorkoutQueries:
     def get_strength_workout_query(self):
@@ -196,17 +214,17 @@ class StrengthWorkoutQueries:
                     """,
                     [id],
                 )
-    def update_strength_workout(self, username, id, category, muscle_group, workout_date, sets, repetitions, weight):
+    def update_strength_workout(self,  category, muscle_group, workout_date, sets, repetitions, weight, id,):
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
                     """
                     UPDATE strength_workout
                     SET category = %s, muscle_group = %s, workout_date = %s, sets = %s, repetitions = %s, weight= %s
-                    WHERE id = %s,
-                    RETURNING id, username, strength_workout_id, category, muscle_group, workout_date, sets, repetitions, weight
+                    WHERE id = %s
+                    RETURNING id, username, category, muscle_group, workout_date, sets, repetitions, weight
                     """,
-                    [username, id, category, muscle_group, workout_date, sets, repetitions, weight]
+                    [category, muscle_group, workout_date, sets, repetitions, weight, id],
                 )
             conn.commit()
             row = cur.fetchone()
