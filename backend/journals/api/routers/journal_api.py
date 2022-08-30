@@ -10,7 +10,7 @@ router= APIRouter()
 
 class Journal(BaseModel):
     id: int
-    uservo: int
+    username: str
     entry_date: datetime
     grateful: str
     daily_aff: str
@@ -19,6 +19,7 @@ class Journal(BaseModel):
     
 
 class JournalIn(BaseModel):
+    username: str
     entry_date: datetime
     grateful: str
     daily_aff: str
@@ -28,6 +29,7 @@ class JournalIn(BaseModel):
 
 class JournalOut(BaseModel):
     id: int
+    username: str
     entry_date: datetime
     grateful: str
     daily_aff: str
@@ -37,6 +39,11 @@ class JournalOut(BaseModel):
 
 class JournalList(BaseModel):
     __root__: List[JournalOut]
+
+
+class DeleteOperation(BaseModel):
+    result: bool
+
 
 
 class ErrorMessage(BaseModel):
@@ -57,7 +64,7 @@ def journal_post(
     journal: JournalIn,
     query=Depends(JournalQueries),
 ):
-    row = query.insert_journal(journal.entry_date,
+    row = query.insert_journal(journal.username, journal.entry_date,
         journal.grateful, journal.daily_aff, journal.note, journal.feeling,
     )
     if row is None:
@@ -80,21 +87,36 @@ def journal_list(
     return rows
 
 
-# @router.get(
-#     "api/journal/{journal_id}",
-#     response_model = JournalOut | Message,
-#     response = {
-#         200: {"model": JournalOut},
-#         404: {"model": ErrorMessage},
-#     },
-# )
-# def get_journal(
-#     mentorship_id: int,
-#     response: Response,
-#     query=Depends(JournalQueries),
-# ):
-#     row = query.get_one_journal(journal_id)
-#     if row is None:
-#         response.status_code = status.HTTP_404_NOT_FOUND
-#         return {"message": "Journal not found"}
-#     return row
+@router.get(
+    "/api/journal/{journal_id}",
+    response_model = JournalOut,
+    responses = {
+        200: {"model": JournalOut},
+        404: {"model": ErrorMessage},
+    },
+)
+def get_journal(
+    journal_id: int,
+    response: Response,
+    query=Depends(JournalQueries),
+):
+    row = query.get_journal(journal_id)
+    if row is None:
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return {"message": "Journal not found"}
+    return row
+
+
+@router.delete(
+    "/api/journal/{journal_id}",
+    response_model=DeleteOperation,
+)
+def delete_journal(
+    journal_id: int,
+    query=Depends(JournalQueries)
+):
+    try:
+        query.delete_journal(journal_id)
+        return {"result": True}
+    except:
+        return {"result": False}

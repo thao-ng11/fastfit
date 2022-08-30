@@ -19,14 +19,14 @@ class WorkoutCategoryIn(BaseModel):
 
 class CardioWorkoutsOut(BaseModel):
     id : int
-    uservo : int
+    username : str
     category : int
     workout_date : date
     duration : int
     distance : float
 
 class CardioWorkoutsIn(BaseModel):
-    uservo : int
+    username : str
     category : int
     workout_date : date
     duration : int
@@ -34,7 +34,7 @@ class CardioWorkoutsIn(BaseModel):
 
 class StrengthWorkoutsOut(BaseModel):
     id : int
-    uservo : int
+    username : str
     category : int
     muscle_group : int
     workout_date : date 
@@ -43,7 +43,7 @@ class StrengthWorkoutsOut(BaseModel):
     weight : int
 
 class StrengthWorkoutsIn(BaseModel):
-    uservo : int
+    username : str
     category : int
     muscle_group : int
     workout_date : date
@@ -75,3 +75,16 @@ class ErrorMessage(BaseModel):
 class Message(BaseModel):
     message: str
 
+class StrengthWorkoutPut(BaseModel):
+    category : int
+    muscle_group : int
+    workout_date : date
+    sets : int
+    repetitions : int
+    weight : int
+
+class CardioWorkoutPut(BaseModel):
+    category : int
+    workout_date : date
+    duration: int
+    distance: int
