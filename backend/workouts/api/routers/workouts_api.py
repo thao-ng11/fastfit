@@ -22,6 +22,8 @@ from workout_models import (
     StrengthWorkoutDeleteOperation,
     ErrorMessage,
     Message,
+    StrengthWorkoutPut,
+    CardioWorkoutPut,
 )
 from workouts_db import (
     MuscleGroupQueries,
@@ -109,7 +111,7 @@ def cardio_workout_post(
     query=Depends(CardioWorkoutQueries,)
 ):
     row = query.insert_cardio_workout(
-        cardio_workout.uservo, 
+        cardio_workout.username, 
         cardio_workout.category, 
         cardio_workout.workout_date,
         cardio_workout.duration, 
@@ -147,6 +149,27 @@ def delete_cardio_workout(
     except:
         return {"result": False}
 
+@router.put(
+    "/api/cardio_workout/{cardio_workout_id}",
+    response_model=CardioWorkoutsOut,
+    responses={
+        404: {"model": ErrorMessage},
+    }
+)
+def update_cardio_workout(
+    cardio_workout_id: int,
+    cardio_workout: CardioWorkoutPut,
+    query=Depends(CardioWorkoutQueries),
+):
+    row = query.update_cardio_workout(
+        cardio_workout.category,
+        cardio_workout.workout_date,
+        cardio_workout.duration,
+        cardio_workout.distance,
+        cardio_workout_id
+    )
+    return row
+
 @router.post(
     "/api/strength_workout",
     response_model=StrengthWorkoutsOut,
@@ -159,7 +182,7 @@ def strength_workout_post(
     query=Depends(StrengthWorkoutQueries,)
 ):
     row = query.insert_strength_workout(
-        strength_workout.uservo, 
+        strength_workout.username, 
         strength_workout.category, 
         strength_workout.muscle_group,
         strength_workout.workout_date,
@@ -198,3 +221,26 @@ def delete_strength_workout(
         return {"result": True}
     except:
         return {"result": False}
+
+@router.put(
+    "/api/strength_workout/{strength_workout_id}",
+    response_model=StrengthWorkoutsOut,
+    responses={
+        404: {"model": ErrorMessage},
+    }
+)
+def update_strength_workout(
+    strength_workout_id: int,
+    strength_workout: StrengthWorkoutPut,
+    query=Depends(StrengthWorkoutQueries),
+):
+    row = query.update_strength_workout(
+        strength_workout.category,
+        strength_workout.muscle_group,
+        strength_workout.workout_date,
+        strength_workout.sets,
+        strength_workout.repetitions,
+        strength_workout.weight,
+        strength_workout_id
+    )
+    return row

@@ -15,3 +15,9 @@ We talked as a group through our models and wire framework. I refined my microse
 
 ### 8.24
 We set up our sql tables with Sarah. We had our first stand up. We also solidified our workflow es
+
+### 8.29
+
+
+### 8.30
+I finally got to set up my models, requests and API. I spend most of the day troubleshooting the errors on Swagger. Major blockers at this point are setting up the request for retrieving ONE set of goals for a particular username, and setting up the BMI calculation between data from two different tables. I'll likely have to continue working on this tomorrow. 

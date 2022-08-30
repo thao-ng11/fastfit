@@ -17,3 +17,14 @@ We finished up the DB and created the tables for each of our microservices. We s
 8/25
 
 Finished up the pollers this am, and created the docker containers for each poller. 12 total so far! I am finally getting better at git. 
+
+8/26
+
+Finished up all of the GET and POSTs for all 4 of my models by lunch! After lunch I will be trying to finish up the PUT and DELETEs for my two workout models. Hopefully I can have it all done by tonight or tomorrow at the latest so I can start the Front end by Wednesday.
+
+8/29
+Completed most of my GET POSTS and DELETES. Hopefulyl tomorrow I can finish up the PUTs and start the front end on Wednesday!
+
+8/30
+Finished up all of the PUTs. Cooper gave a good lecture on Tailwind, seems like a pretty easy CSS to use for our projcet. Excited to finally start the Frontend soon!
+
