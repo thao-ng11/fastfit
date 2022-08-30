@@ -149,7 +149,7 @@ class CardioWorkoutQueries:
                     WHERE id = %s
                     RETURNING id, username, category, workout_date, duration, distance
                     """,
-                    [category,workout_date, duration, distance, id],
+                    [category, workout_date, duration, distance, id],
                 )
             conn.commit()
             row = cur.fetchone()
@@ -232,3 +232,4 @@ class StrengthWorkoutQueries:
             for i, column in enumerate(cur.description):
                 record[column.name] = row[i]
             return record
+
