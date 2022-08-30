@@ -141,7 +141,7 @@ def meal_post(
     query=Depends(MealQueries),
 ):
     row = query.create_meal(
-        meal.uservo,
+        meal.username,
         meal.recipe_api_id,
         meal.date,
         meal.type
