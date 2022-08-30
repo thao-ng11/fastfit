@@ -27,6 +27,7 @@ class JournalIn(BaseModel):
 
 
 class JournalOut(BaseModel):
+    id: int
     entry_date: datetime
     grateful: str
     daily_aff: str
@@ -95,5 +96,5 @@ def journal_list(
 #     row = query.get_one_journal(journal_id)
 #     if row is None:
 #         response.status_code = status.HTTP_404_NOT_FOUND
-#         return {"message": "Mentorship not found"}
+#         return {"message": "Journal not found"}
 #     return row

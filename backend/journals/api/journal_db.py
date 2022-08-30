@@ -68,14 +68,15 @@ class JournalQueries:
     #                 SELECT j.id, j.entry_date, j.grateful, j.daily_aff,
     #                     j.note,j.feeling
     #                 FROM journal j
-    #                 GROUP BY j.entry_date
+    #                 GROUP BY j.id
+    #                 ORDER BY j.entry_date
     #             """,
     #                 [journal_id],
     #             )
 
     #             row = cur.fetchone()
     #             if row is None:
-    #                 return {"message": "Mentorship not found"}
+    #                 return {"message": "Journal is not found"}
     #             record = {
     #                     "id": row[0],
     #                     "entry_date": row[1],
