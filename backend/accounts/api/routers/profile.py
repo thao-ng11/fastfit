@@ -50,6 +50,9 @@ def profile_post(
         raise credentials_exception
     print(bearer_token)
     
+    
+    ## decode returns a dictionary (ie. payload is a dictionary dictionary)
+ 
     payload = jwt.decode(bearer_token, SECRET_KEY, algorithms=[ALGORITHM])
     print(payload)
     password = payload.get("sub"),
@@ -67,9 +70,9 @@ def profile_post(
             try:
                 cur.execute(
                     """
-                    INSERT INTO user_profile (height, zip, username)
+                    INSERT INTO user_profile (height, zip, userid)
                     VALUES (%s, %s, %s)
-                    RETURNING id, height, zip, username
+                    RETURNING id, height, zip, userid
                     """,
                     [profile.height, profile.zip, userid],
                 )

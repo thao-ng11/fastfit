@@ -1,3 +1,6 @@
+###
+today we fixed tables and how the user data is given. 
+
 ### 8/29
 
 I fixed user and profile methods. User authentication is almost complete, need to start on frontend tomorrow.  
