@@ -13,7 +13,7 @@ class MealTypeOut(BaseModel):
 
 
 class MealIn(BaseModel):
-    uservo: int
+    username: str
     recipe_api_id: str
     date: date
     type: int
@@ -21,7 +21,7 @@ class MealIn(BaseModel):
 
 class MealOut(BaseModel):
     id: int
-    uservo: int
+    username: str
     recipe_api_id: str
     date: date
     type: int
