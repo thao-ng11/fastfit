@@ -16,12 +16,24 @@ Drew - Health Data
 
 # Aug 19, 2022
 
-I worked on my excalidraw for what journals would look like and what kind of
+I worked on my excalidraw for what journals would look like and what kind of features I would like on the journal portions. Seems like I will need 4 data table to create the feeling emojis and how the data will flow from one page to another
 
 # Aug 22, 2022
 
-sdf
+We work on the data-model.md files. I spoke wtih the SEIRs and got a recommendation to switch up some of the function to be handled by the front end for better user experience. Since the data won't need to be send back to the backend
 
 # Aug 23, 2022
 
+Ryan decided on his own that we need to do the user authentication before we can build anything else. Which the instructor has been saying can be implemented at any point. This caused us to be delayed and sat around 2-3 hours because it was done on the main branch.
+
 # Aug 24, 2022
+
+We finally have our own microservices. Working together to sort out the docker-compose.yml, setting up all dockers, setting up database with SQL as well as creating a test user in order to start working with pg-admin. We work on poller for each microservice
+
+# Aug 25, 2022
+
+I set up the docker file, routers, journal_db and journal_api. We created a testuser in the database and was able to tested out the poller for the journal. I decided to combine the model and the router into the same journal_api. Made the class JournalIn, JournalOut, Journal and JournalList, still need to set up the get and post method as well as under JournalQuerries.
+
+# Aug 29, 2022
+
+Was able to research and change the datetime data type into timestamptz in the database. Wote up the get all journals and post journal method. Took a bit of time to go through and test the router on FastAPI Swagger. After Ryan talked about the authentication process and instead of polling we should use the JWOT which he includeds all information of user to decode and link the user to our microservices. It took some explanations from Allisha and Dalonte to clarify the pros and cons of using polling vs. authentication via JWOT. Though the way Ryan did was hijacking JWOT and it's not industry standard but we decided to go with it and will fix our database as well as remove the poller and uservo in schema and microservices tomorrow.

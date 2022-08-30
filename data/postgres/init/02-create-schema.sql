@@ -9,19 +9,7 @@ CREATE TABLE users (
     lastname VARCHAR(200)
 );
 
-CREATE TABLE user_profile (
-    id SERIAL PRIMARY KEY,
-    username INT REFERENCES users(id),
-    height INT NOT NULL,
-    zip INT NOT NULL
-);
-
 \connect recipes
-
-CREATE TABLE uservo (
-    id SERIAL PRIMARY KEY,
-    usernamevo VARCHAR(100) NOT NULL UNIQUE
-);
 
 CREATE TABLE meal_type (
     id SERIAL PRIMARY KEY,
@@ -30,18 +18,13 @@ CREATE TABLE meal_type (
 
 CREATE TABLE meal (
     id SERIAL PRIMARY KEY,
-    uservo INT REFERENCES uservo(id),
+    username VARCHAR(100) NOT NULL,
     recipe_api_id VARCHAR(500) NOT NULL,
     date DATE NOT NULL,
     type INT REFERENCES meal_type(id) NOT NULL
 );
 
 \connect workouts
-
-CREATE TABLE uservo (
-    id SERIAL PRIMARY KEY,
-    usernamevo VARCHAR(100) NOT NULL UNIQUE
-);
 
 CREATE TABLE workout_categories (
     id SERIAL PRIMARY KEY,
@@ -55,9 +38,8 @@ CREATE TABLE muscle_group (
 
 CREATE TABLE cardio_workout (
     id SERIAL PRIMARY KEY,
-    uservo INT REFERENCES uservo(id) ON DELETE CASCADE,
+    username VARCHAR(100) NOT NULL,
     category INT REFERENCES workout_categories(id),
-    muscle_group INT REFERENCES muscle_group(id),
     workout_date TIMESTAMPTZ NOT NULL,
     duration INT NOT NULL,
     distance FLOAT
@@ -65,7 +47,7 @@ CREATE TABLE cardio_workout (
 
 CREATE TABLE strength_workout (
     id SERIAL PRIMARY KEY,
-    uservo INT REFERENCES uservo(id) ON DELETE CASCADE,
+    username VARCHAR(100) NOT NULL,
     category INT REFERENCES workout_categories(id),
     muscle_group INT REFERENCES muscle_group(id),
     workout_date TIMESTAMPTZ NOT NULL,
@@ -76,15 +58,11 @@ CREATE TABLE strength_workout (
 
 \connect journals
 
-CREATE TABLE uservo (
-    id SERIAL PRIMARY KEY,
-    usernamevo VARCHAR(100) NOT NULL UNIQUE
-);
 
 CREATE TABLE journal (
     id SERIAL PRIMARY KEY,
-    uservo INT REFERENCES uservo(id) ON DELETE CASCADE,
-    entry_date timestamp DEFAULT current_timestamp,
+    username VARCHAR(100) NOT NULL,
+    entry_date TIMESTAMPTZ NOT NULL,
     grateful TEXT NOT NULL,
     daily_aff TEXT NOT NULL,
     note TEXT NOT NULL,
@@ -93,22 +71,19 @@ CREATE TABLE journal (
 
 \connect health
 
-CREATE TABLE uservo (
-    id SERIAL PRIMARY KEY,
-    usernamevo VARCHAR(100) NOT NULL UNIQUE,
-    heightvo INT NOT NULL
-);
-
 CREATE TABLE health_data (
-    uservo_id INT REFERENCES uservo(id),
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(100) NOT NULL,
     current_weight INT NOT NULL,
     current_bmi FLOAT NOT NULL,
-    entry_date timestamp DEFAULT current_timestamp
+    entry_date TIMESTAMPTZ NOT NULL
 );
 
 CREATE TABLE goals (
-    uservo_id INT REFERENCES uservo(id),
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(100) NOT NULL,
     goal_weight INT,
-    goal_bmi FLOAT
+    goal_bmi FLOAT,
+    height INT NOT NULL
 );
 
