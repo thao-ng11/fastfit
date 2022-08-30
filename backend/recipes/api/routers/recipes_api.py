@@ -44,43 +44,18 @@ def meal_type_post(
         return {"message": "Could not create duplicate meal type post"}
     return row
 
-@router.get(
-    "/api/meal_types",
-    response_model=MealTypeList,
-    responses={
-        404: {"model": ErrorMessage},
-    }
-)
-def meal_type_list(
-    query=Depends(MealTypeQueries),
-):
-    rows = query.get_meal_types()
-    return rows
-
-# @router.put(
-#     "/api/meal_type/{id}",
-#     response_model=Union[MealTypeOut, ErrorMessage],
+# @router.get(
+#     "/api/meal_types",
+#     response_model=MealTypeList,
 #     responses={
-#         200: {"model": MealTypeOut},
 #         404: {"model": ErrorMessage},
-#         409: {"model": ErrorMessage},
-#     },
+#     }
 # )
-# def update_meal_type(
-#     id: int,
-#     meal_type: MealTypeIn,
-#     response: Response,
+# def meal_type_list(
 #     query=Depends(MealTypeQueries),
 # ):
-#     try:
-#         row = query.update_meal_type(meal_type.name, meal_type.id)
-#         if row is None:
-#             response.status_code = status.HTTP_404_NOT_FOUND
-#             return {"message": "Meal type not found"}
-#         return row
-#     except DuplicateRecord:
-#         response.status_code = status.HTTP_409_CONFLICT
-#         return {"message": f"Duplicate meal type: {meal_type.name}"}
+#     rows = query.get_meal_types()
+#     return rows
 
 @router.delete(
     "/api/meal_types/{meal_type_id}",
@@ -109,6 +84,21 @@ def meal_list(
     rows = query.get_meals()
     return rows
 
+@router.get(
+    "/api/meals/user={username}",
+    response_model=MealOut,
+    responses={
+        200: {"model": MealOut},
+        404: {"model": ErrorMessage},
+    }
+)
+def get_meals_users(
+    username: str,
+    response: Response,
+    query=Depends(MealQueries)
+):
+    rows = query.get_user_meals(username)
+    return rows
 
 @router.get(
     "/api/meals/{meal_id}",
@@ -161,7 +151,6 @@ def delete_meal(
         return {"result": True}
     except:
         return {"result": False}
-
 
 @router.put(
     "/api/meals/{meal_id}",
