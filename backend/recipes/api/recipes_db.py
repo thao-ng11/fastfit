@@ -96,7 +96,7 @@ class MealQueries:
                 for row in cur.fetchall():
                     d = {
                         "id": row[0],
-                        "uservo": row[1],
+                        "username": row[1],
                         "recipe_api_id": row[2],
                         "date": row[3],
                         "type": row[4]
@@ -120,23 +120,23 @@ class MealQueries:
                     return {"message": "Meal not found"}
                 record = {
                     "id": row[0],
-                    "uservo": row[1],
+                    "username": row[1],
                     "recipe_api_id": row[2],
                     "date": row[3],
                     "type": row[4]
                 }
                 return record
 
-    def create_meal(self, uservo, recipe_api_id, date, type):
+    def create_meal(self, username, recipe_api_id, date, type):
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
                     """
-                    INSERT INTO meal (uservo, recipe_api_id, date, type)
+                    INSERT INTO meal (username, recipe_api_id, date, type)
                     VALUES (%s, %s, %s, %s)
-                    RETURNING id, uservo, recipe_api_id, date, type
+                    RETURNING id, username, recipe_api_id, date, type
                     """,
-                    [uservo, recipe_api_id, date, type],
+                    [username, recipe_api_id, date, type],
                 )
                 row = cur.fetchone()
                 record = {}
@@ -163,7 +163,7 @@ class MealQueries:
                 UPDATE meal
                 SET date = %s, type = %s
                 WHERE id = %s
-                RETURNING id, uservo, recipe_api_id, date, type
+                RETURNING id, username, recipe_api_id, date, type
                 """,
                 [date, type, id],
                 )
