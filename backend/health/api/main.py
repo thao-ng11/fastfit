@@ -5,7 +5,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import os
-
+from routers import health_api
 
 app = FastAPI()
 
@@ -23,6 +23,5 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
+
+app.include_router(health_api.router)
