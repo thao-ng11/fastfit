@@ -1,4 +1,5 @@
 import os
+from backend.accounts.api.routers.users import AccountsQueries
 import psycopg
 from psycopg_pool import ConnectionPool
 from psycopg.errors import UniqueViolation
@@ -104,7 +105,7 @@ class GoalsQueries:
             record[column.name] = row[i]
         return record
 
-  def get_goal(self, username):
+  def get_goal(self, username: str):
     with pool.connection() as conn:
       with conn.cursor() as cur:
         cur.execute(
