@@ -41,7 +41,7 @@ def meal_type_post(
     )
     if row is None:
         Response.status_code = status.HTTP_409_CONFLICT
-        return {"message": "Could not create duplicate meal type post"}
+        return {"message": "That meal type already exists"}
     return row
 
 @router.get(
@@ -60,7 +60,7 @@ def meal_type_list(
     print(rows)
     if rows is None:
         response.status_code = status.HTTP_404_NOT_FOUND
-        return {"message": "Create meal types"}
+        return {"message": "You don't have any meal types"}
     return rows
 
 @router.delete(
@@ -91,7 +91,7 @@ def meal_list(
     rows = query.get_meals()
     if rows is None:
         response.status_code = status.HTTP_404_NOT_FOUND
-        return {"message": "Create meals"}
+        return {"message": "You don't have any meals"}
     return rows
 
 @router.get(
@@ -124,12 +124,9 @@ def get_meal(
     query=Depends(MealQueries)
 ):
     row = query.get_meal(meal_id)
-    print("row: ", row)
-    print("response: ", response.status_code)
     if row is None:
         response.status_code = status.HTTP_404_NOT_FOUND
         return {"message": "Meal not found"}
-        print("response: ", status)
     return row
 
 @router.post(
