@@ -150,34 +150,34 @@ class MealQueries:
                 """,
                 [date, type, id],
                 )
-            conn.commit()
-            row = cur.fetchone()
-            record = {}
-            for i, column in enumerate(cur.description):
-                record[column.name] = row[i]
-            return record
+                conn.commit()
+                row = cur.fetchone()
+                record = {}
+                for i, column in enumerate(cur.description):
+                    record[column.name] = row[i]
+                return record
 
-    # def get_user_meals(self, username: str):
-    #     with pool.connection() as conn:
-    #         with conn.cursor() as cur:
-    #             cur.execute(
-    #                 """
-    #                 SELECT *
-    #                 FROM meal
-    #                 WHERE username = %s
-    #                 """,
-    #                 [username]
-    #             )
-    #         ds = []
-    #         for row in cur.fetchall():
-    #             print(row)
-    #             # if row[1] == username:
-    #             d = {
-    #                 "id": row[0],
-    #                 "username": row[1],
-    #                 "recipe_api_id": row[2],
-    #                 "date": row[3],
-    #                 "type": row[4]
-    #             }
-    #             ds.append(d)
-    #         return ds
+    def get_user_meals(self, username: str):
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    SELECT *
+                    FROM meal
+                    WHERE username = %s
+                    """,
+                    [username]
+                )
+                ds = []
+                for row in cur.fetchall():
+                    print(row)
+                    # if row[1] == username:
+                    d = {
+                        "id": row[0],
+                        "username": row[1],
+                        "recipe_api_id": row[2],
+                        "date": row[3],
+                        "type": row[4]
+                    }
+                    ds.append(d)
+                return ds
