@@ -13,7 +13,8 @@ class SignUp extends React.Component
       email: "",
       username: "",
       password: "",
-      password_confirm: ""
+      password_confirm: "",
+      correct_format_email: ""
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChangeFirstName = this.handleChangeFirstName.bind(this)
@@ -45,15 +46,29 @@ class SignUp extends React.Component
       email: "",
       username: "",
       password: "",
-      password_confirm: ""
+      password_confirm: "",
+      correct_format_email:""
     })
   }
-
+  const isEmail = () =>
+    /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
   }
   handleChangeFirstName(event)
   {
     const value = event.target.value
-    this.setState({first})
+    this.setState({first_name: value})
+  }
+  
+  handleChangeLastName(event)
+  {
+    const value = event.target.value
+    this.setState({first_name: value})
+  }
+
+  handleChangeEmail(event)
+  {
+    const value = event.target.value
+    if (!isEmail(value)){}
   }
 }
   
