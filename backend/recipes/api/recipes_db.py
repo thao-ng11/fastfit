@@ -99,8 +99,8 @@ class MealQueries:
                     [id],
                 )
                 row = cur.fetchone()
-                if row is None:
-                    return {"message": "Meal not found"}
+                # if row is None:
+                #     return {"message": "Meal not found"}
                 record = {
                     "id": row[0],
                     "username": row[1],

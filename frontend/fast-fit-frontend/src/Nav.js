@@ -3,7 +3,8 @@ import { NavLink } from 'react-router-dom';
 
 function Nav() {
     return (
-        <nav class="flex fixed justify-between items-center bg-white shadow-lg w-screen">
+        // class="flex fixed justify-between items-center bg-white shadow-lg w-screen "
+        <nav >
             <div className='px-4 cursor-pointer'>
                 <NavLink to='/'><h2 className="text-3xl text-gray-800 font-bold">F<span className="text-red-600">a</span>s<span className="text-red-800">t</span><span className="text-green-800">FIT</span></h2></NavLink>
             </div>
