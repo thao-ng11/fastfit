@@ -27,7 +27,7 @@ router = APIRouter()
 
 @router.post(
     "/api/meal_types",
-    response_model=MealTypeOut,
+    response_model=MealTypeOut | Message,
     responses={
         500: {"model": ErrorMessage},
     },
@@ -46,20 +46,26 @@ def meal_type_post(
 
 @router.get(
     "/api/meal_types",
-    response_model=MealTypeList,
+    response_model=MealTypeList | Message,
     responses={
+        200: {"model": MealTypeOut},
         404: {"model": ErrorMessage},
     }
 )
 def meal_type_list(
+    response: Response,
     query=Depends(MealTypeQueries),
 ):
     rows = query.get_meal_types()
+    print(rows)
+    if rows is None:
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return {"message": "Create meal types"}
     return rows
 
 @router.delete(
     "/api/meal_types/{meal_type_id}",
-    response_model=DeleteOperation,
+    response_model=DeleteOperation | Message,
 )
 def delete_meal_type(
     meal_type_id: int,
@@ -73,20 +79,24 @@ def delete_meal_type(
 
 @router.get(
     "/api/meals",
-    response_model=MealList,
+    response_model=MealList | Message,
     responses={
         404: {"model": ErrorMessage},
     }
 )
 def meal_list(
+    response: Response,
     query=Depends(MealQueries),
 ):
     rows = query.get_meals()
+    if rows is None:
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return {"message": "Create meals"}
     return rows
 
 @router.get(
     "/api/meals/user={username}",
-    response_model=MealList,
+    response_model=MealList | Message,
     responses={
         200: {"model": MealOut},
         404: {"model": ErrorMessage},
@@ -102,7 +112,7 @@ def get_meals_users(
 
 @router.get(
     "/api/meals/{meal_id}",
-    response_model=MealOut,
+    response_model=MealOut | Message,
     responses={
         200: {"model": MealOut},
         404: {"model": ErrorMessage},
@@ -114,14 +124,17 @@ def get_meal(
     query=Depends(MealQueries)
 ):
     row = query.get_meal(meal_id)
+    print("row: ", row)
+    print("response: ", response.status_code)
     if row is None:
         response.status_code = status.HTTP_404_NOT_FOUND
         return {"message": "Meal not found"}
+        print("response: ", status)
     return row
 
 @router.post(
     "/api/meals",
-    response_model=MealOut,
+    response_model=MealOut | Message,
     responses={
         500: {"model": ErrorMessage},
     },
@@ -140,7 +153,7 @@ def meal_post(
 
 @router.delete(
     "/api/meals/{meal_id}",
-    response_model=DeleteOperation,
+    response_model=DeleteOperation | Message,
 )
 def delete_meal(
     meal_id: int,
@@ -154,7 +167,7 @@ def delete_meal(
 
 @router.put(
     "/api/meals/{meal_id}",
-    response_model=MealOut,
+    response_model=MealOut | Message,
     responses={
         404: {"model": ErrorMessage},
     }
