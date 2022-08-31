@@ -1,14 +1,14 @@
 import React, {useState, useEffect, useNavigate} from 'react';
 import Modal from 'react-bootstrap/Modal';
 
-function WorkoutSearchModal({visible,handleClose}) {
-    console.log(visible)
+function WorkoutSearchModal({visible,handleClose, data}) {
+    console.log(data)
     return (
         <Modal show={visible} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Search for a Workout</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Body></Modal.Body>
         <Modal.Footer>
           <button variant="secondary" onClick={handleClose}>
             Close

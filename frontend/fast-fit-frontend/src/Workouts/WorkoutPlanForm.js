@@ -6,15 +6,17 @@ import WorkoutSearchModal from './WorkoutsearchModal';
 function WorkoutPlan() {
     const [workoutType, setWorkoutType] = useState('')
     const [showModal, setShowModal] = useState(false)
+    const [searchTerm, setSearchTerm] = useState('')
+    const [workouts, setWorkouts] = useState([])
     const [cardio, setCardio] = useState({
-        "username": "string",
+        "username": "neendicott",
         "category": 0,
         "workout_date": "2022-08-31",
         "duration": 0,
         "distance": 0,
     })
     const [strength,setStrength] = useState({
-        "username": "string",
+        "username": "neendicott",
         "category": 0,
         "muscle_group": 0,
         "workout_date": "2022-08-31",
@@ -44,14 +46,20 @@ function WorkoutPlan() {
             setWorkoutType(e.target.value)
 
         }
-        function HandleSearch(){
+        async function HandleSearch(){
+            await fetchWorkouts()
             setShowModal(true)
+        }
+        function HandleSearchInput(e){
+            setSearchTerm(e.target.value)
         }
         function HandleClose(){
             setShowModal(false)
         }
         async function fetchWorkouts(){
-            fetch(`https://api.api-ninjas.com/v1/exercises?muscle=`)
+            let data = await fetch(`https://api.api-ninjas.com/v1/exercises?muscle=${searchTerm}`,{method:'GET', headers:{'X-Api-Key': 'w+trDWPcrCQuuNR+MYj+Xw==Bk9KDso4mOxNi8CD'}})
+            data = await data.json() 
+            setWorkouts(data)
         }
         function HandleCardio(e){
             setCardio({...cardio, 
@@ -65,11 +73,11 @@ function WorkoutPlan() {
         }
     return (
         <div>
-            <WorkoutSearchModal visible ={showModal} handleClose={HandleClose}/>
+            <WorkoutSearchModal visible ={showModal} handleClose={HandleClose} data={workouts}/>
             <h1>Add a Workout</h1>
             <div className='flex flex-row'>
                 <label></label>
-                <input></input>
+                <input value={searchTerm} onChange={HandleSearchInput}></input>
                 <button onClick={HandleSearch}>Search for a Workout</button>
             </div>
             <div className='flex flex-row'>
