@@ -1,4 +1,4 @@
-import React, { useState } from 'reacat';
+import React, { useState } from 'react';
 
 function StrengthWorkoutForm() {
     const [state, setState] = useState({
