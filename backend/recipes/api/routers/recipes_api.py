@@ -84,21 +84,21 @@ def meal_list(
     rows = query.get_meals()
     return rows
 
-# @router.get(
-#     "/api/meals/user={username}",
-#     response_model=MealOut,
-#     responses={
-#         200: {"model": MealOut},
-#         404: {"model": ErrorMessage},
-#     }
-# )
-# def get_meals_users(
-#     username: str,
-#     response: Response,
-#     query=Depends(MealQueries)
-# ):
-#     rows = query.get_user_meals(username)
-#     return rows
+@router.get(
+    "/api/meals/user={username}",
+    response_model=MealList,
+    responses={
+        200: {"model": MealOut},
+        404: {"model": ErrorMessage},
+    }
+)
+def get_meals_users(
+    username: str,
+    response: Response,
+    query=Depends(MealQueries)
+):
+    rows = query.get_user_meals(username)
+    return rows
 
 @router.get(
     "/api/meals/{meal_id}",
