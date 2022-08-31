@@ -44,18 +44,18 @@ def meal_type_post(
         return {"message": "Could not create duplicate meal type post"}
     return row
 
-# @router.get(
-#     "/api/meal_types",
-#     response_model=MealTypeList,
-#     responses={
-#         404: {"model": ErrorMessage},
-#     }
-# )
-# def meal_type_list(
-#     query=Depends(MealTypeQueries),
-# ):
-#     rows = query.get_meal_types()
-#     return rows
+@router.get(
+    "/api/meal_types",
+    response_model=MealTypeList,
+    responses={
+        404: {"model": ErrorMessage},
+    }
+)
+def meal_type_list(
+    query=Depends(MealTypeQueries),
+):
+    rows = query.get_meal_types()
+    return rows
 
 @router.delete(
     "/api/meal_types/{meal_type_id}",
@@ -65,11 +65,11 @@ def delete_meal_type(
     meal_type_id: int,
     query=Depends(MealTypeQueries)
 ):
-    try:
-        query.delete_meal_type(meal_type_id)
-        return {"result": True}
-    except:
-        return {"result": False}
+    # try:
+    query.delete_meal_type(meal_type_id)
+    return {"result": True}
+    # except:
+    #     return {"result": False}
 
 @router.get(
     "/api/meals",
@@ -84,21 +84,21 @@ def meal_list(
     rows = query.get_meals()
     return rows
 
-@router.get(
-    "/api/meals/user={username}",
-    response_model=MealOut,
-    responses={
-        200: {"model": MealOut},
-        404: {"model": ErrorMessage},
-    }
-)
-def get_meals_users(
-    username: str,
-    response: Response,
-    query=Depends(MealQueries)
-):
-    rows = query.get_user_meals(username)
-    return rows
+# @router.get(
+#     "/api/meals/user={username}",
+#     response_model=MealOut,
+#     responses={
+#         200: {"model": MealOut},
+#         404: {"model": ErrorMessage},
+#     }
+# )
+# def get_meals_users(
+#     username: str,
+#     response: Response,
+#     query=Depends(MealQueries)
+# ):
+#     rows = query.get_user_meals(username)
+#     return rows
 
 @router.get(
     "/api/meals/{meal_id}",

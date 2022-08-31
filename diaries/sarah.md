@@ -1,5 +1,9 @@
 # Progress Report
 
+### 8/30
+
+Team met with a SEIR to learn how to install and implement Tailwind to use in our project in place of Bootstrap for the CSS on the front end. I worked on the meal put request and the meal get by username request and both are getting the 'cursor is closed' error, so I'm going to leave those for stretch goals and start on the front end tomorrow.
+
 ### 8/29
 
 Reviewed JWT authentication process with team and determined that we will no longer use a poller to poll in the user data into the uservo table. We will instead look for the JWT and decode it to get the username and save that, so we have to update the database schema to remove those uservo tables. Added delete and put methods to my meal tables. The put method is giving a strange error that the 'cursor is closed' even though the put request is successful. Going to leave it along for now and see if there are issues on the front end as well.
