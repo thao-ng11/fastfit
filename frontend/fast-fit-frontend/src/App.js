@@ -7,6 +7,7 @@ import Dashboard from './Dashboard';
 import SignUp from './Auth/Signup';
 import WorkoutPlanForm from './Workouts/WorkoutPlanForm'
 import UserMeals from './Recipes/userMeals';
+import HealthDataForm from './health_data/HealthMain';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/workout" element={<WorkoutPlanForm />} />
           <Route path="/meals" element={UserMeals} />
+          <Route path="/health" element={<HealthDataForm />} />
         </Routes>
       </div>
     </BrowserRouter>
