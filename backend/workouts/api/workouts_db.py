@@ -109,6 +109,7 @@ class CardioWorkoutQueries:
                     }
                     new_list.append(dictionary)
                 return new_list
+                
     def insert_cardio_workout(self, username, category, workout_date, duration, distance):
         with pool.connection() as conn:
             with conn.cursor() as cur:
@@ -151,12 +152,12 @@ class CardioWorkoutQueries:
                     """,
                     [category, workout_date, duration, distance, id],
                 )
-            conn.commit()
-            row = cur.fetchone()
-            record = {}
-            for i, column in enumerate(cur.description):
-                record[column.name] = row[i]
-            return record
+                conn.commit()
+                row = cur.fetchone()
+                record = {}
+                for i, column in enumerate(cur.description):
+                    record[column.name] = row[i]
+                return record
 
 class StrengthWorkoutQueries:
     def get_strength_workout_query(self):
@@ -226,10 +227,10 @@ class StrengthWorkoutQueries:
                     """,
                     [category, muscle_group, workout_date, sets, repetitions, weight, id],
                 )
-            conn.commit()
-            row = cur.fetchone()
-            record = {}
-            for i, column in enumerate(cur.description):
-                record[column.name] = row[i]
-            return record
+                conn.commit()
+                row = cur.fetchone()
+                record = {}
+                for i, column in enumerate(cur.description):
+                    record[column.name] = row[i]
+                return record
 
