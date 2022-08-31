@@ -1,21 +1,37 @@
 import React, { useState} from 'react';
 import CardioWorkoutForm from './CardioWorkoutsForm';
 import StrengthWorkoutForm from './StrengthWorkoutsForm';
+import WorkoutSearchModal from './WorkoutsearchModal';
 
 function WorkoutPlan() {
     const [workoutType, setWorkoutType] = useState('')
-    // const [workout, setWorkout] = useState('')
+    const [showModal, setShowModal] = useState(false)
+    const [cardio, setCardio] = useState({
+        "username": "string",
+        "category": 0,
+        "workout_date": "2022-08-31",
+        "duration": 0,
+        "distance": 0,
+    })
+    const [strength,setStrength] = useState({
+        "username": "string",
+        "category": 0,
+        "muscle_group": 0,
+        "workout_date": "2022-08-31",
+        "sets": 0,
+        "repetitions": 0,
+        "weight": 0,
+    })
         function HandleWorkoutForm(){
-            console.log(workoutType)
             switch (workoutType) {
                 case "cardio":
-                    return <CardioWorkoutForm/>
+                    return <CardioWorkoutForm HandleCardio={HandleCardio}/>
                     break;
                 case "strength":
                 case "powerlifting":
                 case "olympic_weightlifting":
                 case "strongman":
-                    return <StrengthWorkoutForm/>
+                    return <StrengthWorkoutForm HandleStrength={HandleStrength}/>
                     break;
                     
                 default:
@@ -28,17 +44,37 @@ function WorkoutPlan() {
             setWorkoutType(e.target.value)
 
         }
+        function HandleSearch(){
+            setShowModal(true)
+        }
+        function HandleClose(){
+            setShowModal(false)
+        }
+        async function fetchWorkouts(){
+            fetch(`https://api.api-ninjas.com/v1/exercises?muscle=`)
+        }
+        function HandleCardio(e){
+            setCardio({...cardio, 
+                [e.target.name]: e.target.value
+            })
+        }
+        function HandleStrength(e){
+            setStrength({...strength, 
+                [e.target.name]: e.target.value
+            })
+        }
     return (
         <div>
+            <WorkoutSearchModal visible ={showModal} handleClose={HandleClose}/>
             <h1>Add a Workout</h1>
             <div className='flex flex-row'>
-                <label>Search for a workout</label>
+                <label></label>
                 <input></input>
-                <button></button>
+                <button onClick={HandleSearch}>Search for a Workout</button>
             </div>
             <div className='flex flex-row'>
                 <label>Calendar</label>
-                <input type='calendar'></input>
+                <input name='workout_date' type='calendar'></input>
                 
             </div>
             <div className='flex flex-row'>
