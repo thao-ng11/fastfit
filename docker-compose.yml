@@ -16,6 +16,8 @@ services:
       HOST_OS: ${OS}
       NODE_ENV: development
       HOST: "0.0.0.0"
+      REACT_APP_ACCOUNTS_HOST: http://localhost:8010
+  
   pg-admin:
     image: dpage/pgadmin4
     volumes:
@@ -25,8 +27,7 @@ services:
     environment:
       PGADMIN_DEFAULT_EMAIL: fastfit@example.com
       PGADMIN_DEFAULT_PASSWORD: fastfit
-      PGADMIN_DISABLE_POSTFIX: 1
-      REACT_APP_ACCOUNTS_HOST: http://localhost:8010
+      PGADMIN_DISABLE_POSTFIX: 1    
 
   postgres:
     image: postgres:14.2-bullseye
