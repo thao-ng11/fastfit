@@ -123,9 +123,8 @@ class JournalQueries:
                     WHERE username = %s
                     ORDER BY j.entry_date
                     """,
-                    [username],
+                    [username]
                 )
-
                 jlist = []
                 for row in cur.fetchall():
                     jdict = {

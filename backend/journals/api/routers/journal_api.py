@@ -85,7 +85,22 @@ def journal_list(
 ):
     rows = query.get_all_journals()
     return rows
-
+    
+@router.get(
+    "/api/journals/user={username}",
+    response_model = JournalList,
+    responses = {
+        200: {"model": JournalOut},
+        404: {"model": ErrorMessage},
+    },
+)
+def get_user_journals(
+    username: str,
+    response: Response,
+    query=Depends(JournalQueries)
+):
+    row = query.get_user_journals(username)
+    return row
 
 @router.get(
     "/api/journals/{journal_id}",
@@ -122,20 +137,4 @@ def delete_journal(
         return {"result": False}
 
 
-# @router.get(
-#     "/api/journals/user={username}",
-#     response_model = JournalOut,
-#     responses = {
-#         200: {"model": JournalOut},
-#         404: {"model": ErrorMessage},
-#     },
-# )
-# def get_user_journals(
-#     username: str,
-#     query=Depends(JournalQueries)
-# ):
-#     row = query.get_user_journals(username)
-#     if row is None:
-#         response.status_code = status.HTTP_404_NOT_FOUND
-#         return {"message": "Journal not found"}
-#     return row
+
