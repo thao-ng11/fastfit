@@ -51,23 +51,6 @@ class MealTypeQueries:
                     record[column.name] = row[i]
                 return record
 
-    # def update_meal_type(self, name, id):
-    #     with pool.connection() as conn:
-    #         with conn.cursor() as cur:
-    #             try:
-    #                 cur.execute(
-    #                     """
-    #                     UPDATE meal_type
-    #                     SET name = %s
-    #                     WHERE id = %s
-    #                     RETURNING id, name
-    #                     """,
-    #                     [name, id],
-    #                 )
-    #                 return cur.fetchone()
-    #             except UniqueViolation:
-    #                 raise DuplicateRecord()
-
     def delete_meal_type(self, id):
         with pool.connection() as conn:
             with conn.cursor() as cur:
@@ -173,3 +156,28 @@ class MealQueries:
             for i, column in enumerate(cur.description):
                 record[column.name] = row[i]
             return record
+
+    # def get_user_meals(self, username: str):
+    #     with pool.connection() as conn:
+    #         with conn.cursor() as cur:
+    #             cur.execute(
+    #                 """
+    #                 SELECT *
+    #                 FROM meal
+    #                 WHERE username = %s
+    #                 """,
+    #                 [username]
+    #             )
+    #         ds = []
+    #         for row in cur.fetchall():
+    #             print(row)
+    #             # if row[1] == username:
+    #             d = {
+    #                 "id": row[0],
+    #                 "username": row[1],
+    #                 "recipe_api_id": row[2],
+    #                 "date": row[3],
+    #                 "type": row[4]
+    #             }
+    #             ds.append(d)
+    #         return ds

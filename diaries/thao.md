@@ -37,3 +37,7 @@ I set up the docker file, routers, journal_db and journal_api. We created a test
 # Aug 29, 2022
 
 Was able to research and change the datetime data type into timestamptz in the database. Wote up the get all journals and post journal method. Took a bit of time to go through and test the router on FastAPI Swagger. After Ryan talked about the authentication process and instead of polling we should use the JWOT which he includeds all information of user to decode and link the user to our microservices. It took some explanations from Allisha and Dalonte to clarify the pros and cons of using polling vs. authentication via JWOT. Though the way Ryan did was hijacking JWOT and it's not industry standard but we decided to go with it and will fix our database as well as remove the poller and uservo in schema and microservices tomorrow.
+
+# Aug 30, 2022
+
+As a team, we worked on cleaning up the database and purge all the pollers, fixing up the docker-compose file. We also got a lecture from our SEIR, Cooper, about tailwindcss. I was able to finish the backend portion of journal including the get and delete requests for individual journal. I was also helping with the health_data microservice. We run into a blocker as a team to try doing a request for all the entries for a specific user. It's a 422 Error Unprocessable Entity. Seems like they want an integer even though we specify a string. At the moment we decided to put a pause on that and will start working on the frontend.

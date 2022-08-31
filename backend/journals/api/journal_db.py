@@ -105,3 +105,39 @@ class JournalQueries:
                     """,
                     [id],
                 )
+
+
+    def get_user_journals(self, username: str):
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    SELECT j.id
+                    , j.username
+                    , j.entry_date
+                    , j.grateful
+                    , j.daily_aff
+                    , j.note
+                    , j.feeling
+                    FROM journal j
+                    WHERE username = %s
+                    ORDER BY j.entry_date
+                    """,
+                    [username],
+                )
+
+                jlist = []
+                for row in cur.fetchall():
+                    jdict = {
+                        "id": row[0],
+                        "username": row[1],
+                        "entry_date": row[2],
+                        "grateful": row[3],
+                        "daily_aff": row[4],
+                        "note": row[5],
+                        "feeling": row[6],
+                    }
+                    jlist.append(jdict)
+
+                return jlist
+        
