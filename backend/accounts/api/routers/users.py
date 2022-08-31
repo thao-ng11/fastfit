@@ -37,6 +37,8 @@ class TokenData(BaseModel):
 class AccessToken(BaseModel):
     token: str
 
+class ErrorMessage(BaseModel):
+    message: str
 
 class User(BaseModel):
     id: int
@@ -119,6 +121,9 @@ async def login_for_access_token(
     form_data: OAuth2PasswordRequestForm = Depends(),
     repo: AccountsQueries = Depends(),
 ):
+    print()
+    print(form_data.username)
+    print(form_data.password)
     user = authenticate_user(repo, form_data.username, form_data.password)
     if not user:
         raise HTTPException(
@@ -215,3 +220,14 @@ async def logout(request: Request, response: Response):
         secure = secure
         )
 
+@router.get("/users",
+    response_model=User,
+    responses={
+        404: {"model": ErrorMessage},
+    }
+)
+def username_list(
+    query=Depends(AccountsQueries),
+):
+    rows = query.get_all_usernames()
+    return rows
