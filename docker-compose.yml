@@ -17,6 +17,10 @@ services:
       NODE_ENV: development
       HOST: "0.0.0.0"
       REACT_APP_ACCOUNTS_HOST: http://localhost:8010
+      REACT_APP_WORKOUTS_HOST: http://localhost:8020
+      REACT_APP_RECIPES_HOST: http://localhost:8030
+      REACT_APP_JOURNALS_HOST: http://localhost:8040
+      REACT_APP_HEALTH_HOST: http://localhost:8050
   
   pg-admin:
     image: dpage/pgadmin4
