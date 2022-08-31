@@ -54,7 +54,7 @@ class Message(BaseModel):
     message: str
 
 @router.post(
-    "/api/journals", 
+    "/api/journals/", 
     response_model=JournalOut,
     responses={
         500: {"model": ErrorMessage},
@@ -74,20 +74,26 @@ def journal_post(
 
 
 @router.get(
-    "/api/journals",
-    response_model=JournalList,
+    "/api/journals/",
+    response_model=JournalList | Message,
     responses={
         404: {"model": ErrorMessage},
+        200: {"model": JournalList}
     }
 )
 def journal_list(
-    query=Depends(JournalQueries),
+    response: Response,
+    query=Depends(JournalQueries)
 ):
     rows = query.get_all_journals()
-    return rows
+    if rows is None:
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return {"message": "not found"}
+    else:
+        return rows
     
 @router.get(
-    "/api/journals/user={username}",
+    "/api/journals/user={username}/",
     response_model = JournalList,
     responses = {
         200: {"model": JournalOut},
@@ -103,7 +109,7 @@ def get_user_journals(
     return row
 
 @router.get(
-    "/api/journals/{journal_id}",
+    "/api/journals/{journal_id}/",
     response_model = JournalOut,
     responses = {
         200: {"model": JournalOut},
@@ -123,7 +129,7 @@ def get_journal(
 
 
 @router.delete(
-    "/api/journals/{journal_id}",
+    "/api/journals/{journal_id}/",
     response_model=DeleteOperation,
 )
 def delete_journal(
