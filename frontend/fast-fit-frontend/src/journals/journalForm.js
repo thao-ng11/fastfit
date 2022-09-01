@@ -99,7 +99,7 @@ class JournalForm extends React.Component {
                 />
                 <label htmlFor="note">Note</label>
               </div>
-              <button className="btn btn-primary">Create</button>
+              <button className="btn btn-primary bg-success">Create</button>
             </form>
           </div>
         </div>
