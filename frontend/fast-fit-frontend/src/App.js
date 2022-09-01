@@ -8,7 +8,7 @@ import SignUp from "./Auth/Signup";
 import WorkoutPlanForm from "./Workouts/WorkoutPlanForm";
 import UserMeals from "./Recipes/userMeals";
 import HealthDataForm from "./health_data/HealthMain";
-import JournalForm from "./journals/JournalForm";
+import JournalForm from "./journals/journalForm";
 
 function App() {
   return (
