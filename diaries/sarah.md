@@ -1,5 +1,9 @@
 # Progress Report
 
+### 8/31
+
+Wrote 3 unit tests for the recipes back end. Also fixed the routers so that the error messages show instead of just 500 Internal Server Error messages when duplicate entries or when items aren't found.
+
 ### 8/30
 
 Team met with a SEIR to learn how to install and implement Tailwind to use in our project in place of Bootstrap for the CSS on the front end. I worked on the meal put request and the meal get by username request and both are getting the 'cursor is closed' error, so I'm going to leave those for stretch goals and start on the front end tomorrow.

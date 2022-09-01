@@ -70,3 +70,25 @@ class AccountsQueries:
                 for i, column in enumerate(cur.description):
                     record[column.name] = row[i]
                 return record
+    
+    def get_all_usernames(self):
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    SELECT u.id
+                    , u.username
+                    , u.email
+                    , u.firstname
+                    , u.lastname
+                    , password
+                    FROM users u
+                    """
+                )
+                usernames_list = []
+                for user in cur.fetchall():
+                    if user is None:
+                        return {"mesage": "there are no users"}                  
+                    usernames_list.append(user[1])
+                    print(usernames_list)
+                return usernames_list

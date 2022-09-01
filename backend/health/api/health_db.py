@@ -1,5 +1,4 @@
 import os
-from backend.accounts.api.routers.users import AccountsQueries
 import psycopg
 from psycopg_pool import ConnectionPool
 from psycopg.errors import UniqueViolation
@@ -72,7 +71,6 @@ class GoalsQueries:
           FROM goals g
           """
         )
-
         glist = []
         for row in cur.fetchall():
           gdict = {
@@ -116,7 +114,6 @@ class GoalsQueries:
           """,
           [username],
         )
-
         row = cur.fetchone()
         if row is None:
           return {"message": "goal not found"}
