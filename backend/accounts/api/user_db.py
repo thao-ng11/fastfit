@@ -90,4 +90,5 @@ class AccountsQueries:
                     if user is None:
                         return {"mesage": "there are no users"}                  
                     usernames_list.append(user[1])
-                    return usernames_list
+                    print(usernames_list)
+                return usernames_list

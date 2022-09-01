@@ -16,6 +16,7 @@ class SignUp extends React.Component
       passwords_equal:"",
       correct_format_email: "",
       username_unique: "",
+      form_valid: "",
       usernames: []
     }
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -25,6 +26,7 @@ class SignUp extends React.Component
     this.handleChangeUsername = this.handleChangeUsername.bind(this)
     this.handleChangePassword = this.handleChangePassword.bind(this)
     this.handleChangePasswordConfirm = this.handleChangePasswordConfirm.bind(this)
+    this.formValid = this.formValid.bind(this)
   }
 
   async handleSubmit(event){
@@ -66,10 +68,12 @@ class SignUp extends React.Component
   {
     const valid = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
     if (email.value.match(valid)){
+      console.log("email valid true")
       return true
     }
     else
     {
+      console.log("emailvalid false")
       return false
     }
 
@@ -91,14 +95,14 @@ class SignUp extends React.Component
   {
     const value = event.target.value
     this.setState({email: value})
-    if (this.isEmailValid(value) === true)
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value))
     {
-      this.setState({correct_format_email: "correct format"})
+      this.setState({correct_format_email: true})
       console.log(this.state.correct_format_email)
     }
     else
     {
-      this.setState({correct_format_email: "incorrect format"})
+      this.setState({correct_format_email: false})
       console.log(this.state.correct_format_email)
     }
   }
@@ -107,15 +111,17 @@ class SignUp extends React.Component
     const value = event.target.value
     this.setState({username: value})
     let data = {...this.state}
-    if (data.usernames.includes(this.username.value)=== true)
+    if (data.usernames.includes(value) === true)
     {
-      this.setState({username_unique: "not unique"})
-      console.log(this.state.username_unique)
+      console.log("unique state set to not unique")
+      this.setState({username_unique: false})
+      console.log(value)
     }
     else
     {
-      this.setState({username_unique: "unique"})
-      console.log(this.state.username_unique)
+      console.log("unique state set to unique")
+      this.setState({username_unique: true})
+      console.log(value)
     }
   }
   
@@ -129,13 +135,15 @@ class SignUp extends React.Component
   {
     const value = event.target.value
     this.setState({password_confirm: value})
-    if (this.state.password == this.state.password_confirm)
+    if (this.state.password === value)
     {
-      this.setState({passwords_equal: "passwords match"})
+      console.log("password_equal set to match")
+      this.setState({passwords_equal: true})
     }
     else
     {
-      this.setState({password_confirm: "passwords dont match"})
+      console.log("password_equal dont match")
+      this.setState({passwords_equal: false})
     }
   }
   async componentDidMount()
@@ -149,29 +157,58 @@ class SignUp extends React.Component
       console.log(data)
       this.setState({usernames: data.usernames})
       console.log(this.state.usernames)
-
     }
   }
+formValid(event)
+{
+  if(this.state.passwords_equal && this.state.username_unique && this.state.correct_format_email)
+  {
+    console.log("returning true")
+    this.setState({form_valid: true})
+    return true
+  }
+  else
+  {
+    console.log("returning false")
+    this.setState({form_valid: false})
+    return false
+  }
+}
 
   render()
   {
-    let uniqueUsername, passwordMatches
-
-    if (this.state.username_unique == "unique")
+    let uniqueUsername = <br></br>
+    let passwordMatches = <br></br>
+    let emailValidFormat = <br></br>
+    let button 
+    if (this.state.username_unique === false)
     {
-      
+      uniqueUsername = <div className="text-red-500 text-xs"><p className= "font-bold">*pick a different username</p></div>
     }
+    
+    if (this.state.passwords_equal === false)
+    {
+      passwordMatches = <div className="text-red-500 text-xs"><p className= "font-bold">*passwords dont match</p></div>
+    }
+    
+    if (this.state.correct_format_email === false)
+    {
+      emailValidFormat = <div className="text-red-500 text-xs"><p className= "font-bold">*use a valid email format</p></div>
+    }
+    
+    console.log(this.state)
     return(
-    <div class="bg-grey-lighter min-h-screen flex flex-col">
-            <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
-                <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
-                    <h1 class="mb-8 text-3xl text-center">Sign up</h1>
+    <form onSubmit={this.handleSubmit} id="signup-form">
+    <div className="bg-grey-lighter min-h-screen flex flex-col">
+            <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2 space-y-1">
+                <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
+                    <h1 className="mb-8 text-3xl text-center">Sign up</h1>
                     <input
                         value={this.state.first_name}
                         onChange={this.handleChangeFirstName} 
                         type="text"
                         id="firstname"
-                        class="block border border-grey-light w-full p-3 rounded mb-4"
+                        className="block border border-grey-light w-full p-3 rounded mb-4"
                         name="firstname"
                         placeholder="First Name" />
                     
@@ -180,45 +217,60 @@ class SignUp extends React.Component
                         onChange={this.handleChangeLastName} 
                         type="text"
                         id="lastname"
-                        class="block border border-grey-light w-full p-3 rounded mb-4"
+                        className="block border border-grey-light w-full p-3 rounded"
                         name="lastname"
                         placeholder="Last Name" />
-
+                    {emailValidFormat}
                     <input
                         value={this.state.email}
                         onChange={this.handleChangeEmail} 
                         type="text"
                         id="email"
-                        class="block border border-grey-light w-full p-3 rounded mb-4"
+                        className="block border border-grey-light w-full p-3 rounded"
                         name="email"
                         placeholder="Email" />
 
+                    {uniqueUsername}
+                    <input
+                        value={this.state.username}
+                        onChange={this.handleChangeUsername} 
+                        type="text"
+                        id="username"
+                        className="block border border-grey-light w-full p-3 rounded mb-4"
+                        name="username"
+                        placeholder="Username" />
+                    
+
                     <input 
+                        value={this.state.password}
+                        onChange={this.handleChangePassword}
                         type="password"
-                        class="block border border-grey-light w-full p-3 rounded mb-4"
+                        className="block border border-grey-light w-full p-3 rounded"
                         name="password"
                         placeholder="Password" />
+                    {passwordMatches}
                     <input 
-                        type="password"
-                        class="block border border-grey-light w-full p-3 rounded mb-4"
+                        value={this.state.password_confirm}
+                        onChange={this.handleChangePasswordConfirm}
+                        type="confirm_password"
+                        className="block border border-grey-light w-full p-3 rounded mb-4"
                         name="confirm_password"
                         placeholder="Confirm Password" />
 
-                    <button
-                        type="submit"
-                        class="w-full text-center py-3 rounded bg-green text-white hover:bg-green-dark focus:outline-none my-1"
-                    >Create Account</button>
+                    <button type="submit" className="w-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                      Create Account</button>
 
                 </div>
 
-                <div class="text-grey-dark mt-6">
+                <div className="text-grey-dark mt-6">
                     Already have an account? 
-                    <a class="no-underline border-b border-blue text-blue" href="../login/">
+                    <a className="no-underline border-b border-blue text-blue" href="../login/" >
                         Log in
                     </a>.
                 </div>
             </div>
         </div>
+        </form>
     )
   }
 }

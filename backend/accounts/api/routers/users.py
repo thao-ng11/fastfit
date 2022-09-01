@@ -13,7 +13,7 @@ from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jose import JWTError, jwt, jws, JWSError
 from passlib.context import CryptContext
 from pydantic import BaseModel
-from typing import Optional
+from typing import List, Optional
 import os
 
 SECRET_KEY = os.environ["SECRET_KEY"]
@@ -55,6 +55,10 @@ class UserSignUp(BaseModel):
     firstname: str | None = None
     lastname: str | None = None
 
+class Username(BaseModel):
+    usernames: list
+    class Config:
+        orm_mode = True
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -221,7 +225,7 @@ async def logout(request: Request, response: Response):
         )
 
 @router.get("/users",
-    response_model=User,
+    response_model=Username,
     responses={
         404: {"model": ErrorMessage},
     }
@@ -230,4 +234,7 @@ def username_list(
     query=Depends(AccountsQueries),
 ):
     rows = query.get_all_usernames()
-    return rows
+    print(rows)
+    usernames = {"usernames": rows}
+    print(usernames)
+    return usernames
