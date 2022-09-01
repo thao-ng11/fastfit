@@ -21,6 +21,8 @@ services:
       REACT_APP_RECIPES_HOST: http://localhost:8030
       REACT_APP_JOURNALS_HOST: http://localhost:8040
       REACT_APP_HEALTH_HOST: http://localhost:8050
+      REACT_APP_EDAMAM_APP_ID: ${EDAMAM_APP_ID}
+      REACT_APP_EDAMAM_RECIPE_API_KEY: ${EDAMAM_RECIPE_API_KEY}
   
   pg-admin:
     image: dpage/pgadmin4

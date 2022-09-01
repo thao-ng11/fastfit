@@ -63,20 +63,27 @@ class MealTypeQueries:
                 )
                 
 
-
 class MealQueries:
     def get_meals(self):
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
                     """
-                    SELECT *
-                    FROM meal;
+                    SELECT m.id,
+                        m.username,
+                        m.recipe_api_id,
+                        m.date,
+                        mt.name
+                    FROM meal m 
+                    INNER JOIN meal_type mt
+                        ON (m.type = mt.id)
+                    ORDER BY m.username, m.date;
                     """
                 )
 
                 ds = []
                 for row in cur.fetchall():
+                    print(row)
                     d = {
                         "id": row[0],
                         "username": row[1],
@@ -92,9 +99,15 @@ class MealQueries:
             with conn.cursor() as cur:
                 cur.execute(
                     """
-                    SELECT *
-                    FROM meal
-                    WHERE id = %s
+                    SELECT m.id,
+                        m.username,
+                        m.recipe_api_id, 
+                        m.date,
+                        mt.name
+                    FROM meal m
+                    INNER JOIN meal_type mt
+                        ON (m.type = mt.id)
+                    WHERE m.id = %s
                     """,
                     [id],
                 )
@@ -162,8 +175,14 @@ class MealQueries:
             with conn.cursor() as cur:
                 cur.execute(
                     """
-                    SELECT *
-                    FROM meal
+                    SELECT m.id,
+                        m.username,
+                        m.recipe_api_id, 
+                        m.date,
+                        mt.name
+                    FROM meal m
+                    INNER JOIN meal_type mt
+                        ON (m.type = mt.id)
                     WHERE username = %s
                     """,
                     [username]
