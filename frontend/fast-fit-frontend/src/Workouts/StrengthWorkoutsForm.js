@@ -48,11 +48,11 @@ return (
             </div>
             <div className="form-floating mb-3">
                 <input onChange={handleChange} value = {state.reps}placeholder="repetitions" required type="text" name="repetitions" id="repetitions" className="form-control" />
-                <label htmlFor="name">Sets</label>
+                <label htmlFor="name">Reps</label>
             </div>
             <div className="form-floating mb-3">
                 <input onChange={handleChange} value = {state.weight}placeholder="weight" required type="text" name="weight" id="weight" className="form-control" />
-                <label htmlFor="name">Sets</label>
+                <label htmlFor="name">Weight</label>
             </div>
             <button className="btn btn-primary">Create</button>
             </form>

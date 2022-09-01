@@ -82,7 +82,7 @@ function WorkoutPlan() {
             </div>
             <div className='flex flex-row'>
                 <label>Calendar</label>
-                <input name='workout_date' type='calendar'></input>
+                <input name='workout_date' type='datetime-local'></input>
                 
             </div>
             <div className='flex flex-row'>
