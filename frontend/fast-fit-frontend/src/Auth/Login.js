@@ -1,10 +1,12 @@
 import{ useEffect, useState } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { useToken } from '../Authentication'
 
-export default function Login({login})
+export default function Login()
 {
     let navigate = useNavigate()
-    let [data, setData] = useState({
+    const [,login] = useToken();
+    let[data, setData] = useState({
         username:'',
         password:'',
         error:'',
@@ -12,24 +14,24 @@ export default function Login({login})
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const data = await login(data.username, data.password, () => navigate("/"))
-        setData({error: error})
+        await login(data.username, data.password)
+        // setData({error: error})
         setData({
             username: "",
             password: '',
         })
+        navigate('/')
     }
 
     return(
-        <form onSubmit={this.handleSubmit} id="login-form">
+        <form onSubmit={handleSubmit} id="login-form">
         <div className="bg-grey-lighter min-h-screen flex flex-col">
             <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2 space-y-1">
                 <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
                     <h1 className="mb-8 text-3xl text-center">Log in</h1>
 
                     <input
-                        value={this.state.username}
-                        onChange={this.handleChangeUsername} 
+                        onChange={(event) => setData({ ...data, username: event.target.value })} 
                         type="text"
                         id="username"
                         className="block border border-grey-light w-full p-3 rounded mb-4"
@@ -38,16 +40,15 @@ export default function Login({login})
                     
 
                     <input 
-                        value={this.state.password}
-                        onChange={this.handleChangePassword}
+                        onChange={(event) => setData({ ...data, password: event.target.value })}
                         type="password"
-                        className="block border border-grey-light w-full p-3 rounded"
+                        className="block border border-grey-light w-full p-3 rounded mb-4"
                         name="password"
                         placeholder="Password" />
 
 
                     <button type="submit" className="w-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-                      Create Account</button>
+                      Log in</button>
 
                 </div>
 

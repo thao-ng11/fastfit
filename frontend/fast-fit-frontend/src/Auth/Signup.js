@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Navigate, useNavigate, Link } from 'react-router-dom'
+import { Navigate, useNavigate, Link, Redirect } from 'react-router-dom'
 
 
 class SignUp extends React.Component
@@ -17,6 +17,7 @@ class SignUp extends React.Component
       correct_format_email: "",
       username_unique: "",
       form_valid: "",
+      redirect: false,
       usernames: []
     }
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -27,6 +28,7 @@ class SignUp extends React.Component
     this.handleChangePassword = this.handleChangePassword.bind(this)
     this.handleChangePasswordConfirm = this.handleChangePasswordConfirm.bind(this)
     this.formValid = this.formValid.bind(this)
+    // this.handleRedirect = this.handleRedirect.bind(this)
   }
 
   async handleSubmit(event){
@@ -58,6 +60,7 @@ class SignUp extends React.Component
       passwords_equal:"",
       correct_format_email: "",
       username_unique: "",
+      redirect: true,
       usernames: []
 
     })
@@ -174,7 +177,11 @@ formValid(event)
     return false
   }
 }
-
+// handleRedirect(event)
+// {
+//   this.setState({redirect: true})
+//   handleSubmit()
+// }
   render()
   {
     let uniqueUsername = <br></br>
@@ -196,6 +203,7 @@ formValid(event)
       emailValidFormat = <div className="text-red-500 text-xs"><p className= "font-bold">*use a valid email format</p></div>
     }
     
+    if (this.state.redirect){return <Navigate to="/login" userInput={this.state.userInput} />;}
     console.log(this.state)
     return(
     <form onSubmit={this.handleSubmit} id="signup-form">
@@ -259,7 +267,7 @@ formValid(event)
 
                     <button type="submit" className="w-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
                       Create Account</button>
-
+                    
                 </div>
 
                 <div className="text-grey-dark mt-6">
@@ -274,4 +282,4 @@ formValid(event)
     )
   }
 }
-  export default SignUp
+export default SignUp
