@@ -7,8 +7,8 @@ class SignUp extends React.Component
   constructor(props){
     super(props)
     this.state = {
-      first_name: "",
-      last_name: "",
+      firstname: "",
+      lastname: "",
       email: "",
       username: "",
       password: "",
@@ -31,7 +31,7 @@ class SignUp extends React.Component
 
   async handleSubmit(event){
     event.preventDefault()
-    const data = {...this.state}
+    let data = {...this.state}
     delete data.password_confirm
     delete data.passwords_equal
     delete data.correct_format_email
@@ -49,8 +49,8 @@ class SignUp extends React.Component
   if (response.ok){
     const newUser = await response.json()
     this.setState({
-      first_name: "",
-      last_name: "",
+      firstname: "",
+      lastname: "",
       email: "",
       username: "",
       password: "",
@@ -82,13 +82,13 @@ class SignUp extends React.Component
   handleChangeFirstName(event)
   {
     const value = event.target.value
-    this.setState({first_name: value})
+    this.setState({firstname: value})
   }
   
   handleChangeLastName(event)
   {
     const value = event.target.value
-    this.setState({last_name: value})
+    this.setState({lastname: value})
   }
 
   handleChangeEmail(event)
