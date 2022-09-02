@@ -1,5 +1,9 @@
 # Progress Report
 
+### 9/1
+
+Worked on the userMeals.js file to pull the meals for a given user and loop through the meals to hit the edamam api for each recipe_id to get the name of the recipe and a picture to display on the user meals page. Next I'll be ready to work on the authentication to show the meals based on the logged in user.
+
 ### 8/31
 
 Finished fully implementing Tailwind in the project to be able to format the main page in react. Wrote 3 unit tests for the recipes back end. Also fixed the routers so that the error messages show instead of just 500 Internal Server Error messages when duplicate entries or when items aren't found.
