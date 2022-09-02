@@ -9,15 +9,23 @@ class HealthDataIn(BaseModel):
   entry_date: datetime
 
 
-class HealthDataOut(BaseModel):
+class HealthDataPostOut(BaseModel):
   id: int
   username: str
   current_weight: int
   current_bmi: float
   entry_date: datetime
 
+class HealthDataGetOut(BaseModel):
+  id: int
+  username: str
+  current_weight: int
+  height: int
+  current_bmi: float
+  entry_date: datetime
+
 class HealthDataList(BaseModel):
-  __root__: List[HealthDataOut]
+  __root__: List[HealthDataGetOut]
 
 class GoalsIn(BaseModel):
   username: str
@@ -28,6 +36,11 @@ class GoalsIn(BaseModel):
 class GoalsOut(BaseModel):
   id: int
   username: str
+  goal_weight: int
+  goal_bmi: float
+  height: int
+
+class GoalsPut(BaseModel):
   goal_weight: int
   goal_bmi: float
   height: int

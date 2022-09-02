@@ -16,22 +16,26 @@ class HealthDataQueries:
           SELECT h.id
           , h.username
           , h.current_weight
+          , g.height
           , h.current_bmi
           , h.entry_date
           FROM health_data h
-          GROUP BY h.id
+          INNER JOIN goals g
+            ON (h.username = g.username)
           ORDER BY h.entry_date
           """
         )
 
         hlist = []
         for row in cur.fetchall():
+          print(row)
           hdict = {
             "id": row[0],
             "username": row[1],
             "current_weight": row[2],
-            "current_bmi": row[3],
-            "entry_date": row[4],
+            "height": row[3],
+            "current_bmi": row[4],
+            "entry_date": row[5],
           }
           hlist.append(hdict)
         return hlist
@@ -110,7 +114,7 @@ class GoalsQueries:
           """
           SELECT *
           FROM goals
-          WHERE id = %s
+          WHERE username = %s
           """,
           [username],
         )
@@ -125,3 +129,23 @@ class GoalsQueries:
           "height": row[4],
           }
         return goal
+
+  def update_goal(self, goal_weight, goal_bmi, height, id):
+      with pool.connection() as conn:
+          with conn.cursor() as cur:
+              cur.execute(
+              """
+              UPDATE goals
+              SET goal_weight = %s, goal_bmi = %s, height = %s
+              WHERE id = %s
+              RETURNING id, username, goal_weight, goal_bmi, height
+              """,
+              [goal_weight, goal_bmi, height, id],
+              )
+              conn.commit()
+              row = cur.fetchone()
+              record = {}
+              print(row)
+              for i, column in enumerate(cur.description):
+                  record[column.name] = row[i]
+              return record
