@@ -23,7 +23,7 @@ services:
       REACT_APP_HEALTH_HOST: http://localhost:8050
       REACT_APP_EDAMAM_APP_ID: ${EDAMAM_APP_ID}
       REACT_APP_EDAMAM_RECIPE_API_KEY: ${EDAMAM_RECIPE_API_KEY}
-  
+      REACT_APP_GOOGLE_MAPS_API_KEY: ${GOOGLE_MAPS_API_KEY}
   pg-admin:
     image: dpage/pgadmin4
     volumes:
