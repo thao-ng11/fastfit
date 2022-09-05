@@ -25,4 +25,11 @@ I continued to shadow/group-code with the rest of the groups' models and dbs. We
 I finally got to set up my models, requests and API. I spend most of the day troubleshooting the errors on Swagger. Major blockers at this point are setting up the request for retrieving ONE set of goals for a particular username, and setting up the BMI calculation between data from two different tables. I'll likely have to continue working on this tomorrow. 
 
 ### 8.31
-I started my front-end js file to get my health data inputs. We fixed an issue with the nav bar not showing up on my form page. 
+I started my front-end js file to get my health data inputs. We fixed an issue with the nav bar not showing up on my form page. I got really bogged down today dealing with internet issues too. 
+
+### 9.1
+Started my unittest code. I created the testing directory in the backend/health/api directory.
+
+### 9.2
+I didn't have a ton of time dedicated to the project today between lecture and mandatory fun. I joined tables for my BMI calculation output. Added a PUT to my API and troubleshooted with Sarah to get it to work since we both have an update router.
+

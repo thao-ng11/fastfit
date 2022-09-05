@@ -11,6 +11,7 @@ from recipes_models import (
     MealTypeList,
     MealIn,
     MealOut,
+    MealPostOut,
     MealPut,
     MealList,
     DeleteOperation,
@@ -131,7 +132,7 @@ def get_meal(
 
 @router.post(
     "/api/meals",
-    response_model=MealOut | Message,
+    response_model=MealPostOut | Message,
     responses={
         500: {"model": ErrorMessage},
     },

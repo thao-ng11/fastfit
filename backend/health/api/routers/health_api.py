@@ -1,5 +1,4 @@
 from datetime import datetime
-from pydantic import BaseModel
 from typing import List
 from fastapi import APIRouter, Response, status, Depends, HTTPException
 import os
@@ -7,13 +6,15 @@ from psycopg_pool import ConnectionPool
 from health_db import HealthDataQueries, GoalsQueries, pool
 from health_models import (
   HealthDataIn,
-  HealthDataOut,
+  HealthDataPostOut,
+  HealthDataGetOut,
   HealthDataList,
   GoalsIn,
   GoalsOut,
   GoalsList,
   ErrorMessage,
   Message,
+  GoalsPut,
 )
 
 router= APIRouter()
@@ -21,7 +22,7 @@ router= APIRouter()
 
 @router.post(
     "/api/health_data",
-    response_model=HealthDataOut,
+    response_model=HealthDataPostOut,
     responses={
         500: {"model": ErrorMessage},
     },
@@ -102,4 +103,25 @@ def get_goal(
   if row is None:
       response.status_code = status.HTTP_404_NOT_FOUND
       return {"message": "Goal not found"}
+  return row
+
+
+@router.put(
+    "/api/goals/{id}",
+    response_model=GoalsOut | Message,
+    responses={
+        500: {"model": ErrorMessage},
+    },
+)
+def goals_put(
+  id: int,
+  goal: GoalsPut,
+  query=Depends(GoalsQueries),
+):
+  row = query.update_goal(
+    goal.goal_weight,
+    goal.goal_bmi,
+    goal.height,
+    id
+  )
   return row
