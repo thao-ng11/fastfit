@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function StrengthWorkoutForm() {
+function StrengthWorkoutForm({HandleStrength, strength}) {
     const [state, setState] = useState({
         sets:'',
         repetitions:'',
@@ -29,13 +29,6 @@ function StrengthWorkoutForm() {
             });
         }
     }
-    const handleChange = event => {
-        const value = event.target.value;
-        setState({
-            ...state,
-            [event.target.name]: value
-        })
-    }
 return (
         <div className="row">
         <div className="offset-3 col-6">
@@ -43,18 +36,17 @@ return (
             <h1>Add your Sets, Reps and Weight to your workout</h1>
             <form onSubmit={handleSubmit} id="create-customer-form">
             <div className="form-floating mb-3">
-                <input onChange={handleChange} value = {state.sets}placeholder="sets" required type="text" name="sets" id="sets" className="form-control" />
+                <input onChange={HandleStrength} value = {strength.sets}placeholder="sets" required type="text" name="sets" id="sets" className="form-control" />
                 <label htmlFor="name">Sets</label>
             </div>
             <div className="form-floating mb-3">
-                <input onChange={handleChange} value = {state.reps}placeholder="repetitions" required type="text" name="repetitions" id="repetitions" className="form-control" />
+                <input onChange={HandleStrength} value = {strength.repetitions}placeholder="repetitions" required type="text" name="repetitions" id="repetitions" className="form-control" />
                 <label htmlFor="name">Reps</label>
             </div>
             <div className="form-floating mb-3">
-                <input onChange={handleChange} value = {state.weight}placeholder="weight" required type="text" name="weight" id="weight" className="form-control" />
+                <input onChange={HandleStrength} value = {strength.weight}placeholder="weight" required type="text" name="weight" id="weight" className="form-control" />
                 <label htmlFor="name">Weight</label>
             </div>
-            <button className="btn btn-primary">Create</button>
             </form>
         </div>  
         </div>

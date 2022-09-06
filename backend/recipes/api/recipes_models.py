@@ -24,6 +24,14 @@ class MealOut(BaseModel):
     username: str
     recipe_api_id: str
     date: date
+    type: str
+
+
+class MealPostOut(BaseModel):
+    id: int
+    username: str
+    recipe_api_id: str
+    date: date
     type: int
 
 

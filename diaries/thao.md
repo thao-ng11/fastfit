@@ -41,3 +41,12 @@ Was able to research and change the datetime data type into timestamptz in the d
 # Aug 30, 2022
 
 As a team, we worked on cleaning up the database and purge all the pollers, fixing up the docker-compose file. We also got a lecture from our SEIR, Cooper, about tailwindcss. I was able to finish the backend portion of journal including the get and delete requests for individual journal. I was also helping with the health_data microservice. We run into a blocker as a team to try doing a request for all the entries for a specific user. It's a 422 Error Unprocessable Entity. Seems like they want an integer even though we specify a string. At the moment we decided to put a pause on that and will start working on the frontend.
+
+# Aug 31, 2022
+
+With help from Allisha, we were able to fix the error "Cursor is closed" by reallign the list and for loop for the dictionary in the JournalQuerries. We also fixed the router {username} by moving it before the {journal_id}. Sarah and I also finished the unit tests for the routers. The main blocker from that is the 404 test rather than the 200 test. After trying to add in some if statement for a message it was able to pass it correctly rather than passing the empty list in for comparison. As a group we decided on a color palette. I ran into some major issue with Docker that even after the SEIRs try to help it didn't resolve. I suspect that it was some cache with the node_module. I found some commands on stackoverflow the next morrning to try out:
+docker-compose down -v
+docker-compose build --no-cache
+docker-compose up --build
+
+# Sept 1, 2022
