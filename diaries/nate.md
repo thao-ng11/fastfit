@@ -30,3 +30,6 @@ Finished up all of the PUTs. Cooper gave a good lecture on Tailwind, seems like 
 
 8/31
 Finally started FrontEnd Today, wahoo! I got about 50% of the way done with it, just need to implement another form and list then it will be complete! Last thing I would need to do is some CSS. Hopefully by the middle of next week I can finish up my part of the MVP and start doing some stretch goals.
+
+9/1
+Continued on more of my FrontEnd portion.
