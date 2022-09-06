@@ -245,17 +245,18 @@ def update_strength_workout(
     )
     return row
 
-@router.get(
-    "/api/workouts",
-    response_model=CardioWorkoutList|StrengthWorkoutList,
-    responses={
-        404:{"model": ErrorMessage},
-    }
-)
-def cardio_workout_list(
-    query=Depends(CardioWorkoutQueries),
-    query2=Depends(StrengthWorkoutQueries)
-):
-    rows = query.get_cardio_workout_query()
-    row2 = query2.get_strength_workout_query()
-    return 
+# @router.get(
+#     "/api/workouts",
+#     response_model=CardioWorkoutList|StrengthWorkoutList,
+#     responses={
+#         404:{"model": ErrorMessage},
+#     }
+# )
+# def workout_list(
+#     query=Depends(CardioWorkoutQueries),
+#     query2=Depends(StrengthWorkoutQueries)
+# ):
+#     row = query.get_cardio_workout_query()
+#     row2 = query2.get_strength_workout_query()
+#     row.append(row2)
+#     return row

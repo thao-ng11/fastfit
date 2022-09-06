@@ -1,23 +1,27 @@
 import React, { useState, useEffect } from 'react'
-
+import WorkoutEntry from './WorkoutEntry'
 
 function WorkoutPlanList() {
 
     const [workouts,setWorkouts] = useState([])
     
     const fetchWorkouts = async () => {
-        const workoutstUrl = 'http://localhost:8020/api/workouts/'
-        const response = await fetch(workoutstUrl)
+        const strengthWorkoutstUrl = 'http://localhost:8020/api/strength_workout/'
+        const cardioWorkoutsUrl ='http://localhost:8020/api/cardio_workout/'
+        const response = await fetch(strengthWorkoutstUrl)
+        const response2 = await fetch(cardioWorkoutsUrl)
         const data = await response.json();
+        const data2 = await response2.json();
         console.log(data)
-        setWorkouts(workouts)
+        const allData = data.concat(data2)
+        setWorkouts(allData)
     }
     useEffect(() => {
         fetchWorkouts()
     }, []);
     
     const cancelWorkout = async (id) => {
-        const cancelUrl = `http://localhost:8020/api/workouts/${id}/`
+        const cancelUrl = `http://localhost:8020/api//${id}/`
         const fetchConfig = {
             method: "delete"
         }
@@ -31,24 +35,17 @@ function WorkoutPlanList() {
 
     return (
         <>
-            <h1>Workout Plan</h1>
+            <h1></h1>
             <table className="table table-striped">
                 <thead>
                     <tr>
-                        <th>Sets</th>
-                        <th>Repetitions</th>
-                        <th>Weight</th>
+                        <th>Workout Plan</th>
                     </tr>
                 </thead>
                 <tbody>
                     {workouts.map(workout => {
                         return (
-                            <tr key={workout.id}>
-                                <td> {workout.sets} </td>
-                                <td> {workout.repetitions} </td>
-                                <td> {workout.weight} </td>
-                                <td><button className="btn btn-danger" onClick={() => cancelWorkout(workout.id)}>delete</button></td>
-                            </tr>
+                            <WorkoutEntry workout={workout}/>
                         );
                     })}
                 </tbody>
