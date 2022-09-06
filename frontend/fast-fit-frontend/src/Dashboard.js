@@ -35,7 +35,6 @@ class Dashboard extends React.Component
     workoutRoute(event)
     {
         this.setState({workout_router: true})
-        this.setState({workout_router: false})
     }
     recipeRoute(event)
     {
@@ -55,19 +54,13 @@ class Dashboard extends React.Component
         const recipeUrl = `${process.env.REACT_APP_RECIPES_HOST}`
         const healthUrl = `${process.env.REACT_APP_HEALTH_HOST}`
         const workoutUrl = `${process.env.REACT_APP_WORKOUTS_HOST}`
-        this.state = {
-            recipe_router: false,
-            workout_router: false,
-            health_router: false,
-            journal_router: false,
-        }
     }
     render()
     {
-        if (this.state.health_router) {return <Navigate to="/health" userInput={this.state.userInput}/>;}
-        if (this.state.journal_router) {return <Navigate to="/journal" userInput={this.state.userInput}/>;}
-        if (this.state.workout_router) {return <Navigate to="/workout" userInput={this.state.userInput}/>;}
-        if (this.state.recipe_router) {return <Navigate to="/recipe" userInput={this.state.userInput}/>;}
+        if (this.state.health_router === true) {return <Navigate to="/health" userInput={this.state.userInput}/>;}
+        if (this.state.journal_router === true) {return <Navigate to="/journal" userInput={this.state.userInput}/>;}
+        if (this.state.workout_router === true) {return <Navigate to="/workout" userInput={this.state.userInput}/>;}
+        if (this.state.recipe_router === true) {return <Navigate to="/recipe" userInput={this.state.userInput}/>;}
         let bmiLong = (this.state.calc_weight / (this.state.calc_height * this.state.calc_height))*703
         let bmi = bmiLong.toFixed(2)
         if(bmi == NaN)
@@ -86,7 +79,7 @@ class Dashboard extends React.Component
                         <div className="flex flex-wrap py-2.5 h-1/2 w-full bg-gray-300 rounded-md justify-center">
                             <h1 className="text-3xl font-semibold">Inspirational Quote</h1>
                         </div>
-                        <div className="flex flex-wrap h-1/2 w-full bg-gray-300 rounded-md justify-center">
+                        <div className="inline-flex flex-col h-1/2 w-full bg-gray-300 rounded-md justify-center">
                             <h1 className="flex-wrap text-3xl font-semibold"> Quick Calculate BMI </h1>
                         <div className='flex flex-wrap'>
                             <h2 className=' flex flex-wrap align-middle'>Height: </h2>
@@ -109,7 +102,7 @@ class Dashboard extends React.Component
                                 className="flex flex-wrap border-grey-light w-full ml-2 mr-2 rounded mt-2 mb-2 h-5"
                                 name="weight"
                                 placeholder=" lbs" />
-                                <p className='flex flex-wrap mr-2'> BMI: </p>
+                                <p className='flex flex-wrap mr-2'>BMI: </p>
                                 {bmi}
                             </div>
                         </div>
