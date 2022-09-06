@@ -10,8 +10,8 @@ import mapStyles from "./mapStyles";
 
 const libraries = ["places"];
 const mapContainerStyle = {
-  height: "300px",
-  width: "400px",
+  height: "275px",
+  width: "425px",
 };
 const options = {
   styles: mapStyles,
@@ -60,7 +60,7 @@ export default function MapContainer() {
   if (!isLoaded) return "Loading...";
 
   return (
-    <div>
+    <div className="justify-center">
 
       <Locate panTo={panTo} />
       {/* <Search panTo={panTo} /> */}
@@ -116,7 +116,7 @@ export default function MapContainer() {
 function Locate({ panTo }) {
   return (
     <button
-      className="locate"
+      className="locate bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 mb-1 px-2 border border-gray-400 rounded shadow"
       onClick={() => {
         navigator.geolocation.getCurrentPosition(
           (position) => {
