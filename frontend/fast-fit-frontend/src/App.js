@@ -36,7 +36,6 @@ function App() {
   return (
     <>
       <Nav />
-      <div className="container">
         <Routes>
           <Route path="/" element={<Dashboard lat={lat} lng={lng}/>} />
           <Route path="/signup" element={<SignUp />} />
@@ -47,7 +46,7 @@ function App() {
           <Route path="/health" element={<HealthDataForm />} />
           <Route path="/journal" element={<JournalForm />} />
         </Routes>
-      </div>
+
     </>
   );
 }
