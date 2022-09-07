@@ -12,17 +12,17 @@ CREATE TABLE users (
 
 \connect recipes
 
-CREATE TABLE meal_type (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL UNIQUE
-);
+-- CREATE TABLE meal_type (
+--     id SERIAL PRIMARY KEY,
+--     name VARCHAR(100) NOT NULL UNIQUE
+-- );
 
 CREATE TABLE meal (
     id SERIAL PRIMARY KEY,
     username VARCHAR(100) NOT NULL,
     recipe_api_id VARCHAR(500) NOT NULL,
     date DATE NOT NULL,
-    type INT REFERENCES meal_type(id) NOT NULL
+    type VARCHAR(25) NOT NULL
 );
 
 \connect workouts

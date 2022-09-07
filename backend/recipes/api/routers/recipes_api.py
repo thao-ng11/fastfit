@@ -6,12 +6,12 @@ import os
 from jose import jwt, JWTError
 
 from recipes_models import (
-    MealTypeIn,
-    MealTypeOut,
-    MealTypeList,
+    # MealTypeIn,
+    # MealTypeOut,
+    # MealTypeList,
     MealIn,
     MealOut,
-    MealPostOut,
+    # MealPostOut,
     MealPut,
     MealList,
     DeleteOperation,
@@ -19,7 +19,7 @@ from recipes_models import (
     Message,
 )
 from recipes_db import (
-    MealTypeQueries,
+    # MealTypeQueries,
     MealQueries,
     DuplicateRecord,
 )
@@ -45,57 +45,57 @@ async def get_current_user(
 
 router = APIRouter()
 
-@router.post(
-    "/api/meal_types",
-    response_model=MealTypeOut | Message,
-    responses={
-        500: {"model": ErrorMessage},
-    },
-)
-def meal_type_post(
-    meal_type: MealTypeIn,
-    query=Depends(MealTypeQueries),
-):
-    row = query.create_meal_type(
-        meal_type.name,
-    )
-    if row is None:
-        Response.status_code = status.HTTP_409_CONFLICT
-        return {"message": "That meal type already exists"}
-    return row
+# @router.post(
+#     "/api/meal_types",
+#     response_model=MealTypeOut | Message,
+#     responses={
+#         500: {"model": ErrorMessage},
+#     },
+# )
+# def meal_type_post(
+#     meal_type: MealTypeIn,
+#     query=Depends(MealTypeQueries),
+# ):
+#     row = query.create_meal_type(
+#         meal_type.name,
+#     )
+#     if row is None:
+#         Response.status_code = status.HTTP_409_CONFLICT
+#         return {"message": "That meal type already exists"}
+#     return row
 
-@router.get(
-    "/api/meal_types",
-    response_model=MealTypeList | Message,
-    responses={
-        200: {"model": MealTypeOut},
-        404: {"model": ErrorMessage},
-    }
-)
-def meal_type_list(
-    response: Response,
-    query=Depends(MealTypeQueries),
-):
-    rows = query.get_meal_types()
-    print(rows)
-    if rows is None:
-        response.status_code = status.HTTP_404_NOT_FOUND
-        return {"message": "You don't have any meal types"}
-    return rows
+# @router.get(
+#     "/api/meal_types",
+#     response_model=MealTypeList | Message,
+#     responses={
+#         200: {"model": MealTypeOut},
+#         404: {"model": ErrorMessage},
+#     }
+# )
+# def meal_type_list(
+#     response: Response,
+#     query=Depends(MealTypeQueries),
+# ):
+#     rows = query.get_meal_types()
+#     print(rows)
+#     if rows is None:
+#         response.status_code = status.HTTP_404_NOT_FOUND
+#         return {"message": "You don't have any meal types"}
+#     return rows
 
-@router.delete(
-    "/api/meal_types/{meal_type_id}",
-    response_model=DeleteOperation | Message,
-)
-def delete_meal_type(
-    meal_type_id: int,
-    query=Depends(MealTypeQueries)
-):
-    # try:
-    query.delete_meal_type(meal_type_id)
-    return {"result": True}
-    # except:
-    #     return {"result": False}
+# @router.delete(
+#     "/api/meal_types/{meal_type_id}",
+#     response_model=DeleteOperation | Message,
+# )
+# def delete_meal_type(
+#     meal_type_id: int,
+#     query=Depends(MealTypeQueries)
+# ):
+#     # try:
+#     query.delete_meal_type(meal_type_id)
+#     return {"result": True}
+#     # except:
+#     #     return {"result": False}
 
 @router.get(
     "/api/meals",
@@ -152,7 +152,7 @@ def get_meal(
 
 @router.post(
     "/api/meals",
-    response_model=MealPostOut | Message,
+    response_model=MealOut | Message,
     responses={
         500: {"model": ErrorMessage},
     },
