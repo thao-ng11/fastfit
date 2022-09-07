@@ -1,5 +1,9 @@
 # Progress Report
 
+### 9/6
+
+Got the user auth working for the UserMeals.js page! I had to update the url path to no longer pass through the username as a variable and instead passed the token in the header. I updated the router file to include the get_user_info function and pulled the username from the token. It surprisingly came together fairly easily with only a couple issues.
+
 ### 9/1
 
 Worked on the userMeals.js file to pull the meals for a given user and loop through the meals to hit the edamam api for each recipe_id to get the name of the recipe and a picture to display on the user meals page. Next I'll be ready to work on the authentication to show the meals based on the logged in user.
