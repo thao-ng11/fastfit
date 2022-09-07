@@ -12,11 +12,6 @@ CREATE TABLE users (
 
 \connect recipes
 
--- CREATE TABLE meal_type (
---     id SERIAL PRIMARY KEY,
---     name VARCHAR(100) NOT NULL UNIQUE
--- );
-
 CREATE TABLE meal (
     id SERIAL PRIMARY KEY,
     username VARCHAR(100) NOT NULL,
