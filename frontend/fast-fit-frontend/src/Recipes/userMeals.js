@@ -1,23 +1,31 @@
 import React from 'react';
+import { AuthContext, useToken } from '../Authentication'
 
 class UserMeals extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            meals: []
+            meals: [],
         };
     }
-
+    static contextType = AuthContext;
+    
     async componentDidMount() {
-        const username = 'testuser1'
-        const url = `${process.env.REACT_APP_RECIPES_HOST}/api/meals/user=${username}`
+        
+        const token_url = `${process.env.REACT_APP_ACCOUNTS_HOST}/token`
+        const token_response = await fetch(token_url, {credentials: "include",})
+        const { token } = await token_response.json()
 
-        const response = await fetch(url);
+        const url = `${process.env.REACT_APP_RECIPES_HOST}/api/meals/user`
+
+        const response = await fetch(url, {
+            headers: { Authorization: `Bearer ${token}` },
+        });
 
         if (response.ok) {
             const data = await response.json()
             for (let meal of data) {
-                console.log(meal)
+                // console.log(meal)
                 let recipe_id = meal['recipe_api_id']
                 // console.log(recipe_id)
                 let apiUrl = `https://api.edamam.com/api/recipes/v2/${recipe_id}/?app_id=${process.env.REACT_APP_EDAMAM_APP_ID}&type=public&app_key=${process.env.REACT_APP_EDAMAM_RECIPE_API_KEY}&field=label&field=image`
