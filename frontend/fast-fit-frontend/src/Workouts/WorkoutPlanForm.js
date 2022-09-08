@@ -32,13 +32,13 @@ function WorkoutPlan() {
     function HandleWorkoutForm() {
         switch (workoutType) {
             case "cardio":
-                return <CardioWorkoutForm HandleCardio={HandleCardio} cardio={cardio} />
+                return <CardioWorkoutForm searchTerm={searchTerm} HandleCardio={HandleCardio} cardio={cardio} />
                 break;
             case "strength":
             case "powerlifting":
             case "olympic_weightlifting":
             case "strongman":
-                return <StrengthWorkoutForm HandleStrength={HandleStrength} strength={strength} />
+                return <StrengthWorkoutForm searchTerm={searchTerm} HandleStrength={HandleStrength} strength={strength} />
                 break;
 
             default:
@@ -65,6 +65,7 @@ function WorkoutPlan() {
                 }, body: JSON.stringify(cardio)
             })
         } else {
+            console.log(strength)
             await fetch(`${process.env.REACT_APP_WORKOUTS_HOST}/api/strength_workout`, {
                 method: 'POST', headers: {
                     'Accept': 'application/json',
@@ -88,12 +89,21 @@ function WorkoutPlan() {
         setWorkouts(data)
         return(data)
     }
-    function HandleCardio(e) {
+    function HandleCardio(e, manual) {
+        let key;
+        let value;
+        if (manual === false){
+            key = e.target.name;
+            value = Number(e.target.value);
+        }else{
+            key = manual.key
+            value = manual.value
         setCardio({
             ...cardio,
             [e.target.name]: Number(e.target.value)
         })
     }
+}
     function HandleStrength(e,manual) {
         let key;
         let value;
@@ -114,7 +124,7 @@ function WorkoutPlan() {
     return (
     <div className='bg-[#C7E8F3] w-full'>
         <div>
-            <WorkoutSearchModal handleStrength={HandleStrength} strength={strength} visible={showModal} handleClose={HandleClose} data={workouts} /> 
+            <WorkoutSearchModal searchTerm={searchTerm} handleCardio={HandleCardio} handleStrength={HandleStrength} strength={strength} visible={showModal} handleClose={HandleClose} data={workouts} /> 
             <div className="w-screen bg-grey-lighter min-h-screen flex flex-col">
                 <div className=" max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2 space-y-1">
                     <div className="text-center bg-[#BF9ACA] px-6 py-8 rounded shadow-md text-black w-full">
