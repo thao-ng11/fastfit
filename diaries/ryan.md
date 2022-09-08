@@ -1,4 +1,7 @@
-###
+### 9/1
+finished and tested the signup react page, moving onto the login page. 
+
+### 8/31
 today we fixed tables and how the user data is given. 
 
 ### 8/29

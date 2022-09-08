@@ -10,12 +10,10 @@ import WorkoutPlanForm from "./Workouts/WorkoutPlanForm";
 import UserMeals from "./Recipes/userMeals";
 import RecipeSearch from "./Recipes/recipeSearch";
 import HealthDataForm from "./health_data/HealthMain";
+import JournalForm from "./journals/journalForm";
 import Login from "./Auth/Login";
 import WorkoutPlanList from "./Workouts/WorkoutPlanList";
 import { AuthProvider } from "./Authentication";
-import JournalForm from "./journals/journalForm";
-import JournalMain from "./journals/journalMain";
-import JournalsList from "./journals/journalList";
 
 function App() {
   const [token, login, logout, signup, update] = useToken();
@@ -55,9 +53,7 @@ function App() {
               <Route path="search" element={<RecipeSearch />} />
             </Route>
             {/* <Route path="/health" element={<HealthDataForm />} /> */}
-            <Route path="/journals" element={<JournalMain />} />
-            <Route path="/journals/form" element={<JournalForm />} />
-            <Route path="/journals/details" element={<JournalsList />} />
+            <Route path="/journal" element={<JournalForm />} />
           </Routes>
         </div>
       </AuthProvider>
