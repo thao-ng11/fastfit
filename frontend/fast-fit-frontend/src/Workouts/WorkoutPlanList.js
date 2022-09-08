@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import WorkoutEntry from './WorkoutEntry'
 
 function WorkoutPlanList() {
-
+    let dates = []
     const [workouts,setWorkouts] = useState([])
     const [dateFilter,setDateFilter] = useState('')
     const fetchWorkouts = async () => {
@@ -47,13 +47,15 @@ function WorkoutPlanList() {
                     <tr>
                         <th>Workout Plan</th>
                         <select onChange={filterDates}>{workouts.map(workout =>{
-                            return(<option value={workout.workout_date}>{workout.workout_date}</option>)
+                            if  (!dates.includes(workout.workout_date)){
+                                dates.push(workout.workout_date)
+                                return(<option value={workout.workout_date}>{workout.workout_date}</option>)
+                            }
                         })}</select>
                     </tr>
                 </thead>
                 <tbody>
                     {workouts.map(workout => {
-                        console.log(workout.workout_date)
                         if (workout.workout_date.includes(dateFilter)){
                             return (
                                 <WorkoutEntry workout={workout}

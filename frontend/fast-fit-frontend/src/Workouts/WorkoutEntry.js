@@ -2,7 +2,6 @@ import React, { useState,} from 'react';
 
 
 function WorkoutEntry({workout, cancelWorkout}) {
-console.log(workout)
 function Delete(){
     if (workout.muscle_group === 'Abdominals' || workout.workout === 'Jumping rope'){
        cancelWorkout(workout.id,'cardio_workout')

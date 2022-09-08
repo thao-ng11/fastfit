@@ -107,7 +107,10 @@ function WorkoutPlan() {
     function HandleStrength(e,manual) {
         let key;
         let value;
-        if (manual === false){
+        if (!manual && e.target.type === 'date'){
+            key = e.target.name;
+            value = (e.target.value);
+        }else if(manual === false){
             key = e.target.name;
             value = Number(e.target.value);
         }else{
@@ -154,7 +157,7 @@ function WorkoutPlan() {
                     </div>
                     <div className=" bg-[#BF9ACA] mt-4 block border border-grey-light w-full p-3 rounded mb-4">
                         <label className='font-semibold px-3'>Calendar</label>
-                        <input name='workout_date' type='datetime-local'></input>
+                        <input onChange={HandleStrength} name='workout_date' type='date'></input>
 
                     </div>
                     <div className="bg-[#BF9ACA] block border border-grey-light w-full p-3 rounded mb-4">
