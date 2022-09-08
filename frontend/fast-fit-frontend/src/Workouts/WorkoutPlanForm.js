@@ -72,24 +72,20 @@ function WorkoutPlan() {
             })
         }
         navigate('/workout/plan')
-        console.log('Strength', strength)
-        console.log('cardio', cardio)
     }
-    async function HandleSearch() {
-        await fetchWorkouts()
-        setShowModal(true)
-    }
-    function HandleSearchInput(e) {
+    async function HandleSearchInput(e) {
         setSearchTerm(e.target.value)
+        setShowModal(true)
         setStrength({ ...strength, muscle_group: e.target.value })
     }
     function HandleClose() {
         setShowModal(false)
     }
-    async function fetchWorkouts() {
-        let data = await fetch(`https://api.api-ninjas.com/v1/exercises?muscle=${searchTerm}`, { method: 'GET', headers: { 'X-Api-Key': 'w+trDWPcrCQuuNR+MYj+Xw==Bk9KDso4mOxNi8CD' } })
+    async function fetchWorkouts(term) {
+        let data = await fetch(`https://api.api-ninjas.com/v1/exercises?muscle=${term}`, { method: 'GET', headers: { 'X-Api-Key': 'w+trDWPcrCQuuNR+MYj+Xw==Bk9KDso4mOxNi8CD' } })
         data = await data.json()
         setWorkouts(data)
+        return(data)
     }
     function HandleCardio(e) {
         setCardio({
@@ -107,7 +103,9 @@ function WorkoutPlan() {
     return (
     <div className='bg-[#C7E8F3] w-full'>
         <div>
-            <WorkoutSearchModal visible={showModal} handleClose={HandleClose} data={workouts} />
+            <WorkoutSearchModal visible={showModal} handleClose={HandleClose} data={workouts}
+             selectedWorkout={selectedWorkout}
+             setSelectedWorkout={setSelectedWorkout} /> 
             <div className="w-screen bg-grey-lighter min-h-screen flex flex-col">
                 <div className=" max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2 space-y-1">
                     <div className="text-center bg-[#BF9ACA] px-6 py-8 rounded shadow-md text-black w-full">
@@ -116,7 +114,7 @@ function WorkoutPlan() {
                             <option value=''>Choose a workout</option>
                             <option value="Abdominals">Abdominals</option>
                             <option value="Adductors">Adductors</option>
-                            <option value="Abbductors">Abbductors</option>
+                            <option value="Abductors">Abductors</option>
                             <option value="Biceps">Biceps</option>
                             <option value="Calves">Calves</option>
                             <option value="Chest">Chest</option>
@@ -132,16 +130,6 @@ function WorkoutPlan() {
                             <option value="Triceps">Triceps</option>
                         </select>
                     </div>
-                    {workouts.map((workout, id) => {
-                        return (
-                            <div className='bg-[#BF9ACA] font-semibold py-[.35rem] w-full text-center shadow-md rounded-md bg-gray-50 border border-gray-300 hover:bg-gray-100'>
-                                <Workout name={workout.name}
-                                    id={id}
-                                    selectedWorkout={selectedWorkout}
-                                    setSelectedWorkout={setSelectedWorkout} />
-                            </div>
-                        )
-                    })}
                     <div className=" bg-[#BF9ACA] mt-4 block border border-grey-light w-full p-3 rounded mb-4">
                         <label className='font-semibold px-3'>Calendar</label>
                         <input name='workout_date' type='datetime-local'></input>
