@@ -5,8 +5,8 @@ function Nav() {
     return (
         // class="flex fixed justify-between items-center bg-white shadow-lg w-screen "
         <nav >
-            <div className='px-4 cursor-pointer'>
-                <NavLink to='/'><h2 className="text-3xl text-gray-800 font-bold">F<span className="text-red-600">a</span>s<span className="text-red-800">t</span><span className="text-green-800">FIT</span></h2></NavLink>
+            <div className='px-4 bg-[#073b4c] cursor-pointer'>
+                <NavLink to='/'><h2 className="text-3xl text-[#fff2f1] font-bold">F<span className="text-[#fff2f1]">a</span>s<span className="text-[#fff2f1]">t</span><span className="text-[#fff2f1]">FIT</span></h2></NavLink>
             </div>
             <div className="flex items-center space-x-10 font-semibold capitalize px-4">
                 {/* <a href="#home" className="text-gray-800 hover:underline">home</a>

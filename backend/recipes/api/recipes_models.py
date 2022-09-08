@@ -3,20 +3,20 @@ from typing import List
 from datetime import date
 
 
-class MealTypeIn(BaseModel): 
-    name: str
+# class MealTypeIn(BaseModel): 
+#     name: str
 
 
-class MealTypeOut(BaseModel): 
-    id: int
-    name: str
+# class MealTypeOut(BaseModel): 
+#     id: int
+#     name: str
 
 
 class MealIn(BaseModel):
     username: str
     recipe_api_id: str
     date: date
-    type: int
+    type: str
 
 
 class MealOut(BaseModel):
@@ -27,21 +27,21 @@ class MealOut(BaseModel):
     type: str
 
 
-class MealPostOut(BaseModel):
-    id: int
-    username: str
-    recipe_api_id: str
-    date: date
-    type: int
+# class MealPostOut(BaseModel):
+#     id: int
+#     username: str
+#     recipe_api_id: str
+#     date: date
+#     type: str
 
 
 class MealPut(BaseModel):
     date: date
-    type: int
+    type: str
 
 
-class MealTypeList(BaseModel):
-    __root__: List[MealTypeOut]
+# class MealTypeList(BaseModel):
+#     __root__: List[MealTypeOut]
 
 
 class MealList(BaseModel):
