@@ -72,25 +72,24 @@ class Dashboard extends React.Component {
       <section className="h-[400px] w-full bg-[#073b4c] tails-selected-element">
         <div className="max-w-7xl px-5 py-2.5 bg-[#073b4c] flex space-x-5 w-full h-full items-center justify-center mx-auto tails-selected-element 2xl:text-center">
           <div className="flex h-full w-full bg-[#c7e8f3] rounded-md tails-selected-element justify-center">
-            <h1 className="py-2.5 text-3xl font-semibold"> Health Data </h1>
+            <h1 className="py-2.5 text-3xl font-semibold text-[#8e4162]" > Health Data </h1>
           </div>
           <div className="flex flex-col space-y-5 w-full h-full">
             <div className="flex flex-wrap py-2.5 h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center">
-              <h1 className="text-3xl font-semibold">Inspirational Quote</h1>
+              <h1 className="text-3xl font-semibold text-[#8e4162]">Inspirational Quote</h1>
             </div>
             <div className="inline-flex flex-col h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center">
-              <h1 className="flex-wrap text-3xl font-semibold">
-                {" "}
-                Quick Calculate BMI{" "}
+              <h1 className="flex-wrap text-3xl font-semibold text-[#8e4162]">
+                Quick Calculate BMI
               </h1>
-              <div className="flex flex-wrap">
+              <div className="flex flex-wrap justify-center">
                 <h2 className=" flex flex-wrap align-middle">Height: </h2>
                 <input
                   value={this.state.calc_height}
                   onChange={this.handleHeightChange}
                   type="text"
                   id="height"
-                  className="flex flex-wrap border-grey-light w-full ml-2 mr-2 rounded mt-2 mb-2 h-5"
+                  className="flex flex-wrap border-grey-light w-full ml-2 mr-2 rounded mt-2 mb-2 h-5 bg-[#f1f1f1]"
                   name="height"
                   placeholder=" inches"
                 />
@@ -101,7 +100,7 @@ class Dashboard extends React.Component {
                   onChange={this.handleWeightChange}
                   type="text"
                   id="weight"
-                  className="flex flex-wrap border-grey-light w-full ml-2 mr-2 rounded mt-2 mb-2 h-5"
+                  className="flex flex-wrap border-grey-light w-full ml-2 mr-2 rounded mt-2 mb-2 h-5 bg-[#f1f1f1]"
                   name="weight"
                   placeholder=" lbs"
                 />
@@ -111,20 +110,20 @@ class Dashboard extends React.Component {
             </div>
           </div>
           <div className="flex py-2.5 h-full w-full bg-[#c7e8f3] rounded-md justify-center">
-            <h1 className="text-3xl font-semibold">Nutrition</h1>
+            <h1 className="text-3xl font-semibold text-[#8e4162]">Meals</h1>
           </div>
         </div>
         <div className="max-w-7xl px-5 py-2.5 bg-[#073b4c] flex space-x-5 w-full h-full items-center justify-center mx-auto">
           <div className="flex flex-col space-y-5 w-full h-full">
             <div className="flex py-2.5 h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center">
-              <h1 className="text-3xl font-semibold"> Workouts </h1>
+              <h1 className="text-3xl font-semibold text-[#8e4162]"> Workouts </h1>
             </div>
             <div className="flex py-2.5 h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center">
-              <h1 className="text-3xl font-semibold">Listen Fam</h1>
+              <h1 className="text-3xl font-semibold text-[#8e4162]">Journal</h1>
             </div>
           </div>
           <div className="flex py-2.5 h-full w-full bg-[#c7e8f3] rounded-md flex-wrap items-center justify-center">
-            <h1 className="text-3xl font-semibold w-full text-center">
+            <h1 className="text-3xl font-semibold w-full text-center text-[#8e4162]">
               {" "}
               Find a Gym{" "}
             </h1>
