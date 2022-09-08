@@ -10,11 +10,11 @@ function WorkoutPlan() {
     const [showModal, setShowModal] = useState(false)
     const [searchTerm, setSearchTerm] = useState('')
     const [workouts, setWorkouts] = useState([])
-    const [selectedWorkout, setSelectedWorkout] = useState(0)
     const [cardio, setCardio] = useState({
         "username": "neendicott",
         "category": 0,
         "workout_date": "2022-08-31",
+        "workout":"",
         "duration": 0,
         "distance": 0,
     })
@@ -23,6 +23,7 @@ function WorkoutPlan() {
         "category": 0,
         "muscle_group": 0,
         "workout_date": "2022-08-31",
+        "workout":"",
         "sets": 0,
         "repetitions": 0,
         "weight": 0,
@@ -81,8 +82,8 @@ function WorkoutPlan() {
     function HandleClose() {
         setShowModal(false)
     }
-    async function fetchWorkouts(term) {
-        let data = await fetch(`https://api.api-ninjas.com/v1/exercises?muscle=${term}`, { method: 'GET', headers: { 'X-Api-Key': 'w+trDWPcrCQuuNR+MYj+Xw==Bk9KDso4mOxNi8CD' } })
+    async function fetchWorkouts() {
+        let data = await fetch(`https://api.api-ninjas.com/v1/exercises?muscle=${searchTerm}`, { method: 'GET', headers: { 'X-Api-Key': 'w+trDWPcrCQuuNR+MYj+Xw==Bk9KDso4mOxNi8CD' } })
         data = await data.json()
         setWorkouts(data)
         return(data)
@@ -93,19 +94,27 @@ function WorkoutPlan() {
             [e.target.name]: Number(e.target.value)
         })
     }
-    function HandleStrength(e) {
+    function HandleStrength(e,manual) {
+        let key;
+        let value;
+        if (manual === false){
+            key = e.target.name;
+            value = Number(e.target.value);
+        }else{
+            key = manual.key
+            value = manual.value
+            console.log(key, value)
+        }
         setStrength({
             ...strength,
-            [e.target.name]: Number(e.target.value)
+            [key]:(value)
         })
     }
     useEffect(() => { fetchWorkouts() }, [searchTerm])
     return (
     <div className='bg-[#C7E8F3] w-full'>
         <div>
-            <WorkoutSearchModal visible={showModal} handleClose={HandleClose} data={workouts}
-             selectedWorkout={selectedWorkout}
-             setSelectedWorkout={setSelectedWorkout} /> 
+            <WorkoutSearchModal handleStrength={HandleStrength} strength={strength} visible={showModal} handleClose={HandleClose} data={workouts} /> 
             <div className="w-screen bg-grey-lighter min-h-screen flex flex-col">
                 <div className=" max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2 space-y-1">
                     <div className="text-center bg-[#BF9ACA] px-6 py-8 rounded shadow-md text-black w-full">
@@ -129,6 +138,9 @@ function WorkoutPlan() {
                             <option value="Traps">Traps</option>
                             <option value="Triceps">Triceps</option>
                         </select>
+                        <div className='text-[#073B4C] mt-2 font-semibold'>
+                        {strength.workout}
+                        </div>
                     </div>
                     <div className=" bg-[#BF9ACA] mt-4 block border border-grey-light w-full p-3 rounded mb-4">
                         <label className='font-semibold px-3'>Calendar</label>

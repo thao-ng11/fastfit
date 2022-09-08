@@ -2,20 +2,22 @@ import React, { useState,} from 'react';
 
 
 function Workout(props) {
+    console.log(props)
     // const [state, setState] = useState({
 
     // })
 function setStyle(){
-    if (props.selectedWorkout === props.id){
-        return({color:"green",
+    if (props.strength.workout === props.name){
+        return({color:"black",
                 cursor:"pointer"})
     }else{
-        return({color:"red",
+        return({color:"white",
                 cursor:"pointer"})
     }
 }
 function setActive(){
-    props.setSelectedWorkout(props.id)
+    props.handleStrength(false,{key:"workout",value:props.name})
+    props.setState(false)
 }
 return (
     <div style={setStyle()} onClick={setActive}>
