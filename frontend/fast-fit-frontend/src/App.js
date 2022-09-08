@@ -54,12 +54,12 @@ function App() {
               <Route path="user" element={<UserMeals />} />
               <Route path="search" element={<RecipeSearch />} />
             </Route>
-            {/* <Route path="/health" element={<HealthDataForm />} /> */}
             <Route path="/journals">
               <Route index element={<JournalMain />} />
               <Route path="form" element={<JournalForm />} />
               <Route path="details" element={<JournalsList />} />
             </Route>
+            <Route path="/health" element={<HealthDataForm />} />
           </Routes>
         </div>
       </AuthProvider>
