@@ -1,5 +1,9 @@
 # Progress Report
 
+### 9/7
+
+Started on the recipeSearch.js page that will hit the Edamam API and retrieve a list of recipes based on the meal type and food query
+
 ### 9/6
 
 Got the user auth working for the UserMeals.js page! I had to update the url path to no longer pass through the username as a variable and instead passed the token in the header. I updated the router file to include the get_user_info function and pulled the username from the token. It surprisingly came together fairly easily with only a couple issues.
