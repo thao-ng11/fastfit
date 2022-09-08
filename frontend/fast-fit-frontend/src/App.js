@@ -49,7 +49,7 @@ function App() {
               <Route path="user" element={<UserMeals />} />
               <Route path="search" element={ <RecipeSearch /> } />
             </Route>
-            <Route path="/health" element={<HealthDataForm />} />
+            {/* <Route path="/health" element={<HealthDataForm />} /> */}
             <Route path="/journal" element={<JournalForm />} />
           </Routes>
         </div>

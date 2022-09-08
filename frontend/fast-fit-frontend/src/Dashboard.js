@@ -70,16 +70,16 @@ class Dashboard extends React.Component
         }
         
         return (
-            <section className="h-[400px] bg-white tails-selected-element" >
-                <div className="max-w-7xl px-5 py-2.5 flex space-x-5 w-full h-full items-center justify-center mx-auto tails-selected-element 2xl:text-center" >
-                <div className="flex h-full w-full bg-gray-300 rounded-md tails-selected-element justify-center" >
+            <section className="h-[400px] w-full bg-[#073b4c] tails-selected-element" >
+                <div className="max-w-7xl px-5 py-2.5 bg-[#073b4c] flex space-x-5 w-full h-full items-center justify-center mx-auto tails-selected-element 2xl:text-center" >
+                <div className="flex h-full w-full bg-[#c7e8f3] rounded-md tails-selected-element justify-center" >
                     <h1 className="py-2.5 text-3xl font-semibold"> Health Data </h1>
                 </div>
                     <div className="flex flex-col space-y-5 w-full h-full">
-                        <div className="flex flex-wrap py-2.5 h-1/2 w-full bg-gray-300 rounded-md justify-center">
+                        <div className="flex flex-wrap py-2.5 h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center">
                             <h1 className="text-3xl font-semibold">Inspirational Quote</h1>
                         </div>
-                        <div className="inline-flex flex-col h-1/2 w-full bg-gray-300 rounded-md justify-center">
+                        <div className="inline-flex flex-col h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center">
                             <h1 className="flex-wrap text-3xl font-semibold"> Quick Calculate BMI </h1>
                         <div className='flex flex-wrap'>
                             <h2 className=' flex flex-wrap align-middle'>Height: </h2>
@@ -108,20 +108,20 @@ class Dashboard extends React.Component
                         </div>
 
                     </div>
-                    <div className="flex py-2.5 h-full w-full bg-gray-300 rounded-md justify-center">
+                    <div className="flex py-2.5 h-full w-full bg-[#c7e8f3] rounded-md justify-center">
                     <h1 className="text-3xl font-semibold">Nutrition</h1>
                     </div>
                 </div>
-                <div className="max-w-7xl px-5 py-2.5 flex space-x-5 w-full h-full items-center justify-center mx-auto">
+                <div className="max-w-7xl px-5 py-2.5 bg-[#073b4c] flex space-x-5 w-full h-full items-center justify-center mx-auto">
                     <div className="flex flex-col space-y-5 w-full h-full">
-                        <div className="flex py-2.5 h-1/2 w-full bg-gray-300 rounded-md justify-center">
+                        <div className="flex py-2.5 h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center">
                             <h1 className="text-3xl font-semibold"> Workouts </h1>
                         </div>
-                        <div className="flex py-2.5 h-1/2 w-full bg-gray-300 rounded-md justify-center">
+                        <div className="flex py-2.5 h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center">
                             <h1 className="text-3xl font-semibold">Listen Fam</h1>
                         </div>
                     </div>
-                    <div className="flex py-2.5 h-full w-full bg-gray-300 rounded-md flex-wrap items-center justify-center">
+                    <div className="flex py-2.5 h-full w-full bg-[#c7e8f3] rounded-md flex-wrap items-center justify-center">
                         <h1 className="text-3xl font-semibold w-full text-center"> Find a Gym </h1>
                     <div className='justify-items-center'>
                         <MapContainer></MapContainer>
