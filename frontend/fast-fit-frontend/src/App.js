@@ -9,6 +9,8 @@ import WorkoutPlanForm from "./Workouts/WorkoutPlanForm";
 import UserMeals from "./Recipes/userMeals";
 import HealthDataForm from "./health_data/HealthMain";
 import JournalForm from "./journals/journalForm";
+import JournalMain from "./journals/journalMain";
+import JournalsList from "./journals/journalList";
 
 function App() {
   return (
@@ -21,7 +23,9 @@ function App() {
           <Route path="/workout" element={<WorkoutPlanForm />} />
           <Route path="/meals" element={<UserMeals />} />
           <Route path="/health" element={<HealthDataForm />} />
-          <Route path="/journal" element={<JournalForm />} />
+          <Route path="/journals/form" element={<JournalForm />} />
+          <Route path="/journals" element={<JournalMain />} />
+          <Route path="/journals/details" element={<JournalsList />} />
         </Routes>
       </div>
     </BrowserRouter>

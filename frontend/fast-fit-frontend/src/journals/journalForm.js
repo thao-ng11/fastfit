@@ -1,111 +1,108 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
-class JournalForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      entry_date: "",
-      grateful: "",
-      daily_aff: "",
-      note: "",
-      feeling: "",
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+function JournalForm() {
+  const { state } = useLocation();
+  const datetime = new Date().toISOString();
+  const navigate = useNavigate();
+  const [body, setBody] = useState({
+    username: "testuser1",
+    entry_date: datetime,
+    grateful: "",
+    daily_aff: "",
+    note: "",
+    feeling: 1,
+  });
 
-  handleChange(event) {
+  useEffect(() => {
+    setBody({ ...body, feeling: state.activeEmoji });
+  }, []);
+  function handleChange(event) {
     const value = event.target.value;
     const key = event.target.name;
-    const changeDict = {};
-    changeDict[key] = value;
-    this.setState(changeDict);
+    setBody({ ...body, [key]: value });
   }
-
-  async handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    const data = { ...this.state };
-    console.log(data);
-
-    const customerUrl = "http://localhost:8090/api/journal/";
+    const customerUrl = "http://localhost:8040/api/journals/";
     const fetchConfig = {
       method: "post",
-      body: JSON.stringify(data),
+      body: JSON.stringify(body),
       headers: {
         "Content-Type": "application/json",
       },
     };
+    console.log(body);
 
     const response = await fetch(customerUrl, fetchConfig);
     if (response.ok) {
       const newCustomer = await response.json();
       console.log(newCustomer);
-
       const cleared = {
+        username: "testuser1",
         entry_date: "",
         grateful: "",
         daily_aff: "",
         note: "",
         feeling: "",
       };
-      this.setState(cleared);
+      setBody(cleared);
+      navigate("/journals/details/");
     }
   }
-  render() {
-    return (
-      <div className="row">
-        <div className="bg-grey-lighter min-h-screen flex flex-col">
-          <div className="shadow p-4 mt-4">
-            <h1> The Five Minute Journal</h1>
-            <form onSubmit={this.handleSubmit} id="create-customer-form">
-              <div className="form-floating mb-3">
-                <input
-                  onChange={this.handleChange}
-                  placeholder="1. "
-                  required
-                  type="text"
-                  name="grateful"
-                  id="grateful"
-                  value={this.state.grateful}
-                  className="form-control"
-                />
-                <label htmlFor="name">
-                  3 things you are grateful for today
-                </label>
-              </div>
-              <div className="form-floating mb-3">
-                <input
-                  onChange={this.handleChange}
-                  placeholder="Daily Affirmation"
-                  required
-                  type="text"
-                  name="daily_aff"
-                  id="daily_aff"
-                  value={this.state.daily_aff}
-                  className="form-control"
-                />
-                <label htmlFor="address">Daily Affirmation</label>
-              </div>
-              <div className="form-floating mb-3">
-                <input
-                  onChange={this.handleChange}
-                  placeholder="Note"
-                  required
-                  type="text"
-                  name="note"
-                  id="note"
-                  value={this.state.note}
-                  className="form-control"
-                />
-                <label htmlFor="note">Note</label>
-              </div>
-              <button className="btn btn-primary">Create</button>
-            </form>
-          </div>
+
+  return (
+    <div className="row">
+      <div className="bg-grey-lighter min-h-screen flex flex-col">
+        <div className="shadow p-4 mt-4">
+          <h1> The Five Minute Journal</h1>
+          <form onSubmit={handleSubmit} id="create-customer-form">
+            <div className="form-floating mb-3">
+              <input
+                onChange={handleChange}
+                placeholder="Grateful"
+                required
+                type="textarea"
+                name="grateful"
+                id="grateful"
+                value={body.grateful}
+                className="form-control"
+              />
+              <label htmlFor="grateful">
+                3 things you are grateful for today
+              </label>
+            </div>
+            <div className="form-floating mb-3">
+              <input
+                onChange={handleChange}
+                placeholder="Daily Affirmation"
+                required
+                type="text"
+                name="daily_aff"
+                id="daily_aff"
+                value={body.daily_aff}
+                className="form-control"
+              />
+              <label htmlFor="address">Daily Affirmation</label>
+            </div>
+            <div className="form-floating mb-3">
+              <input
+                onChange={handleChange}
+                placeholder="Note"
+                required
+                type="text"
+                name="note"
+                id="note"
+                value={body.note}
+                className="form-control"
+              />
+              <label htmlFor="note">Note</label>
+            </div>
+            <button className="btn btn-primary">Create</button>
+          </form>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
-
 export default JournalForm;
