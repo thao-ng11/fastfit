@@ -2,14 +2,18 @@ import React, { useState, useEffect } from 'react'
 import WorkoutEntry from './WorkoutEntry'
 
 function WorkoutPlanList() {
-
+    let dates = []
     const [workouts,setWorkouts] = useState([])
-    
+    const [dateFilter,setDateFilter] = useState('')
     const fetchWorkouts = async () => {
         const strengthWorkoutstUrl = 'http://localhost:8020/api/strength_workout/'
         const cardioWorkoutsUrl ='http://localhost:8020/api/cardio_workout/'
-        const response = await fetch(strengthWorkoutstUrl)
-        const response2 = await fetch(cardioWorkoutsUrl)
+        const response = await fetch(strengthWorkoutstUrl, {
+            credentials: "include",
+          })
+        const response2 = await fetch(cardioWorkoutsUrl, {
+            credentials: "include",
+          })
         const data = await response.json();
         const data2 = await response2.json();
         console.log(data)
@@ -20,8 +24,8 @@ function WorkoutPlanList() {
         fetchWorkouts()
     }, []);
     
-    const cancelWorkout = async (id) => {
-        const cancelUrl = `http://localhost:8020/api//${id}/`
+    const cancelWorkout = async (id,type) => {
+        const cancelUrl = `http://localhost:8020/api/${type}/${id}/`
         const fetchConfig = {
             method: "delete"
         }
@@ -32,7 +36,9 @@ function WorkoutPlanList() {
             setWorkouts(updatedworkouts);
         }
     }
-
+    function filterDates(e){
+        setDateFilter(e.target.value);
+    }
     return (
         <>
             <h1></h1>
@@ -40,13 +46,22 @@ function WorkoutPlanList() {
                 <thead>
                     <tr>
                         <th>Workout Plan</th>
+                        <select onChange={filterDates}>{workouts.map(workout =>{
+                            if  (!dates.includes(workout.workout_date)){
+                                dates.push(workout.workout_date)
+                                return(<option value={workout.workout_date}>{workout.workout_date}</option>)
+                            }
+                        })}</select>
                     </tr>
                 </thead>
                 <tbody>
                     {workouts.map(workout => {
-                        return (
-                            <WorkoutEntry workout={workout}/>
-                        );
+                        if (workout.workout_date.includes(dateFilter)){
+                            return (
+                                <WorkoutEntry workout={workout}
+                                cancelWorkout={cancelWorkout}/>
+                            );
+                        }
                     })}
                 </tbody>
             </table>

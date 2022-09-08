@@ -21,6 +21,7 @@ class CardioWorkoutsOut(BaseModel):
     username : str
     category : str
     workout_date : date
+    workout : str
     duration : int
     distance : float
 
@@ -28,6 +29,7 @@ class CardioWorkoutsIn(BaseModel):
     username : str
     category : str
     workout_date : date
+    workout : str
     duration : int
     distance : float 
 
@@ -36,6 +38,7 @@ class StrengthWorkoutsOut(BaseModel):
     username : str
     category : str
     muscle_group : str
+    workout : str
     workout_date : date 
     sets : int
     repetitions : int
@@ -45,6 +48,7 @@ class StrengthWorkoutsIn(BaseModel):
     username : str
     category :str
     muscle_group :str
+    workout : str
     workout_date : date
     sets : int
     repetitions : int
@@ -78,6 +82,7 @@ class StrengthWorkoutPut(BaseModel):
     category : str
     muscle_group : str
     workout_date : date
+    workout : str
     sets : int
     repetitions : int
     weight : int
@@ -85,5 +90,6 @@ class StrengthWorkoutPut(BaseModel):
 class CardioWorkoutPut(BaseModel):
     category : str
     workout_date : date
+    workout : str
     duration: int
     distance: int

@@ -50,3 +50,17 @@ docker-compose build --no-cache
 docker-compose up --build
 
 # Sept 1, 2022
+
+Working on the backend: writing all journal_db and journal \_api to test all the get, post and delete route. Using FastAPI swagger to set up and to ensure the correct flow of data as well as all routes are working. The main blocker is the detail journal and get request for all journals by the user. Started to set up for the frontend REACT.
+
+# Sept 2, 2022
+
+Finishing up the backend and writing the unit test to test out the router. The main blocker with the unit test is actually the 404 error. Had to go back to journal_api to add Message to the response_model. I'm planning to add the authentication piece after finishing the MVP frontend for journal
+
+# Sept 6, 2022
+
+Starting to work on the front end. Reading through the Font Awesome and trying to implement the emoji into the JournalMain displacing. The JournalEmoji.js is set up to ensure when the activeEmoji is chosen it will be green vs. inactive will be gray. Also was able to set it up in the local state to carry the information over to the form
+
+# Sept 7, 2022
+
+Continue working on the front end. Changed the journalEmoji to include the actual emoji as well as the label that associate with it. This way we can access the emoji in both pages. Displacing it in the main page, then have it carry over in the form before getting submitted and list in the journalListt. In addition, I made the journalModal displacing the details of the journal. To simplify the journalList and make sure the emoji, the details and the modal will displaced the correct instance in the list, I made a journalListComponent to call upon the instances. The modal is also getting set to be hidden then displaced once the "View Detail" button is clicked.

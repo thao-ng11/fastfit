@@ -103,24 +103,26 @@ class CardioWorkoutQueries:
                         "id": row[0],
                         "username": row[1],
                         "category": row[2],
-                        "workout_date": row[3],
-                        "duration": row[4],
-                        "distance": row[5],
+                        "workout" : row[3],
+                        "workout_date": row[4],
+                        "duration": row[5],
+                        "distance": row[6],
+                        
                     }
                     new_list.append(dictionary)
                 return new_list
                 
-    def insert_cardio_workout(self, username, category, workout_date, duration, distance):
+    def insert_cardio_workout(self, username, category, workout_date, duration, distance, workout):
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 try:
                     cur.execute(
                         """
-                        INSERT INTO cardio_workout (username, category, workout_date, duration, distance)
-                        VALUES (%s,%s,%s,%s,%s)
-                        RETURNING id, username, category, workout_date, duration, distance
+                        INSERT INTO cardio_workout (username, category, workout_date, duration, distance, workout)
+                        VALUES (%s,%s,%s,%s,%s,%s)
+                        RETURNING id, username, category, workout_date, duration, distance, workout
                         """,
-                        [username, category, workout_date, duration, distance],
+                        [username, category, workout_date, duration, distance, workout],
                     )
                 except psycopg.errors.UniqueViolation:
                     return None
@@ -140,17 +142,17 @@ class CardioWorkoutQueries:
                     """,
                     [id],
                 )
-    def update_cardio_workout(self, category, workout_date, duration, distance, id,):
+    def update_cardio_workout(self, category, workout_date, duration, distance, id, workout):
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
                     """
                     UPDATE cardio_workout
-                    SET category = %s, workout_date = %s, duration = %s, distance = %s
+                    SET category = %s, workout_date = %s, duration = %s, distance = %s, workout = %s
                     WHERE id = %s
-                    RETURNING id, username, category, workout_date, duration, distance
+                    RETURNING id, username, category, workout_date, duration, distance, workout
                     """,
-                    [category, workout_date, duration, distance, id],
+                    [category, workout_date, duration, distance, id, workout],
                 )
                 conn.commit()
                 row = cur.fetchone()
@@ -177,25 +179,28 @@ class StrengthWorkoutQueries:
                         "username": row[1],
                         "category": row[2],
                         "muscle_group":row[3],
-                        "workout_date": row[4],
-                        "sets" : row[5],
-                        "repetitions": row[6],
-                        "weight": row[7],
+                        "workout": row[4],
+                        "workout_date": row[5],
+                        "sets" : row[6],
+                        "repetitions": row[7],
+                        "weight": row[8],
                     }
                     new_list.append(dictionary)
+                print(new_list)
                 return new_list
+            
 
-    def insert_strength_workout(self, username, category, muscle_group, workout_date, sets, repetitions, weight):
+    def insert_strength_workout(self, username, category, muscle_group, workout_date, sets, repetitions, weight, workout):
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 try:
                     cur.execute(
                         """
-                        INSERT INTO strength_workout (username, category, muscle_group, workout_date, sets, repetitions, weight)
-                        VALUES (%s,%s,%s,%s,%s,%s,%s)
-                        RETURNING id, username, category, muscle_group, workout_date, sets, repetitions, weight
+                        INSERT INTO strength_workout (username, category, muscle_group, workout_date, sets, repetitions, weight, workout)
+                        VALUES (%s,%s,%s,%s,%s,%s,%s,%s)
+                        RETURNING id, username, category, muscle_group, workout_date, sets, repetitions, weight, workout
                         """,
-                        [username, category, muscle_group, workout_date, sets, repetitions, weight ],
+                        [username, category, muscle_group, workout_date, sets, repetitions, weight, workout],
                     )
                 except psycopg.errors.UniqueViolation:
                     return None
@@ -215,17 +220,17 @@ class StrengthWorkoutQueries:
                     """,
                     [id],
                 )
-    def update_strength_workout(self,  category, muscle_group, workout_date, sets, repetitions, weight, id,):
+    def update_strength_workout(self,  category, muscle_group, workout_date, sets, repetitions, weight, id, workout):
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
                     """
                     UPDATE strength_workout
-                    SET category = %s, muscle_group = %s, workout_date = %s, sets = %s, repetitions = %s, weight= %s
+                    SET category = %s, muscle_group = %s, workout_date = %s, sets = %s, repetitions = %s, weight= %s, workout = %s
                     WHERE id = %s
-                    RETURNING id, username, category, muscle_group, workout_date, sets, repetitions, weight
+                    RETURNING id, username, category, muscle_group, workout_date, sets, repetitions, weight, workout
                     """,
-                    [category, muscle_group, workout_date, sets, repetitions, weight, id],
+                    [category, muscle_group, workout_date, sets, repetitions, weight, id, workout],
                 )
                 conn.commit()
                 row = cur.fetchone()

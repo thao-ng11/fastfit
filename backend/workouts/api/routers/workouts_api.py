@@ -116,6 +116,7 @@ def cardio_workout_post(
         cardio_workout.workout_date,
         cardio_workout.duration, 
         cardio_workout.distance,
+        cardio_workout.workout,
     )
     if row is None:
         Response.status_code = status.HTTP_409_CONFLICT
@@ -166,7 +167,8 @@ def update_cardio_workout(
         cardio_workout.workout_date,
         cardio_workout.duration,
         cardio_workout.distance,
-        cardio_workout_id
+        cardio_workout_id,
+        cardio_workout.workout,
     )
     return row
 
@@ -189,6 +191,7 @@ def strength_workout_post(
         strength_workout.sets,
         strength_workout.repetitions,
         strength_workout.weight,
+        strength_workout.workout,
     )
     if row is None:
         Response.status_code = status.HTTP_409_CONFLICT
@@ -241,7 +244,8 @@ def update_strength_workout(
         strength_workout.sets,
         strength_workout.repetitions,
         strength_workout.weight,
-        strength_workout_id
+        strength_workout_id,
+        strength_workout.workout,
     )
     return row
 

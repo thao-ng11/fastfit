@@ -26,6 +26,7 @@ CREATE TABLE cardio_workout (
     id SERIAL PRIMARY KEY,
     username VARCHAR(100) NOT NULL,
     category VARCHAR(100) NOT NULL,
+    workout VARCHAR(100) NOT NULL,
     workout_date TIMESTAMPTZ NOT NULL,
     duration INT NOT NULL,
     distance FLOAT
@@ -36,6 +37,7 @@ CREATE TABLE strength_workout (
     username VARCHAR(100) NOT NULL,
     category VARCHAR(100) NOT NULL,
     muscle_group VARCHAR(100) NOT NULL,
+    workout VARCHAR(100) NOT NULL,
     workout_date TIMESTAMPTZ NOT NULL,
     sets INT NOT NULL,
     repetitions INT NOT NULL,

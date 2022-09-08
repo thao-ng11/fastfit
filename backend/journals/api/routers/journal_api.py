@@ -60,6 +60,7 @@ class Message(BaseModel):
         500: {"model": ErrorMessage},
     },
 )
+
 def journal_post(
     journal: JournalIn,
     query=Depends(JournalQueries),
