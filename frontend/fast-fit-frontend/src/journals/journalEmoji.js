@@ -26,10 +26,10 @@ function JournalEmoji(props) {
         return [faFaceSmile, "good"];
         break;
       case 3:
-        return [faFaceMeh, " meh"];
+        return [faFaceMeh, "meh"];
         break;
       case 4:
-        return [faFaceFrown, " sad"];
+        return [faFaceFrown, "sad"];
         break;
       case 5:
         return [faFaceTired, "somber"];
