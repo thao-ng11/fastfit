@@ -63,4 +63,12 @@ Starting to work on the front end. Reading through the Font Awesome and trying t
 
 # Sept 7, 2022
 
-Continue working on the front end. Changed the journalEmoji to include the actual emoji as well as the label that associate with it. This way we can access the emoji in both pages. Displacing it in the main page, then have it carry over in the form before getting submitted and list in the journalListt. In addition, I made the journalModal displacing the details of the journal. To simplify the journalList and make sure the emoji, the details and the modal will displaced the correct instance in the list, I made a journalListComponent to call upon the instances. The modal is also getting set to be hidden then displaced once the "View Detail" button is clicked.
+Continue working on the front end. Changed the journalEmoji to include the actual emoji as well as the label that associate with it. This way we can access the emoji in both pages. Displacing it in the main page, then have it carry over in the form before getting submitted and list in the journalListt.
+
+# Sept 8, 2022
+
+I made the journalModal displacing the details of the journal. To simplify the journalList and make sure the emoji, the details and the modal will displaced the correct instance in the list, I made a journalListComponent to call upon the instances. The modal is also getting set to be hidden then displaced once the "View Detail" button is clicked. Ensuring the linkage between frontend and backend.
+
+# Sept 9, 2022
+
+Working on tailwind on journal main page. Setting up different cards on the page as well as different <div> tag. In addition, making sure the emoji componentts are enlarged and spacing accordingly.
