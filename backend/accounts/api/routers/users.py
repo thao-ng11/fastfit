@@ -162,9 +162,11 @@ async def login_for_access_token(
 
 
 @router.get("/token", response_model=AccessToken)
-async def get_token(request: Request):
+async def get_token(request: Request, response: Response):
     if COOKIE_NAME in request.cookies:
         return {"token": request.cookies[COOKIE_NAME]}
+    else:
+        response.status_code = status.HTTP_204_NO_CONTENT
 
 ###########################################################################
 #begin user functions
