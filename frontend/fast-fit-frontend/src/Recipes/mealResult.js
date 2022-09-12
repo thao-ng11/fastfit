@@ -31,6 +31,8 @@ function MealResult({meal, setMeals, meals, token}) {
         })
 
         if (response.ok) {
+            setDeleteConfirmation('grid-col-row-2 mt-2 d-none')
+            setDeleteButton('grid-col-row-2')
             refreshMeals(id)
         }
     }
