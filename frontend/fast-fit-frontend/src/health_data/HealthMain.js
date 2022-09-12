@@ -38,10 +38,10 @@ export default function HealthDataForm() {
     let weights = [];
   
     weightHistory &&
-      weightHistory.map((test) => {
-        const date = format(new Date(test.entry_date), "MM/dd/yy");
+      weightHistory.map((weight) => {
+        const date = format(new Date(weight.entry_date), "MM/dd/yy");
         labels.push(date);
-        weights.push("Hello");
+        weights.push(weight.current_weight);
       });
     
     const data = {
@@ -65,6 +65,16 @@ export default function HealthDataForm() {
         },
       ],
     };
-    return <Line data={data} height={90} type="line" />;
-}  
+    return (
+      <>
+      <div>
+        <h1>Weight History</h1>
+      </div>
+      <div>
+        <Line data={data} height={90} type="line" />
+      </div>
+      </>
+
+    );
+};
 
