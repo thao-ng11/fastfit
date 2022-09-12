@@ -125,10 +125,10 @@ function WorkoutPlan() {
     }
     useEffect(() => { fetchWorkouts() }, [searchTerm])
     return (
-    <div className='bg-[#C7E8F3] w-full'>
-        <div>
+    <div className='bg-[#073B4C] w-full h-screen py-20'>
+        <div className='flex items-center justify-center'>
             <WorkoutSearchModal searchTerm={searchTerm} handleCardio={HandleCardio} handleStrength={HandleStrength} strength={strength} visible={showModal} handleClose={HandleClose} data={workouts} /> 
-            <div className="w-screen bg-grey-lighter min-h-screen flex flex-col">
+            <div className="bg-[#C7E8F3] shadow-xl rounded-lg flex flex-col w-[800px] h-[600px]">
                 <div className=" max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2 space-y-1">
                     <div className="text-center bg-[#BF9ACA] px-6 py-8 rounded shadow-md text-black w-full">
                         <h1 className="text-[#073B4C] font-semibold mb-8 text-3xl text-center">Add a Workout</h1>
@@ -155,12 +155,12 @@ function WorkoutPlan() {
                         {strength.workout}
                         </div>
                     </div>
-                    <div className=" bg-[#BF9ACA] mt-4 block border border-grey-light w-full p-3 rounded mb-4">
+                    <div className=" bg-[#BF9ACA] mt-4 block border w-full p-3 rounded mb-4">
                         <label className='font-semibold px-3'>Calendar</label>
                         <input onChange={HandleStrength} name='workout_date' type='date'></input>
 
                     </div>
-                    <div className="bg-[#BF9ACA] block border border-grey-light w-full p-3 rounded mb-4">
+                    <div className="bg-[#BF9ACA] block border w-full p-3 rounded mb-4">
                         <label className='font-semibold px-1'>Workout Type</label>
                         <select onChange={HandleWorkoutType} value={workoutType}>
                             <option value=''>Choose the type of workout</option>
@@ -172,7 +172,7 @@ function WorkoutPlan() {
                         </select>
 
                     </div>
-                    <button type="button" onClick={handleSumbit} className="w-full bg-[#BF9ACA] hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                    <button type="button" onClick={handleSumbit} className="w-full bg-[#BF9ACA] hover:bg-[#073B4C] text-white font-bold py-2 px-4 rounded">
                         Add to your plan</button>
                     {HandleWorkoutForm()}
                 </div>

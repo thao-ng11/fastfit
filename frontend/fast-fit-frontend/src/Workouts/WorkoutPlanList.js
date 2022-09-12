@@ -40,8 +40,10 @@ function WorkoutPlanList() {
         setDateFilter(e.target.value);
     }
     return (
-        <>
-            <h1></h1>
+        <div className='w-screen h-screen py-20'>
+            <div className='flex item-center justify-center'>
+            <div className='w-[650px] bg-[#C7E8F3] px-[26px] py-4 rounded-lg shadow-xl'>
+            <div className='w-[600px] bg-white px-4 py-4 rounded-lg shadow-xl'>
             <table className="table table-striped">
                 <thead>
                     <tr>
@@ -54,18 +56,21 @@ function WorkoutPlanList() {
                         })}</select>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody >
                     {workouts.map(workout => {
                         if (workout.workout_date.includes(dateFilter)){
                             return (
-                                <WorkoutEntry workout={workout}
+                                <WorkoutEntry className='hover:bg-gray-300' workout={workout}
                                 cancelWorkout={cancelWorkout}/>
                             );
                         }
                     })}
                 </tbody>
             </table>
-            </>
+            </div>
+            </div>
+            </div>
+            </div>
         );
     }
 
