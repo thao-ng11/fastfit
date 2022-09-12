@@ -1,8 +1,20 @@
 # Progress Report
 
+### 9/11
+
+I worked on the styling for the userMeals.js page. I set up the authorization for the recipe search pages so messages to login show and the buttons to add a recipe to a meal stop showing if a token isn't returned. I discovered that the get and delete by id routers weren't giving the proper return messages if the function isn't successful, so I corrected those. I added buttons and functions to allow users to delete each meal and added auth to the delete router in fastapi. I ended up converting my userMeals.js class component into a function and that would allow me to call the setMeals hook in the mealResult.js function component and filter the meals state list to refresh the list of meals and not include the id that was deleted. It took so much trial and error today to get it all working. I also used the useNavigate hook to redirect the user to the login page if the token was not pulled. The only way I was able to get it to work was by hitting the accounts token route to fetch the token; otherwise, it kept redirecting before the state could fully be loaded with the token.
+
+### 9/9
+
+Worked on styling the recipeSearch.js and recipeResult.js components using Tailwind and aligning with the color scheme for the site. I got the post request to work for each recipe row and added temporary popups to show if the meal was successfully saved or not using the timeout hook.
+
+### 9/8
+
+I worked more on the recipesSearch.js file. I was able to hit the Edamam API based on a set of parameters and show the first 20 recipes from the results on the page. Next I need to create a modal for another window to pop up to enter the date if someone wants to add a recipe to their meals. I'll have to update the post with the authorization function to post router to get the token and get the username for the post request.
+
 ### 9/7
 
-Started on the recipeSearch.js page that will hit the Edamam API and retrieve a list of recipes based on the meal type and food query
+Started on the recipeSearch.js page that will hit the Edamam API and retrieve a list of recipes based on the meal type and food query. I decided to change my database schema and no longer use a meal_type table to store the "Breakfast", "Lunch", "Dinner", etc types and just hardcode that in the option list on the front end.
 
 ### 9/6
 

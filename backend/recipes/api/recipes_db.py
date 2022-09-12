@@ -77,7 +77,7 @@ class MealQueries:
 
                 ds = []
                 for row in cur.fetchall():
-                    print(row)
+                    # print(row)
                     d = {
                         "id": row[0],
                         "username": row[1],
@@ -100,8 +100,8 @@ class MealQueries:
                     [id],
                 )
                 row = cur.fetchone()
-                # if row is None:
-                #     return {"message": "Meal not found"}
+                if row is None:
+                    return
                 record = {
                     "id": row[0],
                     "username": row[1],
@@ -166,12 +166,13 @@ class MealQueries:
                     SELECT *
                     FROM meal m
                     WHERE username = %s
+                    ORDER BY m.date
                     """,
                     [username]
                 )
                 ds = []
                 for row in cur.fetchall():
-                    print(row)
+                    # print(row)
                     # if row[1] == username:
                     d = {
                         "id": row[0],
