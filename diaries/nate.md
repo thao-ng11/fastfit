@@ -47,3 +47,4 @@ Came across some issues with the "add to workout plan" feature. Had to clean it 
 Added the Calendar for the workout plan so it saves a specific workout for the person! Its getting close to being done which is great. Hopefully next week I can finish up creating my unit test and start adding AUTH stuff to my frotend.
 
 9/12
+Got the CSS and design of my microservices looking a lot better! Functionality is 95% of the way there!

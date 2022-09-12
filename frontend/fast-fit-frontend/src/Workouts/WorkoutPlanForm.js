@@ -172,7 +172,7 @@ function WorkoutPlan() {
                         </select>
 
                     </div>
-                    <button type="button" onClick={handleSumbit} className="w-full bg-[#BF9ACA] hover:bg-[#073B4C] text-white font-bold py-2 px-4 rounded">
+                    <button type="button" onClick={handleSumbit} className="w-full bg-[#BF9ACA] hover:bg-[#dfc4e7] text-white font-bold py-2 px-4 rounded">
                         Add to your plan</button>
                     {HandleWorkoutForm()}
                 </div>
