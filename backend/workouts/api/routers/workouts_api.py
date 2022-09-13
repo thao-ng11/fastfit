@@ -200,10 +200,12 @@ def update_cardio_workout(
 )
 def strength_workout_post(
     strength_workout: StrengthWorkoutsIn,
+    user_info = Depends(get_current_user),
     query=Depends(StrengthWorkoutQueries,)
 ):
+    username= user_info['username']
     row = query.insert_strength_workout(
-        strength_workout.username, 
+        username, 
         strength_workout.category, 
         strength_workout.muscle_group,
         strength_workout.workout_date,
@@ -268,6 +270,39 @@ def update_strength_workout(
     )
     return row
 
+@router.get(
+    "/api/strength_workout/user",
+    response_model=StrengthWorkoutList | Message,
+    responses={
+        200: {"model":StrengthWorkoutsOut},
+        404: {"model": ErrorMessage},
+    }
+)
+def get_strength_workout_users(
+    response: Response,
+    user_info=Depends(get_current_user),
+    query=Depends(StrengthWorkoutQueries)
+):
+    username= user_info['username']
+    rows = query.get_strength_workout_users(username)
+    return rows
+
+@router.get(
+    "/api/cardio_workout/user",
+    response_model=CardioWorkoutList | Message,
+    responses={
+        200: {"model":CardioWorkoutsOut},
+        404: {"model": ErrorMessage},
+    }
+)
+def get_cardio_workout_users(
+    response: Response,
+    user_info=Depends(get_current_user),
+    query=Depends(CardioWorkoutQueries)
+):
+    username= user_info['username']
+    rows = query.get_cardio_workout_users(username)
+    return rows
 # @router.get(
 #     "/api/workouts",
 #     response_model=CardioWorkoutList|StrengthWorkoutList,

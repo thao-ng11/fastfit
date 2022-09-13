@@ -4,14 +4,16 @@ import StrengthWorkoutForm from './StrengthWorkoutsForm';
 import WorkoutSearchModal from './WorkoutsearchModal';
 import Workout from './Workout';
 import { useNavigate } from 'react-router-dom';
+import { useToken } from '../Authentication'
 
 function WorkoutPlan() {
+    const [token] = useToken()
     const [workoutType, setWorkoutType] = useState('')
     const [showModal, setShowModal] = useState(false)
     const [searchTerm, setSearchTerm] = useState('')
     const [workouts, setWorkouts] = useState([])
     const [cardio, setCardio] = useState({
-        "username": "neendicott",
+        "username": "",
         "category": 0,
         "workout_date": "2022-08-31",
         "workout":"",
@@ -19,7 +21,7 @@ function WorkoutPlan() {
         "distance": 0,
     })
     const [strength, setStrength] = useState({
-        "username": "neendicott",
+        "username": "",
         "category": 0,
         "muscle_group": 0,
         "workout_date": "2022-08-31",
@@ -61,7 +63,8 @@ function WorkoutPlan() {
             await fetch(`${process.env.REACT_APP_WORKOUTS_HOST}/api/cardio_workout`, {
                 method: 'POST', headers: {
                     'Accept': 'application/json',
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
                 }, body: JSON.stringify(cardio)
             })
         } else {
@@ -69,7 +72,8 @@ function WorkoutPlan() {
             await fetch(`${process.env.REACT_APP_WORKOUTS_HOST}/api/strength_workout`, {
                 method: 'POST', headers: {
                     'Accept': 'application/json',
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
                 }, body: JSON.stringify(strength)
             })
         }
