@@ -203,20 +203,20 @@ formValid(event)
       emailValidFormat = <div className="text-red-500 text-xs"><p className= "font-bold">*use a valid email format</p></div>
     }
     
-    if (this.state.redirect){return <Navigate to="/login" userInput={this.state.userInput} />;}
+    if (this.state.redirect){return <Navigate to="/" userInput={this.state.userInput} />;}
     console.log(this.state)
     return(
     <form onSubmit={this.handleSubmit} id="signup-form">
     <div className="bg-grey-lighter min-h-screen flex flex-col">
             <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2 space-y-1">
-                <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
-                    <h1 className="mb-8 text-3xl text-center">Sign up</h1>
+                <div className="bg-[#c7e8f3] px-6 py-8 rounded shadow-md text-black w-full">
+                    <h1 className="mb-8 text-3xl text-center font-bold font-sans tracking-wide text-[#8e4162]">Sign up</h1>
                     <input
                         value={this.state.first_name}
                         onChange={this.handleChangeFirstName} 
                         type="text"
                         id="firstname"
-                        className="block border border-grey-light w-full p-3 rounded mb-4"
+                        className="block border border-grey-light w-full p-3 rounded mb-4 bg-[#f1f1f1]"
                         name="firstname"
                         placeholder="First Name" />
                     
@@ -225,7 +225,7 @@ formValid(event)
                         onChange={this.handleChangeLastName} 
                         type="text"
                         id="lastname"
-                        className="block border border-grey-light w-full p-3 rounded"
+                        className="block border border-grey-light w-full p-3 rounded bg-[#f1f1f1]"
                         name="lastname"
                         placeholder="Last Name" />
                     {emailValidFormat}
@@ -234,7 +234,7 @@ formValid(event)
                         onChange={this.handleChangeEmail} 
                         type="text"
                         id="email"
-                        className="block border border-grey-light w-full p-3 rounded"
+                        className="block border border-grey-light w-full p-3 rounded bg-[#f1f1f1]"
                         name="email"
                         placeholder="Email" />
 
@@ -244,7 +244,7 @@ formValid(event)
                         onChange={this.handleChangeUsername} 
                         type="text"
                         id="username"
-                        className="block border border-grey-light w-full p-3 rounded mb-4"
+                        className="block border border-grey-light w-full p-3 rounded mb-4 bg-[#f1f1f1]"
                         name="username"
                         placeholder="Username" />
                     
@@ -253,28 +253,28 @@ formValid(event)
                         value={this.state.password}
                         onChange={this.handleChangePassword}
                         type="password"
-                        className="block border border-grey-light w-full p-3 rounded"
+                        className="block border border-grey-light w-full p-3 rounded bg-[#f1f1f1]"
                         name="password"
                         placeholder="Password" />
                     {passwordMatches}
                     <input 
                         value={this.state.password_confirm}
                         onChange={this.handleChangePasswordConfirm}
-                        type="confirm_password"
-                        className="block border border-grey-light w-full p-3 rounded mb-4"
+                        type="password"
+                        className="block border border-grey-light w-full p-3 rounded mb-4 bg-[#f1f1f1]"
                         name="confirm_password"
                         placeholder="Confirm Password" />
 
-                    <button type="submit" className="w-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                    <button type="submit" className="w-full bg-[#8e4162] hover:bg-[#722f37] text-white font-bold py-2 px-4 rounded">
                       Create Account</button>
                     
                 </div>
 
-                <div className="text-grey-dark mt-6">
-                    Already have an account? 
-                    <a className="no-underline border-b border-blue text-blue" href="../login/" >
-                        Log in
-                    </a>.
+                <div className="mt-6 text-[#f1f1f1]">
+                    <p className='pr-2'>Already have an account?</p> 
+                    <a className="grid place-items-center max-w-70px hover:text-[#722f37]" href="../" >
+                        <p className='no-underline border-b'>Log in</p>
+                    </a>
                 </div>
             </div>
         </div>
