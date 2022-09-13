@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
-function StrengthWorkoutForm({HandleStrength, searchTerm, strength}) {
+function StrengthWorkoutForm({HandleStrength, workoutType, searchTerm, strength,showWorkoutModal, setShowWorkoutModal}) {
     const [state, setState] = useState({
         sets:'',
         repetitions:'',
@@ -32,28 +34,39 @@ function StrengthWorkoutForm({HandleStrength, searchTerm, strength}) {
     function handleChange(e){
         HandleStrength(e,false)
     }
+    function handleClose(){
+        setShowWorkoutModal(false)
+    }
 return (
-        <div className="row">
-        <div className="offset-3 col-6">
-        <div className="shadow p-4 mt-4">
-            <h1>Add your Sets, Reps and Weight to your workout</h1>
+    <Modal show={showWorkoutModal && workoutType !== 'cardio'} onHide={handleClose}>
+            <Modal.Header closeButton>
+            <Modal.Title>Add Workout Details</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
             <form onSubmit={handleSubmit} id="create-customer-form">
-            <div className="form-floating mb-3">
-                <input onChange={handleChange} value = {strength.sets}placeholder="sets" required type="text" name="sets" id="sets" className="form-control" />
-                <label htmlFor="name">Sets</label>
-            </div>
-            <div className="form-floating mb-3">
-                <input onChange={handleChange} value = {strength.repetitions}placeholder="repetitions" required type="text" name="repetitions" id="repetitions" className="form-control" />
-                <label htmlFor="name">Reps</label>
-            </div>
-            <div className="form-floating mb-3">
-                <input onChange={handleChange} value = {strength.weight}placeholder="weight" required type="text" name="weight" id="weight" className="form-control" />
-                <label htmlFor="name">Weight</label>
-            </div>
+                <div className="form-floating mb-3">
+                    <input onChange={handleChange} value = {strength.sets} placeholder="sets" required type="text" name="sets" id="sets" className="form-control" />
+                    <label htmlFor="name">Sets</label>
+                </div>
+                <div className="form-floating mb-3">
+                    <input onChange={handleChange} value = {strength.repetitions} placeholder="repetitions" required type="text" name="repetitions" id="repetitions" className="form-control" />
+                    <label htmlFor="name">Reps</label>
+                </div>
+                <div className="form-floating mb-3">
+                    <input onChange={handleChange} value = {strength.weight} placeholder="weight" required type="text" name="weight" id="weight" className="form-control" />
+                    <label htmlFor="name">Weight</label>
+                </div>
             </form>
-        </div>  
-        </div>
-    </div>
+            </Modal.Body>
+            <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+                Close
+            </Button>
+            <Button variant="primary" onClick={handleClose}>
+                Save Changes
+            </Button>
+            </Modal.Footer>
+    </Modal>
     );
 }
 

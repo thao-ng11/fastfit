@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
-function CardioWorkoutForm({HandleCardio, cardio}) {
+
+function CardioWorkoutForm({HandleCardio, workoutType, setShowWorkoutModal, showWorkoutModal, cardio}) {
     const [state, setState] = useState({
         distance: '',
         duration:'',
@@ -26,26 +29,41 @@ function CardioWorkoutForm({HandleCardio, cardio}) {
             });
         }
     }
-
+    function handleChange(e){
+        HandleCardio(e,false)
+    }
+    function handleClose(){
+        setShowWorkoutModal(false)
+    }
 return (
     
-    <div className="row">
-    <div className="offset-3 col-6">
-    <div className="shadow p-4 mt-4">
-        <h1>Add your duration and distance</h1>
+
+    <Modal show={showWorkoutModal && workoutType ==='cardio'} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add Workout Details</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
         <form onSubmit={handleSubmit} id="create-customer-form">
-        <div className="form-floating mb-3">
-            <input onChange={HandleCardio} value = {cardio.distance}placeholder="distance" required type="text" name="distance" id="distance" className="form-control" />
-            <label htmlFor="name">Distance</label>
-        </div>
-        <div className="form-floating mb-3">
-            <input onChange={HandleCardio} value = {cardio.duration}placeholder="duration" required type="text" name="duration" id="duration" className="form-control" />
-            <label htmlFor="name">Duration</label>
-        </div>
+            <div className="form-floating mb-3">
+                <input onChange={handleChange} value = {cardio.distance}placeholder="distance" required type="text" name="distance" id="distance" className="form-control" />
+                <label htmlFor="name">Distance</label>
+            </div>
+            <div className="form-floating mb-3">
+                <input onChange={handleChange} value = {cardio.duration}placeholder="duration" required type="text" name="duration" id="duration" className="form-control" />
+                <label htmlFor="name">Duration</label>
+            </div>
         </form>
-    </div>  
-    </div>
-</div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
 );
 }
 

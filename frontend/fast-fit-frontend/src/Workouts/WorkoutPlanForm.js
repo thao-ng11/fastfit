@@ -12,6 +12,7 @@ function WorkoutPlan() {
     const [showModal, setShowModal] = useState(false)
     const [searchTerm, setSearchTerm] = useState('')
     const [workouts, setWorkouts] = useState([])
+    const [showWorkoutModal, setShowWorkoutModal] = useState(false)
     const [cardio, setCardio] = useState({
         "username": "",
         "category": 0,
@@ -47,7 +48,6 @@ function WorkoutPlan() {
                 return ('')
                 break;
         }
-
     }
     function HandleWorkoutType(e) {
         setWorkoutType(e.target.value)
@@ -56,6 +56,7 @@ function WorkoutPlan() {
         } else {
             setStrength({ ...strength, category: e.target.value })
         }
+        setShowWorkoutModal(true)
 
     }
     async function handleSumbit() {
@@ -102,11 +103,11 @@ function WorkoutPlan() {
         }else{
             key = manual.key
             value = manual.value
-        setCardio({
-            ...cardio,
-            [e.target.name]: Number(e.target.value)
-        })
     }
+    setCardio({
+        ...cardio,
+        [key]:value
+    })
 }
     function HandleStrength(e,manual) {
         let key;
@@ -131,12 +132,12 @@ function WorkoutPlan() {
     return (
     <div className='bg-[#073B4C] w-full h-screen py-20'>
         <div className='flex items-center justify-center'>
-            <WorkoutSearchModal searchTerm={searchTerm} handleCardio={HandleCardio} handleStrength={HandleStrength} strength={strength} visible={showModal} handleClose={HandleClose} data={workouts} /> 
+            <WorkoutSearchModal searchTerm={searchTerm} handleCardio={HandleCardio} handleStrength={HandleStrength} cardio={cardio} strength={strength} visible={showModal} handleClose={HandleClose} data={workouts} /> 
             <div className="bg-[#C7E8F3] shadow-xl rounded-lg flex flex-col w-[800px] h-[600px]">
                 <div className=" max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2 space-y-1">
                     <div className="text-center bg-[#BF9ACA] px-6 py-8 rounded shadow-md text-black w-full">
                         <h1 className="text-[#073B4C] font-semibold mb-8 text-3xl text-center">Add a Workout</h1>
-                        <select value={searchTerm} onChange={HandleSearchInput}>
+                        <select value={searchTerm}  onChange={HandleSearchInput}>
                             <option value=''>Choose a workout</option>
                             <option value="Abdominals">Abdominals</option>
                             <option value="Adductors">Adductors</option>
@@ -166,7 +167,7 @@ function WorkoutPlan() {
                     </div>
                     <div className="bg-[#BF9ACA] block border w-full p-3 rounded mb-4">
                         <label className='font-semibold px-1'>Workout Type</label>
-                        <select onChange={HandleWorkoutType} value={workoutType}>
+                        <select onChange={HandleWorkoutType}  value={workoutType}>
                             <option value=''>Choose the type of workout</option>
                             <option value="cardio">Cardio</option>
                             <option value="olympic_weightlifting">Olympic weightlifting</option>
@@ -178,7 +179,10 @@ function WorkoutPlan() {
                     </div>
                     <button type="button" onClick={handleSumbit} className="w-full bg-[#BF9ACA] hover:bg-[#dfc4e7] text-white font-bold py-2 px-4 rounded">
                         Add to your plan</button>
-                    {HandleWorkoutForm()}
+                    {/* {HandleWorkoutForm()} */}
+                    <StrengthWorkoutForm workoutType={workoutType} showWorkoutModal={showWorkoutModal} setShowWorkoutModal={setShowWorkoutModal} searchTerm={searchTerm} HandleStrength={HandleStrength} strength={strength} />
+                    <CardioWorkoutForm setShowWorkoutModal={setShowWorkoutModal} showWorkoutModal={showWorkoutModal} workoutType={workoutType} searchTerm={searchTerm} HandleCardio={HandleCardio} cardio={cardio} />
+
                 </div>
             </div>
 

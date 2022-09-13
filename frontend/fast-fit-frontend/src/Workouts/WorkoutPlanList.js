@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import WorkoutEntry from './WorkoutEntry'
 import { useToken } from '../Authentication'
+import { useNavigate } from 'react-router-dom';
 
 function WorkoutPlanList() {
     const [token] = useToken()
     console.log(token)
     let dates = []
     const [workouts,setWorkouts] = useState([])
+    const navigate = useNavigate()
     const [dateFilter,setDateFilter] = useState('')
     const fetchWorkouts = async () => {
         const strengthWorkoutstUrl = 'http://localhost:8020/api/strength_workout/user'
@@ -48,6 +50,9 @@ function WorkoutPlanList() {
     function filterDates(e){
         setDateFilter(e.target.value);
     }
+    function handleNavigate(){
+        navigate('/workout')
+    }
     return (
         <div className='w-screen h-screen py-20'>
             <div className='flex item-center justify-center'>
@@ -57,6 +62,7 @@ function WorkoutPlanList() {
                 <thead>
                     <tr>
                         <th>Workout Plan</th>
+                        <button onClick={handleNavigate}>Add a Workout</button>
                         <select onChange={filterDates}>{workouts.map(workout =>{
                             if  (!dates.includes(workout.workout_date)){
                                 dates.push(workout.workout_date)

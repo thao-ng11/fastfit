@@ -2,7 +2,7 @@ import React, {useState, useEffect, useNavigate} from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Workout from './Workout';
 
-function WorkoutSearchModal({visible,handleClose, data, searchTerm, strength, handleCardio, handleStrength}) {
+function WorkoutSearchModal({visible,handleClose, data, searchTerm, strength, cardio, handleCardio, handleStrength}) {
   const [state,setState] = useState(true)
     return (
         <Modal show={visible} onHide={handleClose}>
@@ -12,14 +12,17 @@ function WorkoutSearchModal({visible,handleClose, data, searchTerm, strength, ha
         <Modal.Body>
         {data.map((workout) => {
           let handle = handleStrength;
+          let workoutData = strength;
           if (searchTerm === 'Abdominals' || workout.name === 'Jumping rope'){
             handle = handleCardio;
+            workoutData = cardio
           }
                         return (
-                            <div className='bg-[#073B4C] font-semibold py-[.35rem] w-full text-center shadow-md rounded-md bg-gray-50 border border-gray-300 hover:bg-[#073B4C] '>
+                            <div className='bg-[#073B4C] font-semibold py-[.35rem] w-full text-center shadow-md rounded-md bg-[#073B4C] border border-gray-300 hover:bg-[#236175] '>
                                 <Workout name={workout.name}
                                     handleStrength={handle}
-                                    strength={strength} 
+                                    strength={workoutData} 
+                                    cardio={cardio}
                                     setState={setState}/>
                             </div>
                         )
