@@ -1,8 +1,9 @@
 from http.client import responses
 from fastapi import APIRouter, Response, status, Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
-from psycopg.errors import ForeignKeyViolation
 import os
+from jose import  jwt, JWTError
+from typing import Optional
 # from jose import jwt
 
 from workout_models import (
@@ -32,6 +33,24 @@ from workouts_db import (
     StrengthWorkoutQueries,
     pool,
 )
+
+SECRET_KEY = os.environ["SECRET_KEY"]
+ALGORITHM = "HS256"
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token", auto_error=False)
+
+async def get_current_user(
+    token: Optional[str] = Depends(oauth2_scheme),
+):
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Invalid authentication credentials",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+    try:
+        return jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+    except (JWTError, AttributeError):
+        raise credentials_exception
+
 
 router = APIRouter()
 
