@@ -4,6 +4,7 @@ import { useToken } from '../Authentication'
 
 function WorkoutPlanList() {
     const [token] = useToken()
+    console.log(token)
     let dates = []
     const [workouts,setWorkouts] = useState([])
     const [dateFilter,setDateFilter] = useState('')
