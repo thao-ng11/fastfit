@@ -48,6 +48,9 @@ class GoalsPut(BaseModel):
 class GoalsList(BaseModel):
   __root__: List[GoalsOut]
 
+class DeleteOperation(BaseModel):
+  result: bool
+
 class ErrorMessage(BaseModel):
   message: str
 

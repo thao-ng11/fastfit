@@ -60,6 +60,82 @@ class HealthDataQueries:
             record[column.name] = row[i]
         return record
 
+  def get_user_weight(self, username):
+    with pool.connection() as conn:
+      with conn.cursor() as cur:
+        cur.execute(
+          """
+          SELECT h.id
+          , h.username
+          , h.current_weight
+          , g.height
+          , h.current_bmi
+          , h.entry_date
+          FROM health_data h
+          INNER JOIN goals g
+            ON (h.username = g.username)
+          WHERE h.username = %s
+          ORDER BY h.entry_date
+          """,
+          [username]
+        )
+
+        hlist = []
+        for row in cur.fetchall():
+          print(row)
+          hdict = {
+            "id": row[0],
+            "username": row[1],
+            "current_weight": row[2],
+            "height": row[3],
+            "current_bmi": row[4],
+            "entry_date": row[5],
+          }
+          hlist.append(hdict)
+        return hlist
+
+  def get_one_health_data(self, id):
+    with pool.connection() as conn:
+      with conn.cursor() as cur:
+        cur.execute(
+          """
+          SELECT h.id
+          , h.username
+          , h.current_weight
+          , g.height
+          , h.current_bmi
+          , h.entry_date
+          FROM health_data h
+          INNER JOIN goals g
+            ON (h.username = g.username)
+          WHERE h.id = %s
+          """,
+          [id]
+        )
+        row = cur.fetchone()
+        if row is None:
+          return
+        record = {
+            "id": row[0],
+            "username": row[1],
+            "current_weight": row[2],
+            "height": row[3],
+            "current_bmi": row[4],
+            "entry_date": row[5],
+        }
+        return record
+
+  def delete_health_data(self, id):
+    with pool.connection() as conn:
+      with conn.cursor() as cur:
+        cur.execute(
+          """
+          DELETE FROM health_data
+          WHERE id = %s
+          """,
+          [id]
+        )
+
 
 class GoalsQueries:
   def get_goals(self):
@@ -75,9 +151,9 @@ class GoalsQueries:
           FROM goals g
           """
         )
-        glist = []
+        glist=[]
         for row in cur.fetchall():
-          gdict = {
+          gdict={
           "id": row[0],
           "username": row[1],
           "goal_weight": row[2],
@@ -101,10 +177,10 @@ class GoalsQueries:
           )
         except UniqueViolation:
           return None
-        row = cur.fetchone()
-        record = {}
+        row=cur.fetchone()
+        record={}
         for i, column in enumerate(cur.description):
-            record[column.name] = row[i]
+            record[column.name]=row[i]
         return record
 
   def get_goal(self, username: str):
@@ -118,10 +194,10 @@ class GoalsQueries:
           """,
           [username],
         )
-        row = cur.fetchone()
+        row=cur.fetchone()
         if row is None:
           return {"message": "goal not found"}
-        goal = {
+        goal={
           "id": row[0],
           "username": row[1],
           "goal_weight": row[2],
@@ -143,9 +219,9 @@ class GoalsQueries:
               [goal_weight, goal_bmi, height, id],
               )
               conn.commit()
-              row = cur.fetchone()
-              record = {}
+              row=cur.fetchone()
+              record={}
               print(row)
               for i, column in enumerate(cur.description):
-                  record[column.name] = row[i]
+                  record[column.name]=row[i]
               return record

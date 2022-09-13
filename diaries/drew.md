@@ -37,3 +37,9 @@ I didn't have a ton of time dedicated to the project today between lecture and m
 
 ### 9.6
 Experimented with the react chart library I wanted to use. It did not come quickly and after some help from a SEIR, I've decided to explore a different library - one with better documentation. I think I was looking at an outdated library that was once popular before a successor came about. I had my Careers 1:1 meeting in the middle of module time, so I didn't get as much done on it. I'm also behind/slow to understand the data structures explorations so I'll be spending a little more time on that tonight. 
+
+
+## Mod 3, Week 5
+
+### 9.12
+I was able to get data points to render on the chartjs. I'm finishing my unit test this afternoon. 
