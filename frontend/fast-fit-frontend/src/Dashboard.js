@@ -96,7 +96,7 @@ class Dashboard extends React.Component {
         </div>
         <div className="max-w-7xl px-5 py-2.5 bg-[#073b4c] flex space-x-5 w-full h-full items-center justify-center mx-auto">
           <div className="flex flex-col space-y-5 w-full h-full">
-          <a href="../workout/" className="flex py-2.5 h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center" >
+          <a href="../workout/plan" className="flex py-2.5 h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center" >
             <div className="flex py-2.5 h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center" >
               <h1 className="text-3xl font-semibold text-[#8e4162]"> Workouts </h1>
               {/* <WokroutWidget /> */}
