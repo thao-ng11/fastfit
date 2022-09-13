@@ -8,10 +8,6 @@ class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      recipe_router: false,
-      workout_router: false,
-      health_router: false,
-      journal_router: false,
       bmi_calculated: 0,
       calc_height: "",
       calc_weight: "",
@@ -40,25 +36,8 @@ class Dashboard extends React.Component {
   journal_router(event) {
     this.setState({ journal_route: true });
   }
-  componentDidMount() {
-    const journalUrl = `${process.env.REACT_APP_JOURNALS_HOST}`; // NEED TO ADD ROUTES TO GET MICROSERVICE INFO DESIRED ON DASHBOARD
-    const recipeUrl = `${process.env.REACT_APP_RECIPES_HOST}`;
-    const healthUrl = `${process.env.REACT_APP_HEALTH_HOST}`;
-    const workoutUrl = `${process.env.REACT_APP_WORKOUTS_HOST}`;
-  }
+  
   render() {
-    if (this.state.health_router === true) {
-      return <Navigate to="/health" userInput={this.state.userInput} />;
-    }
-    if (this.state.journal_router === true) {
-      return <Navigate to="/journal" userInput={this.state.userInput} />;
-    }
-    if (this.state.workout_router === true) {
-      return <Navigate to="/workout" userInput={this.state.userInput} />;
-    }
-    if (this.state.recipe_router === true) {
-      return <Navigate to="/recipe" userInput={this.state.userInput} />;
-    }
     let bmiLong =
       (this.state.calc_weight /
         (this.state.calc_height * this.state.calc_height)) *
@@ -80,7 +59,7 @@ class Dashboard extends React.Component {
               <h1 className="text-3xl font-semibold text-[#8e4162]">Inspirational Quote</h1>
             </div>
             <div className="inline-flex flex-col h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center">
-              <h1 className="flex-wrap text-3xl font-semibold text-[#8e4162]">
+              <h1 className="grid place-items-center text-3xl font-semibold text-[#8e4162]">
                 Quick Calculate BMI
               </h1>
               <div className="flex flex-wrap justify-center">
@@ -117,10 +96,12 @@ class Dashboard extends React.Component {
         </div>
         <div className="max-w-7xl px-5 py-2.5 bg-[#073b4c] flex space-x-5 w-full h-full items-center justify-center mx-auto">
           <div className="flex flex-col space-y-5 w-full h-full">
-            <div className="flex py-2.5 h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center">
+          <a href="../workout/" className="flex py-2.5 h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center" >
+            <div className="flex py-2.5 h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center" >
               <h1 className="text-3xl font-semibold text-[#8e4162]"> Workouts </h1>
               {/* <WokroutWidget /> */}
             </div>
+          </a>
             <div className="flex py-2.5 h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center">
               <h1 className="text-3xl font-semibold text-[#8e4162]">Journal</h1>
             </div>
@@ -128,10 +109,12 @@ class Dashboard extends React.Component {
           <div className="flex py-2.5 h-full w-full bg-[#c7e8f3] rounded-md flex-wrap items-center justify-center">
             <h1 className="text-3xl font-semibold w-full text-center text-[#8e4162]">
               {" "}
-              Find a Gym{" "}
+              Your Local Weather{" "}
             </h1>
-            <div className="justify-items-center">
-              <Weather></Weather>
+            <div>
+              <div className="flex items-center w-full text-2xl">
+                <Weather></Weather>
+              </div>
             </div>
           </div>
         </div>

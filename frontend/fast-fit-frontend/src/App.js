@@ -45,9 +45,9 @@ function App() {
       <AuthProvider>
         <Nav />
           <Routes>
-            <Route path="/" element={<Dashboard lat={lat} lng={lng} />} />
+            <Route path="/dashboard" element={<Dashboard lat={lat} lng={lng} />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/login" element={<Login login={login} />} />
+            <Route path="/" element={<Login login={login} />} />
             <Route path="/workout" element={<WorkoutPlanForm />} />
             <Route path="/workout/plan" element={<WorkoutPlanList />} />
             <Route path="/meals">
