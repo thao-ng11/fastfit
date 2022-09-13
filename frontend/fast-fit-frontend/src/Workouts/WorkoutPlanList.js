@@ -8,13 +8,19 @@ function WorkoutPlanList() {
     const [workouts,setWorkouts] = useState([])
     const [dateFilter,setDateFilter] = useState('')
     const fetchWorkouts = async () => {
-        const strengthWorkoutstUrl = 'http://localhost:8020/api/strength_workout/'
-        const cardioWorkoutsUrl ='http://localhost:8020/api/cardio_workout/'
+        const strengthWorkoutstUrl = 'http://localhost:8020/api/strength_workout/user'
+        const cardioWorkoutsUrl ='http://localhost:8020/api/cardio_workout/user'
         const response = await fetch(strengthWorkoutstUrl, {
             credentials: "include",
+            headers: {
+                Authorization: `Bearer ${token}` 
+            },
           })
         const response2 = await fetch(cardioWorkoutsUrl, {
             credentials: "include",
+            headers: {
+                Authorization: `Bearer ${token}` 
+            },
           })
         const data = await response.json();
         const data2 = await response2.json();
@@ -24,7 +30,7 @@ function WorkoutPlanList() {
     }
     useEffect(() => {
         fetchWorkouts()
-    }, []);
+    }, [token]);
     
     const cancelWorkout = async (id,type) => {
         const cancelUrl = `http://localhost:8020/api/${type}/${id}/`

@@ -127,10 +127,12 @@ router = APIRouter()
 )
 def cardio_workout_post(
     cardio_workout: CardioWorkoutsIn,
+    user_info = Depends(get_current_user),
     query=Depends(CardioWorkoutQueries,)
 ):
+    username = user_info['username']
     row = query.insert_cardio_workout(
-        cardio_workout.username, 
+        username, 
         cardio_workout.category, 
         cardio_workout.workout_date,
         cardio_workout.duration, 
