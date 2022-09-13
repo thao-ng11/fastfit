@@ -8,25 +8,35 @@ function JournalModal({ journal, setActiveModal, activeModal }) {
   }
   return (
     <Modal show={activeModal} onHide={handleClose}>
-      <Modal.Header closeButton>
-        <Modal.Title>Your Journal</Modal.Title>
+      <Modal.Header className="bg-[#C7E8F3]" closeButton>
+        <Modal.Title className="w-full text-center ">Your Journal</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className="w-full">
         <div>
-          <label>3 things I'm grateful for</label>
-          <textarea>{journal.grateful}</textarea>
+          <label className="font-semibold">3 things I'm grateful for</label>
+          <div>
+            <textarea className="w-full">{journal.grateful}</textarea>
+          </div>
         </div>
         <div>
-          <label>Daily Affirmation</label>
-          <textarea>{journal.daily_aff}</textarea>
+          <label className="font-semibold">Daily Affirmation</label>
+          <div>
+            <textarea className="w-full">{journal.daily_aff}</textarea>
+          </div>
         </div>
         <div>
-          <label>Note</label>
-          <textarea>{journal.note}</textarea>
+          <label className="font-semibold">Note</label>
+          <div>
+            <textarea className="w-full">{journal.note}</textarea>
+          </div>
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <button variant="secondary" onClick={handleClose}>
+        <button
+          className="bg-[#BF9ACA] btn rounded font-semibold text-[#F1F1F1]"
+          variant="secondary"
+          onClick={handleClose}
+        >
           Close
         </button>
       </Modal.Footer>

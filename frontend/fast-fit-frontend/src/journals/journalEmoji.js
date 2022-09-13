@@ -32,7 +32,7 @@ function JournalEmoji(props) {
         return [faFaceFrown, "sad"];
         break;
       case 5:
-        return [faFaceTired, "somber"];
+        return [faFaceTired, "down"];
         break;
 
       default:
@@ -59,7 +59,7 @@ function JournalEmoji(props) {
     }
   }
   return (
-    <div className="flex flex-col" onClick={handleActive}>
+    <div className="flex flex-col text-center" onClick={handleActive}>
       <FontAwesomeIcon style={renderStyle()} icon={emoji[0]} />
       <span>{emoji[1]}</span>
     </div>
