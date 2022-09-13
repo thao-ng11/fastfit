@@ -3,6 +3,7 @@ from typing import List, Optional
 from fastapi import APIRouter, Response, status, Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
 import os
+from jose import jwt, JWTError
 from psycopg_pool import ConnectionPool
 from health_db import HealthDataQueries, GoalsQueries, pool
 from health_models import (
@@ -18,6 +19,24 @@ from health_models import (
     GoalsPut,
     DeleteOperation,
 )
+
+SECRET_KEY = os.environ["SECRET_KEY"]
+ALGORITHM = "HS256"
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token", auto_error=False)
+
+
+async def get_current_user(
+    token: Optional[str] = Depends(oauth2_scheme),
+):
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Invalid authentication credentials",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+    try:
+        return jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+    except (JWTError, AttributeError):
+        raise credentials_exception
 
 router = APIRouter()
 
@@ -139,15 +158,16 @@ def goals_put(
     "/api/health_data/user",
     response_model=HealthDataList | ErrorMessage,
     responses={
-      200: {"model": GoalsOut},
-      404: {"model": ErrorMessage},
+        200: {"model": GoalsOut},
+        404: {"model": ErrorMessage},
     },
 )
 def get_user_weight(
     response: Response,
+    user_info=Depends(get_current_user),    
     query=Depends(HealthDataQueries),
 ):
-    username = "drew"
+    username = user_info['username']
     rows = query.get_user_weight(username)
     if rows is None:
         response.status_code = status.HTTP_404_NOT_FOUND
@@ -160,8 +180,8 @@ def get_user_weight(
     "/api/health_data/{id}",
     response_model=HealthDataGetOut | ErrorMessage,
     responses={
-      200: {"model": HealthDataGetOut},
-      404: {"model": ErrorMessage},
+        200: {"model": HealthDataGetOut},
+        404: {"model": ErrorMessage},
     }
 )
 def get_one_health_data(
@@ -171,8 +191,8 @@ def get_one_health_data(
 ):
     row = query.get_one_health_data(id)
     if row is None:
-      response.status_code = status.HTTP_404_NOT_FOUND
-      return {"message": "not found"}
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return {"message": "not found"}
     else:
         return row
 
@@ -181,8 +201,8 @@ def get_one_health_data(
     "/api/health_data/{id}",
     response_model=DeleteOperation | ErrorMessage,
     responses={
-      200: {"model": DeleteOperation},
-      404: {"model": ErrorMessage},
+        200: {"model": DeleteOperation},
+        404: {"model": ErrorMessage},
     },
 )
 def delete_health_data(
@@ -192,7 +212,7 @@ def delete_health_data(
 ):
     row = query.get_one_health_data(id)
     if row is None:
-      response.status_code = status.HTTP_404_NOT_FOUND
-      return {"message": "not found"}
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return {"message": "not found"}
     query.delete_health_data(id)
     return {"result": True}

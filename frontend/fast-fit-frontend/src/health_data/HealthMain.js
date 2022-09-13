@@ -34,30 +34,34 @@ export default function HealthDataForm() {
     current_bmi: 0.0
   })
 
+  const [token] = useToken()
   const [weightHistory, setWeightHistory] = useState([])
+
   const fetchUserWeight = async () => {
-
-    const url = `${process.env.REACT_APP_HEALTH_HOST}/api/health_data/user`
-
-    const healthResponse = await fetch(url, {
-      // headers: { Authorization: `Bearer ${token}` },
-    });
-
-    if (healthResponse.ok) {
-      const weightHistory = await healthResponse.json()
-      setWeightHistory(weightHistory)
-
+    const tokenUrl = `${process.env.REACT_APP_ACCOUNTS_HOST}/token`
+    const tokenResponse = await fetch(tokenUrl, {credentials: "include",})
+    if (tokenResponse.status === 200) {
+      const {token} = await tokenResponse.json()
+      const url = `${process.env.REACT_APP_HEALTH_HOST}/api/health_data/user`    
+      const healthResponse = await fetch(url, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+  
+      if (healthResponse.ok) {
+        const weightHistory = await healthResponse.json()
+        setWeightHistory(weightHistory)
+      }
     }
   }
 
   const handleChange = event => {
     const value = event.target.value
-    setHealthData
+    setHealthData({...healthData, current_weight:value})
   }
 
   useEffect(() => {
     fetchUserWeight()
-  }, [weightHistory]);
+  }, []);
 
   let labels = [];
   let weights = [];
@@ -100,7 +104,7 @@ export default function HealthDataForm() {
               Weight:
               <input type="number" step="1" name="weight" />
             </label>
-            <input className="p-4" type="submit" value="Submit" />
+            <input className="p-4" type="button" value="Submit" />
           </form>
         </div>
       </div>
