@@ -20,7 +20,6 @@ class HealthDataGetOut(BaseModel):
   id: int
   username: str
   current_weight: int
-  height: int
   current_bmi: float
   entry_date: datetime
 
@@ -47,6 +46,9 @@ class GoalsPut(BaseModel):
 
 class GoalsList(BaseModel):
   __root__: List[GoalsOut]
+
+class DeleteOperation(BaseModel):
+  result: bool
 
 class ErrorMessage(BaseModel):
   message: str

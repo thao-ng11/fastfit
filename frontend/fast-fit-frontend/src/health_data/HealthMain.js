@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 // import { Line } from "react-chartjs-2";
 import format from "date-fns/format"
 import { useToken } from '../Authentication'
@@ -13,64 +13,101 @@ import {
   Legend,
   TimeScale,
   ChartOptions
-  } from 'chart.js';
-  import { Line } from 'react-chartjs-2';
+} from 'chart.js';
+import { Line } from 'react-chartjs-2';
 
-  ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    TimeScale,
-    Title,
-    Tooltip,
-    Legend
-  );
-
-console.log(useToken)
-
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  TimeScale,
+  Title,
+  Tooltip,
+  Legend
+);
 
 export default function HealthDataForm() {
-  const [token] = (useToken)
+  const [healthData, setHealthData] = useState({
+    username: "",
+    current_weight: 0,
+    current_bmi: 0.0
+  })
 
-  const weightHistory = [
-    {current_weight: 180, entry_date: "2022-08-30"},
-    {current_weight: 175, entry_date: "2022-08-31"},
-    {current_weight: 170, entry_date: "2022-09-21"},
-    {current_weight: 180, entry_date: "2022-09-22"}
-  ]
-  
-    let labels = [];
-    let weights = [];
-  
-    weightHistory &&
-      weightHistory.map((test) => {
-        const date = format(new Date(test.entry_date), "MM/dd/yy");
-        labels.push(date);
-        weights.push("Hello");
-      });
-    
-    const data = {
-      labels,
-      datasets: [
-        {
-          label: "Weight",
-          data: weights,
-          backgroundColor: ["rbga(129, 178, 154, 0.6)"],
-          borderWidth: 2,
-          lineTension: 0,
-          borderDashOffset: 0.0,
-          pointBorderColor: "rgba(75,192,192,1)",
-          pointBackgroundColor: "#fff",
-          pointBorderWidth: 1,
-          pointHoverRadius: 5,
-          pointHoverBackgroundColor: "rgba(75,192,192,1",
-          pointHoverBorderWidth: 2,
-          pointRadius: 1,
-          pointHitRadius: 10,
-        },
-      ],
-    };
-    return <Line data={data} height={90} type="line" />;
-}  
+  const [weightHistory, setWeightHistory] = useState([])
+  const fetchUserWeight = async () => {
+
+    const url = `${process.env.REACT_APP_HEALTH_HOST}/api/health_data/user`
+
+    const healthResponse = await fetch(url, {
+      // headers: { Authorization: `Bearer ${token}` },
+    });
+
+    if (healthResponse.ok) {
+      const weightHistory = await healthResponse.json()
+      setWeightHistory(weightHistory)
+
+    }
+  }
+
+  const handleChange = event => {
+    const value = event.target.value
+    setHealthData
+  }
+
+  useEffect(() => {
+    fetchUserWeight()
+  }, [weightHistory]);
+
+  let labels = [];
+  let weights = [];
+
+  weightHistory &&
+    weightHistory.map((weight) => {
+      const date = format(new Date(weight.entry_date), "MM/dd/yy");
+      labels.push(date);
+      weights.push(weight.current_weight);
+    });
+
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: "Weight",
+        data: weights,
+        backgroundColor: ["rbga(129, 178, 154, 0.6)"],
+        borderWidth: 2,
+        lineTension: 0,
+        borderDashOffset: 0.0,
+        pointBorderColor: "rgba(75,192,192,1)",
+        pointBackgroundColor: "#fff",
+        pointBorderWidth: 1,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: "rgba(75,192,192,1",
+        pointHoverBorderWidth: 2,
+        pointRadius: 3,
+        pointHitRadius: 10,
+      },
+    ],
+  };
+  return (
+    <>
+      <div className="bg-[#F1F1F1]">
+        <h1 className="p-4">Weight History</h1>
+        <div className="p-4">
+          <form>
+            <label>
+              Weight:
+              <input type="number" step="1" name="weight" />
+            </label>
+            <input className="p-4" type="submit" value="Submit" />
+          </form>
+        </div>
+      </div>
+      <div>
+        <Line className="bg-[#F1F1F1]" data={data} height={90} type="line" />
+      </div>
+    </>
+  );
+};
 
