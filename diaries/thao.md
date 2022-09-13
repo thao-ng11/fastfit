@@ -72,3 +72,9 @@ I made the journalModal displacing the details of the journal. To simplify the j
 # Sept 9, 2022
 
 Working on tailwind on journal main page. Setting up different cards on the page as well as different <div> tag. In addition, making sure the emoji componentts are enlarged and spacing accordingly.
+
+# Sept 12, 2022
+
+Finishing up tailwind and styling for the form and the list. Figuring out the spacing and which tag to put the className took a bit of time. In addition formatting the date on React needs to be assigned a variable before rendering because the way the data is not a function to apply .toLocaleDateString() directly. Having a bit of a hard time with the modal styling. Will work on it tomorrow
+
+# Sept 13, 2022
