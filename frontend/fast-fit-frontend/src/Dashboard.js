@@ -1,9 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
-import MapContainer from "./MapContainer";
 import MealWidget from "./Recipes/mealWidget";
-import WokroutWidget from "./Workouts/WorkoutWidget"
+import Weather from "./WeatherCell";
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -132,7 +131,7 @@ class Dashboard extends React.Component {
               Find a Gym{" "}
             </h1>
             <div className="justify-items-center">
-              <MapContainer></MapContainer>
+              <Weather></Weather>
             </div>
           </div>
         </div>
