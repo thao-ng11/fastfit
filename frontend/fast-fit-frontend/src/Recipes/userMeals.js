@@ -50,7 +50,7 @@ function UserMeals() {
             }
         }
         else {
-            navigate('/login')
+            navigate('/')
         }
     }
 
