@@ -286,7 +286,7 @@ def get_strength_workout_users(
     query=Depends(StrengthWorkoutQueries)
 ):
     username= user_info['username']
-    rows = query.get_strength_workout_users(username)
+    rows = query.get_strength_workout_user(username)
     return rows
 
 @router.get(
@@ -303,7 +303,7 @@ def get_cardio_workout_users(
     query=Depends(CardioWorkoutQueries)
 ):
     username= user_info['username']
-    rows = query.get_cardio_workout_users(username)
+    rows = query.get_cardio_workout_user(username)
     return rows
 # @router.get(
 #     "/api/workouts",

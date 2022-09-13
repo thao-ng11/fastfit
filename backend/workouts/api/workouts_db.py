@@ -160,6 +160,7 @@ class CardioWorkoutQueries:
                 for i, column in enumerate(cur.description):
                     record[column.name] = row[i]
                 return record
+
     def get_cardio_workout_user(self,username:str):
         with pool.connection() as conn:
             with conn.cursor() as cur:
@@ -262,6 +263,7 @@ class StrengthWorkoutQueries:
                 for i, column in enumerate(cur.description):
                     record[column.name] = row[i]
                 return record
+
     def get_strength_workout_user(self, username: str):
         with pool.connection() as conn:
             with conn.cursor()  as cur:
