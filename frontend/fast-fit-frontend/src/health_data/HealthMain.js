@@ -1,6 +1,7 @@
 import React from "react"
 // import { Line } from "react-chartjs-2";
 import format from "date-fns/format"
+import { useToken } from '../Authentication'
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -26,7 +27,12 @@ import {
     Legend
   );
 
+console.log(useToken)
+
+
 export default function HealthDataForm() {
+  const [token] = (useToken)
+
   const weightHistory = [
     {current_weight: 180, entry_date: "2022-08-30"},
     {current_weight: 175, entry_date: "2022-08-31"},
