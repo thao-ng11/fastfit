@@ -27,7 +27,13 @@ ChartJS.register(
 );
 
 export default function HealthDataForm() {
-  const [user_weights, setuser_weights] = useState([])
+  const [healthData, setHealthData] = useState({
+    username: "",
+    current_weight: 0,
+    current_bmi: 0.0
+  })
+
+  const [weightHistory, setWeightHistory] = useState([])
   const fetchUserWeight = async () => {
 
     const url = `${process.env.REACT_APP_HEALTH_HOST}/api/health_data/user`
@@ -37,26 +43,20 @@ export default function HealthDataForm() {
     });
 
     if (healthResponse.ok) {
-      const user_weights = await healthResponse.json()
-      console.log(user_weights)
-      
-      }
+      const weightHistory = await healthResponse.json()
+      setWeightHistory(weightHistory)
+
     }
+  }
+
+  const handleChange = event => {
+    const value = event.target.value
+    setHealthData
+  }
 
   useEffect(() => {
     fetchUserWeight()
-  }, []);
-
-  const weightHistory = [
-    { current_weight: 180, entry_date: "2022-08-30" },
-    { current_weight: 175, entry_date: "2022-08-31" },
-    { current_weight: 170, entry_date: "2022-09-21" },
-    { current_weight: 180, entry_date: "2022-09-22" },
-    { current_weight: 200, entry_date: "2022-09-30" },
-    { current_weight: 160, entry_date: "2022-10-22" },
-  ]
-
-
+  }, [weightHistory]);
 
   let labels = [];
   let weights = [];
@@ -97,7 +97,7 @@ export default function HealthDataForm() {
           <form>
             <label>
               Weight:
-              <input type="number" step="0.1" name="weight" />
+              <input type="number" step="1" name="weight" />
             </label>
             <input className="p-4" type="submit" value="Submit" />
           </form>

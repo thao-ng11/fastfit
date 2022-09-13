@@ -16,12 +16,9 @@ class HealthDataQueries:
           SELECT h.id
           , h.username
           , h.current_weight
-          , g.height
           , h.current_bmi
           , h.entry_date
           FROM health_data h
-          INNER JOIN goals g
-            ON (h.username = g.username)
           ORDER BY h.entry_date
           """
         )
@@ -33,9 +30,8 @@ class HealthDataQueries:
             "id": row[0],
             "username": row[1],
             "current_weight": row[2],
-            "height": row[3],
-            "current_bmi": row[4],
-            "entry_date": row[5],
+            "current_bmi": row[3],
+            "entry_date": row[4],
           }
           hlist.append(hdict)
         return hlist
@@ -68,12 +64,9 @@ class HealthDataQueries:
           SELECT h.id
           , h.username
           , h.current_weight
-          , g.height
           , h.current_bmi
           , h.entry_date
           FROM health_data h
-          INNER JOIN goals g
-            ON (h.username = g.username)
           WHERE h.username = %s
           ORDER BY h.entry_date
           """,
@@ -87,9 +80,8 @@ class HealthDataQueries:
             "id": row[0],
             "username": row[1],
             "current_weight": row[2],
-            "height": row[3],
-            "current_bmi": row[4],
-            "entry_date": row[5],
+            "current_bmi": row[3],
+            "entry_date": row[4],
           }
           hlist.append(hdict)
         return hlist

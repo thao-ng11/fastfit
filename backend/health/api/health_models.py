@@ -20,7 +20,6 @@ class HealthDataGetOut(BaseModel):
   id: int
   username: str
   current_weight: int
-  height: int
   current_bmi: float
   entry_date: datetime
 
