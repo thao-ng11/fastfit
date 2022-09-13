@@ -20,7 +20,7 @@ export default function Login()
             username: "",
             password: '',
         })
-        navigate('/')
+        navigate('/dashboard')
     }
 
     return(
