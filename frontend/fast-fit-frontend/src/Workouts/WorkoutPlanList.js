@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import WorkoutEntry from './WorkoutEntry'
+import { useToken } from '../Authentication'
 
 function WorkoutPlanList() {
+    const [token] = useToken()
+    console.log(token)
     let dates = []
     const [workouts,setWorkouts] = useState([])
     const [dateFilter,setDateFilter] = useState('')
