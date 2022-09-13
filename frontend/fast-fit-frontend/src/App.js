@@ -44,7 +44,6 @@ function App() {
     <>
       <AuthProvider>
         <Nav />
-        <div className="container">
           <Routes>
             <Route path="/" element={<Dashboard lat={lat} lng={lng} />} />
             <Route path="/signup" element={<SignUp />} />
@@ -62,7 +61,6 @@ function App() {
             </Route>
             <Route path="/health" element={<HealthDataForm />} />
           </Routes>
-        </div>
       </AuthProvider>
     </>
   );

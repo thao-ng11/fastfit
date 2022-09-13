@@ -157,12 +157,15 @@ def get_meal(
         500: {"model": ErrorMessage},
     },
 )
+
 def meal_post(
     meal: MealIn,
+    user_info=Depends(get_current_user),
     query=Depends(MealQueries),
 ):
+    username = user_info['username']
     row = query.create_meal(
-        meal.username,
+        username,
         meal.recipe_api_id,
         meal.date,
         meal.type
@@ -175,13 +178,15 @@ def meal_post(
 )
 def delete_meal(
     meal_id: int,
+    response: Response,
+    user_info=Depends(get_current_user),
     query=Depends(MealQueries)
 ):
-    try:
-        query.delete_meal(meal_id)
-        return {"result": True}
-    except:
+    meal = query.get_meal(meal_id)
+    if meal is None: 
         return {"result": False}
+    query.delete_meal(meal_id)
+    return {"result": True}
 
 @router.put(
     "/api/meals/{meal_id}",
