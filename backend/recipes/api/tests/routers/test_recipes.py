@@ -110,8 +110,4 @@ def test_get_meal_types_returns_404():
     assert response.status_code == 404
 
     # CLEAN UP
-<<<<<<< HEAD
     app.dependency_overrides = {}
-=======
-    app.dependency_overrides = {}
->>>>>>> recipes

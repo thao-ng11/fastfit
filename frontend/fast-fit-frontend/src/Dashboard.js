@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import MapContainer from "./MapContainer";
 import MealWidget from "./Recipes/mealWidget";
+import WokroutWidget from "./Workouts/WorkoutWidget"
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -119,6 +120,7 @@ class Dashboard extends React.Component {
           <div className="flex flex-col space-y-5 w-full h-full">
             <div className="flex py-2.5 h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center">
               <h1 className="text-3xl font-semibold text-[#8e4162]"> Workouts </h1>
+              <WokroutWidget />
             </div>
             <div className="flex py-2.5 h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center">
               <h1 className="text-3xl font-semibold text-[#8e4162]">Journal</h1>
