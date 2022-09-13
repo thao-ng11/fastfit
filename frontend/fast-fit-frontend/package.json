@@ -11,11 +11,7 @@
     "@testing-library/user-event": "^13.5.0",
     "bootstrap": "^5.2.0",
     "chart.js": "^3.9.1",
-<<<<<<< HEAD
-=======
-    "date-fns": "^2.29.2",
     "date-streaks": "^1.2.1",
->>>>>>> refs/remotes/origin/main
     "faker": "5.5.3",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
@@ -51,12 +47,8 @@
     ]
   },
   "devDependencies": {
-    "@reach/combobox": "^0.17.0",
-    "@react-google-maps/api": "^2.12.2",
     "autoprefixer": "^10.4.8",
-    "date-fns": "^2.29.2",
     "postcss": "^8.4.16",
-    "tailwindcss": "^3.1.8",
-    "use-places-autocomplete": "^4.0.0"
+    "tailwindcss": "^3.1.8"
   }
 }
