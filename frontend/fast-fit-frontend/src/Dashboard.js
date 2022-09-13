@@ -1,7 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
-import MapContainer from "./MapContainer";
+import MealWidget from "./Recipes/mealWidget";
+import Weather from "./WeatherCell";
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -111,6 +112,7 @@ class Dashboard extends React.Component {
           </div>
           <div className="flex py-2.5 h-full w-full bg-[#c7e8f3] rounded-md justify-center">
             <h1 className="text-3xl font-semibold text-[#8e4162]">Meals</h1>
+            <MealWidget />
           </div>
         </div>
         <div className="max-w-7xl px-5 py-2.5 bg-[#073b4c] flex space-x-5 w-full h-full items-center justify-center mx-auto">
@@ -128,7 +130,7 @@ class Dashboard extends React.Component {
               Find a Gym{" "}
             </h1>
             <div className="justify-items-center">
-              <MapContainer></MapContainer>
+              <Weather></Weather>
             </div>
           </div>
         </div>
