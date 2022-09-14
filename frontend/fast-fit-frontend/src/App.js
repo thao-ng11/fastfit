@@ -11,6 +11,7 @@ import UserMeals from "./Recipes/userMeals";
 import RecipeSearch from "./Recipes/recipeSearch";
 import HealthDataForm from "./health_data/HealthMain";
 import Login from "./Auth/Login";
+import Logout from "./Auth/Logout"
 import WorkoutPlanList from "./Workouts/WorkoutPlanList";
 import { AuthProvider } from "./Authentication";
 import JournalForm from "./journals/journalForm";
@@ -51,6 +52,7 @@ function App() {
           />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/" element={<Login login={login} />} />
+          <Route path="/logout" element={<Logout logout={logout}/>} />
           <Route path="/workout" element={<WorkoutPlanForm />} />
           <Route path="/workout/plan" element={<WorkoutPlanList />} />
           <Route path="/meals">
