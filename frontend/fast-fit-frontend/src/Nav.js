@@ -10,7 +10,7 @@ function Nav() {
             <div>
                 <NavLink to='/dashboard'><h2 className="text-3xl text-[#fff2f1] font-bold">F<span className="text-[#8e4162]">a</span>s<span className="text-[#fff2f1]">t</span><span className="text-[#bf9aca]">FIT</span></h2></NavLink>
             </div>
-            <div class="flex items-center space-x-10">
+            <div className="flex items-center space-x-10">
                 <NavLink to="/workout"><h2 className='text-l text-[#fff2f1] shadow font-bold'>New Workout Plan</h2></NavLink>
                 <NavLink to="/meals/user"><h2 className='text-l text-[#fff2f1] shadow font-bold'>Meal Plans</h2></NavLink>
                 <NavLink to="/journals"><h2 className='text-l text-[#fff2f1] shadow font-bold'>Your Journal</h2></NavLink>   
