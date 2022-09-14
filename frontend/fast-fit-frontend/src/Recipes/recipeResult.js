@@ -1,17 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function RecipeResult({recipe, type, token, noUser}) {
     // console.log(token)
     const [meal, setMeal] = useState({
         username: '',
-        recipe_api_id: recipe.uri.split('#')[1],
+        recipe_api_id: '',
         date: '',
-        type: type
+        type: ''
     })
     
     const [successMessage, setSuccess] = useState('alert alert-success popup-message d-none')
     const [errorMessage, setError] = useState('alert alert-danger popup-message d-none')
 
+    // console.log("original recipe", recipe)
+    useEffect(() => {
+        // console.log("recipe: change", recipe)
+        setMeal({
+            ...meal,
+            recipe_api_id: recipe.uri.split('#')[1],
+            type: type
+        })
+    }, [recipe])
     
     const handleChange = event => {
         const value = event.target.value;
@@ -20,7 +29,7 @@ function RecipeResult({recipe, type, token, noUser}) {
 
     const handleSubmit = async event => {
         event.preventDefault()
-
+        console.log(meal)
         const postUrl = `${process.env.REACT_APP_RECIPES_HOST}/api/meals`
         const response = await fetch(postUrl, {
             method: 'POST',

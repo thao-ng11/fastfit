@@ -19,9 +19,9 @@ function UserMeals() {
         
         if (apiResponse.ok) {
             const { recipe } = await apiResponse.json()
+            return recipe
             // console.log(recipe)
-            meal["image"] = recipe.image
-            meal["recipe"] = recipe.label
+            
             // console.log(data)
             console.log("api: ", meal)
         }
@@ -53,10 +53,12 @@ function UserMeals() {
                 for (let meal of userMeals) {
                     // console.log(meal)
                     console.log(meals)
-                    setTimeout(() => {
-                        fetchAPI(meal)
-                      }, [1000])
-                    mealArray.push(meal)
+                    // setTimeout(async () => {
+                        let recipe = await fetchAPI(meal)
+                        meal["image"] = recipe.image
+                        meal["recipe"] = recipe.label
+                        mealArray.push(meal)
+                    //   }, [1000])
                     console.log(mealArray)
                 }
                 console.log("final meals: ", mealArray)
