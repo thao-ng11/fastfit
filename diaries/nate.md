@@ -53,4 +53,4 @@ Got the CSS and design of my microservices looking a lot better! Functionality i
 Finally finished up the functionality and the CSS on the front end for my microservice. Will start Unit test tomorrow
 
 9/14 
-Finished the unit tests for strength workouts! Last thing to add is my microservice to the dashboard!
+Finished the unit tests for strength workouts! Last thing to add is my microservice to the dashboard!.. Few hours later, added my microservice to the dashboard. ALL DONE!!!! I FINISHED!!

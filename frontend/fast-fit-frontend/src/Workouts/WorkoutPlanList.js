@@ -62,7 +62,7 @@ function WorkoutPlanList() {
                 <thead>
                     <tr>
                         <th>Workout Plan</th>
-                        <button onClick={handleNavigate}>Add a Workout</button>
+                        <button className=' rounded mb-4 font-bold text-[#073B4C] hover:bg-[#BF9ACA] bg-[#BF9ACA]'onClick={handleNavigate}>Add a Workout</button>
                         <select onChange={filterDates}>{workouts.map(workout =>{
                             if  (!dates.includes(workout.workout_date)){
                                 dates.push(workout.workout_date)
