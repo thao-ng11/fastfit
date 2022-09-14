@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { useToken } from '../Authentication';
 
 function MealWidget() {
@@ -23,7 +24,8 @@ function MealWidget() {
         recipe: '',
         image: ''
     })
-    const [showSearch, setShowSearch] = useState(false)
+    const [showSearch, setShowSearch] = useState('d-none')
+    const [showMeal, setShowMeal] = useState('grid-rows-3')
 
     const appID = process.env.REACT_APP_EDAMAM_APP_ID
     const apiKey = process.env.REACT_APP_EDAMAM_RECIPE_API_KEY
@@ -70,7 +72,8 @@ function MealWidget() {
                     fetchRecipe(recipeID)
                 }
                 else {
-                    setShowSearch(true)
+                    setShowSearch('')
+                    setShowMeal('grid-rows-3 d-none')
                 }
             }
         } catch (error) {
@@ -96,10 +99,14 @@ function MealWidget() {
 
     return (
         <div className="flex items-center justify-center">
-            <div className='grid-rows-3'>
+            <div className={showMeal}>
                 <h2 className="pt-3 font-semibold text-center">{mealType}: </h2>
                 <h2 className='py-2 text-center'>{meal.recipe}</h2>
                 <img className="w-[240px] rounded-lg shadow-md" src={meal.image} />
+            </div>
+            <div className={showSearch}>
+                <h2 className="pt-6">You don't have any meals planned for {mealType}. Find a 
+                <NavLink to="/meals/search" className="font-semibold text-[#8e4162]"> recipe</NavLink> to cook!</h2>
             </div>
         </div>
     )
