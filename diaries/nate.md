@@ -48,3 +48,9 @@ Added the Calendar for the workout plan so it saves a specific workout for the p
 
 9/12
 Got the CSS and design of my microservices looking a lot better! Functionality is 95% of the way there! Started making a component for the workout widget on the dashboard.
+
+9/13
+Finally finished up the functionality and the CSS on the front end for my microservice. Will start Unit test tomorrow
+
+9/14 
+Finished the unit tests for strength workouts! Last thing to add is my microservice to the dashboard!
