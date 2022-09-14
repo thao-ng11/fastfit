@@ -15,8 +15,8 @@ return (
         
 
         <tr className='flex item-center justify-center'>
-            <th className='font-semibold text-lg '>{workout.workout}</th>  
-            <th className='pl-2 pt-1'>{workout.sets} sets of {workout.repetitions} reps {workout.weight} pounds</th>
+            <th className='font-medium text-lg '>{workout.workout}:</th>  
+            <th className='pl-2 pt-1 font-normal'>{workout.sets} sets of {workout.repetitions} reps {workout.weight} pounds</th>
         </tr>
 
 
