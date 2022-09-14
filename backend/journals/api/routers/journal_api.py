@@ -27,17 +27,6 @@ async def get_current_user(
     except (JWTError, AttributeError):
         raise credentials_exception
 
-# oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token", auto_error=False)
-# router = APIRouter()
-# SECRET_KEY = os.environ["SECRET_KEY"]
-# ALGORITHM = "HS256"
-
-# credentials_exception = HTTPException(
-#     status_code=status.HTTP_401_UNAUTHORIZED,
-#     detail="Invalid authentication credentials",
-#     headers={"WWW-Authenticate": "Bearer"},
-# )
-
 
 router = APIRouter()
 
