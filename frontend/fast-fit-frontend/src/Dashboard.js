@@ -3,9 +3,10 @@ import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import MealWidget from "./Recipes/mealWidget";
 import Weather from "./WeatherCell";
-import {getTokenInternal} from './Authentication'
+import { getTokenInternal } from "./Authentication";
 import WeightWidget from "./health_data/weightWidget";
-import WorkoutWidget from './Workouts/WorkoutWidget'
+import WorkoutWidget from "./Workouts/WorkoutWidget";
+import JournalWidget from "./journals/journalWidget";
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class Dashboard extends React.Component {
     };
     this.handleWeightChange = this.handleWeightChange.bind(this);
     this.handleHeightChange = this.handleHeightChange.bind(this);
-    this.handleLoginChange = this.handleLoginChange.bind(this)
+    this.handleLoginChange = this.handleLoginChange.bind(this);
   }
   handleHeightChange(event) {
     const value = event.target.value;
@@ -28,7 +29,7 @@ class Dashboard extends React.Component {
     const value = event.target.value;
     this.setState({ calc_weight: value });
   }
-  calculateBMI(event) { }
+  calculateBMI(event) {}
   workoutRoute(event) {
     this.setState({ workout_router: true });
   }
@@ -41,24 +42,21 @@ class Dashboard extends React.Component {
   journal_router(event) {
     this.setState({ journal_route: true });
   }
-  async handleLoginChange(event)
-  {
-    let response = await getTokenInternal()
-    if(response === false)
-    {
-      this.setState({validLogin: false})
+  async handleLoginChange(event) {
+    let response = await getTokenInternal();
+    if (response === false) {
+      this.setState({ validLogin: false });
     }
   }
 
-  componentDidMount()
-  {
-    this.handleLoginChange()
+  componentDidMount() {
+    this.handleLoginChange();
   }
-  
 
   render() {
-    
-    if(!this.state.validLogin){return <Navigate to="/" userInput={this.state.userInput} />;}
+    if (!this.state.validLogin) {
+      return <Navigate to="/" userInput={this.state.userInput} />;
+    }
 
     let bmiLong =
       (this.state.calc_weight /
@@ -74,14 +72,18 @@ class Dashboard extends React.Component {
       <section className="h-[400px] w-full bg-[#073b4c] mt-4 tails-selected-element">
         <div className="max-w-7xl px-5 py-2.5 bg-[#073b4c] flex space-x-5 w-full h-full items-center justify-center mx-auto tails-selected-element 2xl:text-center">
           <div className="px-4 h-full w-full bg-[#c7e8f3] rounded-md tails-selected-element justify-center">
-            <h1 className="text-center py-2 text-3xl font-semibold text-[#8e4162]">Weight Tracker</h1>
+            <h1 className="text-center py-2 text-3xl font-semibold text-[#8e4162]">
+              Weight Tracker
+            </h1>
             <div className="grid-rows-1 mt-20">
               <WeightWidget />
             </div>
           </div>
           <div className="flex flex-col space-y-5 w-full h-full">
             <div className="flex flex-wrap py-2.5 h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center">
-              <h1 className="text-3xl font-semibold text-[#8e4162]">Inspirational Quote</h1>
+              <h1 className="text-3xl font-semibold text-[#8e4162]">
+                Inspirational Quote
+              </h1>
             </div>
             <div className="inline-flex flex-col h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center">
               <h1 className="grid place-items-center text-3xl font-semibold text-[#8e4162]">
@@ -115,7 +117,9 @@ class Dashboard extends React.Component {
             </div>
           </div>
           <div className="py-2.5 h-full w-full bg-[#c7e8f3] rounded-md justify-center">
-            <h1 className="text-3xl text-center font-semibold text-[#8e4162]">Meals</h1>
+            <h1 className="text-3xl text-center font-semibold text-[#8e4162]">
+              Meals
+            </h1>
             <div>
               <MealWidget />
             </div>
@@ -123,16 +127,23 @@ class Dashboard extends React.Component {
         </div>
         <div className="max-w-7xl px-5 py-2.5 bg-[#073b4c] flex space-x-5 w-full h-full items-center justify-center mx-auto">
           <div className="flex flex-col space-y-5 w-full h-full">
-            <a href="../workout/plan" className="flex py-2.5 h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center text-black hover:text-black hover:border-[#195569] border-transparent border-2" >
-              <div className="grid place-items-center py-2.5 h-1/2 w-full bg-[#c7e8f3] rounded-md items-stretch" >
-                <h1 className=" text-3xl font-semibold text-[#8e4162]"> Workouts for Today </h1> 
-                <div className='pt-3 h-5px grid place-items-center '>
+            <a
+              href="../workout/plan"
+              className="flex py-2.5 h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center text-black hover:text-black hover:border-[#195569] border-transparent border-2"
+            >
+              <div className="grid place-items-center py-2.5 h-1/2 w-full bg-[#c7e8f3] rounded-md items-stretch">
+                <h1 className=" text-3xl font-semibold text-[#8e4162]">
+                  {" "}
+                  Workouts for Today{" "}
+                </h1>
+                <div className="pt-3 h-5px grid place-items-center ">
                   <WorkoutWidget />
                 </div>
               </div>
-           </a>
+            </a>
             <div className="flex py-2.5 h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center">
               <h1 className="text-3xl font-semibold text-[#8e4162]">Journal</h1>
+              <JournalWidget />
             </div>
           </div>
           <div className="flex py-2.5 h-full w-full bg-[#c7e8f3] rounded-md flex-wrap items-center justify-center">
@@ -148,18 +159,26 @@ class Dashboard extends React.Component {
           </div>
         </div>
         <div className="container px-8 mx-auto sm:px-12 lg:px-20 justify-center">
-                <h1 className="text-sm pt-20 font-bold tracking-wide text-center text-[#f1f1f1] uppercase mb-7">Built on</h1>
-                <div className="flex grid items-center justify-center grid-cols-2 gap-y-8">
-                    
-                    <div className="flex items-center justify-center col-span-1 row-span-1">
-                        <img src="https://upload.wikimedia.org/wikiversity/en/8/8c/FastAPI_logo.png" alt="Hubspot" className="block object-contain h-9"/>
-                    </div>
-                    <div className="flex items-center justify-center col-span-1 row-span-1">
-                        <img src="https://logos-download.com/wp-content/uploads/2016/09/React_logo_wordmark.png" alt="Youtube" className="block object-contain h-7 lg:h-8"/>
-                    </div>
-                    
-                </div>
+          <h1 className="text-sm pt-20 font-bold tracking-wide text-center text-[#f1f1f1] uppercase mb-7">
+            Built on
+          </h1>
+          <div className="flex grid items-center justify-center grid-cols-2 gap-y-8">
+            <div className="flex items-center justify-center col-span-1 row-span-1">
+              <img
+                src="https://upload.wikimedia.org/wikiversity/en/8/8c/FastAPI_logo.png"
+                alt="Hubspot"
+                className="block object-contain h-9"
+              />
             </div>
+            <div className="flex items-center justify-center col-span-1 row-span-1">
+              <img
+                src="https://logos-download.com/wp-content/uploads/2016/09/React_logo_wordmark.png"
+                alt="Youtube"
+                className="block object-contain h-7 lg:h-8"
+              />
+            </div>
+          </div>
+        </div>
       </section>
     );
   }
