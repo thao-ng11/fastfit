@@ -59,7 +59,7 @@ function WorkoutPlanList() {
             <table className="table-auto object-cover table-borderless">
                 <thead>
                 </thead>
-                <tbody >
+                <tbody className= 'pt-5'>
                     {workouts.map(workout => {
                         if (workout.workout_date.includes(dateFilter)){
                             return (

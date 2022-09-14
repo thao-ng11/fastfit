@@ -126,7 +126,7 @@ class Dashboard extends React.Component {
             <a href="../workout/plan" className="flex py-2.5 h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center text-black hover:text-black hover:border-[#195569] border-transparent border-2" >
               <div className="grid place-items-center py-2.5 h-1/2 w-full bg-[#c7e8f3] rounded-md items-stretch" >
                 <h1 className=" text-3xl font-semibold text-[#8e4162]"> Workouts for Today </h1> 
-                <div className='pt-2 h-5px grid place-items-center '>
+                <div className='pt-3 h-5px grid place-items-center '>
                   <WorkoutWidget />
                 </div>
               </div>
