@@ -25,7 +25,6 @@ class HealthDataQueries:
 
         hlist = []
         for row in cur.fetchall():
-          print(row)
           hdict = {
             "id": row[0],
             "username": row[1],
@@ -51,8 +50,10 @@ class HealthDataQueries:
         except UniqueViolation:
           return None
         row = cur.fetchone()
+        print(row)
         record = {}
         for i, column in enumerate(cur.description):
+            print(column)
             record[column.name] = row[i]
         return record
 
@@ -75,7 +76,6 @@ class HealthDataQueries:
 
         hlist = []
         for row in cur.fetchall():
-          print(row)
           hdict = {
             "id": row[0],
             "username": row[1],

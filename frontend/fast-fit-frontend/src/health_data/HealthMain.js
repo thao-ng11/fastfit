@@ -38,14 +38,14 @@ export default function HealthDataForm() {
 
   const fetchUserWeight = async () => {
     const tokenUrl = `${process.env.REACT_APP_ACCOUNTS_HOST}/token`
-    const tokenResponse = await fetch(tokenUrl, {credentials: "include",})
+    const tokenResponse = await fetch(tokenUrl, { credentials: "include", })
     if (tokenResponse.status === 200) {
-      const {token} = await tokenResponse.json()
-      const url = `${process.env.REACT_APP_HEALTH_HOST}/api/health_data/user`    
+      const { token } = await tokenResponse.json()
+      const url = `${process.env.REACT_APP_HEALTH_HOST}/api/health_data/user`
       const healthResponse = await fetch(url, {
         headers: { Authorization: `Bearer ${token}` },
       });
-  
+
       if (healthResponse.ok) {
         const weightHistory = await healthResponse.json()
         setWeightHistory(weightHistory)
@@ -55,12 +55,38 @@ export default function HealthDataForm() {
 
   const handleChange = event => {
     const value = event.target.value
-    setHealthData({...healthData, current_weight:value})
+    const numericValue = parseInt(value)
+    setHealthData({ ...healthData, current_weight: numericValue })
+  }
+
+  const handleSubmit = async event => {
+    event.preventDefault()
+    console.log(token)
+    const url = `${process.env.REACT_APP_HEALTH_HOST}/api/health_data`
+    console.log(JSON.stringify(healthData))
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(healthData)
+      })
+      if (response.ok) {
+        setHealthData({ ...healthData, current_weight: 0 })
+        fetchUserWeight()
+      }
+    }
+    catch (e) {
+      console.log(e)
+    }
   }
 
   useEffect(() => {
     fetchUserWeight()
-  }, []);
+  }, [token]);
 
   let labels = [];
   let weights = [];
@@ -74,41 +100,45 @@ export default function HealthDataForm() {
 
   const data = {
     labels,
-    datasets: [
-      {
-        label: "Weight",
-        data: weights,
-        backgroundColor: ["rbga(129, 178, 154, 0.6)"],
-        borderWidth: 2,
-        lineTension: 0,
-        borderDashOffset: 0.0,
-        pointBorderColor: "rgba(75,192,192,1)",
-        pointBackgroundColor: "#fff",
-        pointBorderWidth: 1,
-        pointHoverRadius: 5,
-        pointHoverBackgroundColor: "rgba(75,192,192,1",
-        pointHoverBorderWidth: 2,
-        pointRadius: 3,
-        pointHitRadius: 10,
-      },
+    datasets: [{
+      label: "Weight",
+      data: weights,
+      backgroundColor: ["rbga(129, 178, 154, 0.6)"],
+      borderWidth: 2,
+      lineTension: 0,
+      borderDashOffset: 0.0,
+      pointBorderColor: "rgba(75,192,192,1)",
+      pointBackgroundColor: "#fff",
+      pointBorderWidth: 1,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: "rgba(75,192,192,1",
+      pointHoverBorderWidth: 2,
+      pointRadius: 3,
+      pointHitRadius: 10,
+    },
     ],
   };
   return (
     <>
       <div className="bg-[#F1F1F1]">
-        <h1 className="p-4">Weight History</h1>
+        <h1 className="p-4 text-center">Weight History</h1>
         <div className="p-4">
           <form>
-            <label>
+            <label className="px-4">
               Weight:
-              <input type="number" step="1" name="weight" />
+              <input onChange={handleChange} type="number" step="1" name="weight" placeholder="0" value={healthData.current_weight} />
             </label>
-            <input className="p-4" type="button" value="Submit" />
+            <button
+              onClick={handleSubmit}
+              type="button"
+              className="p-2 bg-[#bf9aca] btn rounded font-bold text-[#f1f1f1]" >
+              Submit
+            </button>
           </form>
         </div>
       </div>
       <div>
-        <Line className="bg-[#F1F1F1]" data={data} height={90} type="line" />
+        <Line className="px-5 bg-[#F1F1F1]" data={data} height={90} type="line" />
       </div>
     </>
   );

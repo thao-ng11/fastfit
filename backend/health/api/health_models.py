@@ -6,7 +6,7 @@ class HealthDataIn(BaseModel):
   username: str
   current_weight: int
   current_bmi: float
-  entry_date: datetime
+  # entry_date: datetime
 
 
 class HealthDataPostOut(BaseModel):
