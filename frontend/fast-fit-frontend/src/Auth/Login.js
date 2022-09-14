@@ -13,10 +13,7 @@ export default function Login() {
     })
 
     
-    if (token) {
-        navigate('/dashboard')
-    }
-
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         await login(data.username, data.password)
@@ -27,7 +24,10 @@ export default function Login() {
         })
         navigate('/dashboard')
     }
-
+    
+    if (token) {
+        navigate('/dashboard')
+    }
     return(
         
         <section className="w-full h-1000px px-8 py-16 bg-[#073b4c] xl:px-8 tails-selected-element">

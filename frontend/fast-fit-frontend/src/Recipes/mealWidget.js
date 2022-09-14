@@ -6,7 +6,7 @@ function MealWidget() {
     // const todayDate = today.toISOString()
     const todayYear = today.getFullYear()
     const todayDay = today.getDate()
-    const todayMonth = (today.getMonth()+1).toString().padStart(2, '0')
+    const todayMonth = (today.getMonth() + 1).toString().padStart(2, '0')
     // console.log("month", todayMonth)
     // 2022-09-13
     const todayDate = `${todayYear}-${todayMonth}-${todayDay}`
@@ -36,7 +36,7 @@ function MealWidget() {
         const apiUrl = `https://api.edamam.com/api/recipes/v2/${recipeId}/?app_id=${appID}&type=public&app_key=${apiKey}&field=label&field=image`
 
         const apiResponse = await fetch(apiUrl)
-         if (apiResponse.ok) {
+        if (apiResponse.ok) {
             const { recipe } = await apiResponse.json()
             console.log(recipe)
             setMeal({
@@ -44,11 +44,11 @@ function MealWidget() {
                 recipe: recipe.label,
                 image: recipe.image
             })
-         }
+        }
     }
-    
+
     const fetchMeals = async () => {
-        
+
         const url = `${process.env.REACT_APP_RECIPES_HOST}/api/meals/user`
 
         try {
@@ -58,22 +58,22 @@ function MealWidget() {
             if (mealsResponse.ok) {
                 const meals = await mealsResponse.json()
                 console.log(meals)
-    
+
                 const todayMeals = meals.filter(meal => meal['date'] === `${todayDate}` && meal['type'] === mealType)
                 console.log(mealType)
                 console.log(todayMeals)
                 if (todayMeals.length > 0) {
-    
+
                     const recipeID = todayMeals[0]['recipe_api_id']
                     console.log(recipeID)
-        
+
                     fetchRecipe(recipeID)
                 }
                 else {
                     setShowSearch(true)
                 }
             }
-        } catch(error) {
+        } catch (error) {
             console.log("ERRORRRRRRRRRR", error)
         }
 
@@ -86,14 +86,14 @@ function MealWidget() {
         else if (todayTime >= 10) {
             setMealType('Lunch')
         }
-        else {setMealType('Breakfast')}
+        else { setMealType('Breakfast') }
         console.log(mealType)
-        
+
         if (token !== null) {
             fetchMeals()
-        } 
+        }
     }, [token])
-    
+
     return (
         <div className="flex items-center justify-center">
             <div className='grid-rows-3'>
