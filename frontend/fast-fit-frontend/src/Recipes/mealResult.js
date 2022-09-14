@@ -4,7 +4,7 @@ function MealResult({meal, setMeals, meals, token}) {
 
     const [deleteButton, setDeleteButton] = useState('grid-col-row-2')
     const [deleteConfirmation, setDeleteConfirmation] = useState('grid-col-row-2 mt-2 d-none')
-
+    console.log("inside meal result: ", meal)
     // console.log(token)
     const confirmDelete = () => {
         setDeleteButton('grid-col-row-2 d-none')
