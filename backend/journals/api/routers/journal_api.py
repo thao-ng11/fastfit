@@ -1,12 +1,45 @@
 from datetime import datetime
 from pydantic import BaseModel
-from typing import List
+from typing import List, Optional
 from fastapi import APIRouter, Response, status, Depends, HTTPException
 import os
 from psycopg_pool import ConnectionPool
 from journal_db import JournalQueries, pool
+from fastapi.security import OAuth2PasswordBearer
+from jose import jwt, JWTError
 
-router= APIRouter()
+
+
+SECRET_KEY = os.environ["SECRET_KEY"]
+ALGORITHM = "HS256"
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token", auto_error=False)
+
+async def get_current_user(
+    token: Optional[str] = Depends(oauth2_scheme),
+):
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Invalid authentication credentials",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+    try:
+        return jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+    except (JWTError, AttributeError):
+        raise credentials_exception
+
+# oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token", auto_error=False)
+# router = APIRouter()
+# SECRET_KEY = os.environ["SECRET_KEY"]
+# ALGORITHM = "HS256"
+
+# credentials_exception = HTTPException(
+#     status_code=status.HTTP_401_UNAUTHORIZED,
+#     detail="Invalid authentication credentials",
+#     headers={"WWW-Authenticate": "Bearer"},
+# )
+
+
+router = APIRouter()
 
 class Journal(BaseModel):
     id: int
@@ -63,9 +96,11 @@ class Message(BaseModel):
 
 def journal_post(
     journal: JournalIn,
+    user_info=Depends(get_current_user),
     query=Depends(JournalQueries),
 ):
-    row = query.insert_journal(journal.username, journal.entry_date,
+    username = user_info['username']
+    row = query.insert_journal(username, journal.entry_date,
         journal.grateful, journal.daily_aff, journal.note, journal.feeling,
     )
     if row is None:
@@ -94,7 +129,7 @@ def journal_list(
         return rows
     
 @router.get(
-    "/api/journals/user={username}/",
+    "/api/journals/user/",
     response_model = JournalList,
     responses = {
         200: {"model": JournalOut},
@@ -102,10 +137,13 @@ def journal_list(
     },
 )
 def get_user_journals(
-    username: str,
+    # username: str,
     response: Response,
+    user_info=Depends(get_current_user),
     query=Depends(JournalQueries)
 ):
+    username=user_info["username"]
+    print("username", username)
     row = query.get_user_journals(username)
     return row
 

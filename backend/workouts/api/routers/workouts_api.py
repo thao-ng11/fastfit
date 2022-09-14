@@ -1,8 +1,9 @@
 from http.client import responses
 from fastapi import APIRouter, Response, status, Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
-from psycopg.errors import ForeignKeyViolation
 import os
+from jose import  jwt, JWTError
+from typing import Optional
 # from jose import jwt
 
 from workout_models import (
@@ -32,6 +33,24 @@ from workouts_db import (
     StrengthWorkoutQueries,
     pool,
 )
+
+SECRET_KEY = os.environ["SECRET_KEY"]
+ALGORITHM = "HS256"
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token", auto_error=False)
+
+async def get_current_user(
+    token: Optional[str] = Depends(oauth2_scheme),
+):
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Invalid authentication credentials",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+    try:
+        return jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+    except (JWTError, AttributeError):
+        raise credentials_exception
+
 
 router = APIRouter()
 
@@ -108,10 +127,12 @@ router = APIRouter()
 )
 def cardio_workout_post(
     cardio_workout: CardioWorkoutsIn,
+    user_info = Depends(get_current_user),
     query=Depends(CardioWorkoutQueries,)
 ):
+    username = user_info['username']
     row = query.insert_cardio_workout(
-        cardio_workout.username, 
+        username, 
         cardio_workout.category, 
         cardio_workout.workout_date,
         cardio_workout.duration, 
@@ -181,10 +202,12 @@ def update_cardio_workout(
 )
 def strength_workout_post(
     strength_workout: StrengthWorkoutsIn,
+    user_info = Depends(get_current_user),
     query=Depends(StrengthWorkoutQueries,)
 ):
+    username= user_info['username']
     row = query.insert_strength_workout(
-        strength_workout.username, 
+        username, 
         strength_workout.category, 
         strength_workout.muscle_group,
         strength_workout.workout_date,
@@ -249,6 +272,39 @@ def update_strength_workout(
     )
     return row
 
+@router.get(
+    "/api/strength_workout/user",
+    response_model=StrengthWorkoutList | Message,
+    responses={
+        200: {"model":StrengthWorkoutsOut},
+        404: {"model": ErrorMessage},
+    }
+)
+def get_strength_workout_users(
+    response: Response,
+    user_info=Depends(get_current_user),
+    query=Depends(StrengthWorkoutQueries)
+):
+    username= user_info['username']
+    rows = query.get_strength_workout_user(username)
+    return rows
+
+@router.get(
+    "/api/cardio_workout/user",
+    response_model=CardioWorkoutList | Message,
+    responses={
+        200: {"model":CardioWorkoutsOut},
+        404: {"model": ErrorMessage},
+    }
+)
+def get_cardio_workout_users(
+    response: Response,
+    user_info=Depends(get_current_user),
+    query=Depends(CardioWorkoutQueries)
+):
+    username= user_info['username']
+    rows = query.get_cardio_workout_user(username)
+    return rows
 # @router.get(
 #     "/api/workouts",
 #     response_model=CardioWorkoutList|StrengthWorkoutList,

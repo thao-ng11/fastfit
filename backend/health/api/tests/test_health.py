@@ -14,15 +14,22 @@ class NormalHealthQueries:
         return [
             {
                 "id": 1,
-                "username": "testuser1",
-                "entry_date": "2022-08-30T20:36:40.523093+00:00",
+                "username": "drew",
+                "current_weight": 0,
+                "height": 68,
+                "current_bmi": 0,
+                "entry_date": "2022-09-02T22:31:04.462088+00:00"
             },
             {
                 "id": 2,
-                "username": "testuser2",
-                "entry_date": "2022-08-31T20:35:10.523093+00:00",
+                "username": "drew",
+                "current_weight": 0,
+                "height": 0,
+                "current_bmi": 0,
+                "entry_date": "2022-09-02T22:19:17.281669+00:00"
             },
         ]
+
 
 client = TestClient(app)
 
@@ -34,12 +41,11 @@ def test_get_all_health_data_returns_404():
 
     # ACT
     # Make the request
-    response = client.get("/api/health/")
+    response = client.get("/api/health_data/")
 
     # ASSERT
     # Assert that we got a 404
     assert response.status_code == 404
-
 
     # CLEAN UP
     # Clear out the dependencies
@@ -53,8 +59,9 @@ def test_get_all_health_data_returns_200():
 
     # ACT
     # Make the request
-    response = client.get("/api/health/")
+    response = client.get("/api/health_data/")
     d = response.json()
+    print(d)
 
     # ASSERT
     # Assert that we got a 404

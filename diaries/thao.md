@@ -78,3 +78,5 @@ Working on tailwind on journal main page. Setting up different cards on the page
 Finishing up tailwind and styling for the form and the list. Figuring out the spacing and which tag to put the className took a bit of time. In addition formatting the date on React needs to be assigned a variable before rendering because the way the data is not a function to apply .toLocaleDateString() directly. Having a bit of a hard time with the modal styling. Will work on it tomorrow
 
 # Sept 13, 2022
+
+Redo JSX on the journal list because of all the alert from the <table> hierarchy tags. Apply authentication on both backend and front end. Setting it on router specifically for user as well as general post request in the backend. Have to use Insomia to test the backend instead of FastAPI Swagger since I have to input the JWOT into the Header of the request. Choose Authentication, "bearer JWOT (from the browser)". For the authentication in the front end, have to change the url request from api/journals to api/journals/user and adapt all front end formula to accomodate the username verification. Ryan and Sarah helped me a lot with the authentication implementation.

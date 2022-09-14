@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useToken } from "../Authentication";
 
 function JournalForm() {
   const { state } = useLocation();
   const datetime = new Date().toISOString();
   const navigate = useNavigate();
   const [body, setBody] = useState({
-    username: "testuser1",
+    username: "",
     entry_date: datetime,
     grateful: "",
     daily_aff: "",
     note: "",
     feeling: 1,
   });
+  const [token] = useToken();
+  console.log(token);
 
   useEffect(() => {
     setBody({ ...body, feeling: state.activeEmoji });
@@ -24,12 +27,14 @@ function JournalForm() {
   }
   async function handleSubmit(event) {
     event.preventDefault();
-    const customerUrl = "http://localhost:8040/api/journals/";
+    const customerUrl = `${process.env.REACT_APP_JOURNALS_HOST}/api/journals/`;
     const fetchConfig = {
       method: "post",
       body: JSON.stringify(body),
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
     };
     console.log(body);
@@ -39,7 +44,7 @@ function JournalForm() {
       const newCustomer = await response.json();
       console.log(newCustomer);
       const cleared = {
-        username: "testuser1",
+        username: "",
         entry_date: "",
         grateful: "",
         daily_aff: "",

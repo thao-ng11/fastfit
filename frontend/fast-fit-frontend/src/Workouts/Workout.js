@@ -7,6 +7,7 @@ function Workout(props) {
 
     // })
 function setStyle(){
+    console.log(props.strength)
     if (props.strength.workout === props.name){
         return({color:"black",
                 cursor:"pointer"})

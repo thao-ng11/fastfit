@@ -44,27 +44,29 @@ function App() {
     <>
       <AuthProvider>
         <Nav />
-          <Routes>
-            <Route path="/dashboard" element={<Dashboard lat={lat} lng={lng} />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/" element={<Login login={login} />} />
-            <Route path="/workout" element={<WorkoutPlanForm />} />
-            <Route path="/workout/plan" element={<WorkoutPlanList />} />
-            <Route path="/meals">
-              <Route path="user" element={<UserMeals />} />
-              <Route path="search" element={<RecipeSearch />} />
-            </Route>
-            <Route path="/journals">
-              <Route index element={<JournalMain />} />
-              <Route path="form" element={<JournalForm />} />
-              <Route path="details" element={<JournalsList />} />
-            </Route>
-            <Route path="/health" element={<HealthDataForm />} />
-          </Routes>
+        <Routes>
+          <Route
+            path="/dashboard"
+            element={<Dashboard lat={lat} lng={lng} />}
+          />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/" element={<Login login={login} />} />
+          <Route path="/workout" element={<WorkoutPlanForm />} />
+          <Route path="/workout/plan" element={<WorkoutPlanList />} />
+          <Route path="/meals">
+            <Route path="user" element={<UserMeals />} />
+            <Route path="search" element={<RecipeSearch />} />
+          </Route>
+          <Route path="/journals">
+            <Route index element={<JournalMain />} />
+            <Route path="form" element={<JournalForm />} />
+            <Route path="details" element={<JournalsList />} />
+          </Route>
+          <Route path="/health" element={<HealthDataForm />} />
+        </Routes>
       </AuthProvider>
     </>
   );
 }
 
 export default App;
-
