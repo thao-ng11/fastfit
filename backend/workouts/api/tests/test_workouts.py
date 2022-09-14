@@ -43,7 +43,11 @@ def test_get_all_strength_workout_data_returns_405():
 
     # ACT
     # Make the request
+<<<<<<< HEAD
     response = client.get("/api/strength_workout/102")
+=======
+    response = client.get("/api/strength_workout/10000")
+>>>>>>> main
 
     # ASSERT
     # Assert that we got a 404
