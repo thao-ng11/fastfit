@@ -142,13 +142,8 @@ class Dashboard extends React.Component {
               </div>
             </a>
             <div className="flex py-2.5 h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center">
-              <h1 className="text-2xl font-semibold text-center text-[#8e4162]">
-                {" "}
-                Journals
-              </h1>
-              <div className="pt-2 h-5px grid place-items-center ">
-                <JournalWidget />
-              </div>
+              <h1 className="text-3xl font-semibold text-[#8e4162]">Journal</h1>
+              <JournalWidget />
             </div>
           </div>
           <div className="flex py-2.5 h-full w-full bg-[#c7e8f3] rounded-md flex-wrap items-center justify-center">
