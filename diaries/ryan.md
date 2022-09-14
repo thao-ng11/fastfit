@@ -1,3 +1,19 @@
+### 9/14
+need to make a logout button that will send users back to the login screen on the nav bar. 
+
+
+### 9/13
+scrapping google maps, going to add a weather tracker to the dashboard using device location. 
+
+### 9/12
+began working on the login reworked. restyling the login page. added cool reaact and fast api icons to the login page
+
+### 9/7
+styled the dashboard with the group. 
+
+### 9/5
+layed out the dashboard divs and began trying to implement google maps into one of the widgets
+
 ### 9/1
 finished and tested the signup react page, moving onto the login page. 
 

@@ -2,15 +2,20 @@ import{ useEffect, useState } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { useToken } from '../Authentication'
 
-export default function Login()
-{
+export default function Login() {
+    const [token, login] = useToken()
+    // console.log(token)
     let navigate = useNavigate()
-    const [,login] = useToken();
     let[data, setData] = useState({
         username:'',
         password:'',
         error:'',
     })
+
+    
+    if (token) {
+        navigate('/dashboard')
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
