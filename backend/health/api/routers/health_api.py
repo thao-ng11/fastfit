@@ -50,13 +50,17 @@ router = APIRouter()
 )
 def health_data_post(
     health_data: HealthDataIn,
+    response: Response,
+    user_info=Depends(get_current_user),
     query=Depends(HealthDataQueries),
 ):
+    username = user_info['username']
     row = query.insert_health_data(
-        health_data.username,
+        username,
         health_data.current_weight,
         health_data.current_bmi
     )
+    print(row)
     return row
 
 
