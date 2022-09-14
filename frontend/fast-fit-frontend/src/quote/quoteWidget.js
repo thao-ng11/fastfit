@@ -1,21 +1,46 @@
 import React, { useEffect, useState } from 'react';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faQuoteLeft,
+    faQuoteRight,
+} from "@fortawesome/free-solid-svg-icons";
 
 function QuoteWidget() {
     const [randomCategory, setRandomCateogy] = useState('')
     const categories = [
         'inspirational',
+        'fitness',
+        'happiness',
+        'health',
+        'life',
     ]
     async function fetchQuotes() {
+        const apiUrl = 'https://zenquotes.io?api=random'
         
-        let data = await fetch(`https://api.api-ninjas.com/v1/quotes?category=${randomCategory}`, { method: 'GET', headers: { 'X-Api-Key': process.env.REACT_APP_NINJAS_API_KEY } })
+        const apiResponse = await fetch(apiUrl)
+        if (apiResponse.ok) {
+            const quote = await apiResponse.json()
+            console.log(quote)
+        }
     }
 
     return (
-        <div className="flex items-center justify-center">
-            <div className='grid-rows-3'>
-                <h2 className="pt-3">TEST</h2>
-                <h2>TEST</h2>
-                <h2>TEST</h2>
+        <div className="flex w-full">
+            <div className='flex w-full pt-2'>
+                <div>
+                    <div className="px-3">
+                        <FontAwesomeIcon className=" text-[#8e4162] text-xl"icon={faQuoteLeft} />
+                    </div>
+                    <div className="flex items-center justify-center w-full">
+                        <h2 className ="text-center justify-center">TEST</h2>
+                    </div>
+                    <div className="flex pt-4 px-16 w-full items-end justify-end">
+                        <FontAwesomeIcon className=" text-[#8e4162] text-xl"icon={faQuoteRight} />
+                    </div>
+                    <div className="flex w-full">
+                        <h2 className ="text-center justify-center">- AUTHOR</h2>
+                    </div>
+                </div>
             </div>
         </div>
     )

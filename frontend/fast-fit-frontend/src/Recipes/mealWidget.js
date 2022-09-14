@@ -14,8 +14,8 @@ function MealWidget() {
     const todayTime = today.getHours()
     // console.log(today)
     // const todayTime = 8
-    console.log("date", todayDate)
-    console.log(todayTime)
+    // console.log("date", todayDate)
+    // console.log(todayTime)
 
     const [mealType, setMealType] = useState('null')
 
@@ -40,7 +40,7 @@ function MealWidget() {
         const apiResponse = await fetch(apiUrl)
         if (apiResponse.ok) {
             const { recipe } = await apiResponse.json()
-            console.log(recipe)
+            // console.log(recipe)
             setMeal({
                 ...meal,
                 recipe: recipe.label,
@@ -59,15 +59,15 @@ function MealWidget() {
             })
             if (mealsResponse.ok) {
                 const meals = await mealsResponse.json()
-                console.log(meals)
+                // console.log(meals)
 
                 const todayMeals = meals.filter(meal => meal['date'] === `${todayDate}` && meal['type'] === mealType)
-                console.log(mealType)
-                console.log(todayMeals)
+                // console.log(mealType)
+                // console.log(todayMeals)
                 if (todayMeals.length > 0) {
 
                     const recipeID = todayMeals[0]['recipe_api_id']
-                    console.log(recipeID)
+                    // console.log(recipeID)
 
                     fetchRecipe(recipeID)
                 }
@@ -90,7 +90,7 @@ function MealWidget() {
             setMealType('Lunch')
         }
         else { setMealType('Breakfast') }
-        console.log(mealType)
+            setMealType('Breakfast')
 
         if (token !== null) {
             fetchMeals()
