@@ -12,6 +12,7 @@ export default function Login() {
         error:'',
     })
 
+    
     if (token) {
         navigate('/dashboard')
     }

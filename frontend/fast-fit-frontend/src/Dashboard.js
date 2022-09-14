@@ -23,7 +23,7 @@ class Dashboard extends React.Component {
     const value = event.target.value;
     this.setState({ calc_weight: value });
   }
-  calculateBMI(event) {}
+  calculateBMI(event) { }
   workoutRoute(event) {
     this.setState({ workout_router: true });
   }
@@ -36,7 +36,7 @@ class Dashboard extends React.Component {
   journal_router(event) {
     this.setState({ journal_route: true });
   }
-  
+
   render() {
     let bmiLong =
       (this.state.calc_weight /
@@ -89,18 +89,20 @@ class Dashboard extends React.Component {
               </div>
             </div>
           </div>
-          <div className="flex py-2.5 h-full w-full bg-[#c7e8f3] rounded-md justify-center">
-            <h1 className="text-3xl font-semibold text-[#8e4162]">Meals</h1>
-            <MealWidget />
+          <div className="py-2.5 h-full w-full bg-[#c7e8f3] rounded-md justify-center">
+            <h1 className="text-3xl font-semibold text-[#8e4162] text-center">Meals</h1>
+            <div>
+              <MealWidget />
+            </div>
           </div>
         </div>
         <div className="max-w-7xl px-5 py-2.5 bg-[#073b4c] flex space-x-5 w-full h-full items-center justify-center mx-auto">
           <div className="flex flex-col space-y-5 w-full h-full">
-          <a href="../workout/plan" className="flex py-2.5 h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center" >
-            <div className="flex py-2.5 h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center" >
-              <h1 className="text-3xl font-semibold text-[#8e4162]"> Workouts </h1>
-            </div>
-          </a>
+            <a href="../workout/plan" className="flex py-2.5 h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center" >
+              <div className="flex py-2.5 h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center" >
+                <h1 className="text-3xl font-semibold text-[#8e4162]"> Workouts </h1>
+              </div>
+            </a>
             <div className="flex py-2.5 h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center">
               <h1 className="text-3xl font-semibold text-[#8e4162]">Journal</h1>
             </div>
