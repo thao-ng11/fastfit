@@ -26,7 +26,7 @@ ChartJS.register(
   Legend
 );
 
-export default function HealthDataForm() {
+export default function WeightWidget() {
   const [healthData, setHealthData] = useState({
     username: "",
     current_weight: 0,
@@ -95,18 +95,6 @@ export default function HealthDataForm() {
   };
   return (
     <>
-      <div className="bg-[#F1F1F1]">
-        <h1 className="p-4">Weight History</h1>
-        <div className="p-4">
-          <form>
-            <label>
-              Weight:
-              <input type="number" step="1" name="weight" />
-            </label>
-            <input className="p-4" type="button" value="Submit" />
-          </form>
-        </div>
-      </div>
       <div>
         <Line className="bg-[#F1F1F1]" data={data} height={90} type="line" />
       </div>
