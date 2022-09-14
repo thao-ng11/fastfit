@@ -1,4 +1,3 @@
-import React, { useState, useEffect, useNavigate } from "react";
 import Modal from "react-bootstrap/Modal";
 
 function JournalModal({ journal, setActiveModal, activeModal }) {
@@ -15,19 +14,25 @@ function JournalModal({ journal, setActiveModal, activeModal }) {
         <div>
           <label className="font-semibold">3 things I'm grateful for</label>
           <div>
-            <textarea className="w-full">{journal.grateful}</textarea>
+            <textarea className="w-full" value="grateful" readOnly>
+              {journal.grateful}
+            </textarea>
           </div>
         </div>
         <div>
           <label className="font-semibold">Daily Affirmation</label>
           <div>
-            <textarea className="w-full">{journal.daily_aff}</textarea>
+            <textarea className="w-full" value="daily_aff" readOnly>
+              {journal.daily_aff}
+            </textarea>
           </div>
         </div>
         <div>
           <label className="font-semibold">Note</label>
           <div>
-            <textarea className="w-full">{journal.note}</textarea>
+            <textarea className="w-full" value="note" readOnly>
+              {journal.note}
+            </textarea>
           </div>
         </div>
       </Modal.Body>

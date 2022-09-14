@@ -2,16 +2,24 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import JournalEmoji from "./journalEmoji";
 import { summary } from "date-streaks";
+import { useToken } from "../Authentication";
 
 function JournalMain() {
   const [activeEmoji, setActiveEmoji] = useState(1);
   const [journalDates, setJournalDates] = useState([]);
   const [streak, setStreak] = useState({ currentStreak: 0 });
   const [count, setCount] = useState([]);
+  const [token] = useToken();
+  console.log(token);
 
   const fetchJournalDates = async () => {
-    const url = "http://localhost:8040/api/journals";
-    const res = await fetch(url);
+    const url = `${process.env.REACT_APP_JOURNALS_HOST}/api/journals/user/`;
+    const res = await fetch(url, {
+      credentials: "include",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const journalData = await res.json();
     console.log(journalData);
     let journalDatesArr = [];
@@ -26,7 +34,7 @@ function JournalMain() {
 
   useEffect(() => {
     fetchJournalDates();
-  }, []);
+  }, [token]);
 
   useEffect(() => {
     setStreak(summary(journalDates));

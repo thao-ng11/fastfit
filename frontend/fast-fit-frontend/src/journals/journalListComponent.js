@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import JournalEmoji from "./journalEmoji.js";
 import JournalModal from "./journalModal";
 
@@ -9,37 +9,41 @@ function JournalsListComponent(props) {
   }
   const date = new Date(props.journalKey.entry_date).toLocaleDateString();
   return (
-    <div className="flex items-center justify-center">
+    <div>
       <table>
-        <tbody className="flex items-center justify-center px-4 gap-4">
-          <td className="font-semibold">{date}</td>
-          <td>
-            <JournalEmoji
-              activeEmoji={Number(props.journalKey.feeling)}
-              setActiveEmoji={false}
-              emojiValue={Number(props.journalKey.feeling)}
-            />
-          </td>
-          <td>
-            <h3 className="font-semibold px-2">3 things I'm grateful for</h3>
-            <div className="w-[550px] h-[100px] bg-white rounded-md px-3">
+        <tbody>
+          <tr>
+            <td className="font-semibold px-4">{date}</td>
+            <td className="px-3">
+              <JournalEmoji
+                activeEmoji={Number(props.journalKey.feeling)}
+                setActiveEmoji={false}
+                emojiValue={Number(props.journalKey.feeling)}
+              />
+            </td>
+            <td className="w-[550px] h-[110px] align-text-top  bg-white rounded-md px-3 py-1">
+              <div className="font-semibold">3 things I'm grateful for</div>
               <div>{props.journalKey.grateful}</div>
-            </div>
-          </td>
-          <JournalModal
-            journal={props.journalKey}
-            activeModal={activeModal}
-            setActiveModal={setActiveModal}
-          />
+            </td>
+            <td>
+              <JournalModal
+                journal={props.journalKey}
+                activeModal={activeModal}
+                setActiveModal={setActiveModal}
+              />
+            </td>
+          </tr>
+          <tr>
+            <td className="py-3" colSpan="3" style={{ textAlign: "right" }}>
+              <button
+                className="bg-[#BF9ACA] btn rounded font-semibold text-[#F1F1F1]"
+                onClick={handleDetail}
+              >
+                View Details
+              </button>
+            </td>
+          </tr>
         </tbody>
-        <div className="flex items-end justify-end py-2 px-4">
-          <button
-            className="bg-[#BF9ACA] btn rounded font-semibold text-[#F1F1F1]"
-            onClick={handleDetail}
-          >
-            View Details
-          </button>
-        </div>
       </table>
     </div>
   );

@@ -127,6 +127,7 @@ class JournalQueries:
                 )
                 jlist = []
                 for row in cur.fetchall():
+                    # print(row)
                     jdict = {
                         "id": row[0],
                         "username": row[1],

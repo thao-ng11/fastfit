@@ -1,15 +1,31 @@
 import { useEffect, useState } from "react";
 import JournalsListComponent from "./journalListComponent";
+import { useToken } from "../Authentication";
 
 function JournalsList() {
+  const [token] = useToken();
+  console.log(token);
   const [journalsList, setJournalsList] = useState([]);
 
   const fetchJournalsList = async () => {
-    const url = "http://localhost:8040/api/journals/";
-    const res = await fetch(url);
-    const journalsListArr = await res.json();
-    console.log(journalsListArr);
-    setJournalsList(journalsListArr);
+    const tokenUrl = `${process.env.REACT_APP_ACCOUNTS_HOST}/token`;
+    const tokenResponse = await fetch(tokenUrl, { credentials: "include" });
+    if (tokenResponse.status === 200) {
+      const { token } = await tokenResponse.json();
+
+      const url = `${process.env.REACT_APP_JOURNALS_HOST}/api/journals/user/`;
+
+      const res = await fetch(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (res.ok) {
+        const journalsListArr = await res.json();
+        console.log("journalsListArr", journalsListArr);
+        setJournalsList(journalsListArr);
+      }
+    }
   };
   useEffect(() => {
     fetchJournalsList();
