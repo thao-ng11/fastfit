@@ -1,7 +1,7 @@
 from fastapi.testclient import TestClient
 
 from main import app
-from recipes_db import MealQueries, MealTypeQueries
+from recipes_db import MealQueries
 
 
 client = TestClient(app)
@@ -65,29 +65,35 @@ def test_meal_in_exists():
 # def test_meal_out_exists():
 #     from 
 
-class NormalMealTypeQueries:
-    def get_meal_types(self):
+class NormalMealQueries:
+    def get_meals(self):
         return [
             {
                 "id": 1,
-                "name": "Breakfast"
+                "username": "testuser",
+                "recipe_api_id": "recipe_string1",
+                "date": "2022-09-14",
+                "type": "Breakfast"
             },
             {
                 "id": 2,
-                "name": "Lunch"
+                "username": "testuser",
+                "recipe_api_id": "recipe_string2",
+                "date": "2022-09-14",
+                "type": "Lunch"
             }
         ]
 
-class EmptyMealTypeQueries:
-    def get_meal_types(self):
+class EmptyMealQueries:
+    def get_meals(self):
         return None
 
-def test_get_meal_types_returns_200():
+def test_get_meals_returns_200():
     # ARRANGE
-    app.dependency_overrides[MealTypeQueries] = NormalMealTypeQueries
+    app.dependency_overrides[MealQueries] = NormalMealQueries
 
     # ACT
-    response = client.get("/api/meal_types")
+    response = client.get("/api/meals")
     d = response.json()
 
     # ASSERT
@@ -98,13 +104,13 @@ def test_get_meal_types_returns_200():
     # CLEAN UP
     app.dependency_overrides = {}
 
-def test_get_meal_types_returns_404():
+def test_get_meals_returns_404():
     # ARRANGE
     # Use our fake database
-    app.dependency_overrides[MealTypeQueries] = EmptyMealTypeQueries
+    app.dependency_overrides[MealQueries] = EmptyMealQueries
 
     # ACT
-    response = client.get("/api/meal_types")
+    response = client.get("/api/meals")
     
     # ASSERT
     assert response.status_code == 404

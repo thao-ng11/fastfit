@@ -111,6 +111,7 @@ def meal_list(
     rows = query.get_meals()
     if rows is None:
         response.status_code = status.HTTP_404_NOT_FOUND
+        print(response.status_code)
         return {"message": "You don't have any meals"}
     return rows
 
