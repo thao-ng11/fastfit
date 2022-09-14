@@ -14,7 +14,7 @@ function MealWidget() {
     // console.log(today)
     // const todayTime = 8
     console.log("date", todayDate)
-    // console.log(todayTime)
+    console.log(todayTime)
 
     const [mealType, setMealType] = useState('null')
 
@@ -60,6 +60,7 @@ function MealWidget() {
                 console.log(meals)
     
                 const todayMeals = meals.filter(meal => meal['date'] === `${todayDate}` && meal['type'] === mealType)
+                console.log(mealType)
                 console.log(todayMeals)
                 if (todayMeals.length > 0) {
     
