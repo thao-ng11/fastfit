@@ -3,7 +3,7 @@ from main import app
 from workouts_db import  StrengthWorkoutQueries
 
 class EmptyStrengthWorkoutQueries:
-    def get_strength_workout_query(self):
+    def get_strength_workout_query(self, id):
         print("can you see this?")
         return None
 
@@ -36,18 +36,18 @@ class NormalStrengthQueries:
 
 client = TestClient(app)
 
-def test_get_all_strength_workout_data_returns_404():
+def test_get_all_strength_workout_data_returns_405():
     # ARRANGE
     # Use  our fake database
     app.dependency_overrides[StrengthWorkoutQueries] = EmptyStrengthWorkoutQueries
 
     # ACT
     # Make the request
-    response = client.get("/api/strength_workout")
+    response = client.get("/api/strength_workout/102")
 
     # ASSERT
     # Assert that we got a 404
-    assert response.status_code == 404
+    assert response.status_code == 405
 
     # CLEAN UP
     # Clear out  the dependencies

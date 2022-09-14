@@ -229,9 +229,9 @@ def strength_workout_post(
 
 @router.get(
     "/api/strength_workout",
-    response_model=StrengthWorkoutList | ErrorMessage ,
+    response_model=StrengthWorkoutList | ErrorMessage,
     responses={
-        404:{"model": ErrorMessage},
+        405:{"model": ErrorMessage},
         200:{"model": StrengthWorkoutList}
     }
 )
@@ -242,7 +242,7 @@ def strength_workout_list(
     rows = query.get_strength_workout_query()
     print(rows)
     if rows is None:
-        response.status_code = status.HTTP_404_NOT_FOUND
+        response.status_code = status.HTTP_405_NOT_FOUND
         print(response.status_code)
         return {'Message':'Not Found'}
     else:
