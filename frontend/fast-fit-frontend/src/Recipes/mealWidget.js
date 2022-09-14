@@ -72,7 +72,7 @@ function MealWidget() {
                     fetchRecipe(recipeID)
                 }
                 else {
-                    setShowSearch('')
+                    setShowSearch('grid-rows-3')
                     setShowMeal('grid-rows-3 d-none')
                 }
             }
@@ -105,7 +105,8 @@ function MealWidget() {
                 <img className="w-[240px] rounded-lg shadow-md" src={meal.image} />
             </div>
             <div className={showSearch}>
-                <h2 className="pt-6">You don't have any meals planned for {mealType}. Find a 
+                <h2 className="pt-6">You don't have any meals planned for {mealType.toLowerCase()}.</h2>
+                <h2 className="text-center pt-2">Find a 
                 <NavLink to="/meals/search" className="font-semibold text-[#8e4162]"> recipe</NavLink> to cook!</h2>
             </div>
         </div>
