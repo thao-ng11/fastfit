@@ -1,4 +1,4 @@
-from http.client import responses
+from http.client import FOUND, responses
 from fastapi import APIRouter, Response, status, Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
 import os
@@ -146,16 +146,22 @@ def cardio_workout_post(
 
 @router.get(
     "/api/cardio_workout",
-    response_model=CardioWorkoutList,
+    response_model=CardioWorkoutList | ErrorMessage,
     responses={
         404:{"model": ErrorMessage},
+        200:{"model": CardioWorkoutList}
     }
 )
 def cardio_workout_list(
+    response: Response,
     query=Depends(CardioWorkoutQueries)
 ):
     rows = query.get_cardio_workout_query()
-    return rows
+    if rows is None:
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return {'Message':'Not Found'}
+    else:
+        return rows
 
 @router.delete(
     "/api/cardio_workout/{cardio_workout_id}",
@@ -223,16 +229,24 @@ def strength_workout_post(
 
 @router.get(
     "/api/strength_workout",
-    response_model=StrengthWorkoutList,
+    response_model=StrengthWorkoutList | ErrorMessage ,
     responses={
         404:{"model": ErrorMessage},
+        200:{"model": StrengthWorkoutList}
     }
 )
 def strength_workout_list(
+    response: Response,
     query=Depends(StrengthWorkoutQueries)
 ):
     rows = query.get_strength_workout_query()
-    return rows
+    print(rows)
+    if rows is None:
+        response.status_code = status.HTTP_404_NOT_FOUND
+        print(response.status_code)
+        return {'Message':'Not Found'}
+    else:
+        return rows
 
 @router.delete(
     "/api/strength_workout/{strength_workout_id}",

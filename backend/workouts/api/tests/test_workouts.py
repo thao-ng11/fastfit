@@ -3,12 +3,12 @@ from main import app
 from workouts_db import  StrengthWorkoutQueries
 
 class EmptyStrengthWorkoutQueries:
-    def get_all_strength_workouts(self):
+    def get_strength_workout_query(self):
         print("can you see this?")
         return None
 
 class NormalStrengthQueries:
-    def get_all_strength_workouts(self):
+    def get_strength_workout_query(self):
         return [
            {
                 "id": 15,
@@ -43,7 +43,7 @@ def test_get_all_strength_workout_data_returns_404():
 
     # ACT
     # Make the request
-    response = client.get("/api/strength_workout/")
+    response = client.get("/api/strength_workout")
 
     # ASSERT
     # Assert that we got a 404
@@ -60,7 +60,7 @@ def test_get_all_strength_workout_data_returns_200():
 
     # ACT
     # Make the request
-    response = client.get("/apai/strength_workout/")
+    response = client.get("/api/strength_workout")
     d = response.json()
     print(d)
 
