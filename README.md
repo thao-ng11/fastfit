@@ -10,40 +10,45 @@ A fitness app to drive your fitness goals!
 
 ## Intended Market
 The demographic we intend to service are those who would like an
-applicaiton to help them track general fitness with tools to help schedule
-meals and workouts, calcualte info like BMI, calories burned, and weight tracking.
+application to help them track general fitness with tools to help schedule
+meals and workouts, calculate BMI, weight tracking, and a journal.
 
 ## Functionality(potential)
 
-- schedule(food/workout)
-    - monthly
-    - weekly
-    - daily
+- Dashboard
+	- display all microservice widgets
+	- Meal widget displays next meal
+	- extra widgets:
+		- daily inspirational quote
+		- BMI calculator
+		- local weather
 
-- calculators
-	- BMI
-	- calories burned
-	- weight tracker(daily)
+- Health Data
+	- Weight tracker
 
-- nutrition
-	- mealplan
-	- recipes
-	- food logging
-	- grocery list (ingredients)
+- Meal Plan
+	- search recipes by meal type
+	- display meal based on time/date
 
-- jornaling/status updates
-	- post system for users to log emotions
+- Workout
+	- display workouts by date
+	- search workouts by muscle group
+	- schedule workouts
 
-- morning notifications
-	- weather
-    - workout plan overview(scheduled)
-    - meal plan overview(scheduled)
+- Journal
+	- record journal entries
+	- mood meter
+	- display total entries and current streak
 
-- gyms
-	- find and list local gyms
+- Login/Auth
+	- user based authentication on all microservices
+	- sign-up page, redirects to login page
 
-- meditaiton
-	- timer
 
-- users
-	- save all data for the users
+
+## Install Ready
+
+### DOCKER INTALL
+- Create docker volumes
+	- postgres-data
+	- pg-admin

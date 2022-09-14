@@ -136,7 +136,7 @@ class Dashboard extends React.Component {
                   {" "}
                   Workouts for Today{" "}
                 </h1>
-                <div className="pt-2 h-5px grid place-items-center ">
+                <div className="pt-3 h-5px grid place-items-center ">
                   <WorkoutWidget />
                 </div>
               </div>
@@ -160,6 +160,27 @@ class Dashboard extends React.Component {
               <div className="flex items-center w-full text-2xl">
                 <Weather></Weather>
               </div>
+            </div>
+          </div>
+        </div>
+        <div className="container px-8 mx-auto sm:px-12 lg:px-20 justify-center">
+          <h1 className="text-sm pt-20 font-bold tracking-wide text-center text-[#f1f1f1] uppercase mb-7">
+            Built on
+          </h1>
+          <div className="flex grid items-center justify-center grid-cols-2 gap-y-8">
+            <div className="flex items-center justify-center col-span-1 row-span-1">
+              <img
+                src="https://upload.wikimedia.org/wikiversity/en/8/8c/FastAPI_logo.png"
+                alt="Hubspot"
+                className="block object-contain h-9"
+              />
+            </div>
+            <div className="flex items-center justify-center col-span-1 row-span-1">
+              <img
+                src="https://logos-download.com/wp-content/uploads/2016/09/React_logo_wordmark.png"
+                alt="Youtube"
+                className="block object-contain h-7 lg:h-8"
+              />
             </div>
           </div>
         </div>
