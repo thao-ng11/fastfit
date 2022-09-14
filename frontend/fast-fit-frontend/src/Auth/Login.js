@@ -20,7 +20,7 @@ export default function Login()
             username: "",
             password: '',
         })
-        navigate('/')
+        navigate('/dashboard')
     }
 
     return(
@@ -36,8 +36,8 @@ export default function Login()
                     </div>
                     <form onSubmit={handleSubmit} id="login-form">
                         <div className="w-full mt-16 md:mt-0">
-                        <div className="relative z-10 h-auto p-8 py-10 overflow-hidden bg-[#c7e8f3] border-b-2 border-gray-300 rounded-lg shadow-2xl px-7 tails-selected-element" data-rounded="rounded-lg" data-rounded-max="rounded-full" >
-                            <h3 className="mb-6 text-2xl font-medium text-center">Log in</h3>
+                        <div className="relative z-10 h-auto p-8 py-8 overflow-hidden bg-[#c7e8f3] border-b-2 border-gray-300 rounded-lg shadow-2xl px-7 tails-selected-element" data-rounded="rounded-lg" data-rounded-max="rounded-full" >
+                            <h3 className="mb-8 text-3xl text-center font-bold font-sans tracking-wide text-[#8e4162]">Log in</h3>
                             <input
                                 onChange={(event) => setData({ ...data, username: event.target.value })} 
                                 type="text"
@@ -55,11 +55,13 @@ export default function Login()
                                 placeholder="Password" />
 
 
-                            <div className="block">
-                                <button className="w-full px-3 py-4 font-medium text-white bg-blue-600 rounded-lg" data-primary="blue-600" data-rounded="rounded-lg">Log Me In</button>
+                            <div className=" grid place-items-center">
+                                <button className="w-100px px-3 py-2 font-medium text-white bg-[#8e4162] rounded-lg" data-primary="blue-600" data-rounded="rounded-lg">Log Me In</button>
                             </div>
-                            <p className="w-full mt-4 text-sm text-center text-gray-500">Don't have an account? <a href="../signup" className="text-blue-500 underline">Sign up here</a></p>
                         </div>
+                    </div>
+                    <div>
+                            <p className=" grid place-items-center w-full mt-4 text-sm text-center text-[#f1f1f1]">Don't have an account? <a href="../signup" className="grid place-items-center max-w-70px underline hover:text-[#722f37]">Sign up here</a></p>
                     </div>
                     </form>
 

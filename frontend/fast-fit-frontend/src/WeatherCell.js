@@ -4,6 +4,12 @@ const IDLE = "IDLE";
 const BUSY = "BUSY";
 const DONE = "DONE";
 
+function toTitleCase(str) {
+    return str.toLowerCase().split(' ').map(function (word) {
+      return (word.charAt(0).toUpperCase() + word.slice(1));
+    }).join(' ');
+  }
+
 export default class Weather extends React.Component {
     constructor(props) {
       super(props);
@@ -39,6 +45,7 @@ export default class Weather extends React.Component {
         .then(response => response.json())
         .then(data => this.handleData(data))
         .catch(error => console.log(error))
+      
     }
   
     handleData(data) {
@@ -58,6 +65,7 @@ export default class Weather extends React.Component {
     locationError() {
       return "Unable to retrieve your location"
     }
+    
   
     render() {
       const { actualTemp, feelsLike, minTemp, maxTemp, name,
@@ -67,47 +75,45 @@ export default class Weather extends React.Component {
       if (status === DONE) {
         weatherData = (
           <>
-            <div className="top-info flex space-between">
-              <div className="description flex left gap-0-6">
-                <div className="icon">
-                  <img className="weather-icon" src={`http://openweathermap.org/img/wn/${weather.icon}@2x.png`} />
-                </div>
-                <span className="description">{weather.description}</span>
-              </div>
-              <div className="location flex right gap-0-6">
-                <div className="icon">
-                  <i className="fa-solid fa-map-pin" />
-                </div>
-                <span>
-                  {name}
+            <div className="grid place-items-center">
+                <span className="block">
+                    {name}
                 </span>
-              </div>
+            </div>
+            <div>
+                <div className="grid place-items-center">
+                    <img className=" weather-icon h-50px w-50px" src={`http://openweathermap.org/img/wn/${weather.icon}@2x.png`} />
+                </div>
+            <div className="grid place-items-center pb-1">
+                <span className="description block">{weather.description}</span>
+            </div>
             </div>
   
-            <div className="weather-container grid-2-col col-gap-2 w-100">
+            <div className="grid place-items-center pb-1">
               <div className="title-col flex-col left grid-col-1 grid-row-1">
                 <span className="sm-title">
-                  feels like
+                  Feels like:
                 </span>
-              </div>
-              <div className="flex-col left grid-col-1 grid-row-2">
-                <span className="big-temp">{feelsLike}&#176;</span>
+                <span className="big-temp pl-1">{feelsLike}&#176;</span>
               </div>
               <div className="flex-col left grid-col-2 grid-row-1">
+                
+              </div>
+              <div className="grid place-items-center">
                 <span className="sm-title">
-                  today
+                  Projections:
                 </span>
               </div>
-              <div className="flex-row grid-col-2 grid-row-2 gap-2">
+              <div className="flex-row grid-col-2 grid-row-2 gap-2 pt-1">
                 <div className="flex-col labels">
-                  <span>actual</span>
-                  <span>max</span>
-                  <span>min</span>
+                  <span className="">Current</span>
+                  <span className="pl-7">High</span>
+                  <span className="pl-10">Low</span>
                 </div>
-                <div className="flex-col">
-                  <strong>{actualTemp}<span className="sm-labels">&#176;F</span></strong>
-                  <strong>{maxTemp}<span className="sm-labels">&#176;F</span></strong>
-                  <strong>{minTemp}<span className="sm-labels">&#176;F</span></strong>
+                <div className="flex-col text-[#8e4162]">
+                  <strong className="pl-5">{actualTemp}<span className="sm-labels text-[#8e4162]">&#176;F</span></strong>
+                  <strong className="pl-10">{maxTemp}<span className="sm-labels text-[#8e4162]">&#176;F</span></strong>
+                  <strong className="pl-10">{minTemp}<span className="sm-labels text-[#8e4162]">&#176;F</span></strong>
                 </div>
               </div>
             </div>

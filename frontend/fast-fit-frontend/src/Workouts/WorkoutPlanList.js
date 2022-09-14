@@ -1,18 +1,29 @@
 import React, { useState, useEffect } from 'react'
 import WorkoutEntry from './WorkoutEntry'
+import { useToken } from '../Authentication'
+import { useNavigate } from 'react-router-dom';
 
 function WorkoutPlanList() {
+    const [token] = useToken()
+    console.log(token)
     let dates = []
     const [workouts,setWorkouts] = useState([])
+    const navigate = useNavigate()
     const [dateFilter,setDateFilter] = useState('')
     const fetchWorkouts = async () => {
-        const strengthWorkoutstUrl = 'http://localhost:8020/api/strength_workout/'
-        const cardioWorkoutsUrl ='http://localhost:8020/api/cardio_workout/'
+        const strengthWorkoutstUrl = 'http://localhost:8020/api/strength_workout/user'
+        const cardioWorkoutsUrl ='http://localhost:8020/api/cardio_workout/user'
         const response = await fetch(strengthWorkoutstUrl, {
             credentials: "include",
+            headers: {
+                Authorization: `Bearer ${token}` 
+            },
           })
         const response2 = await fetch(cardioWorkoutsUrl, {
             credentials: "include",
+            headers: {
+                Authorization: `Bearer ${token}` 
+            },
           })
         const data = await response.json();
         const data2 = await response2.json();
@@ -22,7 +33,7 @@ function WorkoutPlanList() {
     }
     useEffect(() => {
         fetchWorkouts()
-    }, []);
+    }, [token]);
     
     const cancelWorkout = async (id,type) => {
         const cancelUrl = `http://localhost:8020/api/${type}/${id}/`
@@ -39,13 +50,19 @@ function WorkoutPlanList() {
     function filterDates(e){
         setDateFilter(e.target.value);
     }
+    function handleNavigate(){
+        navigate('/workout')
+    }
     return (
-        <>
-            <h1></h1>
+        <div className='w-screen h-screen py-20'>
+            <div className='flex item-center justify-center'>
+            <div className='w-[650px] bg-[#C7E8F3] px-[26px] py-4 rounded-lg shadow-xl'>
+            <div className='w-[600px] bg-white px-4 py-4 rounded-lg shadow-xl'>
             <table className="table table-striped">
                 <thead>
                     <tr>
                         <th>Workout Plan</th>
+                        <button onClick={handleNavigate}>Add a Workout</button>
                         <select onChange={filterDates}>{workouts.map(workout =>{
                             if  (!dates.includes(workout.workout_date)){
                                 dates.push(workout.workout_date)
@@ -54,18 +71,21 @@ function WorkoutPlanList() {
                         })}</select>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody >
                     {workouts.map(workout => {
                         if (workout.workout_date.includes(dateFilter)){
                             return (
-                                <WorkoutEntry workout={workout}
+                                <WorkoutEntry className='hover:bg-gray-300' workout={workout}
                                 cancelWorkout={cancelWorkout}/>
                             );
                         }
                     })}
                 </tbody>
             </table>
-            </>
+            </div>
+            </div>
+            </div>
+            </div>
         );
     }
 

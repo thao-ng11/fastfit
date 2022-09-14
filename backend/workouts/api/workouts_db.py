@@ -161,6 +161,31 @@ class CardioWorkoutQueries:
                     record[column.name] = row[i]
                 return record
 
+    def get_cardio_workout_user(self,username:str):
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    SELECT *
+                    FROM cardio_workout
+                    WHERE username = %s
+                    """,
+                    [username]
+                )
+                ds = []
+                for row in cur.fetchall():
+                    d = {
+                        "id": row[0],
+                        "username": row[1],
+                        "category": row[2],
+                        "workout" : row[3],
+                        "workout_date": row[4],
+                        "duration": row[5],
+                        "distance": row[6],
+                    }
+                    ds.append(d)
+                return ds
+
 class StrengthWorkoutQueries:
     def get_strength_workout_query(self):
         with pool.connection() as conn:
@@ -238,4 +263,31 @@ class StrengthWorkoutQueries:
                 for i, column in enumerate(cur.description):
                     record[column.name] = row[i]
                 return record
+
+    def get_strength_workout_user(self, username: str):
+        with pool.connection() as conn:
+            with conn.cursor()  as cur:
+                cur.execute(
+                    """
+                    SELECT *
+                    FROM strength_workout sw
+                    WHERE username = %s
+                    """,
+                    [username]
+                )
+                ds = []
+                for row in cur.fetchall():
+                    d = {
+                        "id": row[0],
+                        "username": row[1],
+                        "category": row[2],
+                        "muscle_group":row[3],
+                        "workout": row[4],
+                        "workout_date": row[5],
+                        "sets" : row[6],
+                        "repetitions": row[7],
+                        "weight": row[8],
+                    }
+                    ds. append(d)
+                return ds
 

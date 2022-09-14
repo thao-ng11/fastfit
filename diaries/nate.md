@@ -33,3 +33,18 @@ Finally started FrontEnd Today, wahoo! I got about 50% of the way done with it, 
 
 9/1
 Continued on more of my FrontEnd portion.
+
+9/6
+Again, Continued on more of the frontend portion of my microservice. Messed around with more of the color scheme we wanted to go with and messed around more with the design of my microservice. Its starting to finally come together.
+
+9/7
+Finally finished up the big portion of my microservice! Got more of the "add to workout plan" features finished up.
+
+9/8
+Came across some issues with the "add to workout plan" feature. Had to clean it up a bit and nowwww it looks good. Started on the WOrkout plan for the landing page and I should be done.
+
+9/9
+Added the Calendar for the workout plan so it saves a specific workout for the person! Its getting close to being done which is great. Hopefully next week I can finish up creating my unit test and start adding AUTH stuff to my frotend.
+
+9/12
+Got the CSS and design of my microservices looking a lot better! Functionality is 95% of the way there! Started making a component for the workout widget on the dashboard.
