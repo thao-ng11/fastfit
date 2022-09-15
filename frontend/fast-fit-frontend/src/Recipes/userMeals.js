@@ -78,7 +78,7 @@ function UserMeals() {
     }, [token])
 
     return (
-        <div className="w-screen">
+        <div className="w-screen py-4">
             <div className="flex items-center justify-center">
                 <div className="grid-col-row-2">
                     <div className="w-[1200px] bg-[#C7e8f3] shadow-xl rounded-lg">

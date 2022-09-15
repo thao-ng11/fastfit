@@ -4,23 +4,19 @@ import { useToken } from '../Authentication';
 
 function MealWidget() {
     const today = new Date()
-    // const todayDate = today.toISOString()
+
     const todayYear = today.getFullYear()
     const todayDay = today.getDate()
     const todayMonth = (today.getMonth() + 1).toString().padStart(2, '0')
-    // console.log("month", todayMonth)
-    // 2022-09-13
+
     const todayDate = `${todayYear}-${todayMonth}-${todayDay}`
     const todayTime = today.getHours()
-    // console.log(today)
-    // const todayTime = 8
-    // console.log("date", todayDate)
-    // console.log('MEALTIME HOUR', todayTime)
+
 
     const [mealType, setMealType] = useState('')
 
     const [token] = useToken()
-    // console.log('MEALWIDGET', token)
+
     const [meal, setMeal] = useState({
         recipe: '',
         image: ''
@@ -31,9 +27,7 @@ function MealWidget() {
     const appID = process.env.REACT_APP_EDAMAM_APP_ID
     const apiKey = process.env.REACT_APP_EDAMAM_RECIPE_API_KEY
 
-    // console.log(token)
-    // console.log(appID)
-    // console.log(apiKey)
+
 
     const fetchRecipe = async (recipeId) => {
         const apiUrl = `https://api.edamam.com/api/recipes/v2/${recipeId}/?app_id=${appID}&type=public&app_key=${apiKey}&field=label&field=image`
@@ -70,7 +64,6 @@ function MealWidget() {
         })
         if (mealsResponse.ok) {
             const meals = await mealsResponse.json()
-            // console.log(meals, todayDate, mealType)
 
             const todayMeals = meals.filter(meal => meal['date'] === `${todayDate}` && meal['type'] === type)
             // console.log(mealType)
@@ -81,7 +74,7 @@ function MealWidget() {
                 const recipeID = todayMeals[0]['recipe_api_id']
                 // console.log(recipeID)
 
-                fetchRecipe(recipeID)
+                // fetchRecipe(recipeID)
             }
             else {
                 setShowSearch('grid-rows-3')
@@ -93,7 +86,6 @@ function MealWidget() {
 
 
     useEffect(() => {
-        console.log('MEALWIDGET', mealType)
         if (token !== null) {
             fetchMeals()
         }
