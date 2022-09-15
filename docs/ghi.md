@@ -12,6 +12,7 @@ log in to the Web site.
 ## Journal
 
 This journal microservice.
+
 ![Image](wireframes/FastFIT_Journal.png)
 
 - The main page: User can indicate their mood based on the mood meter. The page also displays the total entries from the user as well as the current streak from the user.
