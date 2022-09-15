@@ -46,3 +46,9 @@ I was able to get data points to render on the chartjs! I'm finishing my unit te
 
 ### 9.13
 AUTH DAY!!! Sarah really helped today as we made sure all of the pages and routers that needed authentication got it. Lots of share screen today so that we could troubleshoot through each other's errors. I had an issue were my form input was set to submit instead of "button". This caused a big issue with the function continuously being called and REALLY slowing the page down. Zach was able to help me figure that out. I had some silly git issues, which you'll see in the commit log. I kept forgetting to go back to my branch. After having so many docker containers open at this point in our project, I'm starting to think that I'll need a more powerful computer. At one point today, I completely overloaded my working memory and my computer crashed. I have a fairly new MacBook Pro (2020) with 8GB RAM. 
+
+### 9.14
+PREVIEW WITH DALONTE DAY! I was able to get my submit button figured out - it turns out that, at the moment, it doesn't respond to the 'enter' button, but only on click. Chalking that up to a stretch goal. I was also able to create and implement my graph as a widget on the main dashboard page. With a little help from the SEIRs, I got it positioned the way I wanted within the Tailwind card. Preview went well with Dalonte and it seems like all that's left is some documentation and cleaning up things here an there. 
+
+### 9.15
+It's been a slow Thursday. We're combing back through the project requirements and making sure all of the documentation is taken care of. I updated the README and added my wireframe to the docs folder. I'll be adding my API markdown here soon. 
