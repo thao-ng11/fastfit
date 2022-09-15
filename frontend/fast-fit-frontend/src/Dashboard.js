@@ -7,6 +7,7 @@ import { getTokenInternal } from "./Authentication";
 import WeightWidget from "./health_data/weightWidget";
 import WorkoutWidget from "./Workouts/WorkoutWidget";
 import JournalWidget from "./journals/journalWidget";
+import QuoteWidget from "./quote/quoteWidget";
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -80,10 +81,13 @@ class Dashboard extends React.Component {
             </div>
           </div>
           <div className="flex flex-col space-y-5 w-full h-full">
-            <div className="flex flex-wrap py-2.5 h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center">
-              <h1 className="text-3xl font-semibold text-[#8e4162]">
+            <div className="py-2.5 h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center">
+              <h1 className="text-3xl text-center font-semibold text-[#8e4162]">
                 Inspirational Quote
               </h1>
+              <div>
+                <QuoteWidget />
+            </div>
             </div>
             <div className="inline-flex flex-col h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center">
               <h1 className="grid place-items-center text-3xl font-semibold text-[#8e4162]">
@@ -141,13 +145,15 @@ class Dashboard extends React.Component {
                 </div>
               </div>
             </a>
-            <div className="flex py-2.5 h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center">
-              <h1 className="text-3xl font-semibold text-[#8e4162]">Journal</h1>
+            <div className="flex flex-col py-2 h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center">
+              <h1 className="text-3xl text-center font-semibold text-[#8e4162]">
+                Benefits of Journaling
+              </h1>
               <JournalWidget />
             </div>
           </div>
           <div className="flex py-2.5 h-full w-full bg-[#c7e8f3] rounded-md flex-wrap items-center justify-center">
-            <h1 className="text-3xl font-semibold w-full text-center text-[#8e4162]">
+            <h1 className="text-2.5xl font-semibold w-full text-center text-[#8e4162]">
               {" "}
               Your Local Weather{" "}
             </h1>
