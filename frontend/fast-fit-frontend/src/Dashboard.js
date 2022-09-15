@@ -127,7 +127,7 @@ class Dashboard extends React.Component {
           </div>
           <a
             href="../meals/user"
-            className="h-full w-full text-black hover:text-black hover:border-[#195569] border-transparent border-2"
+            className="flex py-2.5 w-full h-full bg-[#c7e8f3] rounded-md justify-center text-black hover:text-black hover:border-[#195569] border-transparent border-2"
           >
             <div className="py-2.5 h-full w-full bg-[#c7e8f3] rounded-md justify-center">
               <h1 className="text-3xl text-center font-semibold text-[#8e4162]">
