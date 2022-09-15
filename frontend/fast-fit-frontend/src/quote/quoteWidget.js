@@ -32,20 +32,22 @@ function QuoteWidget() {
     }, [])
 
     return (
-        <div className="flex w-full">
-            <div className='flex w-full pt-2'>
-                <div>
-                    <div className="px-3">
-                        <FontAwesomeIcon className=" text-[#8e4162] text-xl"icon={faQuoteLeft} />
+        <div className="flex w-full h-[130px]">
+            <div className="grid-col-row-4">
+                <div className="grid-col-row-4 px-2">
+                    <FontAwesomeIcon className=" text-[#8e4162] text-xl"icon={faQuoteLeft} />
+                </div>
+                <div className="grid-col-row-4 justify-center items-center">
+                    <div className="flex flex-row w-full p-2 items-center justify-center">
+                        <h2 className ="font-semibold text-center justify-center">{quote.quote}</h2>
                     </div>
-                    <div className="flex items-center justify-center w-full">
-                        <h2 className ="text-center justify-center">{quote.quote}</h2>
-                    </div>
-                    <div className="flex pt-4 px-16 w-full items-end justify-end">
-                        <FontAwesomeIcon className=" text-[#8e4162] text-xl"icon={faQuoteRight} />
-                    </div>
-                    <div className="flex w-full">
-                        <h2 className ="text-center justify-center">{quote.author}</h2>
+                </div>
+                <div className="grid-col-row-4 justify-end items-end pl-[340px] pr-2">
+                    <FontAwesomeIcon className=" text-[#8e4162] text-xl"icon={faQuoteRight} />
+                </div>
+                <div className="grid-col-row-4 justify-end items-end">
+                    <div className="flex flex-row w-full items-end justify-end pr-8">
+                        <h2 className ="">- {quote.author}</h2>
                     </div>
                 </div>
             </div>

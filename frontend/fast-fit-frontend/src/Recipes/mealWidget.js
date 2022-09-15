@@ -74,7 +74,7 @@ function MealWidget() {
                 const recipeID = todayMeals[0]['recipe_api_id']
                 // console.log(recipeID)
 
-                // fetchRecipe(recipeID)
+                fetchRecipe(recipeID)
             }
             else {
                 setShowSearch('grid-rows-3')
