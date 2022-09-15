@@ -54,3 +54,6 @@ Finally finished up the functionality and the CSS on the front end for my micros
 
 ## 9/14 
 Finished the unit tests for strength workouts! Last thing to add is my microservice to the dashboard!.. Few hours later, added my microservice to the dashboard. ALL DONE!!!! I FINISHED!!
+
+## 9/15
+Started doing wireframes and all of the document files.
