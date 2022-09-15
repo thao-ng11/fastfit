@@ -53,6 +53,15 @@ export default function HealthDataForm() {
     }
   }
 
+  // useEffect(() => {
+  //   // console.log(“recipe: change”, recipe)
+  //   setMeal({
+  //     ...meal,
+  //     recipe_api_id: recipe.uri.split(‘#’)[1],
+  //     type: type
+  //   })
+  // }, [recipe])
+
   const handleChange = event => {
     const value = event.target.value
     const numericValue = parseInt(value)
@@ -61,7 +70,7 @@ export default function HealthDataForm() {
 
   const handleSubmit = async event => {
     event.preventDefault()
-    console.log(token)
+    console.log(healthData)
     const url = `${process.env.REACT_APP_HEALTH_HOST}/api/health_data`
     console.log(JSON.stringify(healthData))
     try {

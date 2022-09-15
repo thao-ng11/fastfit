@@ -1,10 +1,10 @@
 ## FastFIT
 
-Ryan
-Sarah
-Thao
-Nate
-Drew
+Ryan - Accounts, Dashboard
+Sarah - Meals
+Thao - Journal
+Nate - Workouts
+Drew - Health
 
 A fitness app to drive your fitness goals!
 
