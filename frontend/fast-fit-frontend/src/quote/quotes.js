@@ -123,12 +123,6 @@ function quotesList() {
             "h": "<blockquote>&ldquo;Often in the real world, it's not the smart that get ahead, but the bold.&rdquo; &mdash; <footer>Robert Kiyosaki</footer></blockquote>"
         },
         {
-            "q": "Just trust that everything is unfolding the way it is supposed to. Don't resist... Great things are waiting for you around the corner.",
-            "a": "Sonia Ricotti",
-            "c": "134",
-            "h": "<blockquote>&ldquo;Just trust that everything is unfolding the way it is supposed to. Don't resist... Great things are waiting for you around the corner.&rdquo; &mdash; <footer>Sonia Ricotti</footer></blockquote>"
-        },
-        {
             "q": "Courage Is a Love Affair with the Unknown",
             "a": "Osho",
             "c": "41",
@@ -157,12 +151,6 @@ function quotesList() {
             "a": "Bob Proctor",
             "c": "74",
             "h": "<blockquote>&ldquo;You are the only problem you will ever have and you are the only solution.&rdquo; &mdash; <footer>Bob Proctor</footer></blockquote>"
-        },
-        {
-            "q": "Forget mistakes. Forget failure. Forget everything except what you are going to do now and do it. Today is your lucky day!",
-            "a": "Og Mandino",
-            "c": "122",
-            "h": "<blockquote>&ldquo;Forget mistakes. Forget failure. Forget everything except what you are going to do now and do it. Today is your lucky day!&rdquo; &mdash; <footer>Og Mandino</footer></blockquote>"
         },
         {
             "q": "Successful people do what unsuccessful people are not willing to do.",
@@ -217,12 +205,6 @@ function quotesList() {
             "a": "Les Brown",
             "c": "49",
             "h": "<blockquote>&ldquo;Life has no limitations except the ones you make.&rdquo; &mdash; <footer>Les Brown</footer></blockquote>"
-        },
-        {
-            "q": "Nothing ever happened in the past that can prevent you from being present now; and if the past cannot prevent you from being present now, what power does it have?",
-            "a": "Eckhart Tolle",
-            "c": "162",
-            "h": "<blockquote>&ldquo;Nothing ever happened in the past that can prevent you from being present now; and if the past cannot prevent you from being present now, what power does it have?&rdquo; &mdash; <footer>Eckhart Tolle</footer></blockquote>"
         },
         {
             "q": "Success comes from knowing that you did your best to become the best that you are capable of becoming.",
@@ -457,12 +439,6 @@ function quotesList() {
             "a": "Oprah Winfrey",
             "c": "50",
             "h": "<blockquote>&ldquo;Where there is no struggle, there is no strength. &rdquo; &mdash; <footer>Oprah Winfrey</footer></blockquote>"
-        },
-        {
-            "q": "If you want to be successful, find someone who has achieved the results you want and copy what they do and you'll achieve the same results.",
-            "a": "Tony Robbins",
-            "c": "139",
-            "h": "<blockquote>&ldquo;If you want to be successful, find someone who has achieved the results you want and copy what they do and you'll achieve the same results.&rdquo; &mdash; <footer>Tony Robbins</footer></blockquote>"
         },
         {
             "q": "There is no self-discovery without pain and loss.",
