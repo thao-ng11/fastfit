@@ -42,7 +42,7 @@ function QuoteWidget() {
                         <h2 className ="font-semibold text-center justify-center">{quote.quote}</h2>
                     </div>
                 </div>
-                <div className="grid-col-row-4 justify-end items-end pl-[340px] ">
+                <div className="grid-col-row-4 justify-end items-end pl-[340px] pr-2">
                     <FontAwesomeIcon className=" text-[#8e4162] text-xl"icon={faQuoteRight} />
                 </div>
                 <div className="grid-col-row-4 justify-end items-end">

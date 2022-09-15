@@ -1,10 +1,10 @@
 ## FastFIT
 
-Ryan
-Sarah
-Thao
-Nate
-Drew
+Ryan - Accounts, Dashboard
+Sarah - Meals
+Thao - Journal
+Nate - Workouts
+Drew - Health
 
 A fitness app to drive your fitness goals!
 
@@ -48,7 +48,10 @@ meals and workouts, calculate BMI, weight tracking, and a journal.
 
 ## Install Ready
 
-### DOCKER INTALL
+### DOCKER INSTALL
 - Create docker volumes
 	- postgres-data
 	- pg-admin
+
+### .env
+- sent over Slack
