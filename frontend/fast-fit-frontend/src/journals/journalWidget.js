@@ -1,15 +1,37 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faChevronLeft,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
 
 function JournalWidget() {
   const [benefit, setBenefit] = useState([
     "Reduce Stress",
     "Journaling is a incredible stress management tool, a good-for-you habit that lessens impact of physical stressors on your health.",
   ]);
-  function handleCount() {}
+  const [count, setCount] = useState(1);
+
+  function handleCount(direction) {
+    switch (direction) {
+      case "forward":
+        if (count === 5) {
+          setCount(1);
+        } else {
+          setCount(count + 1);
+        }
+      case "backwards":
+        if (count === 1) {
+          setCount(5);
+        } else {
+          setCount(count - 1);
+        }
+    }
+  }
 
   function renderBenefit() {
-    switch (handleCount) {
+    switch (count) {
       case 1:
         return [
           "Reduce Stress",
@@ -25,19 +47,19 @@ function JournalWidget() {
       case 3:
         return [
           "Keeps Memory Sharp",
-          "Journaling helps keep your brain in tip-top shape. It boosts memory and comprehension, it also increases working memory capacity, which may reflect improved cognitive processing.",
+          "Journaling helps keep your brain in tip-top shape. It boosts memory and comprehension, which may reflect improved cognitive processing.",
         ];
         break;
       case 4:
         return [
-          "Boosts Mood",
-          "Writing, like anything, improves with practice. When you journal every day, you’re practicing the art of writing. And if you use a journal to express your thoughts and ideas, it’ll help improve your overall communication skills.",
+          "Opening Up",
+          "Writing privately about a stressful event could encourage some to reach out for social support. This can help with emotional healing..",
         ];
         break;
       case 5:
         return [
           "Strengthens Emotional Functions",
-          "Journaling evokes mindfulness and helps writers remain present while keeping perspective. It helps in the management of personal adversity and change, and emphasize important patterns and growth in life. ",
+          "Journaling evokes mindfulness. It helps in the management of personal adversity with emphasizing on patterns and growth in life. ",
         ];
         break;
 
@@ -47,20 +69,51 @@ function JournalWidget() {
 
   useEffect(() => {
     setBenefit(renderBenefit);
-  }, []);
+  }, [count]);
 
   return (
     <div>
-      {/* <div>
-        <div className="flex flex-col text-center" onClick={handleCount}>
-          <span>{benefit[0]}</span>
-          <span>{benefit[1]}</span>
-        </div>
-      </div> */}
       <div>
-        <h3 className="text-center font-semibold text-xl">
-          It's time to build your gratitude practice
-        </h3>
+        <div className="carousel-inner relative w-full overflow-hidden">
+          <div className="carousel-item active relative float-left w-full">
+            <div
+              className="flex flex-row text-center px-2"
+              onClick={handleCount}
+            >
+              <button
+                onClick={() => {
+                  handleCount("backwards");
+                }}
+                className="font-semibold"
+              >
+                <FontAwesomeIcon
+                  className="text-[#8e4162] text-xl font-bold"
+                  icon={faChevronLeft}
+                />
+              </button>
+              <div className="flex flex-col">
+                <span className="font-semibold text-lg">{benefit[0]}</span>
+                <span className="text-lg">{benefit[1]}</span>
+              </div>
+              <button
+                onClick={() => {
+                  handleCount("forward");
+                }}
+                className="font-semibold"
+              >
+                <FontAwesomeIcon
+                  className="text-[#8e4162] text-xl font-bold"
+                  icon={faChevronRight}
+                />
+              </button>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3 className="text-center font-semibold text-lg text-[#8e4162]">
+            It's time to build your gratitude practice
+          </h3>
+        </div>
       </div>
     </div>
   );

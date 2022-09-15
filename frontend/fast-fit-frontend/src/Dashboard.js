@@ -141,13 +141,15 @@ class Dashboard extends React.Component {
                 </div>
               </div>
             </a>
-            <div className="flex py-2.5 h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center">
-              <h1 className="text-3xl font-semibold text-[#8e4162]">Journal</h1>
+            <div className="flex flex-col py-2 h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center">
+              <h1 className="text-3xl text-center font-semibold text-[#8e4162]">
+                Benefits of Journaling
+              </h1>
               <JournalWidget />
             </div>
           </div>
           <div className="flex py-2.5 h-full w-full bg-[#c7e8f3] rounded-md flex-wrap items-center justify-center">
-            <h1 className="text-3xl font-semibold w-full text-center text-[#8e4162]">
+            <h1 className="text-2.5xl font-semibold w-full text-center text-[#8e4162]">
               {" "}
               Your Local Weather{" "}
             </h1>
