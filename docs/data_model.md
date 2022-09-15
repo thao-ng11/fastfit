@@ -4,20 +4,12 @@
 
 | Name      | Type   | Unique | Optional |
 | --------- | ------ | ------ | -------- |
+| id            | int          | yes    | no       |
 | username  | string | yes    | no       |
 | password  | string | no     | no       |
 | email     | string | yes    | no       |
 | firstname | string | no     | no       |
 | lastname  | string | no     | no       |
-
-## Profile
-
-| Name      | Type              | Unique | Optional |
-| --------- | ----------------- | ------ | -------- |
-| user_info | reference to user | yes    | no       |
-| avatar    | png               | no     | no       |
-| height    | int               | no     | no       |
-| zip       | int               | no     | no       |
 
 The `User` entity contains the data about a user account.
 
@@ -28,40 +20,22 @@ The `User` entity contains the data about a user account.
 | Name          | Type         | Unique | Optional |
 | ------------- | ------------ | ------ | -------- |
 | id            | int          | yes    | no       |
-| uservo        | reference to | yes    | no       |
+| username        | string | yes    | no       |
 | recipe_api_id | string       | no     | no       |
 | date          | date         | no     | no       |
 | type          | str          | no     | no       |
 
-## Meal_type
-
-| Name          | Type         | Unique | Optional |
-| ------------- | ------------ | ------ | -------- |
-| id            | int          | yes    | no       |
-| name        | str | yes    | no       |
-
 # WORKOUTS MODELS
-
-## Workout_categories
-
-| Name     | Type | Unique | Optional |
-| -------- | ---- | ------ | -------- |
-| category | str  | yes    | no       |
-
-## Muscle_group
-
-| Name   | Type | Unique | Optional |
-| ------ | ---- | ------ | -------- |
-| muscle | str  | yes    | no       |
 
 ## Cardio_workout
 
 | Name         | Type                    | Unique | Optional |
 | ------------ | ----------------------- | ------ | -------- |
-| uservo       | reference to            | yes    | no       |
-| category     | reference to categories | no     | no       |
+| id            | int          | yes    | no       |
+| username        | string | yes    | no       |
+| category     | string | no     | no       |
+| workout     | string | no     | no       |
 | date/time    | date/time               | no     | no       |
-| muscle_group | str                     | no     | no       |
 | duration       | int                     | no     | no       |
 | distance     | float                   | no     | yes      |
 
@@ -69,10 +43,12 @@ The `User` entity contains the data about a user account.
 
 | Name         | Type                    | Unique | Optional |
 | ------------ | ----------------------- | ------ | -------- |
-| uservo       | reference to            | yes    | no       |
-| category     | reference to categories | no     | no       |
-| date/time    | date/time               | no     | no       |
+| id            | int          | yes    | no       |
+| username        | string | yes    | no       |
+| category     | string | no     | no       |
 | muscle_group | str                     | no     | no       |
+| workout     | string | no     | no       |
+| date/time    | date/time               | no     | no       |
 | sets         | int                     | no     | no       |
 | repetitions  | int                     | no     | no       |
 | weight       | int                     | no     | yes      |
@@ -83,7 +59,8 @@ The `User` entity contains the data about a user account.
 
 | Name      | Type     | Unique | Optional |
 | --------- | -------- | ------ | -------- |
-| uservo    | ref_user | no     | no       |
+| id            | int          | yes    | no       |
+| username        | string | yes    | no       |
 | date      | date     | no     | no       |
 | grateful  | str      | no     | no       |
 | daily_aff | str      | no     | no       |
@@ -96,7 +73,8 @@ The `User` entity contains the data about a user account.
 
 | Name           | Type        | Unique | Optional |
 | -------------- | ----------- | ------ | -------- |
-| profilevo      | ref_profile | no     | no       |
+| id            | int          | yes    | no       |
+| username        | string | yes    | no       |
 | current_weight | int         | no     | no       |
 | current_bmi    | float       | no     | no       |
 | date/time      | date/time   | no     | no       |
@@ -105,6 +83,8 @@ The `User` entity contains the data about a user account.
 
 | Name        | Type        | Unique | Optional |
 | ----------- | ----------- | ------ | -------- |
-| profilevo   | ref_profile | no     | no       |
+| id            | int          | yes    | no       |
+| username        | string | yes    | no       |
 | goal_weight | int         | no     | no       |
 | goal_bmi    | float       | no     | no       |
+| height    | int       | no     | no       |
