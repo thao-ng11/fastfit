@@ -67,7 +67,7 @@ export default function WeightWidget() {
 
   weightHistory &&
     weightHistory.map((weight) => {
-      const date = format(new Date(weight.entry_date), "MM/dd/yy");
+      const date = format(new Date(weight.entry_date), "MM/dd");
       labels.push(date);
       weights.push(weight.current_weight);
     });
@@ -95,7 +95,7 @@ export default function WeightWidget() {
   };
   return (
     <>
-      <div>
+      <div className="w-full h-full">
         <Line className="bg-[#F1F1F1]" data={data} height={90} type="line" />
       </div>
     </>

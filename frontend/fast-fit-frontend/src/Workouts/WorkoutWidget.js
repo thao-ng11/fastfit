@@ -7,24 +7,24 @@ function WorkoutPlanList() {
     const [token] = useToken()
     console.log(token)
     let dates = []
-    const [workouts,setWorkouts] = useState([])
+    const [workouts, setWorkouts] = useState([])
     const navigate = useNavigate()
-    const [dateFilter,setDateFilter] = useState('')
+    const [dateFilter, setDateFilter] = useState('')
     const fetchWorkouts = async () => {
         const strengthWorkoutstUrl = 'http://localhost:8020/api/strength_workout/user'
-        const cardioWorkoutsUrl ='http://localhost:8020/api/cardio_workout/user'
+        const cardioWorkoutsUrl = 'http://localhost:8020/api/cardio_workout/user'
         const response = await fetch(strengthWorkoutstUrl, {
             credentials: "include",
             headers: {
-                Authorization: `Bearer ${token}` 
+                Authorization: `Bearer ${token}`
             },
-          })
+        })
         const response2 = await fetch(cardioWorkoutsUrl, {
             credentials: "include",
             headers: {
-                Authorization: `Bearer ${token}` 
+                Authorization: `Bearer ${token}`
             },
-          })
+        })
         const data = await response.json();
         const data2 = await response2.json();
         console.log(data)
@@ -34,46 +34,46 @@ function WorkoutPlanList() {
     useEffect(() => {
         fetchWorkouts()
     }, [token]);
-    
-    const cancelWorkout = async (id,type) => {
+
+    const cancelWorkout = async (id, type) => {
         const cancelUrl = `http://localhost:8020/api/${type}/${id}/`
         const fetchConfig = {
             method: "delete"
         }
         const cancelResponse = await fetch(cancelUrl, fetchConfig)
-        if (cancelResponse.ok){
+        if (cancelResponse.ok) {
             let updatedworkouts = [];
             updatedworkouts = workouts.filter(workout => workout.id !== id)
             setWorkouts(updatedworkouts);
         }
     }
-    function filterDates(e){
+    function filterDates(e) {
         setDateFilter(e.target.value);
     }
-    function handleNavigate(){
+    function handleNavigate() {
         navigate('/workout')
     }
     return (
-        <div className='flex justify-between items-center overflow-y-auto  max-h-[100px]'>
+        <div className='flex justify-between items-center overflow-y-auto  max-h-[225px]'>
             <div className='w-full bg-[#c7e8f3] rounded-lg'>
-            <table className="table-auto object-cover table-borderless">
-                <thead>
-                </thead>
-                <tbody className= 'pt-5'>
-                    {workouts.map(workout => {
-                        if (workout.workout_date.includes(dateFilter)){
-                            return (
-                                <WorkoutEntry2 className='hover:bg-gray-300' workout={workout}
-                               />
-                            );
-                        }
-                    })}
-                </tbody>
-            </table>
+                <table className="table-auto object-cover table-borderless">
+                    <thead>
+                    </thead>
+                    <tbody className='pt-5'>
+                        {workouts.map(workout => {
+                            if (workout.workout_date.includes(dateFilter)) {
+                                return (
+                                    <WorkoutEntry2 className='hover:bg-gray-300' workout={workout}
+                                    />
+                                );
+                            }
+                        })}
+                    </tbody>
+                </table>
             </div>
-            </div>
-          
-        );
-    }
+        </div>
+
+    );
+}
 
 export default WorkoutPlanList;

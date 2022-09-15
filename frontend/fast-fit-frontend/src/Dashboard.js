@@ -80,7 +80,7 @@ class Dashboard extends React.Component {
               <h1 className="text-center py-2 text-3xl font-semibold text-[#8e4162]">
                 Workouts for Today
               </h1>
-              <div className="grid-rows-1 mt-20">
+              <div className="grid-rows-1 mt-10">
                 <WorkoutWidget />
               </div>
             </div>
@@ -125,33 +125,38 @@ class Dashboard extends React.Component {
               </div>
             </div>
           </div>
-          <div className="py-2.5 h-full w-full bg-[#c7e8f3] rounded-md justify-center">
-            <h1 className="text-3xl text-center font-semibold text-[#8e4162]">
-              Meals
-            </h1>
-            <div>
-              <MealWidget />
+          <a
+            href="../meals/user"
+            className="h-full w-full text-black hover:text-black hover:border-[#195569] border-transparent border-2"
+          >
+            <div className="py-2.5 h-full w-full bg-[#c7e8f3] rounded-md justify-center">
+              <h1 className="text-3xl text-center font-semibold text-[#8e4162]">
+                Meals
+              </h1>
+              <div>
+                <MealWidget />
+              </div>
             </div>
-          </div>
+          </a>
         </div>
         <div className="max-w-7xl px-5 py-2.5 bg-[#073b4c] flex space-x-5 w-full h-full items-center justify-center mx-auto">
           <div className="flex flex-col space-y-5 w-full h-full">
             <a
               href="../health"
-              className="flex py-2.5 h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center text-black hover:text-black hover:border-[#195569] border-transparent border-2"
+              className="flex py-1 h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center text-black hover:text-black hover:border-[#195569] border-transparent border-2"
             >
-              <div className="grid place-items-center py-2 w-full bg-[#c7e8f3] rounded-md items-stretch">
-                <h1 className=" text-3xl font-semibold text-[#8e4162]">
+              <div className="grid place-items-center py-1 w-full bg-[#c7e8f3] rounded-md items-stretch">
+                <h1 className=" text-2xl font-semibold text-[#8e4162]">
                   {" "}
                   Weight Tracker{" "}
                 </h1>
-                <div className="pt-3 h-5px grid place-items-center ">
+                <div className="pt-1 w-[440px] h-full grid place-items-center shadow-lg">
                   <WeightWidget />
                 </div>
               </div>
             </a>
             <div className="flex flex-col py-2 w-full bg-[#c7e8f3] rounded-md justify-center">
-              <h1 className="text-3xl text-center font-semibold text-[#8e4162]">
+              <h1 className="text-2xl text-center font-semibold text-[#8e4162]">
                 Benefits of Journaling
               </h1>
               <JournalWidget />
