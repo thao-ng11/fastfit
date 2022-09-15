@@ -95,10 +95,10 @@ function JournalMain() {
                 </div>
               </div>
               <div>
-                <h3 className="text-center font-semibold text-xl">
-                  It's time to build your gratitude practice
+                <h3 className="text-center font-semibold text-xl py-2">
+                  Practice gratitude and find joy in your daily life
                 </h3>
-                <div className="flex items-center justify-center py-4">
+                <div className="flex items-center justify-center py-2">
                   <button
                     className="bg-[#BF9ACA] btn rounded font-bold text-[#F1F1F1]"
                     onClick={handleNavigate}

@@ -1,6 +1,18 @@
 # Progress Report
 
-### 9/11
+### 9/14
+
+I worked with Zach on a lot of bugs I discovered at the end of yesterday for the recipeSearch components. I realized that when I do an initial search for recipes based on a meal type and save a meal, then if I do another search (change the meal type) and save a meal, the saved meal if still the old recipes from the original search, so each search wasn't updated the state correctly. We finally found that it occured because the state wasn't getting redefined with each render, even though the recipes shown on the web page were updating. We fixed it by setting the state within the useeffect and adding the recipe variable that was passed into the component as a dependency on the useeffect, whereas initially I only had the recipe id and type defined where I defined the usestate function.
+
+Another bug we worked on was because the mealWidget wasn't loading on the dashboard after navigating to the page; it would load with a user meal after the page is refreshed. We discovered that it wasn't loading because the mealType state that was set in the useeffect was null when the user meals filter function ran. I fixed it by moving logic to determine what the mealtype should be based on the time of day out of use effect and into the fetch meals function and then using a local variable with the mealtype to pass into the filter function and then setting the mealtype state with the local variable.
+
+I got the quoteWidget completed with styling pending tomorrow. I added quotation icons from font awesome to put around the quote. I wasn't able to find a free API with good quotes so I found a bunch of quotes and put them into a function and then created a second "fetch" function that generates a random number between 0 up to the length of the list and then return the quote within the index of the list of quotes. Every time the dashboard refreshes, a new quote will appear.
+
+### 9/13
+
+I worked with Zach on a bug on the user meals page because sometimes the images and recipes names weren't loading for each meal...found it was probably limitations on the external API but also found that the state wasn't updating right and likely lagging and causing the images to not show even though they were pulled from the API. We mitigated the issue on the state by creating an empty array variable and pushing each meal to the array and then setting the state with that array after the for loop within the fetch meals function.
+
+### 9/12
 
 I worked on the styling for the userMeals.js page. I set up the authorization for the recipe search pages so messages to login show and the buttons to add a recipe to a meal stop showing if a token isn't returned. I discovered that the get and delete by id routers weren't giving the proper return messages if the function isn't successful, so I corrected those. I added buttons and functions to allow users to delete each meal and added auth to the delete router in fastapi. I ended up converting my userMeals.js class component into a function and that would allow me to call the setMeals hook in the mealResult.js function component and filter the meals state list to refresh the list of meals and not include the id that was deleted. It took so much trial and error today to get it all working. I also used the useNavigate hook to redirect the user to the login page if the token was not pulled. The only way I was able to get it to work was by hitting the accounts token route to fetch the token; otherwise, it kept redirecting before the state could fully be loaded with the token.
 
