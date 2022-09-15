@@ -80,3 +80,7 @@ Finishing up tailwind and styling for the form and the list. Figuring out the sp
 # Sept 13, 2022
 
 Redo JSX on the journal list because of all the alert from the <table> hierarchy tags. Apply authentication on both backend and front end. Setting it on router specifically for user as well as general post request in the backend. Have to use Insomia to test the backend instead of FastAPI Swagger since I have to input the JWOT into the Header of the request. Choose Authentication, "bearer JWOT (from the browser)". For the authentication in the front end, have to change the url request from api/journals to api/journals/user and adapt all front end formula to accomodate the username verification. Ryan and Sarah helped me a lot with the authentication implementation.
+
+# Sept 14, 2022
+
+Working on the journalWidget and connect it to the Dashboard. I decided to add in a list of benefits of journaling into the dashboard and have it cycles through 5 benefits. Setting up the function handleCount for the button to go back and forth as well as cycle through the list. In addition, adding the fontawesome navigation symbols to give a cleaner look. We gave the instructor our draft presentation on our project and that went well. We had all of our unit tests done as well as the MVP of the project.
