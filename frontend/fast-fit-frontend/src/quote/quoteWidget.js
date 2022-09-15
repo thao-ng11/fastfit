@@ -15,14 +15,18 @@ function QuoteWidget() {
         'life',
     ]
     async function fetchQuotes() {
-        const apiUrl = 'https://zenquotes.io?api=random'
+        const apiUrl = 'https://zenquotes.io/api/quotes/random'
         
         const apiResponse = await fetch(apiUrl)
-        if (apiResponse.ok) {
-            const quote = await apiResponse.json()
-            console.log(quote)
-        }
+        const quote = await apiResponse.json()
+        console.log(quote)
+        // if (apiResponse.ok) {
+        // }
     }
+
+    useEffect(() => {
+        
+    }, [])
 
     return (
         <div className="flex w-full">

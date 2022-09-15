@@ -15,11 +15,12 @@ function MealWidget() {
     // console.log(today)
     // const todayTime = 8
     // console.log("date", todayDate)
-    // console.log(todayTime)
+    // console.log('MEALTIME HOUR', todayTime)
 
-    const [mealType, setMealType] = useState('null')
+    const [mealType, setMealType] = useState('')
 
     const [token] = useToken()
+    // console.log('MEALWIDGET', token)
     const [meal, setMeal] = useState({
         recipe: '',
         image: ''
@@ -51,51 +52,52 @@ function MealWidget() {
 
     const fetchMeals = async () => {
 
+        let type = ''
+        if (todayTime >= 14) {
+            type = 'Dinner'
+        }
+        else if (todayTime >= 10) {
+            type = 'Lunch'
+        }
+        else { type = 'Breakfast' }
+
+        setMealType(type)
+        
         const url = `${process.env.REACT_APP_RECIPES_HOST}/api/meals/user`
 
-        try {
-            const mealsResponse = await fetch(url, {
-                headers: { Authorization: `Bearer ${token}` },
-            })
-            if (mealsResponse.ok) {
-                const meals = await mealsResponse.json()
-                // console.log(meals)
+        const mealsResponse = await fetch(url, {
+            headers: { Authorization: `Bearer ${token}` },
+        })
+        if (mealsResponse.ok) {
+            const meals = await mealsResponse.json()
+            // console.log(meals, todayDate, mealType)
 
-                const todayMeals = meals.filter(meal => meal['date'] === `${todayDate}` && meal['type'] === mealType)
-                // console.log(mealType)
-                // console.log(todayMeals)
-                if (todayMeals.length > 0) {
+            const todayMeals = meals.filter(meal => meal['date'] === `${todayDate}` && meal['type'] === type)
+            // console.log(mealType)
+            // console.log(todayMeals)
+            console.log(mealType, todayMeals)
+            if (todayMeals.length > 0) {
 
-                    const recipeID = todayMeals[0]['recipe_api_id']
-                    // console.log(recipeID)
+                const recipeID = todayMeals[0]['recipe_api_id']
+                // console.log(recipeID)
 
-                    fetchRecipe(recipeID)
-                }
-                else {
-                    setShowSearch('grid-rows-3')
-                    setShowMeal('grid-rows-3 d-none')
-                }
+                fetchRecipe(recipeID)
             }
-        } catch (error) {
-            console.log("ERRORRRRRRRRRR", error)
+            else {
+                setShowSearch('grid-rows-3')
+                setShowMeal('grid-rows-3 d-none')
+            }
         }
 
     }
 
-    useEffect(() => {
-        if (todayTime >= 14) {
-            setMealType('Dinner')
-        }
-        else if (todayTime >= 10) {
-            setMealType('Lunch')
-        }
-        else { setMealType('Breakfast') }
-            setMealType('Breakfast')
 
+    useEffect(() => {
+        console.log('MEALWIDGET', mealType)
         if (token !== null) {
             fetchMeals()
         }
-    }, [token])
+    }, [mealType])
 
     return (
         <div className="flex items-center justify-center">
