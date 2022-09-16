@@ -100,7 +100,7 @@ function JournalMain() {
                 </h3>
                 <div className="flex items-center justify-center py-2">
                   <button
-                    className="bg-[#BF9ACA] btn rounded font-bold text-[#F1F1F1]"
+                    className="bg-gradient-to-r from-[#b3d8e5] to-[#BF9ACA] btn border border-transparent shadow-sm font-bold hover:bg-gradient-to-bl from-[#b3d8e5] to-[#BF9ACA] hover:text-[#F1F1F1]"
                     onClick={handleNavigate}
                   >
                     Start today's journal
@@ -125,7 +125,7 @@ function JournalMain() {
                     </span>
 
                     <button
-                      className="bg-[#BF9ACA] btn rounded font-bold text-[#F1F1F1]"
+                      className=" bg-gradient-to-r from-[#c7e8f3] to-[#BF9ACA] btn border border-[#F1F1F1] shadow-sm font-bold hover:bg-gradient-to-bl from-[#c7e8f3] to-[#BF9ACA] hover:text-[#F1F1F1]"
                       onClick={handleNavigateList}
                     >
                       Your journey

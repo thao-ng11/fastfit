@@ -30,3 +30,14 @@ This is the recipe microservice.
 - User meals: the dashboard will have a navlink to the My Meals page which shows a list of all meals users' have saved ordered by date.
 
 - Search meals: users can search for recipes based on a meal type (Breakfast, Lunch, or Dinner) and a food query. In the row results, a date can be added and the recipe saved to their meals.
+
+
+## Workouts
+
+This is the Workouts Microservice
+
+![Image](wireframes/FastFIT_Workouts.png)
+
+- Workout plan: This is where you can see the workouts filtered by day. If you have nothing  in your workout plan, you can direct yourself to add a workout.
+
+- Add a workout: This is where you can add a number of workouts. Here you can select a muscle group as well as the type of workout, then you can add it to your workout plan.

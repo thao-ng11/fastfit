@@ -30,7 +30,7 @@ class Dashboard extends React.Component {
     const value = event.target.value;
     this.setState({ calc_weight: value });
   }
-  calculateBMI(event) { }
+  calculateBMI(event) {}
   workoutRoute(event) {
     this.setState({ workout_router: true });
   }
@@ -80,7 +80,7 @@ class Dashboard extends React.Component {
               <h1 className="text-center py-2 text-3xl font-semibold text-[#8e4162]">
                 Workouts for Today
               </h1>
-              <div className="grid-rows-1 mt-10">
+              <div className="text-start grid-rows-1 mt-10">
                 <WorkoutWidget />
               </div>
             </div>

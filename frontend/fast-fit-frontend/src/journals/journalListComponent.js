@@ -36,7 +36,7 @@ function JournalsListComponent(props) {
           <tr>
             <td className="py-3" colSpan="3" style={{ textAlign: "right" }}>
               <button
-                className="bg-[#BF9ACA] btn rounded font-semibold text-[#F1F1F1]"
+                className=" bg-gradient-to-bl from-[#BF9ACA] to-[#c7e8f3] btn border border-[#F1F1F1] shadow-sm font-bold  hover:bg-gradient-to-r from-[#BF9ACA] to-[#c7e8f3] text-[#F1F1F1]"
                 onClick={handleDetail}
               >
                 View Details

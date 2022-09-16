@@ -109,9 +109,9 @@ function JournalForm() {
                         className="block p-2 px-4 w-[700px] h-[100px] rounded-lg"
                       />
                     </div>
-                    <div className="flex items-end justify-end py-2 px-4">
-                      <button className="bg-[#BF9ACA] btn rounded font-bold text-[#F1F1F1]">
-                        Create
+                    <div className="flex items-center justify-center py-2 px-4">
+                      <button className=" bg-gradient-to-r from-[#c7e8f3] to-[#BF9ACA] btn border border-[#F1F1F1] shadow-sm font-bold  hover:bg-gradient-to-bl from-[#c7e8f3] to-[#BF9ACA] hover:text-[#F1F1F1]">
+                        Save today's journal
                       </button>
                     </div>
                   </form>
