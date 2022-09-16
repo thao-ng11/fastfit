@@ -55,10 +55,10 @@ return (
         </form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button className="bg-[#BF9ACA] btn rounded font-semibold text-[#F1F1F1] hover:bg-[#dfc4e7] border-width-0"  onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button className="bg-[#BF9ACA] btn rounded font-semibold text-[#F1F1F1] hover:bg-[#dfc4e7]" onClick={handleClose}>
             Save Changes
           </Button>
         </Modal.Footer>
