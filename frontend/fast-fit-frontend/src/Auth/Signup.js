@@ -71,12 +71,10 @@ class SignUp extends React.Component
   {
     const valid = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
     if (email.value.match(valid)){
-      console.log("email valid true")
       return true
     }
     else
     {
-      console.log("emailvalid false")
       return false
     }
 
@@ -101,12 +99,10 @@ class SignUp extends React.Component
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value))
     {
       this.setState({correct_format_email: true})
-      console.log(this.state.correct_format_email)
     }
     else
     {
       this.setState({correct_format_email: false})
-      console.log(this.state.correct_format_email)
     }
   }
   handleChangeUsername(event)
@@ -116,15 +112,11 @@ class SignUp extends React.Component
     let data = {...this.state}
     if (data.usernames.includes(value) === true)
     {
-      console.log("unique state set to not unique")
       this.setState({username_unique: false})
-      console.log(value)
     }
     else
     {
-      console.log("unique state set to unique")
       this.setState({username_unique: true})
-      console.log(value)
     }
   }
   
@@ -140,12 +132,10 @@ class SignUp extends React.Component
     this.setState({password_confirm: value})
     if (this.state.password === value)
     {
-      console.log("password_equal set to match")
       this.setState({passwords_equal: true})
     }
     else
     {
-      console.log("password_equal dont match")
       this.setState({passwords_equal: false})
     }
   }
@@ -156,23 +146,18 @@ class SignUp extends React.Component
     if (response.ok)
     {
       const data = await response.json()
-      console.log("usernames fetched")
-      console.log(data)
       this.setState({usernames: data.usernames})
-      console.log(this.state.usernames)
     }
   }
 formValid(event)
 {
   if(this.state.passwords_equal && this.state.username_unique && this.state.correct_format_email)
   {
-    console.log("returning true")
     this.setState({form_valid: true})
     return true
   }
   else
   {
-    console.log("returning false")
     this.setState({form_valid: false})
     return false
   }
@@ -204,7 +189,6 @@ formValid(event)
     }
     
     if (this.state.redirect){return <Navigate to="/" userInput={this.state.userInput} />;}
-    console.log(this.state)
     return(
     <form onSubmit={this.handleSubmit} id="signup-form">
     <div className="bg-grey-lighter min-h-screen flex flex-col">
