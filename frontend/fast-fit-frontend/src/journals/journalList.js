@@ -22,7 +22,7 @@ function JournalsList() {
       });
       if (res.ok) {
         const journalsListArr = await res.json();
-        console.log("journalsListArr", journalsListArr);
+        // console.log("journalsListArr", journalsListArr);
         setJournalsList(journalsListArr);
       }
     }

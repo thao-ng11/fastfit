@@ -15,7 +15,7 @@ function JournalForm() {
     feeling: 1,
   });
   const [token] = useToken();
-  console.log(token);
+  // console.log(token);
 
   useEffect(() => {
     setBody({ ...body, feeling: state.activeEmoji });
@@ -37,7 +37,7 @@ function JournalForm() {
         Authorization: `Bearer ${token}`,
       },
     };
-    console.log(body);
+    // console.log(body);
 
     const response = await fetch(customerUrl, fetchConfig);
     if (response.ok) {

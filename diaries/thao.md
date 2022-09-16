@@ -88,3 +88,7 @@ Working on the journalWidget and connect it to the Dashboard. I decided to add i
 # Sept 15, 2022
 
 As a group we work to switch up the workout widget and the weight tracker, this allows the graph on the weight tracker to be in a more visually optimal position. I work on the Dashboard and Journal wireframes. The ghi and apis are set up for everyone to fill out their part. Sarah worked on the integrations markdown and data_model. Drew and Ryan are generating the FastFit logo with the AI.
+
+# Sept 16, 2022
+
+Ryan finished the logo, I styled the buttons in journal. Drew and Nat finished their wireframes. The group finished up all the markdown files and readme file. Ready for submission
