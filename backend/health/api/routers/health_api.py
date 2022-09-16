@@ -60,7 +60,6 @@ def health_data_post(
         health_data.current_weight,
         health_data.current_bmi
     )
-    print(row)
     return row
 
 
