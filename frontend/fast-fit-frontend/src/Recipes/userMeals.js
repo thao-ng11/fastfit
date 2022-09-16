@@ -12,7 +12,7 @@ function UserMeals() {
 
     const fetchAPI = async (meal) => {
         let recipeId = meal['recipe_api_id']
-        console.log(recipeId)
+        // console.log(recipeId)
         let apiUrl = `https://api.edamam.com/api/recipes/v2/${recipeId}/?app_id=${appID}&type=public&app_key=${apiKey}&field=label&field=image`
         
         const apiResponse = await fetch(apiUrl)
@@ -23,7 +23,7 @@ function UserMeals() {
             // console.log(recipe)
             
             // console.log(data)
-            console.log("api: ", meal)
+            // console.log("api: ", meal)
         }
         // else {
         //     meal["recipe"] = "Could not load"
@@ -33,7 +33,7 @@ function UserMeals() {
     }
     
     const fetchUserMeals = async () => {
-        console.log(token)
+        // console.log(token)
         // const tokenUrl = `${process.env.REACT_APP_ACCOUNTS_HOST}/token`
         // const tokenResponse = await fetch(tokenUrl, {credentials: "include",})
         // console.log(tokenResponse.status)
@@ -52,16 +52,16 @@ function UserMeals() {
                 let mealArray = []
                 for (let meal of userMeals) {
                     // console.log(meal)
-                    console.log(meals)
+                    // console.log(meals)
                     // setTimeout(async () => {
                         let recipe = await fetchAPI(meal)
                         meal["image"] = recipe.image
                         meal["recipe"] = recipe.label
                         mealArray.push(meal)
                     //   }, [1000])
-                    console.log(mealArray)
+                    // console.log(mealArray)
                 }
-                console.log("final meals: ", mealArray)
+                // console.log("final meals: ", mealArray)
                 setMeals(mealArray)
             }
         // }
@@ -111,7 +111,7 @@ function UserMeals() {
                                             </thead>
                                             <tbody>
                                                 {meals.map(meal => {
-                                                    console.log("inside map", meal)
+                                                    // console.log("inside map", meal)
                                                     return (
                                                         <MealResult meal={meal} setMeals={setMeals} meals={meals} token={token}/>
                                                     );
