@@ -12,7 +12,7 @@ function JournalEmoji(props) {
   const [emoji, setEmoji] = useState([faFaceGrinBeam, "happy"]);
 
   function handleActive() {
-    console.log(props);
+    // console.log(props);
     if (props.setActiveEmoji) {
       props.setActiveEmoji(props.emojiValue);
     }
