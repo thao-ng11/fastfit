@@ -128,28 +128,45 @@ export default function HealthDataForm() {
     ],
   };
   return (
-    <>
-      <div className="bg-[#F1F1F1]">
-        <h1 className="p-4 text-center">Weight History</h1>
-        <div className="p-4">
-          <form>
-            <label className="px-4">
-              Weight:
-              <input onChange={handleChange} type="number" step="1" name="weight" placeholder="0" value={healthData.current_weight} />
-            </label>
-            <button
-              onClick={handleSubmit}
-              type="button"
-              className="p-2 bg-[#bf9aca] btn rounded font-bold text-[#f1f1f1]" >
-              Submit
-            </button>
-          </form>
+    <div className="w-screen py-4">
+      <div className="flex items-center justify-center">
+        <div className="grid-col-row-2">
+          <div className="w-full bg-[#C7e8f3] shadow-xl rounded-lg">
+            <div className="grid-col-row-2">
+              <div className="px-6 py-4 rounded-lg shadow-xl">
+                <div className="grid-col-row-2 bg-[#f1f1f1] rounded-md">
+                  <h1 className="text-center font-semibold text-2xl py-3">Weight History</h1>
+                  <div className="flex flex-row gap-6 items-center justify-center py-2">
+                    <form>
+                      <label className="px-4">
+                        Weight:
+                        <input onChange={handleChange} type="number" step="1" name="weight" placeholder="0" value={healthData.current_weight} />
+                      </label>
+                      <button
+                        onClick={handleSubmit}
+                        type="button"
+                        className="p-2 bg-[#bf9aca] btn rounded font-bold text-[#f1f1f1]" >
+                        Submit
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="w-[800px] bg-[#C7e8f3] shadow-xl rounded-lg">
+            <div className="grid-col-row-2 mt-10">
+              <div className="px-6 py-4 rounded-lg shadow-xl">
+                <div className="grid-col-row-2 bg-[#f1f1f1] rounded-md">
+                  <div className="flex flex-row gap-6 items-center justify-center py-2">
+                    <Line className="px-5 bg-[#F1F1F1]" data={data} height={90} type="line" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div>
-        <Line className="px-5 bg-[#F1F1F1]" data={data} height={90} type="line" />
-      </div>
-    </>
+    </div>
   );
 };
-

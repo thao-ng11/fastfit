@@ -1,5 +1,9 @@
 # Progress Report
 
+#### 9/15
+
+Updated recipes microservice excalidraw for the ghi and wireframes, completed the intregations markdown, and wrote the description of the recipes in the api markdown. Also styled the quote widget on the dashboard.
+
 ### 9/14
 
 I worked with Zach on a lot of bugs I discovered at the end of yesterday for the recipeSearch components. I realized that when I do an initial search for recipes based on a meal type and save a meal, then if I do another search (change the meal type) and save a meal, the saved meal if still the old recipes from the original search, so each search wasn't updated the state correctly. We finally found that it occured because the state wasn't getting redefined with each render, even though the recipes shown on the web page were updating. We fixed it by setting the state within the useeffect and adding the recipe variable that was passed into the component as a dependency on the useeffect, whereas initially I only had the recipe id and type defined where I defined the usestate function.

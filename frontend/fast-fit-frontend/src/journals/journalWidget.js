@@ -47,7 +47,7 @@ function JournalWidget() {
       case 3:
         return [
           "Keeps Memory Sharp",
-          "Journaling helps keep your brain in tip-top shape. It boosts memory and comprehension, which may reflect improved cognitive processing.",
+          "Journaling boosts memory and comprehension, which may reflect improved cognitive processing.",
         ];
         break;
       case 4:
@@ -112,7 +112,7 @@ function JournalWidget() {
         <div>
           <a
             href="../journals"
-            className="flex py-2.5 h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center text-black hover:text-black hover:border-[#195569] border-transparent border-2"
+            className="flex py-1 h-1/2 w-full bg-[#c7e8f3] rounded-md justify-center text-black hover:text-black hover:border-[#195569] border-transparent border-2"
           >
             <h3 className="text-center font-semibold text-lg text-[#8e4162]">
               It's time to build your gratitude practice

@@ -1,6 +1,6 @@
 # Graphical Human Interface
 
-## Home page
+## Dashboard
 
 This is the main page that people will see when they
 log in to the Web site.
@@ -11,7 +11,7 @@ log in to the Web site.
 
 ## Journal
 
-This journal microservice.
+This is the journal microservice.
 
 ![Image](wireframes/FastFIT_Journal.png)
 
@@ -20,3 +20,13 @@ This journal microservice.
 - The journal form: The data from the mood board is carried over to the form. User will fill out and submit the form for the entry being generated.
 
 - The journal list: This page will show the list of all entries. There is button on the page to access pop up modal that display the detaild journal.
+
+## Recipes
+
+This is the recipe microservice.
+
+![Image](wireframes/FastFIT_Recipes.png)
+
+- User meals: the dashboard will have a navlink to the My Meals page which shows a list of all meals users' have saved ordered by date.
+
+- Search meals: users can search for recipes based on a meal type (Breakfast, Lunch, or Dinner) and a food query. In the row results, a date can be added and the recipe saved to their meals.
