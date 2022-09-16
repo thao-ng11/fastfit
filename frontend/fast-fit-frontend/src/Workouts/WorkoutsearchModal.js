@@ -18,7 +18,7 @@ function WorkoutSearchModal({visible,handleClose, data, searchTerm, strength, ca
             workoutData = cardio
           }
                         return (
-                            <div className='bg-[#073B4C] font-semibold py-[.35rem] w-full text-center shadow-md rounded-md bg-[#073B4C] border border-gray-300 hover:bg-[#236175] '>
+                            <div className='bg-[#073B4C] font-semibold py-[.35rem] w-full text-center shadow-md rounded-md border border-gray-300 hover:bg-[#236175] '>
                                 <Workout name={workout.name}
                                     handleStrength={handle}
                                     strength={workoutData} 

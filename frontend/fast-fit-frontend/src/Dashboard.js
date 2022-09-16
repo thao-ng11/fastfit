@@ -178,7 +178,7 @@ class Dashboard extends React.Component {
           <h1 className="text-sm pt-20 font-bold tracking-wide text-center text-[#f1f1f1] uppercase mb-7">
             Built on
           </h1>
-          <div className="flex grid items-center justify-center grid-cols-2 gap-y-8">
+          <div className="flex items-center justify-center grid-cols-2 gap-y-8">
             <div className="flex items-center justify-center col-span-1 row-span-1">
               <img
                 src="https://upload.wikimedia.org/wikiversity/en/8/8c/FastAPI_logo.png"
