@@ -52,3 +52,6 @@ PREVIEW WITH DALONTE DAY! I was able to get my submit button figured out - it tu
 
 ### 9.15
 It's been a slow Thursday. We're combing back through the project requirements and making sure all of the documentation is taken care of. I updated the README and added my wireframe to the docs folder. I'll be adding my API markdown here soon. Thao and I spent a while fixing the dashboard formatting and spacing. We're really happy with how it looks! The clickable cards have a hover border and my chart has a shadow now. These little touches have really helped make it look much better. 
+
+### 9.16
+DUE DAY! Last minute touches today to finish out the project requirements. I made an excalidraw to show my page's GHI. I'm also going through to get rid of all the console.log and print() commands.

@@ -41,3 +41,14 @@ This is the Workouts Microservice
 - Workout plan: This is where you can see the workouts filtered by day. If you have nothing  in your workout plan, you can direct yourself to add a workout.
 
 - Add a workout: This is where you can add a number of workouts. Here you can select a muscle group as well as the type of workout, then you can add it to your workout plan.
+
+
+## Health Data
+
+This is the Health Data Microservice
+
+![Image](wireframes/FastFIT_Health_Data.png)
+
+- Weight Tracker: This page keeps track of your weight maintenance. Each input is take the weight and automatically adds the date to current date/time. Each input adds on to the list.
+
+- Stretch goal: Add the BMI graph as well to auto load given a user's height. Heigh data model is already included in our MVP, just need to add it. 

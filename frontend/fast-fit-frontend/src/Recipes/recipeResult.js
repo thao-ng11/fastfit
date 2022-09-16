@@ -29,7 +29,7 @@ function RecipeResult({recipe, type, token, noUser}) {
 
     const handleSubmit = async event => {
         event.preventDefault()
-        console.log(meal)
+        // console.log(meal)
         const postUrl = `${process.env.REACT_APP_RECIPES_HOST}/api/meals`
         const response = await fetch(postUrl, {
             method: 'POST',

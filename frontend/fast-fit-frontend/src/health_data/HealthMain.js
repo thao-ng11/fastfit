@@ -70,9 +70,7 @@ export default function HealthDataForm() {
 
   const handleSubmit = async event => {
     event.preventDefault()
-    console.log(healthData)
     const url = `${process.env.REACT_APP_HEALTH_HOST}/api/health_data`
-    console.log(JSON.stringify(healthData))
     try {
       const response = await fetch(url, {
         method: "POST",

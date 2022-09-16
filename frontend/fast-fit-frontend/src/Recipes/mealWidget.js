@@ -68,7 +68,7 @@ function MealWidget() {
             const todayMeals = meals.filter(meal => meal['date'] === `${todayDate}` && meal['type'] === type)
             // console.log(mealType)
             // console.log(todayMeals)
-            console.log(mealType, todayMeals)
+            // console.log(mealType, todayMeals)
             if (todayMeals.length > 0) {
 
                 const recipeID = todayMeals[0]['recipe_api_id']

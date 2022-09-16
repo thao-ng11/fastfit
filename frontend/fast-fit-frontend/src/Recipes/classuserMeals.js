@@ -40,9 +40,9 @@ class UserMeals extends React.Component {
             if (mealsResponse.ok) {
                 const meals = await mealsResponse.json()
                 for (let meal of meals) {
-                    console.log(meal)
+                    // console.log(meal)
                     let recipe_id = meal['recipe_api_id']
-                    console.log(recipe_id)
+                    // console.log(recipe_id)
                     let apiUrl = `https://api.edamam.com/api/recipes/v2/${recipe_id}/?app_id=${process.env.REACT_APP_EDAMAM_APP_ID}&type=public&app_key=${process.env.REACT_APP_EDAMAM_RECIPE_API_KEY}&field=label&field=image`
                     
                     const apiResponse = await fetch(apiUrl)
@@ -57,7 +57,7 @@ class UserMeals extends React.Component {
                     }
                     else {
                         meal["recipe"] = "Could not load"
-                        console.log(meal)
+                        // console.log(meal)
                         this.setState({meals: meals})
                     }
                 }
@@ -131,7 +131,7 @@ class UserMeals extends React.Component {
                                                 </thead>
                                                 <tbody>
                                                     {this.state.meals.map(meal => {
-                                                        console.log(meal)
+                                                        // console.log(meal)
                                                         return (
                                                             // <MealResult meal={meal} handleDelete={this.handleDelete} />
                                                             <tr key={meal.id} >

@@ -50,10 +50,8 @@ class HealthDataQueries:
         except UniqueViolation:
           return None
         row = cur.fetchone()
-        print(row)
         record = {}
         for i, column in enumerate(cur.description):
-            print(column)
             record[column.name] = row[i]
         return record
 
@@ -213,7 +211,6 @@ class GoalsQueries:
               conn.commit()
               row=cur.fetchone()
               record={}
-              print(row)
               for i, column in enumerate(cur.description):
                   record[column.name]=row[i]
               return record
