@@ -1,5 +1,9 @@
 # Progress Report
 
+### 9/16
+
+Finalized the readme file. Worked with the team to pick and add a logo to the navbar and signup page. Updated navbar to only show links to each microservice if user is logged in and hides the links if there isn't a token.
+
 #### 9/15
 
 Updated recipes microservice excalidraw for the ghi and wireframes, completed the intregations markdown, and wrote the description of the recipes in the api markdown. Also styled the quote widget on the dashboard.
