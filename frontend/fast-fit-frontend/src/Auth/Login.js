@@ -1,7 +1,7 @@
 import{ useEffect, useState } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { useToken } from '../Authentication'
-
+import fastfit from "../fastfit2.png"
 export default function Login() {
     const [token, login] = useToken()
     // console.log(token)
@@ -36,7 +36,10 @@ export default function Login() {
 
                     <div className="w-full space-y-5 md:w-3/5 md:pr-16">
                         <p className="font-medium text-[#f1f1f1] uppercase" data-primary="blue-500">Building A Healthier You</p>
-                        <h2 className="text-7xl text-[#fff2f1] font-bold">F<span className="text-[#8e4162]">a</span>s<span className="text-[#fff2f1]">t</span><span className="text-[#bf9aca]">FIT</span></h2>
+                        <div className="flex">
+                            <img src={fastfit} className="h-[100px] w-[100px] pr-0"/>
+                            <h2 className="text-7xl italic text-[#fff2f1] font-bold"><span className="text-[#8e4162]">ast</span><span className="text-[#bf9aca]">FIT</span></h2>
+                        </div>
                         <p className="text-xl text-[#f1f1f1] md:pr-16">Interactable new way to track and plan your fitness and nutrition!</p>
                     </div>
                     <form onSubmit={handleSubmit} id="login-form">
