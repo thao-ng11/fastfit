@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
+import RecipeModal from './recipeModal';
 
 function MealResult({meal, setMeals, meals, token}) {
 
-    const [deleteButton, setDeleteButton] = useState('grid-col-row-2')
+    const [activeModal, setActiveModal] = useState(false)
+    function handleDetail() {
+        setActiveModal(true)
+    }
+    
+    const [deleteButton, setDeleteButton] = useState('grid-col-row-2 mt-2')
     const [deleteConfirmation, setDeleteConfirmation] = useState('grid-col-row-2 mt-2 d-none')
     // console.log("inside meal result: ", meal)
     // console.log(token)
     const confirmDelete = () => {
-        setDeleteButton('grid-col-row-2 d-none')
+        setDeleteButton('grid-col-row-2 mt-2 d-none')
         setDeleteConfirmation('grid-col-row-2 mt-2')
         // setTimeout(() => {
         //     setDeleteConfirmation('grid-col-row-2 mt-2 d-none')
@@ -32,20 +38,25 @@ function MealResult({meal, setMeals, meals, token}) {
 
         if (response.ok) {
             setDeleteConfirmation('grid-col-row-2 mt-2 d-none')
-            setDeleteButton('grid-col-row-2')
+            setDeleteButton('grid-col-row-2 mt-2')
             refreshMeals(id)
         }
     }
 
     return (
         <tr key={meal.id} >
-            <td>{meal.recipe}</td>
+            <td>{meal.label}</td>
             <td>{meal.type}</td>
             <td>{meal.date}</td>
             <td><img src={meal.image} /></td>
             <td>
                 <div className="flex items-center justify-center">
                     <div className="grid-col-row-2">
+                        <div className='grid-col-row-2'>
+                            <button onClick={handleDetail} type="button" 
+                                className="bg-[#bf9aca] btn rounded font-bold text-[#f1f1f1]">
+                                    View Details</button>
+                        </div>
                         <div className={deleteButton}>
                             <button onClick={confirmDelete} type="button" 
                                 className="bg-[#bf9aca] btn rounded font-bold text-[#f1f1f1]">
@@ -59,6 +70,11 @@ function MealResult({meal, setMeals, meals, token}) {
                     </div>
                 </div>
             </td>
+            <RecipeModal
+                recipe={meal}
+                activeModal={activeModal}
+                setActiveModal={setActiveModal}
+            />
         </tr>
     )
 }
