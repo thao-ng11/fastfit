@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import format from "date-fns/format";
-import { useToken } from "../Authentication";
 import {
   Chart as ChartJS,
   CategoryScale,
