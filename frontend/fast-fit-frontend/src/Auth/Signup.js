@@ -87,7 +87,11 @@ class SignUp extends React.Component {
   handleChangeEmail(event) {
     const value = event.target.value;
     this.setState({ email: value });
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
+    if (
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+        value
+      )
+    ) {
       this.setState({ correct_format_email: true });
     } else {
       this.setState({ correct_format_email: false });

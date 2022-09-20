@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react"
-import format from "date-fns/format"
-import { useToken } from '../Authentication'
+import React, { useEffect, useState } from "react";
+import format from "date-fns/format";
+import { useToken } from "../Authentication";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,9 +11,8 @@ import {
   Tooltip,
   Legend,
   TimeScale,
-  ChartOptions
-} from 'chart.js';
-import { Line } from 'react-chartjs-2';
+} from "chart.js";
+import { Line } from "react-chartjs-2";
 
 ChartJS.register(
   CategoryScale,
@@ -30,36 +29,35 @@ export default function WeightWidget() {
   const [healthData, setHealthData] = useState({
     username: "",
     current_weight: 0,
-    current_bmi: 0.0
-  })
+    current_bmi: 0.0,
+  });
 
-  const [token] = useToken()
-  const [weightHistory, setWeightHistory] = useState([])
+  const [weightHistory, setWeightHistory] = useState([]);
 
   const fetchUserWeight = async () => {
-    const tokenUrl = `${process.env.REACT_APP_ACCOUNTS_HOST}/token`
-    const tokenResponse = await fetch(tokenUrl, {credentials: "include",})
+    const tokenUrl = `${process.env.REACT_APP_ACCOUNTS_HOST}/token`;
+    const tokenResponse = await fetch(tokenUrl, { credentials: "include" });
     if (tokenResponse.status === 200) {
-      const {token} = await tokenResponse.json()
-      const url = `${process.env.REACT_APP_HEALTH_HOST}/api/health_data/user`    
+      const { token } = await tokenResponse.json();
+      const url = `${process.env.REACT_APP_HEALTH_HOST}/api/health_data/user`;
       const healthResponse = await fetch(url, {
         headers: { Authorization: `Bearer ${token}` },
       });
-  
+
       if (healthResponse.ok) {
-        const weightHistory = await healthResponse.json()
-        setWeightHistory(weightHistory)
+        const weightHistory = await healthResponse.json();
+        setWeightHistory(weightHistory);
       }
     }
-  }
+  };
 
-  const handleChange = event => {
-    const value = event.target.value
-    setHealthData({...healthData, current_weight:value})
-  }
+  // const handleChange = event => {
+  //   const value = event.target.value
+  //   setHealthData({...healthData, current_weight:value})
+  // }
 
   useEffect(() => {
-    fetchUserWeight()
+    fetchUserWeight();
   }, []);
 
   let labels = [];
@@ -100,5 +98,4 @@ export default function WeightWidget() {
       </div>
     </>
   );
-};
-
+}
