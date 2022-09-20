@@ -9,6 +9,7 @@ services:
 variables:
   POSTGRES_PASSWORD: test
   DATABASE_URL: postgresql://postgres:test@postgres:5432/postgres
+  SECRET_KEY: db0a49ab25db171089e1a3950f31f3288df643c7c33ede3f38d6bf7788569e24
 
 backend-accounts-unit-test-job:
   image: python:3-bullseye
