@@ -9,7 +9,6 @@ services:
 variables:
   POSTGRES_PASSWORD: test
   DATABASE_URL: postgresql://fastfit:fastfit@postgres:5432
-  # DATABASE_URL: postgresql://fastfit:fastfit@postgres:5432/health
   SECRET_KEY: db0a49ab25db171089e1a3950f31f3288df643c7c33ede3f38d6bf7788569e24
 
 backend-accounts-unit-test-job:
@@ -35,21 +34,22 @@ backend-journals-unit-test-job:
     - cd backend/journals/api
     - pip install -r requirements.txt
     - python -m pytest
-# backend-recipes-unit-test-job:
-#   image: python:3-bullseye
-#   stage: test
-#   script:
-#     - cd backend/recipes/api
-#     - pip install -r requirements.txt
-#     - python -m pytest
 
-# backend-workouts-unit-test-job:
-#   image: python:3-bullseye
-#   stage: test
-#   script:
-#     - cd backend/workouts/api
-#     - pip install -r requirements.txt
-#     - python -m pytest
+backend-recipes-unit-test-job:
+  image: python:3-bullseye
+  stage: test
+  script:
+    - cd backend/recipes/api
+    - pip install -r requirements.txt
+    - python -m pytest
+
+backend-workouts-unit-test-job:
+  image: python:3-bullseye
+  stage: test
+  script:
+    - cd backend/workouts/api
+    - pip install -r requirements.txt
+    - python -m pytest
 # lint-job:
 #   image: python:3-bullseye
 #   stage: test
