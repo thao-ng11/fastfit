@@ -12,6 +12,8 @@ function RecipeSearch() {
     const [noUser, setNoUser] = useState('')
     const [loginMessage, setLoginMessage] = useState('d-none')
     
+    const appID = process.env.REACT_APP_EDAMAM_APP_ID
+    const apiKey = process.env.REACT_APP_EDAMAM_RECIPE_API_KEY
     
     const handleMealType = event => {
         const value = event.target.value;
@@ -26,7 +28,8 @@ function RecipeSearch() {
     const handleSearch = async event => {
         event.preventDefault()
 
-        const searchUrl = `https://api.edamam.com/api/recipes/v2?type=public&q=${query}&app_id=${process.env.REACT_APP_EDAMAM_APP_ID}&app_key=${process.env.REACT_APP_EDAMAM_RECIPE_API_KEY}&mealType=${mealType}&imageSize=LARGE&imageSize=REGULAR&imageSize=SMALL&imageSize=THUMBNAIL&field=uri&field=label&field=image&field=calories`
+        // const searchUrl = `https://api.edamam.com/api/recipes/v2?type=public&q=${query}&app_id=${process.env.REACT_APP_EDAMAM_APP_ID}&app_key=${process.env.REACT_APP_EDAMAM_RECIPE_API_KEY}&mealType=${mealType}&imageSize=LARGE&imageSize=REGULAR&imageSize=SMALL&imageSize=THUMBNAIL&field=uri&field=label&field=image&field=calories`
+        const searchUrl = `https://api.edamam.com/api/recipes/v2?type=public&q=${query}&app_id=${appID}&app_key=${apiKey}&mealType=${mealType}&imageSize=REGULAR&imageSize=THUMBNAIL&field=uri&field=label&field=image&field=yield&field=ingredientLines&field=calories`
         const response = await fetch(searchUrl)
 
         if (response.ok) {

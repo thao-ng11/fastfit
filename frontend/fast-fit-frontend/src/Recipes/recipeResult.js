@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import RecipeModal from './recipeModal';
 
 function RecipeResult({recipe, type, token, noUser}) {
-    // console.log(token)
+    // console.log(recipe)
+    const [activeModal, setActiveModal] = useState(false)
+    function handleDetail() {
+        setActiveModal(true)
+    }
+    
     const [meal, setMeal] = useState({
         username: '',
         recipe_api_id: '',
@@ -69,13 +75,19 @@ function RecipeResult({recipe, type, token, noUser}) {
     // console.log(recipe)
     return (
         <tr key={recipe.uri.split('#')[1]}>
-            <td className="font-bold">{recipe.label}</td>
+            <td className="font-bold">{recipe.label}
+                <div className="grid-col-row-2 mt-4">
+                    <button onClick={handleDetail} type="button" 
+                        className="bg-[#bf9aca] btn rounded font-bold text-[#f1f1f1]">
+                            View Details</button>
+                </div>
+            </td>
             <td>{Math.round(recipe.calories)}</td>
             <td><img src={recipe.image} /></td>
             <td className={noUser}>
                 <div className="flex items-center justify-center">
                     <div className="grid-col-row-2">
-                        <div className="grid-col-row-2">
+                        <div className="grid-col-row-2 mt-2">
                             <input 
                                 onChange={handleChange}
                                 placeholder="date" required type="date" name="date" id="date" 
@@ -93,6 +105,11 @@ function RecipeResult({recipe, type, token, noUser}) {
                     </div>
                 </div>
             </td>
+            <RecipeModal
+                recipe={recipe}
+                activeModal={activeModal}
+                setActiveModal={setActiveModal}
+            />
         </tr>
     )
 }

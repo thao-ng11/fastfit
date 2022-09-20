@@ -13,16 +13,15 @@ function UserMeals() {
     const fetchAPI = async (meal) => {
         let recipeId = meal['recipe_api_id']
         // console.log(recipeId)
-        let apiUrl = `https://api.edamam.com/api/recipes/v2/${recipeId}/?app_id=${appID}&type=public&app_key=${apiKey}&field=label&field=image`
+        let apiUrl = `https://api.edamam.com/api/recipes/v2/${recipeId}?type=public&app_id=${appID}&app_key=${apiKey}&field=label&field=image&field=images&field=yield&field=ingredientLines&field=calories&field=totalTime`
         
         const apiResponse = await fetch(apiUrl)
         
         if (apiResponse.ok) {
             const { recipe } = await apiResponse.json()
-            return recipe
             // console.log(recipe)
+            return recipe
             
-            // console.log(data)
             // console.log("api: ", meal)
         }
         // else {
@@ -56,7 +55,10 @@ function UserMeals() {
                     // setTimeout(async () => {
                         let recipe = await fetchAPI(meal)
                         meal["image"] = recipe.image
-                        meal["recipe"] = recipe.label
+                        meal["label"] = recipe.label
+                        meal["yield"] = recipe.yield
+                        meal["calories"] = recipe.calories
+                        meal["ingredientLines"] = recipe.ingredientLines
                         mealArray.push(meal)
                     //   }, [1000])
                     // console.log(mealArray)
