@@ -45,13 +45,13 @@ backend-workouts-unit-test-job:
     - cd backend/workouts/api
     - pip install -r requirements.txt
     - python -m pytest
+# lint-job:
+#   image: python:3-bullseye
+#   stage: test
+#   script:
+#     - pip install flake8
+#     - flake8 backend
 
-lint-job:
-  image: python:3-bullseye
-  stage: test
-  script:
-    - pip install flake8
-    - flake8 backend
 # build-front-end-job:
 #   stage: build
 #   image: node:lts-bullseye
