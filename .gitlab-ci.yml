@@ -51,16 +51,21 @@ backend-workouts-unit-test-job:
     - pip install -r requirements.txt
     - python -m pytest
 
-lint-job:
-  image: python:3-bullseye
-  stage: test
-  script:
-    - pip install flake8
-    - flake8 backend
-# build-front-end-job:
-#   stage: build
-#   image: node:lts-bullseye
+# lint-job:
+#   image: python:3-bullseye
+#   stage: test
 #   script:
-#     - cd frontend/fast-fit-frontend
-#     - npm install
-#     - npm run build
+#     - pip install flake8
+#     - flake8 backend
+build-front-end-job:
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  stage: build
+  image: node:lts-bullseye
+  script:
+    - cd frontend/fast-fit-frontend
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - frontend/fast-fit-frontend/build/
