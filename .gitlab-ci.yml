@@ -6,11 +6,43 @@ stages:
 services:
   - postgres:14.2-bullseye
 
+backend-accounts-unit-test-job:
+  image: python:3-bullseye
+  stage: test
+  script:
+    - cd backend/accounts/api
+    - pip install -r requirements.txt
+    - python -m pytest
+
+backend-health-unit-test-job:
+  image: python:3-bullseye
+  stage: test
+  script:
+    - cd backend/health/api
+    - pip install -r requirements.txt
+    - python -m pytest
+
 backend-journals-unit-test-job:
   image: python:3-bullseye
   stage: test
   script:
-    - cd service-directory
+    - cd backend/journals/api
+    - pip install -r requirements.txt
+    - python -m pytest
+
+backend-recipes-unit-test-job:
+  image: python:3-bullseye
+  stage: test
+  script:
+    - cd backend/recipes/api
+    - pip install -r requirements.txt
+    - python -m pytest
+
+backend-workouts-unit-test-job:
+  image: python:3-bullseye
+  stage: test
+  script:
+    - cd backend/workouts/api
     - pip install -r requirements.txt
     - python -m pytest
 
@@ -19,12 +51,11 @@ lint-job:
   stage: test
   script:
     - pip install flake8
-    - flake8 service-directory1 service-directory2
-
-build-front-end-job:
-  stage: build
-  image: node:lts-bullseye
-  script:
-    - cd ghi
-    - npm install
-    - npm run build
+    - flake8 backend
+# build-front-end-job:
+#   stage: build
+#   image: node:lts-bullseye
+#   script:
+#     - cd ghi
+#     - npm install
+#     - npm run build
