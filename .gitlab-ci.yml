@@ -1,0 +1,4 @@
+stages:
+  - test # Run tests first
+  - build # Run build after tests
+  - deploy # Run deploy after build
