@@ -2,3 +2,29 @@ stages:
   - test # Run tests first
   - build # Run build after tests
   - deploy # Run deploy after build
+
+services:
+  - postgres:14.2-bullseye
+
+backend-journals-unit-test-job:
+  image: python:3-bullseye
+  stage: test
+  script:
+    - cd service-directory
+    - pip install -r requirements.txt
+    - python -m pytest
+
+lint-job:
+  image: python:3-bullseye
+  stage: test
+  script:
+    - pip install flake8
+    - flake8 service-directory1 service-directory2
+
+build-front-end-job:
+  stage: build
+  image: node:lts-bullseye
+  script:
+    - cd ghi
+    - npm install
+    - npm run build
