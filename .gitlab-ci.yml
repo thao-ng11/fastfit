@@ -6,6 +6,10 @@ stages:
 services:
   - postgres:14.2-bullseye
 
+variables:
+  POSTGRES_PASSWORD: test
+  DATABASE_URL: postgresql://postgres:test@postgres:5432/postgres
+
 backend-accounts-unit-test-job:
   image: python:3-bullseye
   stage: test
