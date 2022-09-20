@@ -1,7 +1,6 @@
-import logo from "./logo.svg";
 import "./App.css";
-import { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import { useToken } from "./Authentication";
 import Nav from "./Nav";
 import Dashboard from "./Dashboard";
@@ -11,7 +10,7 @@ import UserMeals from "./Recipes/userMeals";
 import RecipeSearch from "./Recipes/recipeSearch";
 import HealthDataForm from "./health_data/HealthMain";
 import Login from "./Auth/Login";
-import Logout from "./Auth/Logout"
+import Logout from "./Auth/Logout";
 import WorkoutPlanList from "./Workouts/WorkoutPlanList";
 import { AuthProvider } from "./Authentication";
 import JournalForm from "./journals/journalForm";
@@ -19,40 +18,37 @@ import JournalMain from "./journals/journalMain";
 import JournalsList from "./journals/journalList";
 
 function App() {
-  const [token, login, logout, signup, update] = useToken();
-  const [lat, setLat] = useState(null);
-  const [lng, setLng] = useState(null);
-  const [status, setStatus] = useState(null);
+  const [, login, logout] = useToken();
+  // const [lat, setLat] = useState(null);
+  // const [lng, setLng] = useState(null);
+  // const [status, setStatus] = useState(null);
 
-  const getLocation = () => {
-    if (!navigator.geolocation) {
-      setStatus("Geolocation is not supported by your browser");
-    } else {
-      setStatus("Locating...");
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setStatus(null);
-          setLat(position.coords.latitude);
-          setLng(position.coords.longitude);
-        },
-        () => {
-          setStatus("Unable to retrieve your location");
-        }
-      );
-    }
-  };
+  // const getLocation = () => {
+  //   if (!navigator.geolocation) {
+  //     setStatus("Geolocation is not supported by your browser");
+  //   } else {
+  //     setStatus("Locating...");
+  //     navigator.geolocation.getCurrentPosition(
+  //       (position) => {
+  //         setStatus(null);
+  //         setLat(position.coords.latitude);
+  //         setLng(position.coords.longitude);
+  //       },
+  //       () => {
+  //         setStatus("Unable to retrieve your location");
+  //       }
+  //     );
+  //   }
+  // };
   return (
     <>
       <AuthProvider>
         <Nav />
         <Routes>
-          <Route
-            path="/dashboard"
-            element={<Dashboard lat={lat} lng={lng} />}
-          />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/" element={<Login login={login} />} />
-          <Route path="/logout" element={<Logout logout={logout}/>} />
+          <Route path="/logout" element={<Logout logout={logout} />} />
           <Route path="/workout" element={<WorkoutPlanForm />} />
           <Route path="/workout/plan" element={<WorkoutPlanList />} />
           <Route path="/meals">

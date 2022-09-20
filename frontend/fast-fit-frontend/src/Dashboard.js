@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import MealWidget from "./Recipes/mealWidget";
 import Weather from "./WeatherCell";
@@ -64,7 +63,7 @@ class Dashboard extends React.Component {
         (this.state.calc_height * this.state.calc_height)) *
       703;
     let bmi = bmiLong.toFixed(2);
-    if (bmi == NaN)
+    if (bmi.isNaN())
       if (!this.state.calc_height) {
         bmi = 0;
       }
