@@ -48,7 +48,7 @@ class SignUp extends React.Component {
     };
     const response = await fetch(userUrl, fetchConfig);
     if (response.ok) {
-      const newUser = await response.json();
+      // const newUser = await response.json();
       this.setState({
         firstname: "",
         lastname: "",

@@ -83,7 +83,7 @@ function RecipeResult({recipe, type, token, noUser}) {
                 </div>
             </td>
             <td>{Math.round(recipe.calories)}</td>
-            <td><img src={recipe.image} /></td>
+            <td><img alt="meal" src={recipe.image} /></td>
             <td className={noUser}>
                 <div className="flex items-center justify-center">
                     <div className="grid-col-row-2">

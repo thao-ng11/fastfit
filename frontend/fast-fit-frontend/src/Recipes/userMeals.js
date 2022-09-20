@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useToken } from '../Authentication';
 import MealResult from './mealResult';
 
 function UserMeals() {
     const [token] = useToken()
-    const navigate = useNavigate()
     const [meals, setMeals] = useState([])
     const appID = process.env.REACT_APP_EDAMAM_APP_ID
     const apiKey = process.env.REACT_APP_EDAMAM_RECIPE_API_KEY
