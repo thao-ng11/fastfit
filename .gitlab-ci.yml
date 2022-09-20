@@ -56,7 +56,7 @@ lint-job:
   stage: test
   script:
     - pip install flake8
-    - flake8 accounts health journals recipes workouts
+    - flake8 backend
 # build-front-end-job:
 #   stage: build
 #   image: node:lts-bullseye
