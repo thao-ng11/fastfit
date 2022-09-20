@@ -63,7 +63,7 @@ class Dashboard extends React.Component {
         (this.state.calc_height * this.state.calc_height)) *
       703;
     let bmi = bmiLong.toFixed(2);
-    if (bmi.isNaN())
+    if (Number.isNaN(bmi))
       if (!this.state.calc_height) {
         bmi = 0;
       }
