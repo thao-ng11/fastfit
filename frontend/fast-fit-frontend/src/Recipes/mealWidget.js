@@ -83,7 +83,7 @@ function MealWidget() {
     if (token !== null) {
       fetchMeals();
     }
-  }, [mealType]);
+  }, );
 
   return (
     <div className="flex items-center justify-center">
