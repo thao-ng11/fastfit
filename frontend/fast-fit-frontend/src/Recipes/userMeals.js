@@ -30,48 +30,48 @@ function UserMeals() {
         // }
     }
     
-    const fetchUserMeals = async () => {
-        // console.log(token)
-        // const tokenUrl = `${process.env.REACT_APP_ACCOUNTS_HOST}/token`
-        // const tokenResponse = await fetch(tokenUrl, {credentials: "include",})
-        // console.log(tokenResponse.status)
-        // if (tokenResponse.status === 200) {
-            // const { token } = await tokenResponse.json()
-
-            const url = `${process.env.REACT_APP_RECIPES_HOST}/api/meals/user`
-
-            const mealsResponse = await fetch(url, {
-                headers: { Authorization: `Bearer ${token}` },
-            });
-
-            if (mealsResponse.ok) {
-                const userMeals = await mealsResponse.json()
-                // console.log(mealsArray)
-                let mealArray = []
-                for (let meal of userMeals) {
-                    // console.log(meal)
-                    // console.log(meals)
-                    // setTimeout(async () => {
-                        let recipe = await fetchAPI(meal)
-                        meal["image"] = recipe.image
-                        meal["label"] = recipe.label
-                        meal["yield"] = recipe.yield
-                        meal["calories"] = recipe.calories
-                        meal["ingredientLines"] = recipe.ingredientLines
-                        mealArray.push(meal)
-                    //   }, [1000])
-                    // console.log(mealArray)
-                }
-                // console.log("final meals: ", mealArray)
-                setMeals(mealArray)
-            }
-        // }
-        // else {
-        //     navigate('/')
-        // }
-    }
-
     useEffect(() => {
+        const fetchUserMeals = async () => {
+            // console.log(token)
+            // const tokenUrl = `${process.env.REACT_APP_ACCOUNTS_HOST}/token`
+            // const tokenResponse = await fetch(tokenUrl, {credentials: "include",})
+            // console.log(tokenResponse.status)
+            // if (tokenResponse.status === 200) {
+                // const { token } = await tokenResponse.json()
+    
+                const url = `${process.env.REACT_APP_RECIPES_HOST}/api/meals/user`
+    
+                const mealsResponse = await fetch(url, {
+                    headers: { Authorization: `Bearer ${token}` },
+                });
+    
+                if (mealsResponse.ok) {
+                    const userMeals = await mealsResponse.json()
+                    // console.log(mealsArray)
+                    let mealArray = []
+                    for (let meal of userMeals) {
+                        // console.log(meal)
+                        // console.log(meals)
+                        // setTimeout(async () => {
+                            let recipe = await fetchAPI(meal)
+                            meal["image"] = recipe.image
+                            meal["label"] = recipe.label
+                            meal["yield"] = recipe.yield
+                            meal["calories"] = recipe.calories
+                            meal["ingredientLines"] = recipe.ingredientLines
+                            mealArray.push(meal)
+                        //   }, [1000])
+                        // console.log(mealArray)
+                    }
+                    // console.log("final meals: ", mealArray)
+                    setMeals(mealArray)
+                }
+            // }
+            // else {
+            //     navigate('/')
+            // }
+        }
+        
         if (token !== null) {
             // console.log(token)
             fetchUserMeals()
