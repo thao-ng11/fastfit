@@ -41,15 +41,18 @@ class JournalQueries:
 
                 return jlist
 
-    def insert_journal(self, username, entry_date, grateful, daily_aff, note, feeling):
+    def insert_journal(self, username, entry_date, grateful, 
+    daily_aff, note, feeling):
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 try:
                     cur.execute(
                         """
-                        INSERT INTO journal (username, entry_date, grateful, daily_aff, note, feeling)
+                        INSERT INTO journal (username, entry_date, 
+                        grateful, daily_aff, note, feeling)
                         VALUES (%s, CURRENT_TIMESTAMP, %s, %s, %s, %s)
-                        RETURNING id, username, entry_date, grateful, daily_aff, note, feeling
+                        RETURNING id, username, entry_date, 
+                        grateful, daily_aff, note, feeling
                         """,
                         [username, grateful, daily_aff, note, feeling],
                     )
@@ -60,7 +63,6 @@ class JournalQueries:
                 for i, column in enumerate(cur.description):
                     record[column.name] = row[i]
                 return record
-
 
     def get_journal(self, id):
         with pool.connection() as conn:
@@ -94,7 +96,6 @@ class JournalQueries:
                     }
                 return record
 
-
     def delete_journal(self, id):
         with pool.connection() as conn:
             with conn.cursor() as cur:
@@ -105,7 +106,6 @@ class JournalQueries:
                     """,
                     [id],
                 )
-
 
     def get_user_journals(self, username: str):
         with pool.connection() as conn:
@@ -138,6 +138,4 @@ class JournalQueries:
                         "feeling": row[6],
                     }
                     jlist.append(jdict)
-
-                return jlist
-        
+                return jlist   
