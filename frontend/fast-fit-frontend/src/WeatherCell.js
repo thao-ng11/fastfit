@@ -4,15 +4,15 @@ const IDLE = "IDLE";
 const BUSY = "BUSY";
 const DONE = "DONE";
 
-function toTitleCase(str) {
-  return str
-    .toLowerCase()
-    .split(" ")
-    .map(function (word) {
-      return word.charAt(0).toUpperCase() + word.slice(1);
-    })
-    .join(" ");
-}
+// function toTitleCase(str) {
+//   return str
+//     .toLowerCase()
+//     .split(" ")
+//     .map(function (word) {
+//       return word.charAt(0).toUpperCase() + word.slice(1);
+//     })
+//     .join(" ");
+// }
 
 export default class Weather extends React.Component {
   constructor(props) {
