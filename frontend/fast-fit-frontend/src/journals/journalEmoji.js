@@ -17,29 +17,30 @@ function JournalEmoji(props) {
       props.setActiveEmoji(props.emojiValue);
     }
   }
-  function renderEmoji() {
-    switch (props.emojiValue) {
-      case 1:
-        return [faFaceGrinBeam, "happy"];
-        break;
-      case 2:
-        return [faFaceSmile, "good"];
-        break;
-      case 3:
-        return [faFaceMeh, "meh"];
-        break;
-      case 4:
-        return [faFaceFrown, "sad"];
-        break;
-      case 5:
-        return [faFaceTired, "down"];
-        break;
-
-      default:
-        break;
-    }
-  }
+  
   useEffect(() => {
+    function renderEmoji() {
+      switch (props.emojiValue) {
+        case 1:
+          return [faFaceGrinBeam, "happy"];
+          break;
+        case 2:
+          return [faFaceSmile, "good"];
+          break;
+        case 3:
+          return [faFaceMeh, "meh"];
+          break;
+        case 4:
+          return [faFaceFrown, "sad"];
+          break;
+        case 5:
+          return [faFaceTired, "down"];
+          break;
+
+        default:
+          break;
+      }
+    };
     setEmoji(renderEmoji);
   }, []);
 

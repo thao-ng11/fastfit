@@ -18,8 +18,16 @@ function JournalForm() {
   // console.log(token);
 
   useEffect(() => {
-    setBody({ ...body, feeling: state.activeEmoji });
-  }, []);
+    setBody({
+      username: "",
+      entry_date: datetime,
+      grateful: "",
+      daily_aff: "",
+      note: "",
+      feeling: state.activeEmoji,
+    });
+  }, [state]);
+
   function handleChange(event) {
     const value = event.target.value;
     const key = event.target.name;

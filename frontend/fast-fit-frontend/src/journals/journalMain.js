@@ -12,27 +12,27 @@ function JournalMain() {
   const [token] = useToken();
   console.log(token);
 
-  const fetchJournalDates = async () => {
-    const url = `${process.env.REACT_APP_JOURNALS_HOST}/api/journals/user/`;
-    const res = await fetch(url, {
-      credentials: "include",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    const journalData = await res.json();
-    console.log(journalData);
-    let journalDatesArr = [];
-    for (let journal of journalData) {
-      journalDatesArr.push(journal.entry_date);
-    }
-    setJournalDates(journalDatesArr);
-    setCount(journalDatesArr.length);
-    console.log(journalDatesArr);
-    console.log(journalDatesArr.length);
-  };
-
   useEffect(() => {
+    const fetchJournalDates = () => {
+      const url = `${process.env.REACT_APP_JOURNALS_HOST}/api/journals/user/`;
+      fetch(url, {
+        credentials: "include",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .then((journalData) => {
+          let journalDatesArr = [];
+          for (let journal of journalData) {
+            journalDatesArr.push(journal.entry_date);
+          }
+          setJournalDates(journalDatesArr);
+          setCount(journalDatesArr.length);
+        });
+    };
     fetchJournalDates();
   }, [token]);
 
