@@ -9,28 +9,29 @@ function UserMeals() {
     const appID = process.env.REACT_APP_EDAMAM_APP_ID
     const apiKey = process.env.REACT_APP_EDAMAM_RECIPE_API_KEY
 
-    const fetchAPI = async (meal) => {
-        let recipeId = meal['recipe_api_id']
-        // console.log(recipeId)
-        let apiUrl = `https://api.edamam.com/api/recipes/v2/${recipeId}?type=public&app_id=${appID}&app_key=${apiKey}&field=label&field=image&field=images&field=yield&field=ingredientLines&field=calories&field=totalTime`
-        
-        const apiResponse = await fetch(apiUrl)
-        
-        if (apiResponse.ok) {
-            const { recipe } = await apiResponse.json()
-            // console.log(recipe)
-            return recipe
-            
-            // console.log("api: ", meal)
-        }
-        // else {
-        //     meal["recipe"] = "Could not load"
-        //     // console.log(meal)
-        //     setMeals([...meals, meal])
-        // }
-    }
     
     useEffect(() => {
+        const fetchAPI = async (meal) => {
+            let recipeId = meal['recipe_api_id']
+            // console.log(recipeId)
+            let apiUrl = `https://api.edamam.com/api/recipes/v2/${recipeId}?type=public&app_id=${appID}&app_key=${apiKey}&field=label&field=image&field=images&field=yield&field=ingredientLines&field=calories&field=totalTime`
+            
+            const apiResponse = await fetch(apiUrl)
+            
+            if (apiResponse.ok) {
+                const { recipe } = await apiResponse.json()
+                // console.log(recipe)
+                return recipe
+                
+                // console.log("api: ", meal)
+            }
+            // else {
+            //     meal["recipe"] = "Could not load"
+            //     // console.log(meal)
+            //     setMeals([...meals, meal])
+            // }
+        }
+        
         const fetchUserMeals = async () => {
             // console.log(token)
             // const tokenUrl = `${process.env.REACT_APP_ACCOUNTS_HOST}/token`

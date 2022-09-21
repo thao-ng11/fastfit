@@ -22,11 +22,12 @@ function RecipeResult({recipe, type, token, noUser}) {
     useEffect(() => {
         // console.log("recipe: change", recipe)
         setMeal({
-            ...meal,
+            username: '',
             recipe_api_id: recipe.uri.split('#')[1],
+            date: '',
             type: type
         })
-    }, [recipe])
+    }, [recipe, type])
     
     const handleChange = event => {
         const value = event.target.value;
