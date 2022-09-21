@@ -6,11 +6,12 @@ import MealResult from './mealResult';
 function UserMeals() {
     const [token] = useToken()
     const [meals, setMeals] = useState([])
-    const appID = process.env.REACT_APP_EDAMAM_APP_ID
-    const apiKey = process.env.REACT_APP_EDAMAM_RECIPE_API_KEY
 
     
     useEffect(() => {
+        const appID = process.env.REACT_APP_EDAMAM_APP_ID
+        const apiKey = process.env.REACT_APP_EDAMAM_RECIPE_API_KEY
+        
         const fetchAPI = async (meal) => {
             let recipeId = meal['recipe_api_id']
             // console.log(recipeId)
