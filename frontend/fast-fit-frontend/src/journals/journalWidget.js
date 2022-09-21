@@ -21,53 +21,59 @@ function JournalWidget() {
         } else {
           setCount(count + 1);
         }
+        break;
       case "backwards":
         if (count === 1) {
           setCount(5);
         } else {
           setCount(count - 1);
         }
-    }
-  }
-
-  function renderBenefit() {
-    switch (count) {
-      case 1:
-        return [
-          "Reduce Stress",
-          "Journaling is a incredible stress management tool, a good-for-you habit that lessens impact of physical stressors on your health.",
-        ];
-        break;
-      case 2:
-        return [
-          "Improves Immune Function",
-          "Expressive writing has been shown to improve and strengthen immune celss and combat certain diseases.",
-        ];
-        break;
-      case 3:
-        return [
-          "Keeps Memory Sharp",
-          "Journaling boosts memory and comprehension, which may reflect improved cognitive processing.",
-        ];
-        break;
-      case 4:
-        return [
-          "Opening Up",
-          "Writing privately about a stressful event could encourage some to reach out for social support. This can help with emotional healing..",
-        ];
-        break;
-      case 5:
-        return [
-          "Strengthens Emotional Functions",
-          "Journaling evokes mindfulness. It helps in the management of personal adversity with emphasizing on patterns and growth in life. ",
-        ];
         break;
 
-        defeat: break;
+      default:
+        break;
     }
   }
 
   useEffect(() => {
+    function renderBenefit() {
+      switch (count) {
+        case 1:
+          return [
+            "Reduce Stress",
+            "Journaling is a incredible stress management tool, a good-for-you habit that lessens impact of physical stressors on your health.",
+          ];
+          break;
+        case 2:
+          return [
+            "Improves Immune Function",
+            "Expressive writing has been shown to improve and strengthen immune celss and combat certain diseases.",
+          ];
+          break;
+        case 3:
+          return [
+            "Keeps Memory Sharp",
+            "Journaling boosts memory and comprehension, which may reflect improved cognitive processing.",
+          ];
+          break;
+        case 4:
+          return [
+            "Opening Up",
+            "Writing privately about a stressful event could encourage some to reach out for social support. This can help with emotional healing..",
+          ];
+          break;
+        case 5:
+          return [
+            "Strengthens Emotional Functions",
+            "Journaling evokes mindfulness. It helps in the management of personal adversity with emphasizing on patterns and growth in life. ",
+          ];
+          break;
+
+        default:
+          break;
+      }
+    }
+
     setBenefit(renderBenefit);
   }, [count]);
 
