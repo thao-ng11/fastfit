@@ -20,7 +20,7 @@ function JournalForm() {
   useEffect(() => {
     setBody({
       username: "",
-      entry_date: datetime,
+      entry_date: new Date().toISOString(),
       grateful: "",
       daily_aff: "",
       note: "",

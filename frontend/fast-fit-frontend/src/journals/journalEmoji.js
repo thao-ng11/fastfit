@@ -17,7 +17,7 @@ function JournalEmoji(props) {
       props.setActiveEmoji(props.emojiValue);
     }
   }
-  
+
   useEffect(() => {
     function renderEmoji() {
       switch (props.emojiValue) {
@@ -40,9 +40,9 @@ function JournalEmoji(props) {
         default:
           break;
       }
-    };
+    }
     setEmoji(renderEmoji);
-  }, []);
+  }, [props.emojiValue]);
 
   function renderStyle() {
     if (props.emojiValue === props.activeEmoji) {
